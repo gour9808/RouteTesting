@@ -1,0 +1,24 @@
+<div class="blur" style="height:100%" fxLayout="row">
+  <div class="sidebar" fxLayout="column" style="opacity: 0.5;filter: alpha(opacity=50);">
+    <div fxLayout="column">
+      <div fxLayout="row">
+        <div class="icon" style="top:15px;left:5px"></div>
+        <div class="dash" style="top:27px;left:38px;background:lightslategrey"></div>
+      </div>
+      <div class="underline" style="top:27px;height:2px"></div>
+      <div style="height:15px"></div>
+      <div fxLayout="row" style="margin-top:25px;margin-left:12px" *ngFor="let time of times">
+        <div class="widget-icon"></div>
+        <div class="dash" style="margin-top:5px;margin-left:14px;width:80px;height:12px" *ngIf="time.odd"></div>
+        <div class="dash" style="margin-top:5px;margin-left:14px;width:120px;height:12px" *ngIf="!time.odd"></div>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column" fxFlex>
+    <div class="toolbar" fxLayout="row" fxLayoutAlign="start right" style="opacity: 0.5;filter: alpha(opacity=50);">
+      <span fxFlex></span>
+      <div class="dash2" fxFlex></div>
+    </div>
+    <app-splash-loader></app-splash-loader>
+  </div>
+</div>

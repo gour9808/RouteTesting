@@ -1,0 +1,13 @@
+<div class="sidebar" fxLayout="column">
+  <ul class="nav navbar-nav sider-navbar">
+    <li id="profile" style="width: 100%;">
+<div class="profile-usertitle">
+  <div class="profile-usertitle-name">Gourav Sharma </div>
+  <div class="profile-usertitle-title">9983419808</div>
+</div>
+</li>
+<a *ngFor="let menuItem of menu">
+  <app-list-item *ngIf="!menuItem.children && menuItem.active" [label]="menuItem.name" [icon]="menuItem.icon" [path]="menuItem.path"></app-list-item>
+</a>
+</ul>
+</div>
