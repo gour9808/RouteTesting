@@ -32,19 +32,18 @@ export class CallbackComponent implements OnInit {
     }
 
     getCookies1() {
-        chrome.cookies.get({ url: 'https://www.google.com', name: 'SSID' }, (cookie) => {
-            console.log('cookie value', cookie.value);
+        let cookies = 12345;
+     
             this.userSession = {
-                token: cookie.value, expires: moment().add(1, 'days')
+                token: cookies, expires: moment().add(1, 'days')
             };
-            if (cookie.value) {
+            if (cookies) {
                 this.router.navigate(['/load'])
             }
             else{
                 this.router.navigate(['/auth/callback'])
             }
-        }
-        );
+        
 
     }
 }

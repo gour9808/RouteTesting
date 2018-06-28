@@ -25,7 +25,6 @@ export const dashboardRoutes: Routes = [
 ];
 
 export const appRoutes: Routes = [
-    {path: '**', redirectTo: 'load', pathMatch: 'full'},
     { path: '', redirectTo: 'load', pathMatch: 'full' },
     {path: 'auth/callback', component: CallbackComponent},
     {path: 'load', component: DataLoaderComponent, canActivate:[OAuthGuard]},
