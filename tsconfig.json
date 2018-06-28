@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -12,8 +11,11 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "types": [
+      "chrome"
+  ],
     "lib": [
-      "es2017",
+      "es2016",
       "dom"
     ]
   }
