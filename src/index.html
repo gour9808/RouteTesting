@@ -4,7 +4,60 @@
 <head>
   <meta charset="utf-8">
   <title>Gourav</title>
- 
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      overflow: hidden;
+      padding: 40px 10px 40px 10px;
+      width: 650px;
+      height: 650px;
+
+    }
+
+    .logo {
+      float: left;
+    }
+
+    .logo-text {
+      position: relative;
+      float: right;
+      font-size: 2em;
+      color: #385988;
+      top: 20px;
+    }
+
+    #cookies {
+      width: 300px;
+      display: table;
+    }
+
+    #cookies .cookie {
+      display: table-row;
+    }
+
+    #cookies .cookie .label,
+    #cookies .cookie label {
+      border: none;
+      display: table-cell;
+      width: 50px;
+    }
+
+    #cookies .cookie input {
+      display: table-cell;
+      width: 210px;
+      margin-bottom: 3px;
+      padding: 10px;
+      border: none;
+      border-bottom: solid 2px #c9c9c9;
+      transition: border 0.3s;
+    }
+
+    #cookies .cookie input:focus,
+    #cookies .cookie input.focus {
+      border-bottom: solid 2px #969696;
+    }
+  </style>
+
   <base href="/">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/primeng@4.0.1/resources/primeng.min.css" />

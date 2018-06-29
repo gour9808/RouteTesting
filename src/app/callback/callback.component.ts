@@ -20,7 +20,7 @@ export class CallbackComponent implements OnInit {
 
     ngOnInit() {
         this.getCookies1();
-        console.log('Access token is');
+        console.log('Access token is', this.userSession);
         // if (str != null && str !== undefined) {
         //     this.userSession = {
         //         token: str, expires: moment().add(1, 'days')
@@ -32,12 +32,13 @@ export class CallbackComponent implements OnInit {
     }
 
     getCookies1() {
-        let cookies = 12345;
+        let cookies = "12345";
      
             this.userSession = {
                 token: cookies, expires: moment().add(1, 'days')
             };
             if (cookies) {
+                console.log("getCookies");
                 this.router.navigate(['/load'])
             }
             else{

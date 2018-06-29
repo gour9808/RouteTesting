@@ -12,7 +12,7 @@ import { AppRoutingModule } from './app.routes';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ContainerComponent } from './container/container.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
 import { BooksService } from './services/books.service';
 import { ListItemComponent } from './list-item/list-item.component';
@@ -25,6 +25,7 @@ import { CommunicatorService } from './services/communicator.service';
 import { DataLoaderComponent } from './data-loader/data-loader.component';
 import { OAuthGuard } from './services/oauth-guard.service';
 import { CallbackComponent } from './callback/callback.component';
+import { HttpInterceptorService } from './interceptor/http.interceptor.service';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,11 @@ import { CallbackComponent } from './callback/callback.component';
 
   ],
   providers: [
+      // {
+      //   provide: HTTP_INTERCEPTORS,
+      //   useClass: HttpInterceptorService,
+      //   multi: true
+      // },
     ToastMessageService,
     OAuthGuard,
     SlimLoadingBarService,

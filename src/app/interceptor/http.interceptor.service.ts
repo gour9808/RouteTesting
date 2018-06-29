@@ -16,7 +16,7 @@ import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
-    @Cache({pool: 'User'}) userInfo: any;
+    @Cache({ pool: 'Session' }) userSession: any;
     private _pendingRequests = 0;
     private _pendingRequestsStatus = new Subject();
 
@@ -36,83 +36,24 @@ export class HttpInterceptorService implements HttpInterceptor {
     prepareAuthHeader(req: HttpRequest<any>) {
         const headers = new HttpHeaders()
             .set('Content-Type', 'application/json')
-            .set('access_token', this.auth.getToken());
         return headers;
-    }
-
-
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (req.url.includes('lang-')) {
-            return next.handle(req);
-        } else if (req.url.includes('https://freegeoip.net/json/')) {
-            return next.handle(req);
-        } else if (req.url.includes('https://maps.googleapis.com')) {
-            return next.handle(req);
-        } else if (this.auth.isAuthenticated()) {
-            this._requestStarted();
-            return next.handle(this.prepareHeaders(req))
-                .catch(error => this.handleError(error))
-                .finally(() => {
-                    this._requestEnded();
-                });
-        } else {
-            this.router.navigate(['/auth'], {queryParams: {redirect: true}});
-            this._requestEnded();
-            return new EmptyObservable();
+            // var headers = req.headers ? req.headers : new HttpHeaders();
+            // new HttpHeaders().set('access_token', `${JSON.parse(localStorage.getItem("session")).token}`);
+            // new HttpHeaders().set('Content-Type', req.detectContentTypeHeader());
+            // req.withCredentials = true;
+            // return req.clone({
+            //     headers: req.headers.set('Authorization', authHeader),
+            //     withCredentials: true;
+            // });
         }
-    }
 
-    private _requestStarted() {
-        this._pendingRequestsStatus.next({
-            started: this._pendingRequests === 0,
-            pendingRequests: ++this._pendingRequests
-        });
-    }
-
-    private _requestEnded() {
-        this._pendingRequestsStatus.next({
-            completed: this._pendingRequests === 1,
-            pendingRequests: --this._pendingRequests
-        });
-    }
-
-    private handleError(error) {
-        switch (error.status) {
-            case 401:
-            case 403:
-                console.log('Session Expired. Show Alert and redirect to login', error);
-                this.router.navigate(['/redirect']);
-                break;
-            case 500:
-                console.log('Something broke from server. Show 500 page');
-                this.toast.error({
-                    title: '500 | INTERNAL SERVER ERROR',
-                    msg: error.message,
-                    showClose: false,
-                    timeout: 3000,
-                    theme: 'default'
-                });
-                break;
-            case 409:
-                console.error('Intercepted Error', error);
-                break;
-            default:
-                this.toast.error({
-                    title: error.status + '|' + error.statusText,
-                    msg: error.message,
-                    showClose: false,
-                    timeout: 3000,
-                    theme: 'default'
-                });
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+      
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${this.auth.getToken()}`
         }
-        this._requestEnded();
-        return Observable.throw(error);
+      });
+      return next.handle(request);
     }
-
-    private prepareHeaders(req: HttpRequest<any>) {
-            return req.clone({
-                headers: this.prepareAuthHeader(req)
-            });
-        
-    }
-}
+  }
