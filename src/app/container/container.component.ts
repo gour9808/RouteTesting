@@ -10,6 +10,18 @@ import * as _ from 'lodash';
 export class ContainerComponent implements OnInit {
   showSidenav: boolean = true;
 
+  menu = [{
+    name: 'All',
+    icon: 'mdi-bank',
+    path: 'fleets',
+    active: true
+}, {
+    name: 'Mine',
+    icon: 'mdi-account-plus',
+    path: 'invites',
+    active: true
+}];
+
   show: string;
   menuItems = [{
     name: "Debug",
