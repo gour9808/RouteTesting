@@ -10,23 +10,16 @@ import * as _ from 'lodash';
 })
 export class ToolbarComponent implements OnInit {
 
-  @Input() title: String;
-  @Output() toggleSidenav = new EventEmitter<any>();
-  @ViewChild('popOutButton') elementView: ElementRef;
-  showPopout: boolean = false;
-  showProfile: boolean = false;
+ 
+  @Input() menu: Array<Object>;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
-    console.log("Init Toolbar");
+    console.log("Init Sidebar");
+    console.log(this.menu);
+
   }
 
-  toggle() {
-    this.toggleSidenav.emit();
-  }
 
-  togglePopout() {
-    this.showPopout = !this.showPopout;
-  }
 }

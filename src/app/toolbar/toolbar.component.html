@@ -1,6 +1,8 @@
-<div class="toolbar" fxLayout="row" fxLayoutAlign="start center">
-  <i class="material-icons" (click)="toggle()">menu</i>
-  <span class="title" fxFlex>{{title}}</span>
-  <div fxLayout="row" class="user-info" fxLayoutAlign="center center">
-</div>
-</div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header" *ngFor="let menuItem of menu">
+          <app-list-item *ngIf="!menuItem.children && menuItem.active" [label]="menuItem.name" [icon]="menuItem.icon" [path]="menuItem.path"></app-list-item>
+        </div>
+    </div>
+  </nav>
+    

@@ -1,7 +1,6 @@
 <div style="height:100%" fxLayout="row">
-    <app-sidebar *ngIf="showSidenav" [menu]=menuItems [style.z-index]="10"></app-sidebar>
     <div fxLayout="column" fxFlex>
-        <app-toolbar  [style.z-index]="5"(toggleSidenav)="toggle()" class="full-width" title="Welcome Gourav"></app-toolbar>
+        <app-toolbar  [menu]=menuItems [style.z-index]="10"></app-toolbar>
         <div fxFlex style="overflow-y: auto;">
             <router-outlet></router-outlet>
         </div>

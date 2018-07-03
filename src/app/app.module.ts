@@ -26,6 +26,10 @@ import { DataLoaderComponent } from './data-loader/data-loader.component';
 import { OAuthGuard } from './services/oauth-guard.service';
 import { CallbackComponent } from './callback/callback.component';
 import { HttpInterceptorService } from './interceptor/http.interceptor.service';
+import { AllComponent } from './all/all.component';
+import { MineComponent } from './mine/mine.component';
+import {TabMenuModule} from 'primeng/tabmenu';
+
 
 @NgModule({
   declarations: [
@@ -37,9 +41,11 @@ import { HttpInterceptorService } from './interceptor/http.interceptor.service';
     SplashLoaderComponent,
     DataLoaderComponent,
     CallbackComponent,
+    AllComponent,
+    MineComponent,
   ],
   imports: [
-    BrowserAnimationsModule,
+    BrowserAnimationsModule,TabMenuModule,
     AppRoutingModule,
     BrowserModule,
     FormsModule,
