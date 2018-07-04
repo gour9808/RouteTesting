@@ -3,7 +3,6 @@ import { Cache } from '../utils/storage.provider';
 import { ToastMessageService } from '../services/toast-message.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommunicatorService } from '../services/communicator.service';
-import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 
 @Component({
   selector: 'app-data-loader',
