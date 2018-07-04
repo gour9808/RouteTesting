@@ -1,21 +1,3 @@
-
-    <p-table [value]="country$" [paginator]="true" [rows]="10" loadingIcon  ="fa-circle-o-notch" [loading] ="loading">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Name</th>
-                <th>Area</th>
-                <th>Population</th>
-                <th>Region</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-car>
-            <tr>
-                <td>{{car.name}}</td>
-                <td>{{car.area}}</td>
-                <td>{{car.population}}</td>
-                <td>{{car.region}}</td>
-            </tr>
-        </ng-template>
-    </p-table>
-
-
+ <app-tabbar [tabs] = "tabs"></app-tabbar>
+ <router-outlet></router-outlet>
+ 

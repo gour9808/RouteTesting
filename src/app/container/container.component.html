@@ -1,8 +1,20 @@
-<div style="height:100%" fxLayout="row">
+<!-- <div style="height:100%" fxLayout="row">
     <div fxLayout="column" fxFlex>
         <app-toolbar  [menu]=menuItems [style.z-index]="10"></app-toolbar>
         <div fxFlex style="overflow-y: auto;">
             <router-outlet></router-outlet>
         </div>
     </div>   
-</div>
+</div> -->
+
+
+<div class="container-fluid">
+    <div class="row">
+        <app-toolbar  [menu]=menuItems [style.z-index]="10"></app-toolbar>
+    </div>
+    <!-- <div class="row">
+        <app-toolbar  [menu]=menuItems [style.z-index]="10"></app-toolbar>     
+    </div> -->
+     <router-outlet></router-outlet>
+  </div>
+      

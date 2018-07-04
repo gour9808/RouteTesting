@@ -5,6 +5,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {dashboardRoutes} from '../app.routes';
 import { DashboardComponent } from './dashboard.component';
 import { TableModule } from 'primeng/table';
+import { TabbarComponent } from '../tabbar/tabbar.component';
 
 @NgModule({
     imports: [
@@ -12,9 +13,9 @@ import { TableModule } from 'primeng/table';
         CommonModule,
         FlexLayoutModule,TableModule
     ],
-    exports: [RouterModule, DashboardComponent],
-    declarations: [ DashboardComponent],
+    exports: [RouterModule, DashboardComponent, TabbarComponent],
+    declarations: [ DashboardComponent, TabbarComponent],
     providers: [],
 })
-export class DashboardModule {
+export class HomeModule {
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import * as _ from 'lodash';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-container',
@@ -9,18 +8,6 @@ import * as _ from 'lodash';
 })
 export class ContainerComponent implements OnInit {
   showSidenav: boolean = true;
-
-  menu = [{
-    name: 'All',
-    icon: 'mdi-bank',
-    path: 'fleets',
-    active: true
-}, {
-    name: 'Mine',
-    icon: 'mdi-account-plus',
-    path: 'invites',
-    active: true
-}];
 
   show: string;
   menuItems = [{
@@ -46,7 +33,7 @@ export class ContainerComponent implements OnInit {
   ];
 
   constructor(private router: Router, private currentRoute: ActivatedRoute) {
-   
+
   }
 
   ngOnInit() {

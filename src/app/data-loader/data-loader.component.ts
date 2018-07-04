@@ -19,7 +19,6 @@ export class DataLoaderComponent implements OnInit {
 
     console.log('Init Data Loader');
     console.log("token is on data loader", this.userSession.token);
-
     this.fetchSession();
 
   }
@@ -33,7 +32,7 @@ export class DataLoaderComponent implements OnInit {
       console.log(this.current);
       this.router.navigate(['/home'])
     }
-    else{
+    else {
       this.router.navigate(['/auth/callback'])
     }
 
