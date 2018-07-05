@@ -9,7 +9,6 @@ import { SlimLoadingBarModule, SlimLoadingBarService } from 'ng2-slim-loading-ba
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ContainerComponent } from './container/container.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -33,7 +32,6 @@ import {TabMenuModule} from 'primeng/tabmenu';
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent,
     ToolbarComponent,
     ContainerComponent,
     ListItemComponent,

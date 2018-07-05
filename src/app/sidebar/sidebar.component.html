@@ -1,7 +1,0 @@
-<div class="sidebar" fxLayout="column">
-  <ul class="nav navbar-nav sider-navbar">
-<a *ngFor="let menuItem of menu">
-  <app-list-item *ngIf="!menuItem.children && menuItem.active" [label]="menuItem.name" [icon]="menuItem.icon" [path]="menuItem.path"></app-list-item>
-</a>
-</ul>
-</div>

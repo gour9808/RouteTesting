@@ -23,8 +23,8 @@ export class DataLoaderComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
+
   fetchSession() {
     console.log('go to route');
     if (this.userSession.token) {
