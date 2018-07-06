@@ -11,13 +11,34 @@ import * as _ from 'lodash';
 export class ToolbarComponent implements OnInit {
 
  
-  @Input() menu: Array<Object>;
+  menuItems = [{
+    name: "Debug",
+    icon: "fa-dashboard",
+    path: "/home/my",
+    active: true
+  },
+
+  {
+    name: "Events",
+    icon: "fa-line-chart",
+    path: "/home/events/all",
+    active: true
+  },
+  {
+    name: "Discussions",
+    icon: "fa-users",
+    path: "/home/discussions/all",
+    active: true,
+
+  },
+  ];
+
 
   constructor() { }
 
   ngOnInit() {
     console.log("Init Sidebar");
-    console.log(this.menu);
+    console.log(this.menuItems);
 
   }
 

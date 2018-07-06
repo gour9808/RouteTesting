@@ -37,7 +37,7 @@ export class ContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+    this.router.routeReuseStrategy.shouldReuseRoute = function () { 
       return false;
     }
 
