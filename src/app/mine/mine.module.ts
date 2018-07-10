@@ -8,12 +8,13 @@ import { TabbarComponent } from '../tabbar/tabbar.component';
 import { MineComponent } from './mine.component';
 import { AllComponent } from '../all/all.component';
 import { FlagComponent } from '../flag/flag.component';
+import { WidgetsModule } from '../widgets/widget.module';
 
 @NgModule({
     imports: [
         RouterModule.forChild(MineRoutes),
         CommonModule,
-        FlexLayoutModule,TableModule
+        FlexLayoutModule,TableModule, WidgetsModule
     ],
     exports: [RouterModule, MineComponent, FlagComponent, AllComponent],
     declarations: [ AllComponent, MineComponent, FlagComponent],

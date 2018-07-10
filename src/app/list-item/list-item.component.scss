@@ -1,12 +1,11 @@
 .item {
-    display: inline;
+    display: block;
     font-size: 20px;
-    font-weight: bold;
-    margin: 0;
-    height: 65px;
-    vertical-align: middle;
-    padding-left: 12px;
     color: rgba(0, 0, 0, 0.6);
+    font-size: 18px;
+    margin: 5px;
+    height: 52px;
+    padding-left: 11px;
     &.sub {
         padding-left: 24px;
         font-size: 12px;
@@ -15,13 +14,6 @@
             font-weight: bold;
             padding-left: 20px;
             color: rgba(0, 0, 0, 0.8);
-        }
-        &.disabled {
-            cursor: not-allowed;
-        }
-        &:hover:not(.disabled) {
-                background: linear-gradient(90deg, #70bf43 0, #0ac);
-            cursor: pointer;
         }
         i {
             font-size: 20px;
@@ -34,7 +26,6 @@
         margin-left: 12px;
     }
     &.active {
-       background: linear-gradient(90deg, #70bf43 0, #0ac);
         font-weight: bold;
         padding-left: 8px;
         color: rgba(0, 0, 0, 0.8);
@@ -54,15 +45,4 @@
         background: #f1f1f1;
         cursor: pointer;
     }
-}
-
-.category {
-    font-size: 18px;
-    margin: 0;
-    padding-left: 12px;
-    color: rgba(0, 0, 0, 0.6);
-}
-
-a.item {
-    text-decoration: none;
 }

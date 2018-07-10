@@ -26,6 +26,7 @@ import { OAuthGuard } from './services/oauth-guard.service';
 import { CallbackComponent } from './callback/callback.component';
 import { HttpInterceptorService } from './interceptor/http.interceptor.service';
 import {TabMenuModule} from 'primeng/tabmenu';
+import { WidgetsModule } from './widgets/widget.module';
 
 
 
@@ -37,10 +38,10 @@ import {TabMenuModule} from 'primeng/tabmenu';
     ListItemComponent,
     SplashLoaderComponent,
     DataLoaderComponent,
-    CallbackComponent,
+    CallbackComponent
   ],
   imports: [
-    BrowserAnimationsModule,TabMenuModule,
+    BrowserAnimationsModule,TabMenuModule,WidgetsModule,
     AppRoutingModule,
     BrowserModule,
     FormsModule,

@@ -5,10 +5,11 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {discussionsRoutes} from '../app.routes';
 import { TableModule } from 'primeng/table';
 import { DiscussionsComponent } from './discussions.component';
+import { WidgetsModule } from '../widgets/widget.module';
 
 @NgModule({
     imports: [
-        RouterModule.forChild(discussionsRoutes),
+        RouterModule.forChild(discussionsRoutes),WidgetsModule,
         CommonModule,
         FlexLayoutModule,TableModule
     ],

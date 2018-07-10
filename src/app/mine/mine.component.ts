@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../services/books.service';
+import { ToastMessageService } from '../services/toast-message.service';
 
 @Component({
   selector: 'app-mine',
   templateUrl: './mine.component.html',
-  styleUrls: ['./mine.component.css']
+  styleUrls: ['./mine.component.scss']
 })
 export class MineComponent implements OnInit {
   country$: any = [];
   loading: boolean;
 
-  constructor(private books: BooksService) {
+  constructor(private books: BooksService, private toast: ToastMessageService) {
     
   }
 
@@ -26,7 +27,6 @@ export class MineComponent implements OnInit {
       console.log(res);
       this.loading = false;
       this.country$ = res;
-
     })
   }
 }

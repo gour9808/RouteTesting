@@ -1,4 +1,22 @@
-<p-table [value]="country$" [paginator]="true" [rows]="10" loadingIcon  ="fa-circle-o-notch" [loading] ="loading">
+<div class="dashboard-header" fxLayout="row">
+
+    <div fxLayout="row" fxFlex>
+        <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
+            <div fxLayout="column" fxFlex>
+                <app-button label="Watch logs"></app-button>
+            </div>
+        </div>
+    </div>
+    <div fxLayout="row" fxFlex>
+        <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
+            <div fxLayout="column" fxFlex>
+                <app-button label="Watch logs"></app-button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-table [value]="country$" [paginator]="true" [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
     <ng-template pTemplate="header">
         <tr>
             <th>Name</th>
@@ -16,6 +34,3 @@
         </tr>
     </ng-template>
 </p-table>
-
-
-
