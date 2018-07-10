@@ -1,33 +1,12 @@
 @import "../widgets.scss";
 
 .btn {
-    border: none;
-    border-radius: 2px;
-    display: inline-block;
-    height: 36px;
-    line-height: 36px;
-    padding: 0 2rem;
     text-transform: uppercase;
-    vertical-align: middle;
-    font-size: $btn;
-    outline: 0;
-    text-decoration: none;
-    color: $highlight-color;
-    background-color: $btn-color;
-    text-align: center;
-    letter-spacing: .5px;
-    transition: .2s ease-out;
-    cursor: pointer;
-    box-shadow: 0 1px 3px 0 $card-shadow1, 0 1px 1px 0 $card-shadow2, 0 2px 1px -1px $card-shadow3;
+    border: none;
+    -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
 }
 
-.btn:disabled {
-    cursor: not-allowed;
-    // background-color: #757575;
-    background-color: rgba(76, 175, 80, 0.4);
-
-}
-
-.ripple {
-    @include ripple();
-}
