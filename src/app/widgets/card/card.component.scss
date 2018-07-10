@@ -1,5 +1,10 @@
+@import "../widgets.scss";
+@import "../general.scss";
+
 .card {
+    @extend .card-design;
     .progress {
+        @extend .progress;
         position: relative;
         width: 20px;
         height: 20px;
@@ -7,9 +12,9 @@
     }
     .header {
         background: #fafafa;
-        border-bottom: 1px solid;
-font-weight: lighter;
-        color: black;
+        border-bottom: 1px solid $card-title-border;
+        @include font-weight(light);
+        color: $card-title;
         padding: 0 20px;
         border-radius: 4px;
         .card-title {
