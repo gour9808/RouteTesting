@@ -10,7 +10,6 @@ import { ButtonComponent } from './button/button.component';
     declarations: [
         CardComponent,
         ButtonComponent,
-
     ],
     imports: [
         CommonModule,
