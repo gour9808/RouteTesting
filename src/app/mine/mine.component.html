@@ -6,7 +6,7 @@
                     <app-button label="Fetch logs"></app-button>
                 </div>
                 <div fxLayout="column" fxFlex>
-                    <app-button label="Watch new logs"></app-button>
+                    <app-button label="Watch new logs" (click)="showDialog=!showDialog"></app-button>
                 </div>
                 <div fxLayout="column" fxFlex>
                     <app-button label="Delete cached"></app-button>
@@ -34,3 +34,12 @@
         </tr>
     </ng-template>
 </p-table>
+
+<p-dialog header="Please confirm" [(visible)]="showDialog" [modal]="modal" [responsive]="true" [width]="350" [minWidth]="200"
+    [minY]="70">
+    <span>Watching logs requires opening extension in a new window, are you sure ?</span>
+    <p-footer>
+        <button pButton type="button" label="Yes"></button>
+        <button pButton type="button" label="Close" class="ui-button-secondary"></button>
+    </p-footer>
+</p-dialog>

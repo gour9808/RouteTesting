@@ -28,6 +28,10 @@ import { HttpInterceptorService } from './interceptor/http.interceptor.service';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { DialogModule } from 'primeng/dialog';
 import { WidgetsModule } from './widgets/widget.module';
+import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +46,7 @@ import { WidgetsModule } from './widgets/widget.module';
   imports: [
     BrowserAnimationsModule,
     TabMenuModule,
+    ReactiveFormsModule,
     WidgetsModule,
     DialogModule,
     AppRoutingModule,
@@ -49,7 +54,10 @@ import { WidgetsModule } from './widgets/widget.module';
     FormsModule,
     HttpModule,
     DataTableModule,
-    SharedModule, TableModule,
+    SharedModule,
+    TableModule,
+    DropdownModule,
+    ButtonModule,
     FlexLayoutModule,
     HttpClientModule,
     ToastyModule.forRoot(),

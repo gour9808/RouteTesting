@@ -10,6 +10,8 @@ import { ToastMessageService } from '../services/toast-message.service';
 export class MineComponent implements OnInit {
   country$: any = [];
   loading: boolean;
+  showDialog: boolean;
+
 
   constructor(private books: BooksService, private toast: ToastMessageService) {
   }
@@ -25,6 +27,6 @@ export class MineComponent implements OnInit {
       console.log(res);
       this.loading = false;
       this.country$ = res;
-    })
+    });
   }
 }
