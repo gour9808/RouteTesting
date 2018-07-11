@@ -11,7 +11,7 @@ import { WidgetsModule } from '../widgets/widget.module';
     imports: [
         RouterModule.forChild(eventRoutes),
         CommonModule,
-        FlexLayoutModule,TableModule, WidgetsModule
+        FlexLayoutModule, TableModule, WidgetsModule
     ],
     exports: [RouterModule, EventsComponent],
     declarations: [ EventsComponent],

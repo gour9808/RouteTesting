@@ -25,10 +25,9 @@ import { DataLoaderComponent } from './data-loader/data-loader.component';
 import { OAuthGuard } from './services/oauth-guard.service';
 import { CallbackComponent } from './callback/callback.component';
 import { HttpInterceptorService } from './interceptor/http.interceptor.service';
-import {TabMenuModule} from 'primeng/tabmenu';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { DialogModule } from 'primeng/dialog';
 import { WidgetsModule } from './widgets/widget.module';
-
-
 
 @NgModule({
   declarations: [
@@ -41,7 +40,10 @@ import { WidgetsModule } from './widgets/widget.module';
     CallbackComponent
   ],
   imports: [
-    BrowserAnimationsModule,TabMenuModule,WidgetsModule,
+    BrowserAnimationsModule,
+    TabMenuModule,
+    WidgetsModule,
+    DialogModule,
     AppRoutingModule,
     BrowserModule,
     FormsModule,
@@ -55,11 +57,11 @@ import { WidgetsModule } from './widgets/widget.module';
 
   ],
   providers: [
-      // {
-      //   provide: HTTP_INTERCEPTORS,
-      //   useClass: HttpInterceptorService,
-      //   multi: true
-      // },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpInterceptorService,
+    //   multi: true
+    // },
     ToastMessageService,
     OAuthGuard,
     SlimLoadingBarService,

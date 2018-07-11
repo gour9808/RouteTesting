@@ -9,12 +9,13 @@ import { MineComponent } from './mine.component';
 import { AllComponent } from '../all/all.component';
 import { FlagComponent } from '../flag/flag.component';
 import { WidgetsModule } from '../widgets/widget.module';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
     imports: [
         RouterModule.forChild(MineRoutes),
         CommonModule,
-        FlexLayoutModule,TableModule, WidgetsModule
+        FlexLayoutModule, TableModule, WidgetsModule, DialogModule
     ],
     exports: [RouterModule, MineComponent, FlagComponent, AllComponent],
     declarations: [ AllComponent, MineComponent, FlagComponent],

@@ -12,14 +12,12 @@ export class MineComponent implements OnInit {
   loading: boolean;
 
   constructor(private books: BooksService, private toast: ToastMessageService) {
-    
   }
 
   ngOnInit() {
     this.getBooks();
   }
 
-  ngOnDestroy() { }
 
   getBooks() {
     this.loading = true;
