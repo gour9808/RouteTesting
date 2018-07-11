@@ -3,7 +3,7 @@
         <div fxLayout="row">
             <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
                 <div fxLayout="column" fxFlex>
-                    <app-button label="Fetch logs"></app-button>
+                  <p-dropdown [options] ="config" [(ngModel)]="selected" [style]="{'width':'150px'}"  placeholder="NEW TRACE CONFIG"></p-dropdown>
                 </div>
                 <div fxLayout="column" fxFlex>
                     <app-button label="Watch new logs" (click)="showDialog=!showDialog"></app-button>

@@ -10,20 +10,17 @@ export class FlagComponent implements OnInit {
   country$: any = [];
   loading: boolean;
   showDialog: boolean;
-  cities: any[];
-  selectedCity: any;
+  config: any[] = [];
+  selected: any;
 
-
-  constructor(private books: BooksService) {
-    this.cities = [
-      {name: 'user', code: 'RM'},
-      {name: 'class', code: 'LDN'},
-      {name: 'Trigger', code: 'IST'}
-  ];
-
-  }
+  constructor(private books: BooksService) { }
 
   ngOnInit() {
+    this.config = [
+      {label: 'User', value: 'User'},
+      {label: 'Class', value: 'Class'},
+      {label: 'Trigger', value: 'Trigger'},
+  ];
     this.getBooks();
   }
 

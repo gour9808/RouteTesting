@@ -11,11 +11,12 @@ import { WidgetsModule } from '../widgets/widget.module';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/primeng';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
         RouterModule.forChild(MineRoutes),
-        CommonModule,
+        CommonModule, FormsModule,
         FlexLayoutModule, TableModule, WidgetsModule, DialogModule, ButtonModule, DropdownModule, WidgetsModule
     ],
     exports: [RouterModule, MineComponent, FlagComponent, AllComponent],

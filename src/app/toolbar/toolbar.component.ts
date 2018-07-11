@@ -14,7 +14,7 @@ export class ToolbarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log("Init Sidebar");
+    console.log('Init toolbar');
   }
 
 }

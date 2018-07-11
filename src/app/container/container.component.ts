@@ -32,16 +32,14 @@ export class ContainerComponent implements OnInit {
   },
   ];
 
-  constructor(private router: Router, private currentRoute: ActivatedRoute) {
-
-  }
+  constructor(private router: Router, private currentRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     }
 
-    console.log("Init Container");
+    console.log('Init Container');
   }
 
   toggle() {
