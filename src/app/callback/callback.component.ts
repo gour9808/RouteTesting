@@ -33,18 +33,16 @@ export class CallbackComponent implements OnInit {
 
     getCookies1() {
         let cookies = "12345";
-     
-            this.userSession = {
-                token: cookies, expires: moment().add(1, 'days')
-            };
-            if (cookies) {
-                console.log("getCookies");
-                this.router.navigate(['/load'])
-            }
-            else{
-                this.router.navigate(['/auth/callback'])
-            }
-        
 
+        this.userSession = {
+            token: cookies, expires: moment().add(1, 'days')
+        };
+        if (cookies) {
+            console.log("getCookies");
+            this.router.navigate(['/load'])
+        }
+        else {
+            this.router.navigate(['/auth/callback'])
+        }
     }
 }
