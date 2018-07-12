@@ -9,12 +9,10 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 export class ToolbarComponent implements OnInit {
 
   @Input() menu: Array<Object>;
-
-
+  
   constructor() { }
 
   ngOnInit() {
-    console.log('Init toolbar');
   }
 
 }
