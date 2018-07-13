@@ -1,13 +1,13 @@
 
-import {Inject, Injectable} from '@angular/core';
-import {DOCUMENT} from '@angular/platform-browser';
+import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Injectable()
 export class CookieService {
     private documentIsAccessible: boolean;
 
     constructor(
-                @Inject(DOCUMENT) private document: any) {
+        @Inject(DOCUMENT) private document: any) {
         // To avoid issues with server side prerendering, check if `document` is defined.
         this.documentIsAccessible = document !== undefined;
     }

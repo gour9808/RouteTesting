@@ -30,6 +30,12 @@ export class ContainerComponent implements OnInit {
     active: true,
 
   },
+  {
+    name: "New Window",
+    icon: "fa-external-link",
+    path: "/home/my",
+    active: true
+  },
   ];
 
   constructor(private router: Router, private currentRoute: ActivatedRoute) { }
