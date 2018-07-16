@@ -31,7 +31,6 @@ export class CallbackComponent implements OnInit {
                     token: cookie.value, expires: moment().add(1, 'days')
                 };
                 console.log("get Cookies", this.userSession);
-
                 this.router.navigate(['/load'])
             }
             else {
@@ -39,6 +38,5 @@ export class CallbackComponent implements OnInit {
             }
         }
         );
-
     }
 }
