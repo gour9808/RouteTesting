@@ -16,7 +16,6 @@ export class ContainerComponent implements OnInit {
     path: "/home/my",
     active: true
   },
-
   {
     name: "Events",
     icon: "fa-line-chart",
@@ -46,10 +45,6 @@ export class ContainerComponent implements OnInit {
     }
 
     console.log('Init Container');
-  }
-
-  toggle() {
-    this.showSidenav = !this.showSidenav;
   }
 
 }
