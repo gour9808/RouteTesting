@@ -28,13 +28,11 @@ export class DataLoaderComponent implements OnInit {
   fetchSession() {
     console.log('go to route');
     if (this.userSession.token) {
-      console.log(this.current);
       this.router.navigate(['/home'])
     }
     else {
       this.router.navigate(['/auth/callback'])
     }
-
   }
 
 }

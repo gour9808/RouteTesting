@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
-    "name": "Angular 5 extension",
-    "description": "Sync with Couchbase in a Google Chrome extension",
+    "name": "Salesforce Developer Tool Suite",
+    "description": "Suite of tools like Debug log viewer, which loads without any authentication or ask for user name or password.",
     "version": "1.0",
     "browser_action": {
         "default_icon": "icon.png",

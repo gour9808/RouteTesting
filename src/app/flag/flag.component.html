@@ -3,26 +3,27 @@
         <div fxLayout="row">
             <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
                 <div fxLayout="column" fxFlex>
-                  <p-dropdown [options] ="config" [(ngModel)]="selected" [style]="{'width':'150px'}"  placeholder="NEW TRACE CONFIG"></p-dropdown>
+                    <p-dropdown [options]="config" [(ngModel)]="selected" [style]="{'width':'150px'}" placeholder="NEW TRACE CONFIG"></p-dropdown>
                 </div>
                 <div fxLayout="column" fxFlex>
-                    <app-button label="Watch new logs" (click)="showDialog=!showDialog"></app-button>
+                    <app-button label="REFRESH" (click)="showDialog=!showDialog"></app-button>
                 </div>
                 <div fxLayout="column" fxFlex>
-                    <app-button label="Delete cached"></app-button>
+                    <app-button label="MANAGE DEBUG LEVELS"></app-button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
 <p-table [value]="country$" [paginator]="true" [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
     <ng-template pTemplate="header">
         <tr>
-            <th>Name</th>
-            <th>Area</th>
-            <th>Population</th>
-            <th>Region</th>
+            <th>Actions</th>
+            <th>User/Apex</th>
+            <th>Expiration Date</th>
+            <th>Debug level</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-car>

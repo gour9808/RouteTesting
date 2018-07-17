@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
+import {CalendarModule} from 'primeng/calendar';
 import { ToastyModule } from 'ng2-toasty';
 import { SlimLoadingBarModule, SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -44,7 +45,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CallbackComponent
   ],
   imports: [
-    BrowserAnimationsModule,
+    BrowserAnimationsModule,CalendarModule,
     TabMenuModule,
     ReactiveFormsModule,
     WidgetsModule,
