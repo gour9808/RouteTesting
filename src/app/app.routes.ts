@@ -11,6 +11,7 @@ import { CallbackComponent } from './callback/callback.component';
 import { MineComponent } from './mine/mine.component';
 import { AllComponent } from './all/all.component';
 import { FlagComponent } from './flag/flag.component';
+import { ViewLogDetailComponent } from './view-log-detail/view-log-detail.component';
 
 export const eventRoutes: Routes = [
     { path: 'all', component: EventsComponent },
@@ -24,6 +25,7 @@ export const MineRoutes: Routes = [
 
     { path: "", redirectTo: "logs" },
     { path: "logs", component: MineComponent },
+    { path: "details/:recordId", component: ViewLogDetailComponent },
     { path: "allLogs", component: AllComponent },
     { path: "flag", component: FlagComponent }
 

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
-import {CalendarModule} from 'primeng/calendar';
+import { CalendarModule } from 'primeng/calendar';
 import { ToastyModule } from 'ng2-toasty';
 import { SlimLoadingBarModule, SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -32,7 +32,8 @@ import { WidgetsModule } from './widgets/widget.module';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MineLogsService } from './services/mine-logs.service';
+import { ViewLogDetailComponent } from './view-log-detail/view-log-detail.component';
 
 @NgModule({
   declarations: [
@@ -42,10 +43,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListItemComponent,
     SplashLoaderComponent,
     DataLoaderComponent,
-    CallbackComponent
+    CallbackComponent,
+    ViewLogDetailComponent
   ],
   imports: [
-    BrowserAnimationsModule,CalendarModule,
+    BrowserAnimationsModule,
+     CalendarModule,
     TabMenuModule,
     ReactiveFormsModule,
     WidgetsModule,
@@ -66,12 +69,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: HttpInterceptorService,
-    //   multi: true
-    // },
-    ToastMessageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    },
+    ToastMessageService,MineLogsService,
     OAuthGuard,
     SlimLoadingBarService,
     ToolbarTitleService,

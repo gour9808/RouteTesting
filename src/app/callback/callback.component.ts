@@ -15,9 +15,11 @@ import { AuthService } from '../services/auth.service';
 export class CallbackComponent implements OnInit {
     @Cache({ pool: 'Session' }) userSession: any;
     @Cache({ pool: 'url' }) url: any;
+    @Cache({ pool: 'LogUserId' }) logUserId: any
 
     constructor(private router: Router, private currentRoute: ActivatedRoute, private auth: AuthService) {
         this.getCurrentTabUrl();
+        this.getLogUserId();
     }
 
     ngOnInit() {
@@ -26,7 +28,7 @@ export class CallbackComponent implements OnInit {
     }
 
     getCookies1() {
-        chrome.cookies.get({ url: 'https://ap5.lightning.force.com/lightning/setup/SetupOneHome/home', name: 'sid_Client' }, (cookie) => {
+        chrome.cookies.get({ url: 'https://ap5.salesforce.com/home', name: 'sid' }, (cookie) => {
             console.log('cookie value', cookie.value);
             if (cookie.value) {
                 this.userSession = {
@@ -52,8 +54,22 @@ export class CallbackComponent implements OnInit {
         });
     }
 
-    getData()
-    {
-        "https://ap5.salesforce.com/services/data/v35.0/tooling/query/?q=SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  LogUserId = '0057F0000045LeNQAU'  ORDER BY StartTime DESC LIMIT 20"
+    getLogUserId() {
+        chrome.cookies.get({ url: 'https://ap5.salesforce.com/home', name: 'disco' }, (logUserId) => {
+            console.log('log userid value value', logUserId.value);
+            let str = logUserId.value;
+            let a = str.split(':')[2];
+            console.log("value of a ", a);
+            this.logUserId ={
+                userId : a
+            }
+            
+        }
+        );
     }
+
+    // getData() {
+    //     "https://ap5.salesforce.com/services/data/v35.0/tooling/query/?q=SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  LogUserId = '0057F0000045LeNQAU'  ORDER BY StartTime DESC LIMIT 20"
+    // }
 }
+

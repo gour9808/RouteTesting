@@ -12,6 +12,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
+import { TimeAgoPipe } from '../../../node_modules/time-ago-pipe';
 
 @NgModule({
     imports: [
@@ -20,7 +21,7 @@ import { FormsModule } from '@angular/forms';
         FlexLayoutModule, TableModule, WidgetsModule, DialogModule, ButtonModule, DropdownModule, WidgetsModule
     ],
     exports: [RouterModule, MineComponent, FlagComponent, AllComponent],
-    declarations: [ AllComponent, MineComponent, FlagComponent],
+    declarations: [ AllComponent, MineComponent, FlagComponent, TimeAgoPipe],
     providers: [],
 })
 export class MineModule {

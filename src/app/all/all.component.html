@@ -1,3 +1,51 @@
-<p>
-  all works!
-</p>
+<div class="home-container">
+  <div class="dashboard-header" fxLayout="column">
+      <div fxLayout="row">
+          <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
+              <div fxLayout="column" fxFlex>
+                  <app-button label="Fetch logs" (click) = "getAllLogs()"></app-button>
+              </div>
+              <div fxLayout="column" fxFlex>
+                  <app-button label="Watch new logs" (click)="showDialog=!showDialog"></app-button>
+              </div>
+              <div fxLayout="column" fxFlex>
+                  <app-button label="Delete cached"></app-button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<p-table [value]="allLogs$" [paginator]="true" selectionMode="single" (onRowSelect)="viewDebugLogs($event)" [(selection)]="selected" [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Actions</th>
+          <th>User</th>
+          <th>Operation</th>
+          <th>Duration</th>
+          <th>LogSize</th>
+          <th>Start Time</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-all>
+      <tr [pSelectableRow]="all">
+          <td>{{all.name}}</td>
+          <td>{{all.LogUser.Name}}</td>
+          <td style="overflow: auto;">{{all.Operation}}</td>
+          <td>{{all.DurationMilliseconds}}</td>
+          <td>{{all.LogLength}}</td>
+          <td>{{all.StartTime | timeAgo}}</td>
+      </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog header="Please confirm" [(visible)]="showDialog" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200"
+  [minY]="70">
+  <span>Watching logs requires opening extension in a new window, are you sure ?</span>
+  <p-footer>
+      <button pButton type="button" label="Yes"></button>
+      <button pButton type="button" label="Close" class="ui-button-secondary"></button>
+  </p-footer>
+</p-dialog>
+
+<router-outlet></router-outlet>

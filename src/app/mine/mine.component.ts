@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../services/books.service';
 import { ToastMessageService } from '../services/toast-message.service';
+import { MineLogsService } from '../services/mine-logs.service';
+import { Cache } from '../utils/storage.provider';
 
 @Component({
   selector: 'app-mine',
@@ -8,25 +10,29 @@ import { ToastMessageService } from '../services/toast-message.service';
   styleUrls: ['./mine.component.scss']
 })
 export class MineComponent implements OnInit {
-  country$: any = [];
+  mineLogs$: any = [];
   loading: boolean;
   showDialog: boolean;
+  @Cache({ pool: 'LogUserId' }) logUserId: any
 
 
-  constructor(private books: BooksService, private toast: ToastMessageService) {
+  constructor(private books: BooksService, private mineService: MineLogsService, private toast: ToastMessageService) {
   }
 
   ngOnInit() {
-    this.getBooks();
+    this.getMineLogs();
   }
 
 
-  getBooks() {
+  getMineLogs() {
     this.loading = true;
-    this.books.getBooks().subscribe(res => {
-      console.log(res);
+    this.mineService.getMineLogs(this.logUserId.userId).subscribe(res => {
+      console.log("mine logs", res.records);
+      this.mineLogs$ = res.records;
       this.loading = false;
-      this.country$ = res;
-    });
+
+    })
   }
+
+  
 }
