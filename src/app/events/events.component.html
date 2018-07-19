@@ -7,7 +7,7 @@
             <p-dropdown [options]="config" [style]="{'width':'150px'}" placeholder="Event type"></p-dropdown>
         </div>
         <div fxLayout="column" fxFlex>
-            <app-button label="APPLY" (click)="getBooks()"></app-button>
+            <app-button label="APPLY"></app-button>
         </div>
 
     </div>
@@ -15,7 +15,7 @@
 
 <div fxLayout="row">
 
-    <p-table [value]="country$" [paginator]="true" [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
+    <!-- <p-table [value]="country$" [paginator]="true" [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
         <ng-template pTemplate="header">
             <tr>
                 <th>Actions</th>
@@ -32,6 +32,6 @@
                 <td>{{car.region}}</td>
             </tr>
         </ng-template>
-    </p-table>
+    </p-table> -->
 
 </div>

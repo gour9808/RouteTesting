@@ -40,8 +40,7 @@ export class CallbackComponent implements OnInit {
             else {
                 this.router.navigate(['/auth/callback'])
             }
-        }
-        );
+        });
     }
 
     getCurrentTabUrl() {
@@ -60,16 +59,12 @@ export class CallbackComponent implements OnInit {
             let str = logUserId.value;
             let a = str.split(':')[2];
             console.log("value of a ", a);
-            this.logUserId ={
-                userId : a
+            this.logUserId = {
+                userId: a
             }
-            
-        }
-        );
+
+        });
     }
 
-    // getData() {
-    //     "https://ap5.salesforce.com/services/data/v35.0/tooling/query/?q=SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  LogUserId = '0057F0000045LeNQAU'  ORDER BY StartTime DESC LIMIT 20"
-    // }
 }
 

@@ -14,7 +14,6 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ContainerComponent } from './container/container.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
-import { BooksService } from './services/books.service';
 import { ListItemComponent } from './list-item/list-item.component';
 import { ToastMessageService } from './services/toast-message.service';
 import { ToolbarTitleService } from './services/toolbar-title.service';
@@ -81,7 +80,7 @@ import { ViewLogDetailComponent } from './view-log-detail/view-log-detail.compon
     CookieService,
     CommunicatorService,
     AuthService,
-    BooksService],
+  ],
 
   bootstrap: [AppComponent]
 })

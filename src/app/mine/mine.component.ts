@@ -1,27 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { BooksService } from '../services/books.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastMessageService } from '../services/toast-message.service';
 import { MineLogsService } from '../services/mine-logs.service';
 import { Cache } from '../utils/storage.provider';
+import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
+import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
+import { Constants } from '../services/constants';
 
 @Component({
   selector: 'app-mine',
   templateUrl: './mine.component.html',
   styleUrls: ['./mine.component.scss']
 })
-export class MineComponent implements OnInit {
+@AutoUnsubscribe()
+export class MineComponent implements OnInit, OnDestroy {
   mineLogs$: any = [];
+  selected: any;
   loading: boolean;
   showDialog: boolean;
   @Cache({ pool: 'LogUserId' }) logUserId: any
 
 
-  constructor(private books: BooksService, private mineService: MineLogsService, private toast: ToastMessageService) {
+  constructor(private mineService: MineLogsService, private route: ActivatedRoute, private router: Router,
+    private toast: ToastMessageService) {
   }
 
   ngOnInit() {
     this.getMineLogs();
   }
+
+  ngOnDestroy() { }
 
 
   getMineLogs() {
@@ -30,9 +37,28 @@ export class MineComponent implements OnInit {
       console.log("mine logs", res.records);
       this.mineLogs$ = res.records;
       this.loading = false;
+    })
+    //  this.deleteMineCached();
+  }
 
+  goToViewPage(event) {
+    console.log("on row select", event.data);
+    this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
+  }
+
+  deleteMineCached() {
+    this.mineService.deleteMineCached().subscribe(res => {
+      console.log(res);
     })
   }
 
-  
+  downloadLogs(event) {
+    console.log(event);
+
+    //  this.mineService.downloadLogs().subscribe
+
+
+  }
+
+
 }

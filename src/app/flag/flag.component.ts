@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BooksService } from '../services/books.service';
+import { MineLogsService } from '../services/mine-logs.service';
 
 @Component({
   selector: 'app-flag',
@@ -7,30 +7,27 @@ import { BooksService } from '../services/books.service';
   styleUrls: ['./flag.component.scss']
 })
 export class FlagComponent implements OnInit {
-  country$: any = [];
   loading: boolean;
   showDialog: boolean;
   config: any[] = [];
   selected: any;
 
-  constructor(private books: BooksService) { }
+  constructor(private mine: MineLogsService) { }
 
   ngOnInit() {
+    this.fetch();
     this.config = [
-      {label: 'User', value: 'User'},
-      {label: 'Class', value: 'Class'},
-      {label: 'Trigger', value: 'Trigger'},
-  ];
-    this.getBooks();
+      { label: 'User', value: 'User' },
+      { label: 'Class', value: 'Class' },
+      { label: 'Trigger', value: 'Trigger' },
+    ];
   }
 
-
-  getBooks() {
-    this.loading = true;
-    this.books.getBooks().subscribe(res => {
+  fetch() {
+    this.mine.fetchFlags().subscribe(res => {
       console.log(res);
-      this.loading = false;
-      this.country$ = res;
-    });
+
+    })
   }
+
 }

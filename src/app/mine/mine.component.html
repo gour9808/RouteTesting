@@ -3,20 +3,21 @@
         <div fxLayout="row">
             <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
                 <div fxLayout="column" fxFlex>
-                    <app-button label="Fetch logs" (click) = "getMineLogs()"></app-button>
+                    <app-button label="Fetch logs" (click)="getMineLogs()"></app-button>
                 </div>
                 <div fxLayout="column" fxFlex>
                     <app-button label="Watch new logs" (click)="showDialog=!showDialog"></app-button>
                 </div>
                 <div fxLayout="column" fxFlex>
-                    <app-button label="Delete cached"></app-button>
+                    <app-button label="Delete cached" (click) ="deleteMineCached()" ></app-button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<p-table [value]="mineLogs$" [paginator]="true" [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
+<p-table [value]="mineLogs$" [paginator]="true" selectionMode="single" (onRowSelect)="goToViewPage($event)" [(selection)]="selected"
+    [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
     <ng-template pTemplate="header">
         <tr>
             <th>Actions</th>
@@ -28,8 +29,12 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-mine>
-        <tr>
-            <td>{{mine.name}}</td>
+        <tr [pSelectableRow]="mine">
+            <td>
+                <i class="fa fa-cloud-download" style="font-size:18px;color:black" (click) = "downloadLogs(mine)" fxFlex></i>
+                <i class="glyphicon glyphicon-new-window" style="font-size:18px;color:black" fxFlex></i>
+                <i class="fa fa-clone" style="font-size:18px;color:black" fxFlex></i>
+            </td>
             <td>{{mine.LogUser.Name}}</td>
             <td style="overflow: auto;">{{mine.Operation}}</td>
             <td>{{mine.DurationMilliseconds}}</td>
@@ -47,3 +52,5 @@
         <button pButton type="button" label="Close" class="ui-button-secondary"></button>
     </p-footer>
 </p-dialog>
+
+<router-outlet></router-outlet>

@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
-import { BooksService } from '../services/books.service';
 
 @Component({
   selector: 'app-events',
@@ -16,7 +15,7 @@ export class EventsComponent implements OnInit {
   config:any;
 
 
-  constructor(private books: BooksService) {
+  constructor() {
   }
 
   ngOnInit() {
@@ -25,16 +24,7 @@ export class EventsComponent implements OnInit {
       {label: 'Class', value: 'Class'},
       {label: 'Trigger', value: 'Trigger'},
   ];
-    this.getBooks();
   }
 
 
-  getBooks() {
-    this.loading = true;
-    this.books.getBooks().subscribe(res => {
-      console.log(res);
-      this.loading = false;
-      this.country$ = res;
-    });
-  }
 }

@@ -1,6 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { BooksService } from '../services/books.service';
 import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 
 @Component({
