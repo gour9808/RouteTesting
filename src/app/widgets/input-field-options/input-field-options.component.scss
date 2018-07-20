@@ -1,0 +1,12 @@
+@import "../widgets.scss";
+
+.input-label {
+    @extend .label;
+}
+
+p-dropdown {
+    select {
+        @extend .select-box;
+    }
+}
+
