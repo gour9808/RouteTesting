@@ -75,7 +75,7 @@ export class MineLogsService {
 
 
   fetchFlags() {
-    let url = "https://ap5.salesforce.com/services/data/v35.0/tooling/query/?q=Select Id, LogType, DebugLevelId, DebugLevel.DeveloperName,  TracedEntityId, TracedEntity.Name, ExpirationDate  from TraceFlag  order by ExpirationDate DESC "
+    let url = "Select Id, LogType, DebugLevelId, DebugLevel.DeveloperName,  TracedEntityId, TracedEntity.Name, ExpirationDate  from TraceFlag  order by ExpirationDate DESC "
     console.log(Constants.BASE_URL + encodeURIComponent(url));
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');

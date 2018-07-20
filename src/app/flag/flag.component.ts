@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MineLogsService } from '../services/mine-logs.service';
+import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 
 @Component({
   selector: 'app-flag',
   templateUrl: './flag.component.html',
   styleUrls: ['./flag.component.scss']
 })
-export class FlagComponent implements OnInit {
+@AutoUnsubscribe()
+export class FlagComponent implements OnInit, OnDestroy {
   loading: boolean;
+  fetchLogs$: any = [];
   showDialog: boolean;
   config: any[] = [];
   selected: any;
@@ -15,7 +18,7 @@ export class FlagComponent implements OnInit {
   constructor(private mine: MineLogsService) { }
 
   ngOnInit() {
-    this.fetch();
+    this.fetchTraceLogs();
     this.config = [
       { label: 'User', value: 'User' },
       { label: 'Class', value: 'Class' },
@@ -23,11 +26,20 @@ export class FlagComponent implements OnInit {
     ];
   }
 
-  fetch() {
-    this.mine.fetchFlags().subscribe(res => {
-      console.log(res);
+  ngOnDestroy() { }
 
+  fetchTraceLogs() {
+    this.loading = true;
+    this.mine.fetchFlags().subscribe(res => {
+      console.log("Trace flag data", res);
+      this.fetchLogs$ = res;
+      this.loading = false;
     })
+  }
+
+  deleteTraceLogs(event) {
+    console.log(event);
+
   }
 
 }

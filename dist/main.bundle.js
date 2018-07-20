@@ -1104,25 +1104,49 @@ var EventsComponent = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FlagComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_mine_logs_service__ = __webpack_require__("./src/app/services/mine-logs.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_auto_unsubscribe__ = __webpack_require__("./src/app/utils/auto-unsubscribe.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 var FlagComponent = (function () {
     function FlagComponent(mine) {
         this.mine = mine;
+        this.fetchLogs$ = [];
         this.config = [];
     }
     FlagComponent.prototype.ngOnInit = function () {
-        this.fetch();
+        this.fetchTraceLogs();
         this.config = [
             { label: 'User', value: 'User' },
             { label: 'Class', value: 'Class' },
             { label: 'Trigger', value: 'Trigger' },
         ];
     };
-    FlagComponent.prototype.fetch = function () {
+    FlagComponent.prototype.ngOnDestroy = function () { };
+    FlagComponent.prototype.fetchTraceLogs = function () {
+        var _this = this;
+        this.loading = true;
         this.mine.fetchFlags().subscribe(function (res) {
-            console.log(res);
+            console.log("Trace flag data", res);
+            _this.fetchLogs$ = res;
+            _this.loading = false;
         });
     };
+    FlagComponent.prototype.deleteTraceLogs = function (event) {
+        console.log(event);
+    };
+    FlagComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__utils_auto_unsubscribe__["a" /* AutoUnsubscribe */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__services_mine_logs_service__["a" /* MineLogsService */]])
+    ], FlagComponent);
     return FlagComponent;
 }());
 
@@ -1748,7 +1772,7 @@ var MineLogsService = (function () {
         return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url), { headers: headers });
     };
     MineLogsService.prototype.fetchFlags = function () {
-        var url = "https://ap5.salesforce.com/services/data/v35.0/tooling/query/?q=Select Id, LogType, DebugLevelId, DebugLevel.DeveloperName,  TracedEntityId, TracedEntity.Name, ExpirationDate  from TraceFlag  order by ExpirationDate DESC ";
+        var url = "Select Id, LogType, DebugLevelId, DebugLevel.DeveloperName,  TracedEntityId, TracedEntity.Name, ExpirationDate  from TraceFlag  order by ExpirationDate DESC ";
         console.log(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url));
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
