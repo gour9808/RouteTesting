@@ -11,6 +11,7 @@ import { ToastMessageService } from '../services/toast-message.service';
 export class ViewLogDetailComponent implements OnInit {
   sub$;
   id: any;
+  data: any;
   constructor(private mine: MineLogsService, private toast: ToastMessageService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -25,7 +26,10 @@ export class ViewLogDetailComponent implements OnInit {
 
   getParticularLog() {
     this.mine.getParticularLog(this.id).subscribe(res => {
-      console.log(res.headers.get('Content-Type'));
-    })
+    //  console.log(res.headers.get('Content-Type'));
+    }, err => {
+        console.log(err.error.text);
+        this.data = err.error.text;
+      })
   }
 }

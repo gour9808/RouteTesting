@@ -10,18 +10,19 @@ import { FlagComponent } from '../flag/flag.component';
 import { WidgetsModule } from '../widgets/widget.module';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/primeng';
+import { DropdownModule, ScrollPanelModule, AutoCompleteModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
 import { TimeAgoPipe } from '../../../node_modules/time-ago-pipe';
+import { FilterPipe } from '../utils/filter.pipe';
 
 @NgModule({
     imports: [
         RouterModule.forChild(MineRoutes),
-        CommonModule, FormsModule,
-        FlexLayoutModule, TableModule, WidgetsModule, DialogModule, ButtonModule, DropdownModule, WidgetsModule
+        CommonModule, FormsModule,AutoCompleteModule,
+        FlexLayoutModule, TableModule,ScrollPanelModule, WidgetsModule, DialogModule, ButtonModule, DropdownModule, WidgetsModule
     ],
     exports: [RouterModule, MineComponent, FlagComponent, AllComponent],
-    declarations: [ AllComponent, MineComponent, FlagComponent, TimeAgoPipe],
+    declarations: [ AllComponent, MineComponent, FlagComponent, TimeAgoPipe, FilterPipe],
     providers: [],
 })
 export class MineModule {

@@ -20,6 +20,7 @@ import { ToolbarTitleService } from './services/toolbar-title.service';
 import { CookieService } from './services/cookie.service';
 import { AuthService } from './services/auth.service';
 import { SplashLoaderComponent } from './spalsh-loader/spalsh-loader.component';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CommunicatorService } from './services/communicator.service';
 import { DataLoaderComponent } from './data-loader/data-loader.component';
 import { OAuthGuard } from './services/oauth-guard.service';
@@ -28,6 +29,7 @@ import { HttpInterceptorService } from './interceptor/http.interceptor.service';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { DialogModule } from 'primeng/dialog';
 import { WidgetsModule } from './widgets/widget.module';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -46,12 +48,13 @@ import { ViewLogDetailComponent } from './view-log-detail/view-log-detail.compon
     ViewLogDetailComponent
   ],
   imports: [
-    BrowserAnimationsModule,
-     CalendarModule,
+    BrowserAnimationsModule, ScrollPanelModule,
+    CalendarModule,
     TabMenuModule,
     ReactiveFormsModule,
     WidgetsModule,
-    DialogModule,
+    DialogModule, 
+    AutoCompleteModule,
     AppRoutingModule,
     BrowserModule,
     FormsModule,
@@ -73,7 +76,7 @@ import { ViewLogDetailComponent } from './view-log-detail/view-log-detail.compon
       useClass: HttpInterceptorService,
       multi: true
     },
-    ToastMessageService,MineLogsService,
+    ToastMessageService, MineLogsService,
     OAuthGuard,
     SlimLoadingBarService,
     ToolbarTitleService,

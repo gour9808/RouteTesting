@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MineLogsService } from '../services/mine-logs.service';
 import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
+import * as  post from '../model/user';
 
 @Component({
   selector: 'app-flag',
@@ -11,9 +12,16 @@ import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 export class FlagComponent implements OnInit, OnDestroy {
   loading: boolean;
   fetchLogs$: any = [];
-  showDialog: boolean;
+  showDialog: boolean
   config: any[] = [];
   selected: any;
+  users: any
+  traceConfigs: any;
+  showUserDialog: boolean;
+  showClassDialog: boolean;
+  showTriggerDialog: boolean;
+  filteredCountriesSingle$: any = [];
+  add: post.CreateUser = new post.CreateUser();
 
   constructor(private mine: MineLogsService) { }
 
@@ -39,7 +47,59 @@ export class FlagComponent implements OnInit, OnDestroy {
 
   deleteTraceLogs(event) {
     console.log(event);
+    this.mine.deleteParticularTracelag(event.Id).subscribe(res => {
+      console.log(res);
+    })
+    this.fetchTraceLogs();
 
+  }
+
+  setData(event) {
+    console.log(event);
+    if (event.value === "User") {
+      this.showUserDialog = true
+    }
+    else if (event.value === "Class") {
+      this.showClassDialog = true;
+    }
+    else {
+      this.showTriggerDialog = true;
+    }
+
+  }
+
+  filterCountrySingle(event) {
+    console.log(event.query);
+    this.mine.searchUserForUser(event.query).subscribe(res => {
+      console.log(res.records.Name);
+      this.filteredCountriesSingle$ = res.records;
+    })
+
+  }
+
+  createUser() {
+    console.log(this.add);
+    this.add.LogType = "DEVELOPER_LOG"
+    this.mine.create(this.add).subscribe(res => {
+      console.log(res);
+    })
+
+  }
+
+  createClass() {
+    console.log(this.add);
+    this.add.LogType = "CLASS_TRACING";
+    this.mine.create(this.add).subscribe(res => {
+      console.log(res);
+    })
+  }
+
+  createTrigger() {
+    console.log(this.add);
+    this.add.LogType = "DEVELOPER_LOG"
+    this.mine.create(this.add).subscribe(res => {
+      console.log(res);
+    })
   }
 
 }
