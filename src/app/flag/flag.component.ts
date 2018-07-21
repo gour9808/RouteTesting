@@ -2,6 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MineLogsService } from '../services/mine-logs.service';
 import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 import * as  post from '../model/user';
+import * as _ from 'lodash';
+
+
 
 @Component({
   selector: 'app-flag',
@@ -20,7 +23,7 @@ export class FlagComponent implements OnInit, OnDestroy {
   showUserDialog: boolean;
   showClassDialog: boolean;
   showTriggerDialog: boolean;
-  filteredCountriesSingle$: any = [];
+  filtereUser$: any = [];
   add: post.CreateUser = new post.CreateUser();
 
   constructor(private mine: MineLogsService) { }
@@ -40,7 +43,7 @@ export class FlagComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.mine.fetchFlags().subscribe(res => {
       console.log("Trace flag data", res);
-      this.fetchLogs$ = res;
+      this.fetchLogs$ = res.records;
       this.loading = false;
     })
   }
@@ -68,14 +71,17 @@ export class FlagComponent implements OnInit, OnDestroy {
 
   }
 
-  filterCountrySingle(event) {
+  filterUser(event) {
     console.log(event.query);
     this.mine.searchUserForUser(event.query).subscribe(res => {
-      console.log(res.records.Name);
-      this.filteredCountriesSingle$ = res.records;
+      console.log(res.records);
+      this.filtereUser$ = _.map(res.records, 'Name');
+      console.log("filterd one", this.filtereUser$);
+
     })
 
   }
+
 
   createUser() {
     console.log(this.add);

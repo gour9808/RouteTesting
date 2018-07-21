@@ -1,21 +1,7 @@
-<!-- <div fxLayout="row">
-        <div class="metrics" fxLayout="row"  fxLayoutAlign="start center">
-            <div fxLayout="column" fxFlex>
-                    <p-dropdown [options]="config" (onChange) = "setData($event)" placeholder="Select a City" ></p-dropdown>
-            </div>
-            <div fxLayout="column" fxFlex>
-                <app-button label="REFRESH" (click)="fetchTraceLogs()"></app-button>
-            </div>
-            <div fxLayout="column" fxFlex>
-                <app-button label="MANAGE DEBUG LEVELS"></app-button>
-            </div>
-        </div>
-    </div> -->
-
 
 <div fxLayout="row">
     <div fxLayout="column" fxFlex>
-        <p-dropdown [options]="config" (onChange)="setData($event)" placeholder="Select a City"></p-dropdown>
+        <p-dropdown [options]="config" (onChange)="setData($event)" placeholder="Select Trace Config"></p-dropdown>
     </div>
     <div fxLayout="column" fxFlex>
         <app-button label="REFRESH" (click)="fetchTraceLogs()"></app-button>
@@ -24,7 +10,7 @@
         <app-button label="MANAGE DEBUG LEVELS"></app-button>
     </div>
 </div>
-<p-table [value]="fetchLogs$.records" [paginator]="true" [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
+<!-- <p-table [value]="fetchLogs$" [paginator]="true" [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
     <ng-template pTemplate="header">
         <tr>
             <th>Action</th>
@@ -46,7 +32,7 @@
     </ng-template>
 </p-table>
 
-
+ -->
 
 
 <p-dialog header="Please confirm" [(visible)]="showDialog" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200"
@@ -61,8 +47,8 @@
 
 <p-dialog header="Add trigger" [(visible)]="showTriggerDialog" [modal]="true" [responsive]="true" [width]="350" [height] = "350">
 
-                <p-autoComplete [(ngModel)]="users" [suggestions]="filteredCountriesSingle$" (completeMethod)="filterCountrySingle($event)"
-                    field="name" placeholder="User" [minLength]="1" fxFlex></p-autoComplete>
+                <p-autoComplete [(ngModel)]="users" [suggestions]="filtereUser$" (completeMethod)="filterUser($event)"
+                     placeholder="User" [minLength]="1" fxFlex></p-autoComplete>
                 <!-- <p-autoComplete [(ngModel)]="users" [suggestions]="filteredCountriesSingle" (completeMethod)="filterCountrySingle($event)"
                     field="name" placeholder="User" [minLength]="1" fxFlex></p-autoComplete>
      -->

@@ -1115,6 +1115,8 @@ var EventsComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_mine_logs_service__ = __webpack_require__("./src/app/services/mine-logs.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_auto_unsubscribe__ = __webpack_require__("./src/app/utils/auto-unsubscribe.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_user__ = __webpack_require__("./src/app/model/user.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__("./node_modules/lodash/lodash.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1127,12 +1129,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var FlagComponent = (function () {
     function FlagComponent(mine) {
         this.mine = mine;
         this.fetchLogs$ = [];
         this.config = [];
-        this.filteredCountriesSingle$ = [];
+        this.filtereUser$ = [];
         this.add = new __WEBPACK_IMPORTED_MODULE_2__model_user__["a" /* CreateUser */]();
     }
     FlagComponent.prototype.ngOnInit = function () {
@@ -1149,7 +1152,7 @@ var FlagComponent = (function () {
         this.loading = true;
         this.mine.fetchFlags().subscribe(function (res) {
             console.log("Trace flag data", res);
-            _this.fetchLogs$ = res;
+            _this.fetchLogs$ = res.records;
             _this.loading = false;
         });
     };
@@ -1172,12 +1175,13 @@ var FlagComponent = (function () {
             this.showTriggerDialog = true;
         }
     };
-    FlagComponent.prototype.filterCountrySingle = function (event) {
+    FlagComponent.prototype.filterUser = function (event) {
         var _this = this;
         console.log(event.query);
         this.mine.searchUserForUser(event.query).subscribe(function (res) {
-            console.log(res.records.Name);
-            _this.filteredCountriesSingle$ = res.records;
+            console.log(res.records);
+            _this.filtereUser$ = __WEBPACK_IMPORTED_MODULE_3_lodash__["map"](res.records, 'Name');
+            console.log("filterd one", _this.filtereUser$);
         });
     };
     FlagComponent.prototype.createUser = function () {

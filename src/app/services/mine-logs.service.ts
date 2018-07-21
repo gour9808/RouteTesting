@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Constants } from './constants';
 import { Cache } from '../utils/storage.provider';
-import { ResponseType } from '../../../node_modules/@angular/http';
 
 @Injectable()
 export class MineLogsService {
@@ -73,7 +72,7 @@ export class MineLogsService {
   }
 
 
-  fetchFlags() {
+  fetchFlags(): Observable<any> {
     let url = "Select Id, LogType, DebugLevelId, DebugLevel.DeveloperName,  TracedEntityId, TracedEntity.Name, ExpirationDate  from TraceFlag  order by ExpirationDate DESC "
     console.log(Constants.BASE_URL + encodeURIComponent(url));
     let headers = new HttpHeaders();
@@ -100,47 +99,45 @@ export class MineLogsService {
     return this.http.get(Constants.BASE_URL + encodeURIComponent(url))
   }
 
-  searchUserForUser(name): Observable<any>  {
+  searchUserForUser(name): Observable<any> {
 
     let url = "Select Id, Name, Profile.Name from User where IsActive = true AND Name like '%" + name + "%'"
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.USER_SEARCH_BASE_URL +  encodeURIComponent(url))
+    return this.http.get(Constants.USER_SEARCH_BASE_URL + encodeURIComponent(url))
 
   }
 
-  searchDebugLevelFor(name): Observable<any>{
+  searchDebugLevelFor(name): Observable<any> {
     let url = "Select Id, DeveloperName from DebugLevel where DeveloperName like '%" + name + "%'"
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.BASE_URL +  encodeURIComponent(url))
+    return this.http.get(Constants.BASE_URL + encodeURIComponent(url))
 
   }
 
-  searchUserForClass(name): Observable<any>  {
+  searchUserForClass(name): Observable<any> {
 
     let url = "Select NamespacePrefix, Name, Id From ApexClass Where Name like '%" + name + "%'"
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.USER_SEARCH_BASE_URL +  encodeURIComponent(url))
+    return this.http.get(Constants.USER_SEARCH_BASE_URL + encodeURIComponent(url))
 
   }
 
-  searchUserForTrigger(name): Observable<any>
-  {
-    
+  searchUserForTrigger(name): Observable<any> {
+
     let url = "Select NamespacePrefix, Name, Id From ApexTrigger Where Name like '%" + name + "%'"
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.USER_SEARCH_BASE_URL +  encodeURIComponent(url))
+    return this.http.get(Constants.USER_SEARCH_BASE_URL + encodeURIComponent(url))
   }
 
-  create(body)
-  {
+  create(body) {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
