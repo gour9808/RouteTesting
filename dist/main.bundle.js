@@ -1115,8 +1115,6 @@ var EventsComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_mine_logs_service__ = __webpack_require__("./src/app/services/mine-logs.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_auto_unsubscribe__ = __webpack_require__("./src/app/utils/auto-unsubscribe.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_user__ = __webpack_require__("./src/app/model/user.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__("./node_modules/lodash/lodash.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1129,13 +1127,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var FlagComponent = (function () {
     function FlagComponent(mine) {
         this.mine = mine;
         this.fetchLogs$ = [];
         this.config = [];
-        this.filtereUser$ = [];
+        this.filtereUserForUser$ = [];
+        this.filterUserForClass$ = [];
+        this.filterUserForTrigger$ = [];
+        this.filterDebugLevel$ = [];
         this.add = new __WEBPACK_IMPORTED_MODULE_2__model_user__["a" /* CreateUser */]();
     }
     FlagComponent.prototype.ngOnInit = function () {
@@ -1157,11 +1157,12 @@ var FlagComponent = (function () {
         });
     };
     FlagComponent.prototype.deleteTraceLogs = function (event) {
+        var _this = this;
         console.log(event);
         this.mine.deleteParticularTracelag(event.Id).subscribe(function (res) {
             console.log(res);
+            _this.fetchTraceLogs();
         });
-        this.fetchTraceLogs();
     };
     FlagComponent.prototype.setData = function (event) {
         console.log(event);
@@ -1175,34 +1176,91 @@ var FlagComponent = (function () {
             this.showTriggerDialog = true;
         }
     };
-    FlagComponent.prototype.filterUser = function (event) {
+    FlagComponent.prototype.filterUserDataForUser = function (event) {
         var _this = this;
         console.log(event.query);
         this.mine.searchUserForUser(event.query).subscribe(function (res) {
             console.log(res.records);
-            _this.filtereUser$ = __WEBPACK_IMPORTED_MODULE_3_lodash__["map"](res.records, 'Name');
-            console.log("filterd one", _this.filtereUser$);
+            _this.filtereUserForUser$ = res.records;
+        });
+    };
+    FlagComponent.prototype.filterUserDataForClass = function (event) {
+        var _this = this;
+        console.log(event.query);
+        this.mine.searchUserForClass(event.query).subscribe(function (res) {
+            console.log(res.records);
+            _this.filterUserForClass$ = res.records;
+        });
+    };
+    FlagComponent.prototype.filterUserDataForTrigger = function (event) {
+        var _this = this;
+        console.log(event.query);
+        this.mine.searchUserForTrigger(event.query).subscribe(function (res) {
+            console.log(res.records);
+            _this.filterUserForTrigger$ = res.records;
+        });
+    };
+    FlagComponent.prototype.setUserIdForUser = function (event) {
+        console.log(event);
+        this.add.TracedEntityId = event.Id;
+        console.log("USerId", this.add.TracedEntityId);
+    };
+    FlagComponent.prototype.setDebugLevelId = function (event) {
+        console.log(event);
+        this.add.DebugLevelId = event.Id;
+        console.log("debug level ID ", this.add.DebugLevelId);
+    };
+    FlagComponent.prototype.filterDebugLevel = function (event) {
+        var _this = this;
+        console.log(event.query);
+        this.mine.searchDebugLevel(event.query).subscribe(function (res) {
+            console.log(res.records);
+            _this.filterDebugLevel$ = res.records;
         });
     };
     FlagComponent.prototype.createUser = function () {
+        var _this = this;
         console.log(this.add);
+        var date = new Date();
+        date.setDate(date.getDate() + 1);
+        console.log(new Date(date.toString().split('GMT')[0] + ' UTC').toISOString());
+        console.log("tomorrow date", date);
+        this.add.ExpirationDate = date;
         this.add.LogType = "DEVELOPER_LOG";
         this.mine.create(this.add).subscribe(function (res) {
+            _this.showUserDialog = false;
             console.log(res);
+            _this.fetchTraceLogs();
         });
     };
     FlagComponent.prototype.createClass = function () {
+        var _this = this;
         console.log(this.add);
+        var date = new Date();
+        date.setDate(date.getDate() + 1);
+        console.log(new Date(date.toString().split('GMT')[0] + ' UTC').toISOString());
+        console.log("tomorrow date", date);
+        this.add.ExpirationDate = date;
         this.add.LogType = "CLASS_TRACING";
         this.mine.create(this.add).subscribe(function (res) {
+            _this.showClassDialog = false;
             console.log(res);
+            _this.fetchTraceLogs();
         });
     };
     FlagComponent.prototype.createTrigger = function () {
+        var _this = this;
         console.log(this.add);
+        var date = new Date();
+        date.setDate(date.getDate() + 1);
+        console.log(new Date(date.toString().split('GMT')[0] + ' UTC').toISOString());
+        console.log("tomorrow date", date);
+        this.add.ExpirationDate = date;
         this.add.LogType = "DEVELOPER_LOG";
         this.mine.create(this.add).subscribe(function (res) {
+            _this.showTriggerDialog = false;
             console.log(res);
+            _this.fetchTraceLogs();
         });
     };
     FlagComponent = __decorate([
@@ -1509,7 +1567,7 @@ var MineComponent = (function () {
 var CreateUser = (function () {
     function CreateUser() {
         this.DebugLevelId = "";
-        this.ExpirationDate = "";
+        this.ExpirationDate = new Date();
         this.LogType = "";
         this.TracedEntityId = "";
     }
@@ -1886,7 +1944,7 @@ var MineLogsService = (function () {
         headers.append("Authorization", "Bearer " + this.userSession.token);
         return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].USER_SEARCH_BASE_URL + encodeURIComponent(url));
     };
-    MineLogsService.prototype.searchDebugLevelFor = function (name) {
+    MineLogsService.prototype.searchDebugLevel = function (name) {
         var url = "Select Id, DeveloperName from DebugLevel where DeveloperName like '%" + name + "%'";
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');

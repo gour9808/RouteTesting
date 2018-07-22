@@ -17,15 +17,14 @@ export class FlagComponent implements OnInit, OnDestroy {
   fetchLogs$: any = [];
   showDialog: boolean
   config: any[] = [];
-  selected: any;
-  users: any
-  traceConfigs: any;
   showUserDialog: boolean;
   showClassDialog: boolean;
   showTriggerDialog: boolean;
-  filtereUser$: any = [];
+  filtereUserForUser$: any = [];
+  filterUserForClass$: any = [];
+  filterUserForTrigger$: any = [];
+  filterDebugLevel$: any = [];
   add: post.CreateUser = new post.CreateUser();
-
   constructor(private mine: MineLogsService) { }
 
   ngOnInit() {
@@ -52,9 +51,8 @@ export class FlagComponent implements OnInit, OnDestroy {
     console.log(event);
     this.mine.deleteParticularTracelag(event.Id).subscribe(res => {
       console.log(res);
+      this.fetchTraceLogs();
     })
-    this.fetchTraceLogs();
-
   }
 
   setData(event) {
@@ -68,43 +66,98 @@ export class FlagComponent implements OnInit, OnDestroy {
     else {
       this.showTriggerDialog = true;
     }
-
   }
 
-  filterUser(event) {
+  filterUserDataForUser(event) {
     console.log(event.query);
     this.mine.searchUserForUser(event.query).subscribe(res => {
       console.log(res.records);
-      this.filtereUser$ = _.map(res.records, 'Name');
-      console.log("filterd one", this.filtereUser$);
-
+      this.filtereUserForUser$ = res.records;
     })
+  }
 
+  filterUserDataForClass(event) {
+    console.log(event.query);
+    this.mine.searchUserForClass(event.query).subscribe(res => {
+      console.log(res.records);
+      this.filterUserForClass$ = res.records;
+    })
+  }
+
+  filterUserDataForTrigger(event) {
+    console.log(event.query);
+    this.mine.searchUserForTrigger(event.query).subscribe(res => {
+      console.log(res.records);
+      this.filterUserForTrigger$ = res.records;
+    })
+  }
+
+
+
+  setUserIdForUser(event) {
+    console.log(event);
+    this.add.TracedEntityId = event.Id;
+    console.log("USerId", this.add.TracedEntityId);
+  }
+
+  setDebugLevelId(event) {
+    console.log(event);
+    this.add.DebugLevelId = event.Id;
+    console.log("debug level ID ", this.add.DebugLevelId);
+  }
+
+
+  filterDebugLevel(event) {
+    console.log(event.query);
+    this.mine.searchDebugLevel(event.query).subscribe(res => {
+      console.log(res.records);
+      this.filterDebugLevel$ = res.records;
+    })
   }
 
 
   createUser() {
     console.log(this.add);
+    let date = new Date();
+    date.setDate(date.getDate() + 1);
+    console.log(new Date(date.toString().split('GMT')[0] + ' UTC').toISOString());
+    console.log("tomorrow date", date);
+    this.add.ExpirationDate = date;
     this.add.LogType = "DEVELOPER_LOG"
     this.mine.create(this.add).subscribe(res => {
+      this.showUserDialog = false;
       console.log(res);
+      this.fetchTraceLogs();
     })
-
   }
 
   createClass() {
     console.log(this.add);
+    let date = new Date();
+    date.setDate(date.getDate() + 1);
+    console.log(new Date(date.toString().split('GMT')[0] + ' UTC').toISOString());
+    console.log("tomorrow date", date);
+    this.add.ExpirationDate = date;
     this.add.LogType = "CLASS_TRACING";
     this.mine.create(this.add).subscribe(res => {
+      this.showClassDialog = false;
       console.log(res);
+      this.fetchTraceLogs();
     })
   }
 
   createTrigger() {
     console.log(this.add);
+    let date = new Date();
+    date.setDate(date.getDate() + 1);
+    console.log(new Date(date.toString().split('GMT')[0] + ' UTC').toISOString());
+    console.log("tomorrow date", date);
+    this.add.ExpirationDate = date;
     this.add.LogType = "DEVELOPER_LOG"
     this.mine.create(this.add).subscribe(res => {
+      this.showTriggerDialog = false;
       console.log(res);
+      this.fetchTraceLogs();
     })
   }
 

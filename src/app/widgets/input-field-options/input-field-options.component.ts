@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import { MineLogsService } from '../../services/mine-logs.service';
 
 @Component({
   selector: 'app-input-field-options',
@@ -6,37 +7,38 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
   styleUrls: ['./input-field-options.component.scss']
 })
 export class InputFieldOptionsComponent implements OnInit {
-  @Input() list: any;
+  autocomplete: any;
+  results: any;
   @Input() label: any;
-  @Input() placeH: any;
-  @Input() value: any;
-  @Input() reset: any;
-  @Input() disabled: any;
-  @Input() showFilter: any;
-  @Input() filter: any;
+  @Input() placeholder: any;
+  @Input() model: any;
+  @Input() error: any;
+  @Input() errorMessage: any;
   @Input() icon: any;
+  @Input() disabled: any;
   @Input() iconColor: any;
   @Input() mandatory: boolean;
-  @Output() selected: EventEmitter<any> = new EventEmitter<any>();
-  key: any;
-  constructor() { }
+  @Output() pickedAddress: EventEmitter<any> = new EventEmitter<any>();
+  country: any;
+  constructor(private mine : MineLogsService) { }
 
   ngOnInit() {
+   
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['reset']) {
-      this.value = null;
-    }
+  search(event) {
+    console.log('Searching for ', event.query);
+    this.mine.searchUserForUser(event.query).subscribe(res => {
+      console.log(res.records);
+     this.results = res.records;
+     
+   })
+
   }
 
-  modelChange(event) {
-    this.value = event;
-  }
-
-  onSelected() {
-    console.log(this.value);
-    this.selected.emit(this.value);
+  selected(event) {
+    console.log('Selected Address', event);
+    this.pickedAddress.emit(event);
   }
 
 }

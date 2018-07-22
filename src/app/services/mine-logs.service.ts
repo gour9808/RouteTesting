@@ -109,7 +109,7 @@ export class MineLogsService {
 
   }
 
-  searchDebugLevelFor(name): Observable<any> {
+  searchDebugLevel(name): Observable<any> {
     let url = "Select Id, DeveloperName from DebugLevel where DeveloperName like '%" + name + "%'"
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
