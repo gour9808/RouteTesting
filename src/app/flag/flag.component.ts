@@ -93,7 +93,6 @@ export class FlagComponent implements OnInit, OnDestroy {
   }
 
 
-
   setUserIdForUser(event) {
     console.log(event);
     this.add.TracedEntityId = event.Id;
