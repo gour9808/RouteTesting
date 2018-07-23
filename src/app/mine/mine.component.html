@@ -31,9 +31,20 @@
     <ng-template pTemplate="body" let-mine>
         <tr [pSelectableRow]="mine">
             <td>
-                <i class="fa fa-cloud-download" style="font-size:18px;color:black" (click) = "downloadLogs(mine)" fxFlex></i>
-                <i class="glyphicon glyphicon-new-window" style="font-size:18px;color:black" fxFlex></i>
-                <i class="fa fa-clone" style="font-size:18px;color:black" fxFlex></i>
+                <div class="social-icons">
+                    <a class="social-icon social-icon--codepen" (click)="downloadLogs(mine)" download>
+                        <i class="fa fa-cloud-download" ></i>
+                        <div class="tooltip">Download</div>
+                    </a>
+                    <a class="social-icon social-icon--github" (click) = "goToNewWindow(mine)">
+                        <i class="glyphicon glyphicon-new-window"></i>
+                        <div class="tooltip">New Window</div>
+                    </a>
+                    <a class="social-icon social-icon--twitter">
+                        <i class="fa fa-clone"></i>
+                        <div class="tooltip">New tab</div>
+                    </a>
+                </div>
             </td>
             <td>{{mine.LogUser.Name}}</td>
             <td style="overflow: auto;">{{mine.Operation}}</td>

@@ -1,22 +1,26 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewContainerRef } from '@angular/core';
 import { MineLogsService } from '../services/mine-logs.service';
 import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 import * as  post from '../model/user';
 import * as _ from 'lodash';
-
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 
 @Component({
   selector: 'app-flag',
   templateUrl: './flag.component.html',
-  styleUrls: ['./flag.component.scss']
+  styleUrls: ['./flag.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 @AutoUnsubscribe()
 export class FlagComponent implements OnInit, OnDestroy {
   loading: boolean;
+  userName: string;
+  devName: string;
   fetchLogs$: any = [];
   showDialog: boolean
   config: any[] = [];
+  selected: any;
   showUserDialog: boolean;
   showClassDialog: boolean;
   showTriggerDialog: boolean;
@@ -24,12 +28,18 @@ export class FlagComponent implements OnInit, OnDestroy {
   filterUserForClass$: any = [];
   filterUserForTrigger$: any = [];
   filterDebugLevel$: any = [];
+  deleteConfirmDialog: boolean;
+  emptyMessage: string;
   add: post.CreateUser = new post.CreateUser();
-  constructor(private mine: MineLogsService) { }
+  remove: post.clearUsername = new post.clearUsername();
+  constructor(private mine: MineLogsService, private toast: ToastsManager, private vcr: ViewContainerRef) {
+    this.toast.setRootViewContainerRef(vcr)
+  }
 
   ngOnInit() {
     this.fetchTraceLogs();
     this.config = [
+
       { label: 'User', value: 'User' },
       { label: 'Class', value: 'Class' },
       { label: 'Trigger', value: 'Trigger' },
@@ -44,6 +54,8 @@ export class FlagComponent implements OnInit, OnDestroy {
       console.log("Trace flag data", res);
       this.fetchLogs$ = res.records;
       this.loading = false;
+    }, err => {
+      this.toast.error("Error in fetching Logs")
     })
   }
 
@@ -51,20 +63,25 @@ export class FlagComponent implements OnInit, OnDestroy {
     console.log(event);
     this.mine.deleteParticularTracelag(event.Id).subscribe(res => {
       console.log(res);
+      this.toast.success("Deleted Successfully");
       this.fetchTraceLogs();
+    }, err => {
+      this.toast.error("Error deleting log", err)
     })
   }
 
   setData(event) {
     console.log(event);
     if (event.value === "User") {
-      this.showUserDialog = true
+      this.showUserDialog = true;
+
     }
     else if (event.value === "Class") {
       this.showClassDialog = true;
     }
     else {
       this.showTriggerDialog = true;
+
     }
   }
 
@@ -72,6 +89,9 @@ export class FlagComponent implements OnInit, OnDestroy {
     console.log(event.query);
     this.mine.searchUserForUser(event.query).subscribe(res => {
       console.log(res.records);
+      if (res.records.length === 0) {
+        this.emptyMessage = "No records found"
+      }
       this.filtereUserForUser$ = res.records;
     })
   }
@@ -80,6 +100,9 @@ export class FlagComponent implements OnInit, OnDestroy {
     console.log(event.query);
     this.mine.searchUserForClass(event.query).subscribe(res => {
       console.log(res.records);
+      if (res.records.length === 0) {
+        this.emptyMessage = "No records found"
+      }
       this.filterUserForClass$ = res.records;
     })
   }
@@ -88,6 +111,9 @@ export class FlagComponent implements OnInit, OnDestroy {
     console.log(event.query);
     this.mine.searchUserForTrigger(event.query).subscribe(res => {
       console.log(res.records);
+      if (res.records.length === 0) {
+        this.emptyMessage = "No records found"
+      }
       this.filterUserForTrigger$ = res.records;
     })
   }
@@ -96,12 +122,16 @@ export class FlagComponent implements OnInit, OnDestroy {
   setUserIdForUser(event) {
     console.log(event);
     this.add.TracedEntityId = event.Id;
+    this.userName = event.Name;
     console.log("USerId", this.add.TracedEntityId);
+    console.log(this.userName);
+
   }
 
   setDebugLevelId(event) {
     console.log(event);
     this.add.DebugLevelId = event.Id;
+    this.devName = event.DeveloperName;
     console.log("debug level ID ", this.add.DebugLevelId);
   }
 
@@ -127,7 +157,11 @@ export class FlagComponent implements OnInit, OnDestroy {
       this.showUserDialog = false;
       console.log(res);
       this.fetchTraceLogs();
-    })
+    },
+      err => {
+        console.log(err.error[0].message);
+        this.toast.error("error", err.error[0].message)
+      })
   }
 
   createClass() {
@@ -142,6 +176,9 @@ export class FlagComponent implements OnInit, OnDestroy {
       this.showClassDialog = false;
       console.log(res);
       this.fetchTraceLogs();
+    }, err => {
+      console.log(err.error[0].message);
+      this.toast.error("error", err.error[0].message)
     })
   }
 
@@ -152,12 +189,19 @@ export class FlagComponent implements OnInit, OnDestroy {
     console.log(new Date(date.toString().split('GMT')[0] + ' UTC').toISOString());
     console.log("tomorrow date", date);
     this.add.ExpirationDate = date;
-    this.add.LogType = "DEVELOPER_LOG"
+    this.add.LogType = "CLASS_TRACING"
     this.mine.create(this.add).subscribe(res => {
       this.showTriggerDialog = false;
       console.log(res);
       this.fetchTraceLogs();
+    }, err => {
+      console.log(err.error[0].message);
+      this.toast.error("error", err.error[0].message)
     })
+  }
+
+  goForIgnition() {
+    return this.add.TracedEntityId && this.add.DebugLevelId;
   }
 
 }

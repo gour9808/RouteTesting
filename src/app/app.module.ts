@@ -35,6 +35,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MineLogsService } from './services/mine-logs.service';
 import { ViewLogDetailComponent } from './view-log-detail/view-log-detail.component';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
+
+
 
 @NgModule({
   declarations: [
@@ -57,7 +60,7 @@ import { ViewLogDetailComponent } from './view-log-detail/view-log-detail.compon
     AutoCompleteModule,
     AppRoutingModule,
     BrowserModule,
-    FormsModule,
+    FormsModule,ToastModule.forRoot() ,
     HttpModule,
     DataTableModule,
     SharedModule,

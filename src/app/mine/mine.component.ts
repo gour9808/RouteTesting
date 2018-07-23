@@ -5,6 +5,8 @@ import { Cache } from '../utils/storage.provider';
 import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
 import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 import { Constants } from '../services/constants';
+import { saveAs } from 'file-saver';
+
 
 @Component({
   selector: 'app-mine',
@@ -15,6 +17,8 @@ import { Constants } from '../services/constants';
 export class MineComponent implements OnInit, OnDestroy {
   mineLogs$: any = [];
   selected: any;
+  data: any;
+  recordId: any;
   loading: boolean;
   showDialog: boolean;
   @Cache({ pool: 'LogUserId' }) logUserId: any
@@ -25,6 +29,7 @@ export class MineComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getCurrentTabUrl();
     this.getMineLogs();
   }
 
@@ -41,9 +46,21 @@ export class MineComponent implements OnInit, OnDestroy {
     //  this.deleteMineCached();
   }
 
+  
+  getCurrentTabUrl() {
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+        console.log("tab is", tab);
+        // let path = new URL(tab[0].url).host;
+        // console.log("https://" + path);
+        // path = "https://" + path;
+        // this.url = path;
+
+    });
+}
+
   goToViewPage(event) {
-    console.log("on row select", event.data);
-    this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
+    // console.log("on row select", event.data);
+    // this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
   }
 
   deleteMineCached() {
@@ -52,13 +69,37 @@ export class MineComponent implements OnInit, OnDestroy {
     })
   }
 
+
   downloadLogs(event) {
-    console.log(event);
+    console.log("log Id is", event.Id);
+    this.recordId = event.Id;
+    let title = "apex - " + event.Id
+    this.mineService.downloadLogs(this.recordId).subscribe(res => {
+      console.log(res);
 
-    //  this.mineService.downloadLogs().subscribe
-
-
+    }, err => {
+      console.log(err.error.text);
+      this.data = err.error.text;
+      this.saveToFileSystem(this.data)
+    })
   }
 
+  saveToFileSystem(response) {
+    const filename = "Apex- " + this.recordId;
+    const blob = new Blob([response], { type: 'application/octet-stream' });
+    saveAs(blob, filename);
+  }
+
+  goToNewWindow(event) {
+    console.log(event);
+    let tabId
+    chrome.tabs.get( tabId , (tab)=>
+  {
+     console.log(tab.id);
+     
+  })
+  
+
+  }
 
 }

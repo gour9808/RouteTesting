@@ -14,6 +14,7 @@ import { DropdownModule, ScrollPanelModule, AutoCompleteModule } from 'primeng/p
 import { FormsModule } from '@angular/forms';
 import { TimeAgoPipe } from '../../../node_modules/time-ago-pipe';
 import { FilterPipe } from '../utils/filter.pipe';
+import { ToastModule } from '../../../node_modules/ng2-toastr';
 
 @NgModule({
     imports: [

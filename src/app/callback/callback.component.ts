@@ -45,6 +45,7 @@ export class CallbackComponent implements OnInit {
 
     getCurrentTabUrl() {
         chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+            console.log("tab is", tab);
             let path = new URL(tab[0].url).host;
             console.log("https://" + path);
             path = "https://" + path;

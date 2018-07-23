@@ -11,3 +11,9 @@ export class CreateUser {
         this.TracedEntityId = "";
     }
 }
+
+export class clearUsername
+{
+    userName: string;
+    devName: string
+}
