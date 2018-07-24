@@ -863,6 +863,7 @@ var ContainerComponent = (function () {
         this.router = router;
         this.currentRoute = currentRoute;
         this.showSidenav = true;
+        this.showNewWindow = false;
         this.menuItems = [{
                 name: "Debug",
                 icon: "fa-dashboard",
@@ -881,12 +882,6 @@ var ContainerComponent = (function () {
                 path: "/home/discussions/all",
                 active: true,
             },
-            {
-                name: "New Window",
-                icon: "fa-external-link",
-                path: "/home/my",
-                active: true
-            },
         ];
     }
     ContainerComponent.prototype.ngOnInit = function () {
@@ -894,6 +889,14 @@ var ContainerComponent = (function () {
             return false;
         };
         console.log('Init Container');
+    };
+    ContainerComponent.prototype.openInNewWindow = function () {
+        chrome.windows.create({
+            url: "index.html",
+            type: 'panel',
+            width: 1200,
+            height: 800,
+        }, function () { });
     };
     return ContainerComponent;
 }());
@@ -1099,6 +1102,7 @@ var DiscussionsComponent = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventsComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_auto_unsubscribe__ = __webpack_require__("./src/app/utils/auto-unsubscribe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__ = __webpack_require__("./src/app/services/mine-logs.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1109,20 +1113,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var EventsComponent = (function () {
-    function EventsComponent() {
-        this.country$ = [];
+    function EventsComponent(mineService) {
+        this.mineService = mineService;
+        this.events$ = [];
     }
     EventsComponent.prototype.ngOnInit = function () {
+        this.fetchEventsData();
         this.config = [
             { label: 'User', value: 'User' },
             { label: 'Class', value: 'Class' },
             { label: 'Trigger', value: 'Trigger' },
         ];
     };
+    EventsComponent.prototype.fetchEventsData = function () {
+        var _this = this;
+        this.mineService.fetchEventData().subscribe(function (res) {
+            console.log(res);
+            _this.events$ = res.records;
+        });
+    };
     EventsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__utils_auto_unsubscribe__["a" /* AutoUnsubscribe */])(),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__["a" /* MineLogsService */]])
     ], EventsComponent);
     return EventsComponent;
 }());
@@ -1142,6 +1156,7 @@ var EventsComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model_user__ = __webpack_require__("./src/app/model/user.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_toastr_ng2_toastr__ = __webpack_require__("./node_modules/ng2-toastr/ng2-toastr.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_toastr_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_storage_provider__ = __webpack_require__("./src/app/utils/storage.provider.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1151,6 +1166,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -1172,6 +1188,7 @@ var FlagComponent = (function () {
         this.toast.setRootViewContainerRef(vcr);
     }
     FlagComponent.prototype.ngOnInit = function () {
+        this.NewWindow = false;
         this.fetchTraceLogs();
         this.config = [
             { label: 'User', value: 'User' },
@@ -1265,6 +1282,9 @@ var FlagComponent = (function () {
         console.log(event.query);
         this.mine.searchDebugLevel(event.query).subscribe(function (res) {
             console.log(res.records);
+            if (res.records.length === 0) {
+                _this.emptyMessage = "No records found";
+            }
             _this.filterDebugLevel$ = res.records;
         });
     };
@@ -1279,6 +1299,7 @@ var FlagComponent = (function () {
         this.add.LogType = "DEVELOPER_LOG";
         this.mine.create(this.add).subscribe(function (res) {
             _this.showUserDialog = false;
+            _this.toast.success("Success");
             console.log(res);
             _this.fetchTraceLogs();
         }, function (err) {
@@ -1297,6 +1318,7 @@ var FlagComponent = (function () {
         this.add.LogType = "CLASS_TRACING";
         this.mine.create(this.add).subscribe(function (res) {
             _this.showClassDialog = false;
+            _this.toast.success("Success");
             console.log(res);
             _this.fetchTraceLogs();
         }, function (err) {
@@ -1315,6 +1337,7 @@ var FlagComponent = (function () {
         this.add.LogType = "CLASS_TRACING";
         this.mine.create(this.add).subscribe(function (res) {
             _this.showTriggerDialog = false;
+            _this.toast.success("Success");
             console.log(res);
             _this.fetchTraceLogs();
         }, function (err) {
@@ -1325,6 +1348,27 @@ var FlagComponent = (function () {
     FlagComponent.prototype.goForIgnition = function () {
         return this.add.TracedEntityId && this.add.DebugLevelId;
     };
+    FlagComponent.prototype.goToNewWindow = function () {
+        chrome.windows.create({
+            url: "index.html",
+            type: 'panel',
+            width: 1200,
+            height: 800,
+        });
+        if (this.showDialog === false) {
+            this.NewWindow = true;
+        }
+        else {
+            this.NewWindow = false;
+        }
+    };
+    FlagComponent.prototype.checkTrueOrFalse = function () {
+        this.showDialog = false;
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_5__utils_storage_provider__["a" /* Cache */])({ pool: 'NewWindow' }),
+        __metadata("design:type", Boolean)
+    ], FlagComponent.prototype, "NewWindow", void 0);
     FlagComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_auto_unsubscribe__["a" /* AutoUnsubscribe */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__["a" /* MineLogsService */], __WEBPACK_IMPORTED_MODULE_4_ng2_toastr_ng2_toastr__["ToastsManager"], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"]])
@@ -1504,7 +1548,7 @@ function View_ListItemComponent_1(_l) { return __WEBPACK_IMPORTED_MODULE_1__angu
 function View_ListItemComponent_0(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 16, "div", [["class", "item"], ["fxLayoutAlign", "start center"], ["routerLinkActive", "active"]], null, [[null, "click"]], function (_v, en, $event) { var ad = true; if (("click" === en)) {
         var pd_0 = (__WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵnov"](_v, 2).onClick() !== false);
         ad = (pd_0 && ad);
-    } return ad; }, null, null)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](1, 278528, null, 0, __WEBPACK_IMPORTED_MODULE_2__angular_common__["NgClass"], [__WEBPACK_IMPORTED_MODULE_1__angular_core__["IterableDiffers"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["KeyValueDiffers"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer2"]], { klass: [0, "klass"], ngClass: [1, "ngClass"] }, null), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](2, 16384, [[1, 4]], 0, __WEBPACK_IMPORTED_MODULE_3__angular_router__["RouterLink"], [__WEBPACK_IMPORTED_MODULE_3__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_3__angular_router__["ActivatedRoute"], [8, null], __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer2"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"]], { queryParams: [0, "queryParams"], routerLink: [1, "routerLink"] }, null), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](3, 1720320, null, 2, __WEBPACK_IMPORTED_MODULE_3__angular_router__["RouterLinkActive"], [__WEBPACK_IMPORTED_MODULE_3__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer2"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ChangeDetectorRef"]], { routerLinkActive: [0, "routerLinkActive"] }, null), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵqud"](603979776, 1, { links: 1 }), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵqud"](603979776, 2, { linksWithHrefs: 1 }), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](6, 737280, null, 0, __WEBPACK_IMPORTED_MODULE_4__angular_flex_layout__["f" /* LayoutAlignDirective */], [__WEBPACK_IMPORTED_MODULE_4__angular_flex_layout__["l" /* MediaMonitor */], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer2"], [8, null]], { align: [0, "align"] }, null), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n    "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](8, 0, null, null, 1, "i", [["class", "fa"]], null, null, null, null, null)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](9, 278528, null, 0, __WEBPACK_IMPORTED_MODULE_2__angular_common__["NgClass"], [__WEBPACK_IMPORTED_MODULE_1__angular_core__["IterableDiffers"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["KeyValueDiffers"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer2"]], { klass: [0, "klass"], ngClass: [1, "ngClass"] }, null), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n    "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵand"](16777216, null, null, 1, null, View_ListItemComponent_1)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](12, 16384, null, 0, __WEBPACK_IMPORTED_MODULE_2__angular_common__["NgIf"], [__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["TemplateRef"]], { ngIf: [0, "ngIf"] }, null), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n    "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](14, 0, null, null, 1, "span", [], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](15, null, ["", ""])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n"])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n"]))], function (_ck, _v) { var _co = _v.component; var currVal_0 = "item"; var currVal_1 = _co.class; _ck(_v, 1, 0, currVal_0, currVal_1); var currVal_2 = _co.query; var currVal_3 = _co.path; _ck(_v, 2, 0, currVal_2, currVal_3); var currVal_4 = "active"; _ck(_v, 3, 0, currVal_4); var currVal_5 = "start center"; _ck(_v, 6, 0, currVal_5); var currVal_6 = "fa"; var currVal_7 = _co.icon; _ck(_v, 9, 0, currVal_6, currVal_7); var currVal_8 = _co.notmdi; _ck(_v, 12, 0, currVal_8); }, function (_ck, _v) { var _co = _v.component; var currVal_9 = _co.label; _ck(_v, 15, 0, currVal_9); }); }
+    } return ad; }, null, null)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](1, 278528, null, 0, __WEBPACK_IMPORTED_MODULE_2__angular_common__["NgClass"], [__WEBPACK_IMPORTED_MODULE_1__angular_core__["IterableDiffers"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["KeyValueDiffers"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer2"]], { klass: [0, "klass"], ngClass: [1, "ngClass"] }, null), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](2, 16384, [[1, 4]], 0, __WEBPACK_IMPORTED_MODULE_3__angular_router__["RouterLink"], [__WEBPACK_IMPORTED_MODULE_3__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_3__angular_router__["ActivatedRoute"], [8, null], __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer2"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"]], { queryParams: [0, "queryParams"], routerLink: [1, "routerLink"] }, null), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](3, 1720320, null, 2, __WEBPACK_IMPORTED_MODULE_3__angular_router__["RouterLinkActive"], [__WEBPACK_IMPORTED_MODULE_3__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer2"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ChangeDetectorRef"]], { routerLinkActive: [0, "routerLinkActive"] }, null), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵqud"](603979776, 1, { links: 1 }), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵqud"](603979776, 2, { linksWithHrefs: 1 }), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](6, 737280, null, 0, __WEBPACK_IMPORTED_MODULE_4__angular_flex_layout__["f" /* LayoutAlignDirective */], [__WEBPACK_IMPORTED_MODULE_4__angular_flex_layout__["l" /* MediaMonitor */], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer2"], [8, null]], { align: [0, "align"] }, null), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n    "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](8, 0, null, null, 1, "i", [["class", "fa"]], null, null, null, null, null)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](9, 278528, null, 0, __WEBPACK_IMPORTED_MODULE_2__angular_common__["NgClass"], [__WEBPACK_IMPORTED_MODULE_1__angular_core__["IterableDiffers"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["KeyValueDiffers"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer2"]], { klass: [0, "klass"], ngClass: [1, "ngClass"] }, null), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n    "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵand"](16777216, null, null, 1, null, View_ListItemComponent_1)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](12, 16384, null, 0, __WEBPACK_IMPORTED_MODULE_2__angular_common__["NgIf"], [__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["TemplateRef"]], { ngIf: [0, "ngIf"] }, null), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n    "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](14, 0, null, null, 1, "span", [], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](15, null, ["", ""])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["  \n"])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n"]))], function (_ck, _v) { var _co = _v.component; var currVal_0 = "item"; var currVal_1 = _co.class; _ck(_v, 1, 0, currVal_0, currVal_1); var currVal_2 = _co.query; var currVal_3 = _co.path; _ck(_v, 2, 0, currVal_2, currVal_3); var currVal_4 = "active"; _ck(_v, 3, 0, currVal_4); var currVal_5 = "start center"; _ck(_v, 6, 0, currVal_5); var currVal_6 = "fa"; var currVal_7 = _co.icon; _ck(_v, 9, 0, currVal_6, currVal_7); var currVal_8 = _co.notmdi; _ck(_v, 12, 0, currVal_8); }, function (_ck, _v) { var _co = _v.component; var currVal_9 = _co.label; _ck(_v, 15, 0, currVal_9); }); }
 function View_ListItemComponent_Host_0(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 1, "app-list-item", [], null, null, null, View_ListItemComponent_0, RenderType_ListItemComponent)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](1, 114688, null, 0, __WEBPACK_IMPORTED_MODULE_5__list_item_component__["a" /* ListItemComponent */], [], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
 var ListItemComponentNgFactory = __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵccf"]("app-list-item", __WEBPACK_IMPORTED_MODULE_5__list_item_component__["a" /* ListItemComponent */], View_ListItemComponent_Host_0, { label: "label", icon: "icon", class: "class", path: "path", query: "query", img: "img", notmdi: "notmdi" }, {}, []);
 
@@ -1634,10 +1678,12 @@ var MineComponent = (function () {
     };
     MineComponent.prototype.goToNewWindow = function (event) {
         console.log(event);
-        var tabId;
-        chrome.tabs.get(tabId, function (tab) {
-            console.log(tab.id);
-        });
+        chrome.windows.create({
+            url: "index.html",
+            type: 'panel',
+            width: 1200,
+            height: 800,
+        }, function () { });
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'LogUserId' }),
@@ -1794,6 +1840,7 @@ var Constants = (function () {
     Constants.BASE_URL = "https://ap5.salesforce.com/services/data/v35.0/tooling/query/?q=";
     Constants.USER_SEARCH_BASE_URL = "https://ap5.salesforce.com/services/data/v35.0/query/?q=";
     Constants.CREATE_USER_URL = "https://ap5.salesforce.com/services/data/v35.0/tooling/sobjects/TraceFlag/";
+    Constants.FETCH_EVENTS_URL = "https://ap5.salesforce.com/services/data/v35.0/query/?q=";
     Constants.GET_MINE_LOGS = function (LogUserId) {
         return "https://ap5.salesforce.com/services/data/v35.0/tooling/query/?q=SELECT%20id%2C%20Application%2C%20Operation%2C%20Status%2C%20DurationMilliseconds%2C%20LogLength%2C%20StartTime%2C%20LogUser.Name%20from%20ApexLog%20where%20%20LogUserId%20%3D%20%27" + LogUserId + "%27%20%20ORDER%20BY%20StartTime%20DESC%20LIMIT%2020";
     };
@@ -2031,14 +2078,23 @@ var MineLogsService = (function () {
         headers.append("Authorization", "Bearer " + this.userSession.token);
         return this.http.delete(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].DELETE_PARTICULAR_FLAG(traceFlagId), { headers: headers });
     };
-    MineLogsService.prototype.fetchEventData = function (logStartTime, logEndTime) {
+    MineLogsService.prototype.fetchEventData = function () {
+        var today = new Date();
+        today.setDate(today.getDate());
+        new Date(today.toString().split('GMT')[0] + 'UTC').toISOString();
+        console.log("today", new Date(today.toString().split('GMT')[0] + ' UTC').toISOString());
+        var date = new Date();
+        date.setDate(date.getDate() - 15);
+        console.log(new Date(date.toString().split('GMT')[0] + ' UTC').toISOString());
+        console.log("15 din baad date", date);
+        var url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + new Date(date.toString().split('GMT')[0] + ' UTC').toISOString() + " and  LogDate <= " + new Date(today.toString().split('GMT')[0] + ' UTC').toISOString() + " ORDER BY LogDate DESC LIMIT 20";
+        console.log("https://ap5.salesforce.com/services/data/v35.0/query/?q=" + encodeURIComponent(url));
         // let date = (new Date(new Date().toString().split('GMT')[0]).toISOString());
-        var url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= 2018-07-05T00:00:00+00:00 and  LogDate <= 2018-07-20T23:59:59+00:00 ORDER BY LogDate DESC LIMIT 20";
-        console.log(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url));
+        console.log(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].FETCH_EVENTS_URL + encodeURIComponent(url));
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url));
+        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].FETCH_EVENTS_URL + encodeURIComponent(url));
     };
     MineLogsService.prototype.searchUserForUser = function (name) {
         var url = "Select Id, Name, Profile.Name from User where IsActive = true AND Name like '%" + name + "%'";
@@ -2278,8 +2334,11 @@ var styles_ToolbarComponent = [__WEBPACK_IMPORTED_MODULE_0__toolbar_component_sc
 var RenderType_ToolbarComponent = __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵcrt"]({ encapsulation: 0, styles: styles_ToolbarComponent, data: {} });
 
 function View_ToolbarComponent_2(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 1, "app-list-item", [], null, null, null, __WEBPACK_IMPORTED_MODULE_2__list_item_list_item_component_ngfactory__["b" /* View_ListItemComponent_0 */], __WEBPACK_IMPORTED_MODULE_2__list_item_list_item_component_ngfactory__["a" /* RenderType_ListItemComponent */])), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](1, 114688, null, 0, __WEBPACK_IMPORTED_MODULE_3__list_item_list_item_component__["a" /* ListItemComponent */], [], { label: [0, "label"], icon: [1, "icon"], path: [2, "path"] }, null)], function (_ck, _v) { var currVal_0 = _v.parent.context.$implicit.name; var currVal_1 = _v.parent.context.$implicit.icon; var currVal_2 = _v.parent.context.$implicit.path; _ck(_v, 1, 0, currVal_0, currVal_1, currVal_2); }, null); }
-function View_ToolbarComponent_1(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 4, "div", [["class", "navbar-header"], ["style", "float: left;"]], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n      "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵand"](16777216, null, null, 1, null, View_ToolbarComponent_2)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](3, 16384, null, 0, __WEBPACK_IMPORTED_MODULE_4__angular_common__["NgIf"], [__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["TemplateRef"]], { ngIf: [0, "ngIf"] }, null), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n    "]))], function (_ck, _v) { var currVal_0 = (!_v.context.$implicit.children && _v.context.$implicit.active); _ck(_v, 3, 0, currVal_0); }, null); }
-function View_ToolbarComponent_0(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 7, "nav", [["class", "navbar navbar-default"]], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n  "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](2, 0, null, null, 4, "div", [], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n    "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵand"](16777216, null, null, 1, null, View_ToolbarComponent_1)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](5, 802816, null, 0, __WEBPACK_IMPORTED_MODULE_4__angular_common__["NgForOf"], [__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["TemplateRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["IterableDiffers"]], { ngForOf: [0, "ngForOf"] }, null), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n  "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n"]))], function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.menu; _ck(_v, 5, 0, currVal_0); }, null); }
+function View_ToolbarComponent_1(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 4, "div", [["class", "navbar-header"], ["style", "float: left;"]], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n      "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵand"](16777216, null, null, 1, null, View_ToolbarComponent_2)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](3, 16384, null, 0, __WEBPACK_IMPORTED_MODULE_4__angular_common__["NgIf"], [__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["TemplateRef"]], { ngIf: [0, "ngIf"] }, null), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["  \n    "]))], function (_ck, _v) { var currVal_0 = (!_v.context.$implicit.children && _v.context.$implicit.active); _ck(_v, 3, 0, currVal_0); }, null); }
+function View_ToolbarComponent_0(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 11, "nav", [["class", "navbar navbar-default"]], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n    "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵand"](16777216, null, null, 1, null, View_ToolbarComponent_1)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](3, 802816, null, 0, __WEBPACK_IMPORTED_MODULE_4__angular_common__["NgForOf"], [__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["TemplateRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["IterableDiffers"]], { ngForOf: [0, "ngForOf"] }, null), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n    "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](5, 0, null, null, 5, "a", [["ga-click-event", "Open in new window"], ["gacat", "Container"]], null, [[null, "click"]], function (_v, en, $event) { var ad = true; var _co = _v.component; if (("click" === en)) {
+        var pd_0 = (_co.openInNewWindow($event) !== false);
+        ad = (pd_0 && ad);
+    } return ad; }, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](6, 0, null, null, 0, "i", [["class", "glyphicon glyphicon-new-window"]], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, [" "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](8, 0, null, null, 2, "small", [], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](9, 0, null, null, 1, "i", [], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["New window"])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n"]))], function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.menu; _ck(_v, 3, 0, currVal_0); }, null); }
 function View_ToolbarComponent_Host_0(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 1, "app-toolbar", [], null, null, null, View_ToolbarComponent_0, RenderType_ToolbarComponent)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](1, 114688, null, 0, __WEBPACK_IMPORTED_MODULE_5__toolbar_component__["a" /* ToolbarComponent */], [], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
 var ToolbarComponentNgFactory = __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵccf"]("app-toolbar", __WEBPACK_IMPORTED_MODULE_5__toolbar_component__["a" /* ToolbarComponent */], View_ToolbarComponent_Host_0, { menu: "menu" }, {}, []);
 
@@ -2313,6 +2372,15 @@ var ToolbarComponent = (function () {
     function ToolbarComponent() {
     }
     ToolbarComponent.prototype.ngOnInit = function () {
+    };
+    ToolbarComponent.prototype.openInNewWindow = function (event) {
+        console.log("new window event", event);
+        chrome.windows.create({
+            url: "index.html",
+            type: 'panel',
+            width: 1200,
+            height: 800,
+        }, function () { });
     };
     return ToolbarComponent;
 }());

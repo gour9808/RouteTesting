@@ -4,6 +4,7 @@ import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 import * as  post from '../model/user';
 import * as _ from 'lodash';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { Cache } from '../utils/storage.provider';
 
 
 @Component({
@@ -15,6 +16,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @AutoUnsubscribe()
 export class FlagComponent implements OnInit, OnDestroy {
   loading: boolean;
+  @Cache({ pool: 'NewWindow' }) NewWindow: boolean;
+  showDialogForNewWindow: boolean;
   userName: string;
   devName: string;
   fetchLogs$: any = [];
@@ -37,6 +40,7 @@ export class FlagComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.NewWindow = false;
     this.fetchTraceLogs();
     this.config = [
 
@@ -140,6 +144,9 @@ export class FlagComponent implements OnInit, OnDestroy {
     console.log(event.query);
     this.mine.searchDebugLevel(event.query).subscribe(res => {
       console.log(res.records);
+      if (res.records.length === 0) {
+        this.emptyMessage = "No records found"
+      }
       this.filterDebugLevel$ = res.records;
     })
   }
@@ -155,6 +162,7 @@ export class FlagComponent implements OnInit, OnDestroy {
     this.add.LogType = "DEVELOPER_LOG"
     this.mine.create(this.add).subscribe(res => {
       this.showUserDialog = false;
+      this.toast.success("Success");
       console.log(res);
       this.fetchTraceLogs();
     },
@@ -174,6 +182,7 @@ export class FlagComponent implements OnInit, OnDestroy {
     this.add.LogType = "CLASS_TRACING";
     this.mine.create(this.add).subscribe(res => {
       this.showClassDialog = false;
+      this.toast.success("Success");
       console.log(res);
       this.fetchTraceLogs();
     }, err => {
@@ -192,6 +201,7 @@ export class FlagComponent implements OnInit, OnDestroy {
     this.add.LogType = "CLASS_TRACING"
     this.mine.create(this.add).subscribe(res => {
       this.showTriggerDialog = false;
+      this.toast.success("Success");
       console.log(res);
       this.fetchTraceLogs();
     }, err => {
@@ -203,5 +213,27 @@ export class FlagComponent implements OnInit, OnDestroy {
   goForIgnition() {
     return this.add.TracedEntityId && this.add.DebugLevelId;
   }
+
+  goToNewWindow() {
+    chrome.windows.create({
+      url: "index.html",
+      type: 'panel',
+      width: 1200,
+      height: 800,
+
+    })
+    if (this.showDialog === false) {
+      this.NewWindow = true;
+    }
+    else {
+      this.NewWindow = false;
+    }
+
+  }
+
+  checkTrueOrFalse() {
+    this.showDialog = false;
+  }
+
 
 }

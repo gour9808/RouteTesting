@@ -15,4 +15,21 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  openInNewWindow(event) {
+    console.log("new window event",event);
+    
+    chrome.windows.create({
+      url: "index.html",
+      type: 'panel',
+      width: 1200,
+      height: 800,
+
+    },
+      function () { });
+
+  }
+
+
+  
+
 }

@@ -89,14 +89,25 @@ export class MineLogsService {
     return this.http.delete(Constants.DELETE_PARTICULAR_FLAG(traceFlagId), { headers: headers })
   }
 
-  fetchEventData(logStartTime, logEndTime) {
+  fetchEventData(): Observable<any> {
+    let today = new Date();
+    today.setDate(today.getDate())
+    new Date(today.toString().split('GMT')[0] + 'UTC').toISOString();
+    console.log("today", new Date(today.toString().split('GMT')[0] + ' UTC').toISOString());
+
+    let date = new Date();
+    date.setDate(date.getDate() - 15);
+
+    console.log(new Date(date.toString().split('GMT')[0] + ' UTC').toISOString());
+    console.log("15 din baad date", date);
+    let url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + new Date(date.toString().split('GMT')[0] + ' UTC').toISOString() + " and  LogDate <= " + new Date(today.toString().split('GMT')[0] + ' UTC').toISOString() + " ORDER BY LogDate DESC LIMIT 20"
+    console.log("https://ap5.salesforce.com/services/data/v35.0/query/?q=" + encodeURIComponent(url));
     // let date = (new Date(new Date().toString().split('GMT')[0]).toISOString());
-    let url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= 2018-07-05T00:00:00+00:00 and  LogDate <= 2018-07-20T23:59:59+00:00 ORDER BY LogDate DESC LIMIT 20"
-    console.log(Constants.BASE_URL + encodeURIComponent(url));
+    console.log(Constants.FETCH_EVENTS_URL + encodeURIComponent(url));
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.BASE_URL + encodeURIComponent(url))
+    return this.http.get(Constants.FETCH_EVENTS_URL + encodeURIComponent(url))
   }
 
   searchUserForUser(name): Observable<any> {

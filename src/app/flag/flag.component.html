@@ -1,15 +1,24 @@
-<div fxLayout="row" >
-    <div fxLayout="column" >
-        <p-dropdown [options]="config" [(ngModel)]="selected"  (onChange)="setData($event)" placeholder="Select Trace Config"></p-dropdown>
-    </div>
-    <div fxLayout="column" >
-        <app-button label="REFRESH" (click)="fetchTraceLogs()"></app-button>
-    </div>
-    <div fxLayout="column">
-        <app-button label="MANAGE DEBUG LEVELS"></app-button>
+<div class="home-container">
+    <div class="dashboard-header" fxLayout="column">
+        <div fxLayout="row">
+            <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
+                <div fxLayout="column" fxFlex>
+                    <p-dropdown [options]="config" [(ngModel)]="selected" (onChange)="setData($event)" placeholder="Select Trace Config"></p-dropdown>
+                </div>
+                <div fxLayout="column" fxFlex>
+                    <app-button label="REFRESH" (click)="fetchTraceLogs()"></app-button>
+                </div>
+                <div fxLayout="column" fxFlex>
+                    <app-button label="MANAGE DEBUG LEVELS" (click)="showDialog = true"></app-button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<p-table [value]="fetchLogs$" [paginator]="true"  [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
+
+
+<p-table [value]="fetchLogs$" [paginator]="true" [scrollable]="true" scrollHeight="317px" [rows]="10" loadingIcon="fa-circle-o-notch"
+    [loading]="loading">
     <ng-template pTemplate="header">
         <tr>
             <th>Action</th>
@@ -21,8 +30,19 @@
     <ng-template pTemplate="body" let-mine>
         <tr>
             <td>
-                <i class="fa fa-trash" style="font-size:18px;color:black" (click)="deleteTraceLogs(mine)" fxFlex></i>
-                <i class="glyphicon glyphicon-new-window" style="font-size:18px;color:black" fxFlex></i>
+                <!-- <i class="fa fa-trash" style="font-size:18px;color:black" (click)="deleteTraceLogs(mine)" fxFlex></i>
+                <i class="glyphicon glyphicon-new-window" style="font-size:18px;color:black" fxFlex></i> -->
+
+                <div class="social-icons">
+                    <a class="social-icon social-icon--codepen" (click)="deleteTraceLogs(mine)" download>
+                        <i class="fa fa-trash"></i>
+                        <div class="tooltip">Delete</div>
+                    </a>
+                    <a class="social-icon social-icon--github">
+                        <i class="glyphicon glyphicon-new-window"></i>
+                        <div class="tooltip">New tab</div>
+                    </a>
+                </div>
             </td>
             <td>{{mine.TracedEntity.Name}}</td>
             <td>{{mine.ExpirationDate | date:'medium'}}</td>
@@ -34,37 +54,47 @@
 
 <p-dialog header="Please confirm" [(visible)]="showDialog" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200"
     [minY]="70">
-    <span>Watching logs requires opening extension in a new window, are you sure ?</span>
+    <span>Managing debug levels requires a full big window, please confirm opening the same ?</span>
     <p-footer>
-        <button pButton type="button" label="Yes"></button>
-        <button pButton type="button" label="Close" class="ui-button-secondary"></button>
+        <button pButton type="button" label="Yes"  (click) = "goToNewWindow()"></button>
+        <button pButton type="button" label="Close" (click) = "showDialog = false" class="ui-button-secondary"></button>
+    </p-footer>
+</p-dialog>
+
+
+<p-dialog header="Please confirm" [(visible)]="NewWindow" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200"
+    [minY]="70">
+    <span>Hi this is new window</span>
+    <p-footer>
+        <button pButton type="button" label="New Debug level"  (click) = "checkTrueOrFalse()"></button>
+        <button pButton type="button" label="Cancel" (click) = "showDialog = false" class="ui-button-secondary"></button>
     </p-footer>
 </p-dialog>
 
 
 <p-dialog header="Add Trigger" [(visible)]="showTriggerDialog" [modal]="true" [responsive]="true" [width]="500">
 
-    <p-autoComplete [suggestions]="filterUserForTrigger$" [emptyMessage] = "emptyMessage"   (completeMethod)="filterUserDataForTrigger($event)" placeholder="User"
-        [minLength]="1" field="Name" (onSelect)="setUserIdForUser($event)" fxFlex></p-autoComplete>
-    <p-autoComplete [suggestions]="filterDebugLevel$" [emptyMessage] = "emptyMessage"  (completeMethod)="filterDebugLevel($event)" field="DeveloperName" placeholder="Debug Level"
-        [minLength]="1" (onSelect)="setDebugLevelId($event)" fxFlex></p-autoComplete>
+    <p-autoComplete [suggestions]="filterUserForTrigger$" [emptyMessage]="emptyMessage" (completeMethod)="filterUserDataForTrigger($event)"
+        placeholder="User" [minLength]="1" field="Name" (onSelect)="setUserIdForUser($event)" fxFlex></p-autoComplete>
+    <p-autoComplete [suggestions]="filterDebugLevel$" [emptyMessage]="emptyMessage" (completeMethod)="filterDebugLevel($event)"
+        field="DeveloperName" placeholder="Debug Level" [minLength]="1" (onSelect)="setDebugLevelId($event)" fxFlex></p-autoComplete>
 
     <p-footer>
-        <button pButton type="button" [disabled] ="!goForIgnition()" (click)="createTrigger()" label="Create"></button>
+        <button pButton type="button" [disabled]="!goForIgnition()" (click)="createTrigger()" label="Create"></button>
         <button type="button" pButton icon="pi pi-close" (click)="showTriggerDialog=false" label="Cancel" class="ui-button-secondary"></button>
 
     </p-footer>
 </p-dialog>
 
 
-<p-dialog header="Add User" [(visible)]="showUserDialog" [modal]="true" [responsive]="true" [width]="500" >
+<p-dialog header="Add User" [(visible)]="showUserDialog" [modal]="true" [responsive]="true" [width]="500">
 
-    <p-autoComplete [suggestions]="filtereUserForUser$" [emptyMessage] = "emptyMessage" (completeMethod)="filterUserDataForUser($event)" placeholder="User" [minLength]="1"
-        field="Name" showClear = "true" (onSelect)="setUserIdForUser($event)" fxFlex></p-autoComplete>
-    <p-autoComplete [suggestions]="filterDebugLevel$" [emptyMessage] = "emptyMessage" (completeMethod)="filterDebugLevel($event)" field="DeveloperName" placeholder="Debug Level"
-        [minLength]="1"  (onSelect)="setDebugLevelId($event)" fxFlex></p-autoComplete>
+    <p-autoComplete [suggestions]="filtereUserForUser$" [emptyMessage]="emptyMessage" (completeMethod)="filterUserDataForUser($event)"
+        placeholder="User" [minLength]="1" field="Name" showClear="true" (onSelect)="setUserIdForUser($event)" fxFlex></p-autoComplete>
+    <p-autoComplete [suggestions]="filterDebugLevel$" [emptyMessage]="emptyMessage" (completeMethod)="filterDebugLevel($event)"
+        field="DeveloperName" placeholder="Debug Level" [minLength]="1" (onSelect)="setDebugLevelId($event)" fxFlex></p-autoComplete>
     <p-footer>
-        <button pButton type="button" (click)="createUser()" [disabled] ="!goForIgnition()" label="Create"></button>
+        <button pButton type="button" (click)="createUser()" [disabled]="!goForIgnition()" label="Create"></button>
         <button type="button" pButton icon="pi pi-close" (click)="showUserDialog=false" label="Cancel" class="ui-button-secondary"></button>
     </p-footer>
 </p-dialog>
@@ -72,13 +102,13 @@
 
 <p-dialog header="Add Class" [(visible)]="showClassDialog" [modal]="true" [responsive]="true" [width]="500">
 
-    <p-autoComplete [suggestions]="filterUserForClass$" [emptyMessage] = "emptyMessage" (completeMethod)="filterUserDataForClass($event)" placeholder="User"
-        [minLength]="1" field="Name" (onSelect)="setUserIdForUser($event)" fxFlex></p-autoComplete>
-    <p-autoComplete [suggestions]="filterDebugLevel$" [emptyMessage] = "emptyMessage" (completeMethod)="filterDebugLevel($event)" field="DeveloperName" placeholder="Debug Level"
-        [minLength]="1" (onSelect)="setDebugLevelId($event)" fxFlex></p-autoComplete>
+    <p-autoComplete [suggestions]="filterUserForClass$" [emptyMessage]="emptyMessage" (completeMethod)="filterUserDataForClass($event)"
+        placeholder="User" [minLength]="1" field="Name" (onSelect)="setUserIdForUser($event)" fxFlex></p-autoComplete>
+    <p-autoComplete [suggestions]="filterDebugLevel$" [emptyMessage]="emptyMessage" (completeMethod)="filterDebugLevel($event)"
+        field="DeveloperName" placeholder="Debug Level" [minLength]="1" (onSelect)="setDebugLevelId($event)" fxFlex></p-autoComplete>
 
     <p-footer>
-        <button pButton type="button" (click)="createClass()" [disabled] ="!goForIgnition()" label="Create"></button>
+        <button pButton type="button" (click)="createClass()" [disabled]="!goForIgnition()" label="Create"></button>
         <button type="button" pButton icon="pi pi-close" (click)="showClassDialog=false" label="Cancel" class="ui-button-secondary"></button>
     </p-footer>
 </p-dialog>

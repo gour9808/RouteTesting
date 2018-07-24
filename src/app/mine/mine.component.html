@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<p-table [value]="mineLogs$" [paginator]="true" selectionMode="single" (onRowSelect)="goToViewPage($event)" [(selection)]="selected"
+<p-table [value]="mineLogs$" [paginator]="true" [scrollable]="true" scrollHeight="317px" selectionMode="single" (onRowSelect)="goToViewPage($event)" [(selection)]="selected"
     [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
     <ng-template pTemplate="header">
         <tr>

@@ -46,17 +46,17 @@ export class MineComponent implements OnInit, OnDestroy {
     //  this.deleteMineCached();
   }
 
-  
+
   getCurrentTabUrl() {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
-        console.log("tab is", tab);
-        // let path = new URL(tab[0].url).host;
-        // console.log("https://" + path);
-        // path = "https://" + path;
-        // this.url = path;
+      console.log("tab is", tab);
+      // let path = new URL(tab[0].url).host;
+      // console.log("https://" + path);
+      // path = "https://" + path;
+      // this.url = path;
 
     });
-}
+  }
 
   goToViewPage(event) {
     // console.log("on row select", event.data);
@@ -92,14 +92,19 @@ export class MineComponent implements OnInit, OnDestroy {
 
   goToNewWindow(event) {
     console.log(event);
-    let tabId
-    chrome.tabs.get( tabId , (tab)=>
-  {
-     console.log(tab.id);
-     
-  })
-  
+    
+    chrome.windows.create({
+      url: "index.html",
+      type: 'panel',
+      width: 1200,
+      height: 800,
+      
+  },
+  function() {});
+    
 
   }
+
+  
 
 }

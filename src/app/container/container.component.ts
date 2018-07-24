@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ContainerComponent implements OnInit {
   showSidenav: boolean = true;
-
+  showNewWindow: boolean = false;
   show: string;
   menuItems = [{
     name: "Debug",
@@ -29,13 +29,10 @@ export class ContainerComponent implements OnInit {
     active: true,
 
   },
-  {
-    name: "New Window",
-    icon: "fa-external-link",
-    path: "/home/my",
-    active: true
-  },
   ];
+
+
+
 
   constructor(private router: Router, private currentRoute: ActivatedRoute) { }
 
@@ -45,6 +42,18 @@ export class ContainerComponent implements OnInit {
     }
 
     console.log('Init Container');
+  }
+
+  openInNewWindow() {
+    chrome.windows.create({
+      url: "index.html",
+      type: 'panel',
+      width: 1200,
+      height: 800,
+
+    },
+      function () { });
+
   }
 
 }
