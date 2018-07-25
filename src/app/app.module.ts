@@ -36,7 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MineLogsService } from './services/mine-logs.service';
 import { ViewLogDetailComponent } from './view-log-detail/view-log-detail.component';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
-
+import { DebugLevelService } from './services/debug-level.service';
+import { ViewDebugLevelLogComponent } from './view-debug-level-log/view-debug-level-log.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import {ToastModule} from 'ng2-toastr/ng2-toastr';
     SplashLoaderComponent,
     DataLoaderComponent,
     CallbackComponent,
-    ViewLogDetailComponent
+    ViewLogDetailComponent,
+    ViewDebugLevelLogComponent
   ],
   imports: [
     BrowserAnimationsModule, ScrollPanelModule,
@@ -70,7 +72,7 @@ import {ToastModule} from 'ng2-toastr/ng2-toastr';
     FlexLayoutModule,
     HttpClientModule,
     ToastyModule.forRoot(),
-    SlimLoadingBarModule.forRoot(),
+    SlimLoadingBarModule.forRoot()
 
   ],
   providers: [
@@ -85,7 +87,7 @@ import {ToastModule} from 'ng2-toastr/ng2-toastr';
     ToolbarTitleService,
     CookieService,
     CommunicatorService,
-    AuthService,
+    AuthService,DebugLevelService
   ],
 
   bootstrap: [AppComponent]

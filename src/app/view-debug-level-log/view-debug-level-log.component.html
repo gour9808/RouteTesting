@@ -1,0 +1,231 @@
+<!-- <p-table [value]="fetchDebugLevel$" [paginator]="true" [scrollable]="true" scrollHeight="317px" selectionMode="single" (onRowSelect)="viewDetails($event)"
+  [(selection)]="selected" [rows]="10" loadingIcon="fa-circle-o-notch">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Developer Name</th>
+      <th>Apex Code</th>
+      <th>Visual force</th>
+      <th>Apex Profiling</th>
+      <th>Callout</th>
+      <th>DataBase</th>
+      <th>System</th>
+      <th>Validation</th>
+      <th>Workflow</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-all>
+    <tr [pSelectableRow]="all">
+
+      <td>{{all.DeveloperName}}</td>
+      <td>{{all.ApexCode}}</td>
+      <td>{{all.Visualforce}}</td>
+      <td>{{all.ApexProfiling}}</td>
+      <td>{{all.ApexProfiling}}</td>
+      <td>{{all.Database}}</td>
+      <td>{{all.System}}</td>
+      <td>{{all.Validation}}</td>
+      <td>{{all.Workflow}}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary" let-rowData>
+    <div style="text-align:left">
+      <button type="button" pButton icon="fa fa-plus" label="Add"></button>
+    </div>
+  </ng-template>
+</p-table> -->
+<!-- 
+<p-dialog header="LOg Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="800">
+    <div fxLayout="row">
+        <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
+            <div fxLayout="column" fxFlex>
+                <p-dropdown  [(ngModel)]="debug.ApexCode"  ></p-dropdown>
+            </div>
+            <div fxLayout="column" fxFlex>
+                <p-dropdown  [(ngModel)]="debug.ApexCode"  ></p-dropdown>
+            </div>
+            <div fxLayout="column" fxFlex>
+                <p-dropdown  [(ngModel)]="debug.ApexCode"  ></p-dropdown>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="fa fa-close"  label="Delete"></button>
+            <button type="button" pButton icon="fa fa-check"  label="Save"></button>
+        </div>
+    </p-footer>
+</p-dialog> -->
+
+
+<p-table [value]="fetchDebugLevel$" [paginator]="true" [scrollable]="true" scrollHeight="317px"
+[rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Actions </th>
+      <th>Developer Name</th>
+      <th>Apex Code</th>
+      <th>Visual force</th>
+      <th>Apex Profiling</th>
+      <th>Callout</th>
+      <th>DataBase</th>
+      <th>System</th>
+      <th>Validation</th>
+      <th>Workflow</th>
+
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-debug>
+    <tr>
+      <td>
+        <div class="social-icons">
+          <a class="social-icon social-icon--codepen" (click)="deleteDebugLevelLog(debug)">
+            <i class="fa fa-trash"></i>
+            <div class="tooltip">Delete</div>
+          </a>
+          <a class="social-icon social-icon--github" (click) = "updateLogLevelId(debug)">
+            <i class="fa fa-check"></i>
+            <div class="tooltip">Save</div>
+          </a>
+        </div>
+      </td>
+      <td pEditableColumn>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+              <input type="text" [(ngModel)]="debug.DeveloperName">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{debug.DeveloperName}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+              <p-dropdown [options]="config" [(ngModel)]="debug.ApexCode"></p-dropdown>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{debug.ApexCode}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+                <p-dropdown [options]="config" [(ngModel)]="debug.Visualforce"></p-dropdown>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{debug.Visualforce}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td pEditableColumn>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                  <p-dropdown [options]="config" [(ngModel)]="debug.ApexProfiling"></p-dropdown>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{debug.ApexProfiling}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td pEditableColumn>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                    <p-dropdown [options]="config" [(ngModel)]="debug.Callout"></p-dropdown>
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{debug.Callout}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td pEditableColumn>
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                      <p-dropdown [options]="config" [(ngModel)]="debug.Database"></p-dropdown>
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{debug.Database}}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+              <td pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <p-dropdown [options]="config" [(ngModel)]="debug.System"></p-dropdown>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{debug.System}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+      <td pEditableColumn>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+              <p-dropdown [options]="config" [(ngModel)]="debug.Validation"></p-dropdown>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{debug.Validation}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+              <p-dropdown [options]="config" [(ngModel)]="debug.Workflow"></p-dropdown>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{debug.Workflow}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary" let-rowData>
+    <div style="text-align:left">
+      <button type="button" pButton icon="fa fa-plus" label="Add" (click) = "displayDialog = true" ></button>
+    </div>
+  </ng-template>
+</p-table>
+
+<p-dialog header="LOg Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="800">
+    <div fxLayout="row">
+        <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
+            <div fxLayout="column" fxFlex>
+                <input type="text" [(ngModel)]="debug.DeveloperName">
+            </div>
+            <div fxLayout="column" fxFlex>
+                <p-dropdown [options]="config" (onChange) = "setApexCodeData($event)" [(ngModel)]="debug.ApexCode"></p-dropdown>
+            </div>
+            <div fxLayout="column" fxFlex>
+                <p-dropdown [options]="config" (onChange) = "setVisualForceData($event)" [(ngModel)]="debug.Visualforce"></p-dropdown>
+            </div>
+            <div fxLayout="column" fxFlex>
+                <p-dropdown [options]="config" (onChange) = "setApexProfillingData($event)" [(ngModel)]="debug.ApexProfiling"></p-dropdown>
+            </div>
+            <div fxLayout="column" fxFlex>
+                <p-dropdown [options]="config" (onChange) = "setCalloutData($event)" [(ngModel)]="debug.Callout"></p-dropdown>
+            </div>
+            <div fxLayout="column" fxFlex>
+                <p-dropdown [options]="config"  (onChange) = "setDatabaseData($event)" [(ngModel)]="debug.Database"></p-dropdown>
+            </div>
+            <div fxLayout="column" fxFlex>
+                <p-dropdown [options]="config" (onChange) = "setSystemData($event)"  [(ngModel)]="debug.System"></p-dropdown>
+            </div>
+            <div fxLayout="column" fxFlex>
+                <p-dropdown [options]="config" (onChange) = "setValidationData($event)" [(ngModel)]="debug.Validation"></p-dropdown>
+            </div>
+            <div fxLayout="column" fxFlex>
+                <p-dropdown [options]="config" (onChange) = "setWorkflowData($event)" [(ngModel)]="debug.Workflow"></p-dropdown>
+            </div>
+            <div fxLayout="column" fxFlex>
+                <p-dropdown [options]="config" (onChange) = "setMasterData($event)" [(ngModel)]="debug.MasterLabel"></p-dropdown>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="fa fa-check"  label="Save" (click) ="createNewDebugLevel()"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+

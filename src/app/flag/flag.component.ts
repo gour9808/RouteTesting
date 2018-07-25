@@ -5,6 +5,8 @@ import * as  post from '../model/user';
 import * as _ from 'lodash';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Cache } from '../utils/storage.provider';
+import { DebugLevelService } from '../services/debug-level.service';
+import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
 
 
 @Component({
@@ -31,16 +33,16 @@ export class FlagComponent implements OnInit, OnDestroy {
   filterUserForClass$: any = [];
   filterUserForTrigger$: any = [];
   filterDebugLevel$: any = [];
+  fetchDebugLevel$ : any = [];
   deleteConfirmDialog: boolean;
   emptyMessage: string;
   add: post.CreateUser = new post.CreateUser();
   remove: post.clearUsername = new post.clearUsername();
-  constructor(private mine: MineLogsService, private toast: ToastsManager, private vcr: ViewContainerRef) {
+  constructor(private mine: MineLogsService, private route: Router, private router: ActivatedRoute, private toast: ToastsManager, private debugLevel: DebugLevelService, private vcr: ViewContainerRef) {
     this.toast.setRootViewContainerRef(vcr)
   }
 
   ngOnInit() {
-    this.NewWindow = false;
     this.fetchTraceLogs();
     this.config = [
 
@@ -49,6 +51,22 @@ export class FlagComponent implements OnInit, OnDestroy {
       { label: 'Trigger', value: 'Trigger' },
     ];
   }
+  settings = {
+    columns: {
+      id: {
+        title: 'ID'
+      },
+      name: {
+        title: 'Full Name'
+      },
+      username: {
+        title: 'User Name'
+      },
+      email: {
+        title: 'Email'
+      }
+    }
+  };
 
   ngOnDestroy() { }
 
@@ -222,18 +240,26 @@ export class FlagComponent implements OnInit, OnDestroy {
       height: 800,
 
     })
-    if (this.showDialog === false) {
-      this.NewWindow = true;
+    this.showDialog = false;
+    this.NewWindow = true;
+
+  }
+
+  select() {
+    if (this.NewWindow === true) {
+      this.showDialog = false;
+      this.route.navigate(['../debugLevelLog'], { relativeTo: this.router });
     }
     else {
-      this.NewWindow = false;
+      this.showDialog = true;
+
     }
-
   }
 
-  checkTrueOrFalse() {
-    this.showDialog = false;
+  getDebugLevel() {
+    this.debugLevel.getDebugLevel().subscribe(res => {
+      console.log("debug level", res);
+      this.fetchDebugLevel$ = res.records;
+    })
   }
-
-
 }

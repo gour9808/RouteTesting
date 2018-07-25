@@ -9,7 +9,7 @@
                     <app-button label="REFRESH" (click)="fetchTraceLogs()"></app-button>
                 </div>
                 <div fxLayout="column" fxFlex>
-                    <app-button label="MANAGE DEBUG LEVELS" (click)="showDialog = true"></app-button>
+                    <app-button label="MANAGE DEBUG LEVELS" (click)="select()"></app-button>
                 </div>
             </div>
         </div>
@@ -56,20 +56,21 @@
     [minY]="70">
     <span>Managing debug levels requires a full big window, please confirm opening the same ?</span>
     <p-footer>
-        <button pButton type="button" label="Yes"  (click) = "goToNewWindow()"></button>
-        <button pButton type="button" label="Close" (click) = "showDialog = false" class="ui-button-secondary"></button>
+        <button pButton type="button" label="Yes" (click)="goToNewWindow()"></button>
+        <button pButton type="button" label="Close" (click)="showDialog = false" class="ui-button-secondary"></button>
     </p-footer>
 </p-dialog>
 
-
-<p-dialog header="Please confirm" [(visible)]="NewWindow" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200"
+<!-- 
+<p-dialog header="Please confirm" [(visible)]="showDialogForNewWindow" [modal]="true" [responsive]="true" [width]="800" [minWidth]="200"
     [minY]="70">
-    <span>Hi this is new window</span>
+    <ng2-smart-table [settings]="settings" [source]="fetchDebugLevel$"></ng2-smart-table>
+        
     <p-footer>
-        <button pButton type="button" label="New Debug level"  (click) = "checkTrueOrFalse()"></button>
-        <button pButton type="button" label="Cancel" (click) = "showDialog = false" class="ui-button-secondary"></button>
+        <button pButton type="button" label="New Debug level"></button>
+        <button pButton type="button" label="Cancel" (click)="showDialogForNewWindow = false" class="ui-button-secondary"></button>
     </p-footer>
-</p-dialog>
+</p-dialog> -->
 
 
 <p-dialog header="Add Trigger" [(visible)]="showTriggerDialog" [modal]="true" [responsive]="true" [width]="500">
@@ -98,7 +99,6 @@
         <button type="button" pButton icon="pi pi-close" (click)="showUserDialog=false" label="Cancel" class="ui-button-secondary"></button>
     </p-footer>
 </p-dialog>
-
 
 <p-dialog header="Add Class" [(visible)]="showClassDialog" [modal]="true" [responsive]="true" [width]="500">
 
