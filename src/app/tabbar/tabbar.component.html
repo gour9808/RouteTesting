@@ -2,6 +2,7 @@
     <div class="tab-item" *ngFor="let tab of tabs" [routerLink]="tab.path" fxFlex routerLinkActive="active" [queryParams]="tab.query" fxLayout="row" fxLayoutAlign="center center">
         <i class="tab-icon mdi" [ngClass]="tab.icon"></i>
         <span class="tab-title">{{tab.name}}</span>
+        <i class="glyphicon glyphicon-remove" *ngIf = "!closable" ></i>
   </div>
 </div>
 

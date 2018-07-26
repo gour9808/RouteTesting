@@ -21,7 +21,10 @@ export class MineComponent implements OnInit, OnDestroy {
   recordId: any;
   loading: boolean;
   showDialog: boolean;
-  @Cache({ pool: 'LogUserId' }) logUserId: any
+  @Cache({ pool: 'LogUserId' }) logUserId: any;
+  @Cache({ pool: 'LastSeenTime' }) lastSeenTime: any;
+  @Cache({ pool: 'DeleteMineCached' }) deleteMyCache: boolean;
+
 
 
   constructor(private mineService: MineLogsService, private route: ActivatedRoute, private router: Router,
@@ -29,8 +32,7 @@ export class MineComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getCurrentTabUrl();
-    this.getMineLogs();
+   this.choose();
   }
 
   ngOnDestroy() { }
@@ -39,23 +41,12 @@ export class MineComponent implements OnInit, OnDestroy {
   getMineLogs() {
     this.loading = true;
     this.mineService.getMineLogs(this.logUserId.userId).subscribe(res => {
-      console.log("mine logs", res.records);
+      console.log("mine logs", res.records[0].StartTime);
+      this.lastSeenTime = res.records[0].StartTime;
       this.mineLogs$ = res.records;
       this.loading = false;
     })
     //  this.deleteMineCached();
-  }
-
-
-  getCurrentTabUrl() {
-    chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
-      console.log("tab is", tab);
-      // let path = new URL(tab[0].url).host;
-      // console.log("https://" + path);
-      // path = "https://" + path;
-      // this.url = path;
-
-    });
   }
 
   goToViewPage(event) {
@@ -64,9 +55,22 @@ export class MineComponent implements OnInit, OnDestroy {
   }
 
   deleteMineCached() {
+    this.deleteMyCache = true;
+    this.loading = true;
     this.mineService.deleteMineCached().subscribe(res => {
       console.log(res);
+      this.mineLogs$ = res.records;
+      this.loading = false;
     })
+  }
+
+  choose() {
+    if (this.deleteMyCache === true) {
+      this.deleteMineCached();
+    }
+    else {
+      this.getMineLogs();
+    }
   }
 
 
@@ -92,19 +96,19 @@ export class MineComponent implements OnInit, OnDestroy {
 
   goToNewWindow(event) {
     console.log(event);
-    
+
     chrome.windows.create({
       url: "index.html",
       type: 'panel',
       width: 1200,
       height: 800,
-      
-  },
-  function() {});
-    
+
+    },
+      function () { });
+
 
   }
 
-  
+
 
 }

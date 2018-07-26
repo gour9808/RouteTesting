@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { DebugLevelService } from '../services/debug-level.service';
 import * as  post from '../model/debug-level';
 import { ToastsManager } from '../../../node_modules/ng2-toastr';
@@ -18,7 +18,9 @@ export class ViewDebugLevelLogComponent implements OnInit {
   displayDialog: boolean;
   debug: post.CreateDebugLevel = new post.CreateDebugLevel();
 
-  constructor(private debugLevel: DebugLevelService, private toast: ToastsManager) { }
+  constructor(private debugLevel: DebugLevelService, private toast: ToastsManager, vcr: ViewContainerRef) {
+    this.toast.setRootViewContainerRef(vcr)
+  }
 
   ngOnInit() {
     this.config = [
@@ -30,6 +32,8 @@ export class ViewDebugLevelLogComponent implements OnInit {
       { label: 'WARN', value: 'WARN' },
       { label: 'ERROR', value: 'ERROR' },
     ];
+    this.setValue();
+
     this.getDebugLevel();
   }
 
@@ -60,13 +64,15 @@ export class ViewDebugLevelLogComponent implements OnInit {
   deleteDebugLevelLog(event) {
     this.debugLevel.deleteDebugLogLevelById(event.Id).subscribe(res => {
       console.log(res);
+      this.toast.success("successfully deleted")
       this.getDebugLevel();
-    })
+    }, err => {
+        this.toast.error(err)
+      })
   }
 
   updateLogLevelId(event) {
     console.log(event);
-
     this.debug.ApexCode = event.ApexCode;
     this.debug.ApexProfiling = event.ApexProfiling;
     this.debug.Callout = event.Callout;;
@@ -77,31 +83,52 @@ export class ViewDebugLevelLogComponent implements OnInit {
     this.debug.Validation = event.Validation;
     this.debug.Visualforce = event.Visualforce;
     this.debug.Workflow = event.Workflow;
+    console.log(this.debug);
     this.debugLevel.updateDebugLevelData(event.Id, this.debug).subscribe(res => {
       console.log("update", res);
-      this.toast.success("success")
+      this.toast.success("Successfully Updated");
+      this.getDebugLevel();
     }, err => {
       this.toast.error(err)
     })
+  }
+
+  setValue() {
+    this.debug.ApexCode = this.config[0].value;
+    this.debug.ApexProfiling = this.config[0].value;
+    this.debug.Callout = this.config[0].value;
+    this.debug.Database = this.config[0].value;
+    this.debug.MasterLabel = this.config[0].value;
+    this.debug.System = this.config[0].value;
+    this.debug.Validation = this.config[0].value;
+    this.debug.Visualforce = this.config[0].value;
+    this.debug.Workflow = this.config[0].value;
   }
 
   createNewDebugLevel() {
     this.debugLevel.createDebugLevel(this.debug).subscribe(res => {
       console.log(res);
       this.displayDialog = false;
+      this.toast.success("successfully created")
+      this.debug = new post.CreateDebugLevel();
       this.getDebugLevel();
+    }, err => {
+      this.toast.error(err)
     })
   }
 
   setApexCodeData(event) {
+    console.log(event.value);
     this.debug.ApexCode = event.value;
   }
 
   setVisualForceData(event) {
+    console.log(event.value);
     this.debug.Visualforce = event.value;
   }
 
   setSystemData(event) {
+    console.log(event.value);
     this.debug.System = event.value;
   }
 
@@ -113,21 +140,27 @@ export class ViewDebugLevelLogComponent implements OnInit {
   setMasterData(event) {
     console.log(event.value);
     this.debug.MasterLabel = event.value;
-
   }
 
   setWorkflowData(event) {
+    console.log(event.value);
     this.debug.Workflow = event.value;
   }
   setApexProfillingData(event) {
+    console.log(event.value);
     this.debug.ApexProfiling = event.value;
   }
+
   setCalloutData(event) {
     this.debug.Callout = event.value;
   }
+
   setDatabaseData(event) {
+    console.log(event.value);
     this.debug.Database = event.value;
   }
 
-
+  modelChange(event) {
+    console.log("model change ", event);
+  }
 }

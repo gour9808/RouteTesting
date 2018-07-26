@@ -314,11 +314,15 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AllComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_mine_logs_service__ = __webpack_require__("./src/app/services/mine-logs.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_auto_unsubscribe__ = __webpack_require__("./src/app/utils/auto-unsubscribe.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_file_saver__ = __webpack_require__("./node_modules/file-saver/FileSaver.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_file_saver___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_file_saver__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__ = __webpack_require__("./src/app/services/mine-logs.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_auto_unsubscribe__ = __webpack_require__("./src/app/utils/auto-unsubscribe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_file_saver__ = __webpack_require__("./node_modules/file-saver/FileSaver.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_file_saver___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_file_saver__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_storage_provider__ = __webpack_require__("./src/app/utils/storage.provider.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__node_modules_ng2_toastr__ = __webpack_require__("./node_modules/ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__node_modules_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__node_modules_ng2_toastr__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -332,15 +336,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
 var AllComponent = (function () {
-    function AllComponent(mineService, router, route) {
+    function AllComponent(mineService, toast, vcr, router, route) {
         this.mineService = mineService;
+        this.toast = toast;
         this.router = router;
         this.route = route;
         this.allLogs$ = [];
+        this.toast.setRootViewContainerRef(vcr);
     }
     AllComponent.prototype.ngOnInit = function () {
-        this.getAllLogs();
+        this.choose();
     };
     AllComponent.prototype.ngOnDestroy = function () { };
     AllComponent.prototype.getAllLogs = function () {
@@ -350,6 +359,8 @@ var AllComponent = (function () {
             console.log("res for all logs", res);
             _this.allLogs$ = res.records;
             _this.loading = false;
+        }, function (err) {
+            _this.toast.error(err);
         });
     };
     AllComponent.prototype.goToViewPage = function (event) {
@@ -357,9 +368,22 @@ var AllComponent = (function () {
         // this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
     };
     AllComponent.prototype.deleteAllCached = function () {
+        var _this = this;
+        this.deleteAllCache = true;
+        this.loading = true;
         this.mineService.deleteAllCached().subscribe(function (res) {
             console.log(res);
+            _this.allLogs$ = res.records;
+            _this.loading = false;
         });
+    };
+    AllComponent.prototype.choose = function () {
+        if (this.deleteAllCache === true) {
+            this.deleteAllCached();
+        }
+        else {
+            this.getAllLogs();
+        }
     };
     AllComponent.prototype.downloadLogs = function (event) {
         var _this = this;
@@ -377,11 +401,23 @@ var AllComponent = (function () {
     AllComponent.prototype.saveToFileSystem = function (response) {
         var filename = "Apex- " + this.recordId;
         var blob = new Blob([response], { type: 'application/octet-stream' });
-        Object(__WEBPACK_IMPORTED_MODULE_3_file_saver__["saveAs"])(blob, filename);
+        Object(__WEBPACK_IMPORTED_MODULE_4_file_saver__["saveAs"])(blob, filename);
     };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_5__utils_storage_provider__["a" /* Cache */])({ pool: 'DeleteAllCached' }),
+        __metadata("design:type", Boolean)
+    ], AllComponent.prototype, "deleteAllCache", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_5__utils_storage_provider__["a" /* Cache */])({ pool: 'LogUserId' }),
+        __metadata("design:type", Object)
+    ], AllComponent.prototype, "logUserId", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_5__utils_storage_provider__["a" /* Cache */])({ pool: 'LastSeenTime' }),
+        __metadata("design:type", Object)
+    ], AllComponent.prototype, "lastSeenTime", void 0);
     AllComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_2__utils_auto_unsubscribe__["a" /* AutoUnsubscribe */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__services_mine_logs_service__["a" /* MineLogsService */], __WEBPACK_IMPORTED_MODULE_1__node_modules_angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_1__node_modules_angular_router__["ActivatedRoute"]])
+        Object(__WEBPACK_IMPORTED_MODULE_3__utils_auto_unsubscribe__["a" /* AutoUnsubscribe */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__["a" /* MineLogsService */], __WEBPACK_IMPORTED_MODULE_6__node_modules_ng2_toastr__["ToastsManager"], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_2__node_modules_angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_2__node_modules_angular_router__["ActivatedRoute"]])
     ], AllComponent);
     return AllComponent;
 }());
@@ -916,6 +952,7 @@ var ContainerComponent = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_auto_unsubscribe__ = __webpack_require__("./src/app/utils/auto-unsubscribe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_communicator_service__ = __webpack_require__("./src/app/services/communicator.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -926,20 +963,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var DashboardComponent = (function () {
-    function DashboardComponent() {
+    function DashboardComponent(comms) {
+        this.comms = comms;
         this.tabs = [
-            { name: 'All', path: 'allLogs' },
-            { name: 'Mine', path: 'logs' },
-            { name: '', path: 'flag', icon: 'fa fa-flag' }
+            { name: 'All', path: 'allLogs', closable: false },
+            { name: 'Mine', path: 'logs', closable: false },
+            { name: '', path: 'flag', icon: 'fa fa-flag', closable: false }
         ];
     }
     DashboardComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.comms.on('Add-new-tab', function (a) {
+            console.log("Adding new Tab", a.DebugLevel.DeveloperName);
+            _this.tabs.push({ name: a.DebugLevel.DeveloperName, path: '', closable: true });
+        });
     };
     DashboardComponent.prototype.ngOnDestroy = function () { };
     DashboardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__utils_auto_unsubscribe__["a" /* AutoUnsubscribe */])(),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_communicator_service__["a" /* CommunicatorService */]])
     ], DashboardComponent);
     return DashboardComponent;
 }());
@@ -1164,6 +1208,7 @@ var EventsComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_storage_provider__ = __webpack_require__("./src/app/utils/storage.provider.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_debug_level_service__ = __webpack_require__("./src/app/services/debug-level.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__node_modules_angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_communicator_service__ = __webpack_require__("./src/app/services/communicator.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1181,9 +1226,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var FlagComponent = (function () {
-    function FlagComponent(mine, route, router, toast, debugLevel, vcr) {
+    function FlagComponent(mine, comms, route, router, toast, debugLevel, vcr) {
         this.mine = mine;
+        this.comms = comms;
         this.route = route;
         this.router = router;
         this.toast = toast;
@@ -1198,22 +1245,6 @@ var FlagComponent = (function () {
         this.fetchDebugLevel$ = [];
         this.add = new __WEBPACK_IMPORTED_MODULE_3__model_user__["a" /* CreateUser */]();
         this.remove = new __WEBPACK_IMPORTED_MODULE_3__model_user__["b" /* clearUsername */]();
-        this.settings = {
-            columns: {
-                id: {
-                    title: 'ID'
-                },
-                name: {
-                    title: 'Full Name'
-                },
-                username: {
-                    title: 'User Name'
-                },
-                email: {
-                    title: 'Email'
-                }
-            }
-        };
         this.toast.setRootViewContainerRef(vcr);
     }
     FlagComponent.prototype.ngOnInit = function () {
@@ -1402,13 +1433,17 @@ var FlagComponent = (function () {
             _this.fetchDebugLevel$ = res.records;
         });
     };
+    FlagComponent.prototype.addNewTab = function (event) {
+        console.log(event);
+        this.comms.broadcast('Add-new-tab', event);
+    };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_5__utils_storage_provider__["a" /* Cache */])({ pool: 'NewWindow' }),
         __metadata("design:type", Boolean)
     ], FlagComponent.prototype, "NewWindow", void 0);
     FlagComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_auto_unsubscribe__["a" /* AutoUnsubscribe */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__["a" /* MineLogsService */], __WEBPACK_IMPORTED_MODULE_7__node_modules_angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_7__node_modules_angular_router__["ActivatedRoute"], __WEBPACK_IMPORTED_MODULE_4_ng2_toastr_ng2_toastr__["ToastsManager"], __WEBPACK_IMPORTED_MODULE_6__services_debug_level_service__["a" /* DebugLevelService */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__["a" /* MineLogsService */], __WEBPACK_IMPORTED_MODULE_8__services_communicator_service__["a" /* CommunicatorService */], __WEBPACK_IMPORTED_MODULE_7__node_modules_angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_7__node_modules_angular_router__["ActivatedRoute"], __WEBPACK_IMPORTED_MODULE_4_ng2_toastr_ng2_toastr__["ToastsManager"], __WEBPACK_IMPORTED_MODULE_6__services_debug_level_service__["a" /* DebugLevelService */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"]])
     ], FlagComponent);
     return FlagComponent;
 }());
@@ -1663,37 +1698,41 @@ var MineComponent = (function () {
         this.mineLogs$ = [];
     }
     MineComponent.prototype.ngOnInit = function () {
-        this.getCurrentTabUrl();
-        this.getMineLogs();
+        this.choose();
     };
     MineComponent.prototype.ngOnDestroy = function () { };
     MineComponent.prototype.getMineLogs = function () {
         var _this = this;
         this.loading = true;
         this.mineService.getMineLogs(this.logUserId.userId).subscribe(function (res) {
-            console.log("mine logs", res.records);
+            console.log("mine logs", res.records[0].StartTime);
+            _this.lastSeenTime = res.records[0].StartTime;
             _this.mineLogs$ = res.records;
             _this.loading = false;
         });
         //  this.deleteMineCached();
-    };
-    MineComponent.prototype.getCurrentTabUrl = function () {
-        chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
-            console.log("tab is", tab);
-            // let path = new URL(tab[0].url).host;
-            // console.log("https://" + path);
-            // path = "https://" + path;
-            // this.url = path;
-        });
     };
     MineComponent.prototype.goToViewPage = function (event) {
         // console.log("on row select", event.data);
         // this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
     };
     MineComponent.prototype.deleteMineCached = function () {
+        var _this = this;
+        this.deleteMyCache = true;
+        this.loading = true;
         this.mineService.deleteMineCached().subscribe(function (res) {
             console.log(res);
+            _this.mineLogs$ = res.records;
+            _this.loading = false;
         });
+    };
+    MineComponent.prototype.choose = function () {
+        if (this.deleteMyCache === true) {
+            this.deleteMineCached();
+        }
+        else {
+            this.getMineLogs();
+        }
     };
     MineComponent.prototype.downloadLogs = function (event) {
         var _this = this;
@@ -1726,6 +1765,14 @@ var MineComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'LogUserId' }),
         __metadata("design:type", Object)
     ], MineComponent.prototype, "logUserId", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'LastSeenTime' }),
+        __metadata("design:type", Object)
+    ], MineComponent.prototype, "lastSeenTime", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'DeleteMineCached' }),
+        __metadata("design:type", Boolean)
+    ], MineComponent.prototype, "deleteMyCache", void 0);
     MineComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_4__utils_auto_unsubscribe__["a" /* AutoUnsubscribe */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__["a" /* MineLogsService */], __WEBPACK_IMPORTED_MODULE_3__node_modules_angular_router__["ActivatedRoute"], __WEBPACK_IMPORTED_MODULE_3__node_modules_angular_router__["Router"],
@@ -2190,8 +2237,7 @@ var MineLogsService = (function () {
         return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].GET_PARTICULAR_LOG(recordId), { headers: headers });
     };
     MineLogsService.prototype.deleteMineCached = function () {
-        var date = (new Date(new Date().toString().split('GMT')[0]).toISOString());
-        var url = "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  StartTime > " + date + " and  LogUserId = " + "'" + this.logUserId.userId + "'" + "  ORDER BY StartTime DESC LIMIT 20";
+        var url = "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  StartTime > " + this.lastSeenTime + " and  LogUserId = " + "'" + this.logUserId.userId + "'" + "  ORDER BY StartTime DESC LIMIT 20";
         console.log(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url));
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
@@ -2205,8 +2251,7 @@ var MineLogsService = (function () {
         return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].DOWNLOAD_LOGS(recordId), { headers: headers });
     };
     MineLogsService.prototype.deleteAllCached = function () {
-        var date = (new Date(new Date().toString().split('GMT')[0]).toISOString());
-        var url = "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  StartTime > " + date + " ORDER BY StartTime DESC LIMIT 20";
+        var url = "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  StartTime > " + this.lastSeenTime + " ORDER BY StartTime DESC LIMIT 20";
         console.log(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url));
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
@@ -2287,6 +2332,10 @@ var MineLogsService = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'LogUserId' }),
         __metadata("design:type", Object)
     ], MineLogsService.prototype, "logUserId", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'LastSeenTime' }),
+        __metadata("design:type", Object)
+    ], MineLogsService.prototype, "lastSeenTime", void 0);
     return MineLogsService;
 }());
 
@@ -3018,20 +3067,23 @@ var STORAGE_PROVIDERS = [
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewDebugLevelLogComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_debug_level_service__ = __webpack_require__("./src/app/services/debug-level.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model_debug_level__ = __webpack_require__("./src/app/model/debug-level.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_ng2_toastr__ = __webpack_require__("./node_modules/ng2-toastr/ng2-toastr.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__node_modules_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_debug_level_service__ = __webpack_require__("./src/app/services/debug-level.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_debug_level__ = __webpack_require__("./src/app/model/debug-level.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_toastr__ = __webpack_require__("./node_modules/ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_toastr__);
+
 
 
 
 var ViewDebugLevelLogComponent = (function () {
-    function ViewDebugLevelLogComponent(debugLevel, toast) {
+    function ViewDebugLevelLogComponent(debugLevel, toast, vcr) {
         this.debugLevel = debugLevel;
         this.toast = toast;
         this.fetchDebugLevel$ = [];
         this.config = [];
-        this.debug = new __WEBPACK_IMPORTED_MODULE_1__model_debug_level__["a" /* CreateDebugLevel */]();
+        this.debug = new __WEBPACK_IMPORTED_MODULE_2__model_debug_level__["a" /* CreateDebugLevel */]();
+        this.toast.setRootViewContainerRef(vcr);
     }
     ViewDebugLevelLogComponent.prototype.ngOnInit = function () {
         this.config = [
@@ -3043,6 +3095,7 @@ var ViewDebugLevelLogComponent = (function () {
             { label: 'WARN', value: 'WARN' },
             { label: 'ERROR', value: 'ERROR' },
         ];
+        this.setValue();
         this.getDebugLevel();
     };
     ViewDebugLevelLogComponent.prototype.getDebugLevel = function () {
@@ -3072,7 +3125,10 @@ var ViewDebugLevelLogComponent = (function () {
         var _this = this;
         this.debugLevel.deleteDebugLogLevelById(event.Id).subscribe(function (res) {
             console.log(res);
+            _this.toast.success("successfully deleted");
             _this.getDebugLevel();
+        }, function (err) {
+            _this.toast.error(err);
         });
     };
     ViewDebugLevelLogComponent.prototype.updateLogLevelId = function (event) {
@@ -3089,27 +3145,48 @@ var ViewDebugLevelLogComponent = (function () {
         this.debug.Validation = event.Validation;
         this.debug.Visualforce = event.Visualforce;
         this.debug.Workflow = event.Workflow;
+        console.log(this.debug);
         this.debugLevel.updateDebugLevelData(event.Id, this.debug).subscribe(function (res) {
             console.log("update", res);
-            _this.toast.success("success");
+            _this.toast.success("Successfully Updated");
+            _this.getDebugLevel();
         }, function (err) {
             _this.toast.error(err);
         });
+    };
+    ViewDebugLevelLogComponent.prototype.setValue = function () {
+        this.debug.ApexCode = this.config[0].value;
+        this.debug.ApexProfiling = this.config[0].value;
+        this.debug.Callout = this.config[0].value;
+        this.debug.Database = this.config[0].value;
+        this.debug.MasterLabel = this.config[0].value;
+        this.debug.System = this.config[0].value;
+        this.debug.Validation = this.config[0].value;
+        this.debug.Visualforce = this.config[0].value;
+        this.debug.Workflow = this.config[0].value;
     };
     ViewDebugLevelLogComponent.prototype.createNewDebugLevel = function () {
         var _this = this;
         this.debugLevel.createDebugLevel(this.debug).subscribe(function (res) {
             console.log(res);
+            _this.displayDialog = false;
+            _this.toast.success("successfully created");
+            _this.debug = new __WEBPACK_IMPORTED_MODULE_2__model_debug_level__["a" /* CreateDebugLevel */]();
             _this.getDebugLevel();
+        }, function (err) {
+            _this.toast.error(err);
         });
     };
     ViewDebugLevelLogComponent.prototype.setApexCodeData = function (event) {
+        console.log(event.value);
         this.debug.ApexCode = event.value;
     };
     ViewDebugLevelLogComponent.prototype.setVisualForceData = function (event) {
+        console.log(event.value);
         this.debug.Visualforce = event.value;
     };
     ViewDebugLevelLogComponent.prototype.setSystemData = function (event) {
+        console.log(event.value);
         this.debug.System = event.value;
     };
     ViewDebugLevelLogComponent.prototype.setValidationData = function (event) {
@@ -3121,16 +3198,22 @@ var ViewDebugLevelLogComponent = (function () {
         this.debug.MasterLabel = event.value;
     };
     ViewDebugLevelLogComponent.prototype.setWorkflowData = function (event) {
+        console.log(event.value);
         this.debug.Workflow = event.value;
     };
     ViewDebugLevelLogComponent.prototype.setApexProfillingData = function (event) {
+        console.log(event.value);
         this.debug.ApexProfiling = event.value;
     };
     ViewDebugLevelLogComponent.prototype.setCalloutData = function (event) {
         this.debug.Callout = event.value;
     };
     ViewDebugLevelLogComponent.prototype.setDatabaseData = function (event) {
+        console.log(event.value);
         this.debug.Database = event.value;
+    };
+    ViewDebugLevelLogComponent.prototype.modelChange = function (event) {
+        console.log("model change ", event);
     };
     return ViewDebugLevelLogComponent;
 }());

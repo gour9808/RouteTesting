@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
 import { MineLogsService } from '../services/mine-logs.service';
 import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
 import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 import { saveAs } from 'file-saver';
 import { Utils } from '../utils/utils';
+import { Cache } from '../utils/storage.provider';
+import { ToastsManager } from '../../../node_modules/ng2-toastr';
 
 
 @Component({
@@ -18,12 +20,17 @@ export class AllComponent implements OnInit, OnDestroy {
   showDialog: boolean;
   selected: any;
   recordId: any;
-  data: any
+  data: any;
+  @Cache({ pool: 'DeleteAllCached' }) deleteAllCache: boolean;
+  @Cache({ pool: 'LogUserId' }) logUserId: any;
+  @Cache({ pool: 'LastSeenTime' }) lastSeenTime: any;
 
-  constructor(private mineService: MineLogsService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private mineService: MineLogsService, private toast: ToastsManager, vcr: ViewContainerRef, private router: Router, private route: ActivatedRoute) {
+    this.toast.setRootViewContainerRef(vcr)
+  }
 
   ngOnInit() {
-    this.getAllLogs();
+    this.choose();
   }
 
   ngOnDestroy() { }
@@ -34,6 +41,8 @@ export class AllComponent implements OnInit, OnDestroy {
       console.log("res for all logs", res);
       this.allLogs$ = res.records;
       this.loading = false;
+    }, err => {
+      this.toast.error(err)
     })
   }
 
@@ -44,10 +53,23 @@ export class AllComponent implements OnInit, OnDestroy {
 
 
   deleteAllCached() {
+    this.deleteAllCache = true;
+    this.loading = true;
     this.mineService.deleteAllCached().subscribe(res => {
       console.log(res);
-
+      this.allLogs$ = res.records;
+      this.loading = false;
     })
+  }
+
+
+  choose() {
+    if (this.deleteAllCache === true) {
+      this.deleteAllCached();
+    }
+    else {
+      this.getAllLogs();
+    }
   }
 
   downloadLogs(event) {
@@ -56,7 +78,6 @@ export class AllComponent implements OnInit, OnDestroy {
     let title = "apex - " + event.Id
     this.mineService.downloadLogs(this.recordId).subscribe(res => {
       console.log(res);
-
     }, err => {
       console.log(err.error.text);
       this.data = err.error.text;

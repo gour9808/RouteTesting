@@ -9,6 +9,7 @@ export class TabbarComponent implements OnInit {
 
   @Input() tabs: any;
   @Input() vertical: boolean;
+  @Input() closable: boolean;
   constructor() { }
 
   ngOnInit() {

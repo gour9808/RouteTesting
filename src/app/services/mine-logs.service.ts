@@ -7,7 +7,8 @@ import { Cache } from '../utils/storage.provider';
 @Injectable()
 export class MineLogsService {
   @Cache({ pool: 'Session' }) userSession: any;
-  @Cache({ pool: 'LogUserId' }) logUserId: any
+  @Cache({ pool: 'LogUserId' }) logUserId: any;
+  @Cache({ pool: 'LastSeenTime' }) lastSeenTime: any;
 
   constructor(private http: HttpClient) { }
 
@@ -40,9 +41,8 @@ export class MineLogsService {
   }
 
 
-  deleteMineCached() {
-    let date = (new Date(new Date().toString().split('GMT')[0]).toISOString());
-    let url = "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  StartTime > " + date + " and  LogUserId = " + "'" + this.logUserId.userId + "'" + "  ORDER BY StartTime DESC LIMIT 20"
+  deleteMineCached(): Observable<any> {
+    let url = "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  StartTime > " + this.lastSeenTime + " and  LogUserId = " + "'" + this.logUserId.userId + "'" + "  ORDER BY StartTime DESC LIMIT 20"
     console.log(Constants.BASE_URL + encodeURIComponent(url));
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
@@ -60,9 +60,8 @@ export class MineLogsService {
 
   }
 
-  deleteAllCached() {
-    let date = (new Date(new Date().toString().split('GMT')[0]).toISOString());
-    let url = "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  StartTime > " + date + " ORDER BY StartTime DESC LIMIT 20"
+  deleteAllCached(): Observable<any> {
+    let url = "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  StartTime > " + this.lastSeenTime + " ORDER BY StartTime DESC LIMIT 20"
     console.log(Constants.BASE_URL + encodeURIComponent(url));
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');

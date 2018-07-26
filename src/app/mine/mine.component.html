@@ -3,7 +3,7 @@
         <div fxLayout="row">
             <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
                 <div fxLayout="column" fxFlex>
-                    <app-button label="Fetch logs" (click)="getMineLogs()"></app-button>
+                    <app-button label="Fetch logs" (click)="choose()"></app-button>
                 </div>
                 <div fxLayout="column" fxFlex>
                     <app-button label="Watch new logs" (click)="showDialog=!showDialog"></app-button>
@@ -15,7 +15,7 @@
         </div>
     </div>
 </div>
-
+<div>
 <p-table [value]="mineLogs$" [paginator]="true" [scrollable]="true" scrollHeight="317px" selectionMode="single" (onRowSelect)="goToViewPage($event)" [(selection)]="selected"
     [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
     <ng-template pTemplate="header">
@@ -54,6 +54,7 @@
         </tr>
     </ng-template>
 </p-table>
+</div>
 
 <p-dialog header="Please confirm" [(visible)]="showDialog" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200"
     [minY]="70">
