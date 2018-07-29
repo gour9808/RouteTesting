@@ -279,7 +279,6 @@ var map = {
 	],
 	"app/discussions/discussion.module.ngfactory": [
 		"./src/app/discussions/discussion.module.ngfactory.js",
-		"common",
 		"discussion.module"
 	],
 	"app/events/events.module.ngfactory": [
@@ -365,7 +364,7 @@ var AllComponent = (function () {
     };
     AllComponent.prototype.goToViewPage = function (event) {
         // console.log("on row select", event.data);
-        // this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
+        this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
     };
     AllComponent.prototype.deleteAllCached = function () {
         var _this = this;
@@ -451,7 +450,7 @@ var AllComponent = (function () {
 var styles_AppComponent = [__WEBPACK_IMPORTED_MODULE_0__app_component_scss_shim_ngstyle__["a" /* styles */]];
 var RenderType_AppComponent = __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵcrt"]({ encapsulation: 0, styles: styles_AppComponent, data: {} });
 
-function View_AppComponent_0(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n"])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](1, 16777216, null, null, 1, "router-outlet", [], null, null, null, null, null)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](2, 212992, null, 0, __WEBPACK_IMPORTED_MODULE_2__angular_router__["RouterOutlet"], [__WEBPACK_IMPORTED_MODULE_2__angular_router__["ChildrenOutletContexts"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ComponentFactoryResolver"], [8, null], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ChangeDetectorRef"]], null, null)], function (_ck, _v) { _ck(_v, 2, 0); }, null); }
+function View_AppComponent_0(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 16777216, null, null, 1, "router-outlet", [], null, null, null, null, null)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](1, 212992, null, 0, __WEBPACK_IMPORTED_MODULE_2__angular_router__["RouterOutlet"], [__WEBPACK_IMPORTED_MODULE_2__angular_router__["ChildrenOutletContexts"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ComponentFactoryResolver"], [8, null], __WEBPACK_IMPORTED_MODULE_1__angular_core__["ChangeDetectorRef"]], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
 function View_AppComponent_Host_0(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 1, "app-root", [], null, null, null, View_AppComponent_0, RenderType_AppComponent)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](1, 49152, null, 0, __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */], [], null, null)], null, null); }
 var AppComponentNgFactory = __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵccf"]("app-root", __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */], View_AppComponent_Host_0, {}, {}, []);
 
@@ -1152,6 +1151,8 @@ var DiscussionsComponent = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventsComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_auto_unsubscribe__ = __webpack_require__("./src/app/utils/auto-unsubscribe.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__ = __webpack_require__("./src/app/services/mine-logs.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_file_saver__ = __webpack_require__("./node_modules/file-saver/FileSaver.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_file_saver___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_file_saver__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1161,6 +1162,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 var EventsComponent = (function () {
@@ -1178,10 +1180,33 @@ var EventsComponent = (function () {
     };
     EventsComponent.prototype.fetchEventsData = function () {
         var _this = this;
+        this.loading = true;
         this.mineService.fetchEventData().subscribe(function (res) {
             console.log(res);
             _this.events$ = res.records;
+            _this.loading = false;
         });
+    };
+    EventsComponent.prototype.downloadLogs = function (event) {
+        var _this = this;
+        console.log("log Id is", event.Id);
+        this.recordId = event.Id;
+        var title = "apex - " + event.Id;
+        this.mineService.downloadLogs(this.recordId).subscribe(function (res) {
+            console.log(res);
+        }, function (err) {
+            console.log(err.error.text);
+            _this.data = err.error.text;
+            _this.saveToFileSystem(_this.data);
+        });
+    };
+    EventsComponent.prototype.saveToFileSystem = function (response) {
+        var filename = "LogFile";
+        var blob = new Blob([response], { type: 'application/octet-stream' });
+        Object(__WEBPACK_IMPORTED_MODULE_2_file_saver__["saveAs"])(blob, filename);
+    };
+    EventsComponent.prototype.dateValues = function (event) {
+        console.log(event);
     };
     EventsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__utils_auto_unsubscribe__["a" /* AutoUnsubscribe */])(),
@@ -2533,10 +2558,7 @@ var RenderType_ToolbarComponent = __WEBPACK_IMPORTED_MODULE_1__angular_core__["�
 
 function View_ToolbarComponent_2(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 1, "app-list-item", [], null, null, null, __WEBPACK_IMPORTED_MODULE_2__list_item_list_item_component_ngfactory__["b" /* View_ListItemComponent_0 */], __WEBPACK_IMPORTED_MODULE_2__list_item_list_item_component_ngfactory__["a" /* RenderType_ListItemComponent */])), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](1, 114688, null, 0, __WEBPACK_IMPORTED_MODULE_3__list_item_list_item_component__["a" /* ListItemComponent */], [], { label: [0, "label"], icon: [1, "icon"], path: [2, "path"] }, null)], function (_ck, _v) { var currVal_0 = _v.parent.context.$implicit.name; var currVal_1 = _v.parent.context.$implicit.icon; var currVal_2 = _v.parent.context.$implicit.path; _ck(_v, 1, 0, currVal_0, currVal_1, currVal_2); }, null); }
 function View_ToolbarComponent_1(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 4, "div", [["class", "navbar-header"], ["style", "float: left;"]], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n      "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵand"](16777216, null, null, 1, null, View_ToolbarComponent_2)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](3, 16384, null, 0, __WEBPACK_IMPORTED_MODULE_4__angular_common__["NgIf"], [__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["TemplateRef"]], { ngIf: [0, "ngIf"] }, null), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["  \n    "]))], function (_ck, _v) { var currVal_0 = (!_v.context.$implicit.children && _v.context.$implicit.active); _ck(_v, 3, 0, currVal_0); }, null); }
-function View_ToolbarComponent_0(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 11, "nav", [["class", "navbar navbar-default"]], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n    "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵand"](16777216, null, null, 1, null, View_ToolbarComponent_1)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](3, 802816, null, 0, __WEBPACK_IMPORTED_MODULE_4__angular_common__["NgForOf"], [__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["TemplateRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["IterableDiffers"]], { ngForOf: [0, "ngForOf"] }, null), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n    "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](5, 0, null, null, 5, "a", [["ga-click-event", "Open in new window"], ["gacat", "Container"]], null, [[null, "click"]], function (_v, en, $event) { var ad = true; var _co = _v.component; if (("click" === en)) {
-        var pd_0 = (_co.openInNewWindow($event) !== false);
-        ad = (pd_0 && ad);
-    } return ad; }, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](6, 0, null, null, 0, "i", [["class", "glyphicon glyphicon-new-window"]], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, [" "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](8, 0, null, null, 2, "small", [], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](9, 0, null, null, 1, "i", [], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["New window"])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n"]))], function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.menu; _ck(_v, 3, 0, currVal_0); }, null); }
+function View_ToolbarComponent_0(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 4, "nav", [["class", "navbar navbar-default"]], null, null, null, null, null)), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n    "])), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵand"](16777216, null, null, 1, null, View_ToolbarComponent_1)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](3, 802816, null, 0, __WEBPACK_IMPORTED_MODULE_4__angular_common__["NgForOf"], [__WEBPACK_IMPORTED_MODULE_1__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["TemplateRef"], __WEBPACK_IMPORTED_MODULE_1__angular_core__["IterableDiffers"]], { ngForOf: [0, "ngForOf"] }, null), (_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵted"](-1, null, ["\n"]))], function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.menu; _ck(_v, 3, 0, currVal_0); }, null); }
 function View_ToolbarComponent_Host_0(_l) { return __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵvid"](0, [(_l()(), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵeld"](0, 0, null, null, 1, "app-toolbar", [], null, null, null, View_ToolbarComponent_0, RenderType_ToolbarComponent)), __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵdid"](1, 114688, null, 0, __WEBPACK_IMPORTED_MODULE_5__toolbar_component__["a" /* ToolbarComponent */], [], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null); }
 var ToolbarComponentNgFactory = __WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵccf"]("app-toolbar", __WEBPACK_IMPORTED_MODULE_5__toolbar_component__["a" /* ToolbarComponent */], View_ToolbarComponent_Host_0, { menu: "menu" }, {}, []);
 
@@ -3137,7 +3159,6 @@ var ViewDebugLevelLogComponent = (function () {
         this.debug.ApexCode = event.ApexCode;
         this.debug.ApexProfiling = event.ApexProfiling;
         this.debug.Callout = event.Callout;
-        ;
         this.debug.Database = event.Database;
         this.debug.DeveloperName = event.DeveloperName;
         this.debug.MasterLabel = event.MasterLabel;

@@ -2,5 +2,4 @@
     <div class="navbar-header" style="float: left;" *ngFor="let menuItem of menu">
       <app-list-item *ngIf="!menuItem.children && menuItem.active" [label]="menuItem.name" [icon]="menuItem.icon" [path]="menuItem.path"></app-list-item>  
     </div>
-    <a  gacat="Container" (click) = "openInNewWindow($event)"  ga-click-event="Open in new window"><i class="glyphicon glyphicon-new-window"></i> <small><i>New window</i></small></a>
 </nav>

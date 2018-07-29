@@ -48,7 +48,7 @@ export class AllComponent implements OnInit, OnDestroy {
 
   goToViewPage(event) {
     // console.log("on row select", event.data);
-    // this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
+     this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
   }
 
 

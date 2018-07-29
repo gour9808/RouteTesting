@@ -67,15 +67,15 @@ export class ViewDebugLevelLogComponent implements OnInit {
       this.toast.success("successfully deleted")
       this.getDebugLevel();
     }, err => {
-        this.toast.error(err)
-      })
+      this.toast.error(err)
+    })
   }
 
   updateLogLevelId(event) {
     console.log(event);
     this.debug.ApexCode = event.ApexCode;
     this.debug.ApexProfiling = event.ApexProfiling;
-    this.debug.Callout = event.Callout;;
+    this.debug.Callout = event.Callout;
     this.debug.Database = event.Database;
     this.debug.DeveloperName = event.DeveloperName;
     this.debug.MasterLabel = event.MasterLabel;
@@ -146,6 +146,7 @@ export class ViewDebugLevelLogComponent implements OnInit {
     console.log(event.value);
     this.debug.Workflow = event.value;
   }
+  
   setApexProfillingData(event) {
     console.log(event.value);
     this.debug.ApexProfiling = event.value;

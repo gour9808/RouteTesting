@@ -10,17 +10,16 @@ import { FlagComponent } from '../flag/flag.component';
 import { WidgetsModule } from '../widgets/widget.module';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-import { DropdownModule, ScrollPanelModule, AutoCompleteModule, TabViewModule } from 'primeng/primeng';
+import { DropdownModule, ScrollPanelModule, AutoCompleteModule, TabViewModule, CalendarModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
 import { TimeAgoPipe } from '../../../node_modules/time-ago-pipe';
 import { FilterPipe } from '../utils/filter.pipe';
-import { ToastModule } from '../../../node_modules/ng2-toastr';
 
 
 @NgModule({
     imports: [
         RouterModule.forChild(MineRoutes),
-        CommonModule, FormsModule,AutoCompleteModule,TabViewModule,
+        CommonModule, FormsModule,AutoCompleteModule,TabViewModule,CalendarModule,
         FlexLayoutModule, TableModule,ScrollPanelModule, WidgetsModule, DialogModule, ButtonModule, DropdownModule, WidgetsModule
     ],
     exports: [RouterModule, MineComponent, FlagComponent, AllComponent],

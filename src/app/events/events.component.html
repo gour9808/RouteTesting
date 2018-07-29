@@ -1,37 +1,58 @@
-<app-card>
-    <div fxLayout="row" style="margin-top: 20px;">
-        <div fxLayout="column" fxFlex>
-            <p-calendar></p-calendar>
+<div class="home-container">
+    <div class="dashboard-header" fxLayout="column">
+        <div fxLayout="row">
+            <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
+                <div fxLayout="column" fxFlex>
+                    <p-calendar [(ngModel)]="fromRangeDates" (onSelect) ="fromDateValues($event)" selectionMode="single" [readonlyInput]="true"></p-calendar>
+                </div>
+                <div fxLayout="column" fxFlex>
+                        <p-calendar [(ngModel)]="toRangeDates" (onSelect) ="toDateValues($event)" selectionMode="single" [readonlyInput]="true"></p-calendar>
+                    </div>
+                <div fxLayout="column" fxFlex>
+                    <p-dropdown [options]="config" placeholder="Event Type"></p-dropdown>
+                </div>
+                <div fxLayout="column" fxFlex>
+                    <app-button label="APPLY" (click) = "fetchFilteredData()" ></app-button>
+                </div>
+            </div>
         </div>
-        <div fxLayout="column" fxFlex>
-            <p-dropdown [options]="config" [style]="{'width':'150px'}" placeholder="Event type"></p-dropdown>
-        </div>
-        <div fxLayout="column" fxFlex>
-            <app-button label="APPLY"></app-button>
-        </div>
-
     </div>
-</app-card>
-
-<div fxLayout="row">
-
-    <!-- <p-table [value]="country$" [paginator]="true" [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Actions</th>
-                <th>User</th>
-                <th>Operations</th>
-                <th>Duration</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-car>
-            <tr>
-                <td>{{car.name}}</td>
-                <td>{{car.area}}</td>
-                <td>{{car.population}}</td>
-                <td>{{car.region}}</td>
-            </tr>
-        </ng-template>
-    </p-table> -->
-
 </div>
+
+
+<p-table [value]="events$" [paginator]="true" [scrollable]="true" scrollHeight="317px" selectionMode="single" [rows]="10"
+    loadingIcon="fa-circle-o-notch" [loading]="loading">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Actions</th>
+            <th>Event Type</th>
+            <th>Log Date</th>
+            <th>Log Size (in bytes)</th>
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-events>
+        <tr [pSelectableRow]="all">
+            <td>
+                <div class="social-icons">
+                    <a class="social-icon social-icon--codepen" (click)="downloadLogs(events)" download>
+                        <i class="fa fa-cloud-download"></i>
+                        <div class="tooltip">Download</div>
+                    </a>
+                    <!-- <a class="social-icon social-icon--github">
+                        <i class="glyphicon glyphicon-new-window"></i>
+                        <div class="tooltip">New Window</div>
+                    </a>
+                    <a class="social-icon social-icon--twitter">
+                        <i class="fa fa-clone"></i>
+                        <div class="tooltip">New tab</div>
+                    </a> -->
+                </div>
+            </td>
+
+            <td>{{events.EventType}}</td>
+            <td>{{events.LogDate | date}}</td>
+            <td>{{events.LogFileLength}}</td>
+        </tr>
+    </ng-template>
+</p-table>
