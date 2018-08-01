@@ -48,7 +48,7 @@ export class AllComponent implements OnInit, OnDestroy {
 
   goToViewPage(event) {
     // console.log("on row select", event.data);
-     this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
+    // this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
   }
 
 
@@ -90,5 +90,19 @@ export class AllComponent implements OnInit, OnDestroy {
     const blob = new Blob([response], { type: 'application/octet-stream' });
     saveAs(blob, filename);
   }
+
+  goToNewWindow(event) {
+    console.log(event);
+
+    chrome.windows.create({
+      url: "index.html",
+      type: 'panel',
+      width: 1200,
+      height: 800,
+
+    },
+      function () { });
+  }
 }
+
 

@@ -19,14 +19,23 @@ export class EventsComponent implements OnInit, OnDestroy {
   config: any;
   recordId: string;
   data: any;
-  fromRangeDates: Date[];
-  toRangeDates: Date[];
-
+  fromRangeDates: any;
+  toRangeDates: any;
+  from: boolean;
+  to: boolean;
+  event: boolean = false;
+  eventType: string;
 
   constructor(private events: EventsService, private mineService: MineLogsService) {
   }
 
   ngOnInit() {
+
+    this.fromRangeDates = new Date();
+    this.fromRangeDates.setDate(this.fromRangeDates.getDate() - 15);
+    this.toRangeDates = new Date();
+    this.toRangeDates.setDate(this.toRangeDates.getDate());
+    
     this.fetchEventsData();
     this.config = [
       { label: 'All', value: 'All' },
@@ -92,16 +101,61 @@ export class EventsComponent implements OnInit, OnDestroy {
   }
 
   fromDateValues(event) {
-    console.log(event);
-
+    console.log("from date", event);
+    this.fromRangeDates = new Date(event).toISOString();
+    this.from = true;
+    console.log("iso string", this.fromRangeDates);
   }
 
   toDateValues(event) {
-    console.log(event);
-
+    console.log("to date", event);
+    this.toRangeDates = new Date(event).toISOString();
+    this.to = true;
+    console.log(this.toRangeDates);
   }
 
-  fetchFilteredData() {
+  setEventType(event) {
+    console.log("event type", event);
+    this.event = true;
+    this.eventType = event.value;
+  }
 
+  fetchFilteredDataForEvent() {
+    this.loading = true;
+    this.events.fetchFilteredDataForEventType(this.eventType).subscribe(res => {
+      console.log(res);
+      this.events$ = res.records;
+      this.loading = false;
+    })
+  }
+
+  fetchFilteredDataForDate() {
+    this.loading = true;
+    this.events.fetchFilteredDataForDate(this.fromRangeDates, this.toRangeDates).subscribe(res => {
+      console.log(res);
+      this.events$ = res.records;
+      this.loading = false;
+    })
+  }
+
+  fetchFilteredDataForDateAndEvent() {
+    this.loading = true;
+    this.events.fetchFilteredDataForEventTypeAndDate(this.fromRangeDates, this.toRangeDates, this.eventType).subscribe(res => {
+      console.log(res);
+      this.events$ = res.records;
+      this.loading = false;
+    })
+  }
+
+  choose() {
+    if (this.from === true && this.to === true && this.event === false) {
+      this.fetchFilteredDataForDate();
+    }
+    else if (this.event === true) {
+      this.fetchFilteredDataForEvent();
+    }
+    else {
+      this.fetchFilteredDataForDateAndEvent();
+    }
   }
 }

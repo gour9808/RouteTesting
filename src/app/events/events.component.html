@@ -9,10 +9,10 @@
                         <p-calendar [(ngModel)]="toRangeDates" (onSelect) ="toDateValues($event)" selectionMode="single" [readonlyInput]="true"></p-calendar>
                     </div>
                 <div fxLayout="column" fxFlex>
-                    <p-dropdown [options]="config" placeholder="Event Type"></p-dropdown>
+                    <p-dropdown [options]="config" (onChange)="setEventType($event)" placeholder="Event Type"></p-dropdown>
                 </div>
                 <div fxLayout="column" fxFlex>
-                    <app-button label="APPLY" (click) = "fetchFilteredData()" ></app-button>
+                    <app-button label="APPLY" (click) = "choose()" ></app-button>
                 </div>
             </div>
         </div>
@@ -34,19 +34,15 @@
     <ng-template pTemplate="body" let-events>
         <tr [pSelectableRow]="all">
             <td>
-                <div class="social-icons">
+                <div class="social-icons" >
                     <a class="social-icon social-icon--codepen" (click)="downloadLogs(events)" download>
                         <i class="fa fa-cloud-download"></i>
                         <div class="tooltip">Download</div>
                     </a>
-                    <!-- <a class="social-icon social-icon--github">
-                        <i class="glyphicon glyphicon-new-window"></i>
-                        <div class="tooltip">New Window</div>
+                    <a class="social-icon social-icon--github" *ngIf  = "events.EventType==='Login'">
+                        <i class="fa fa-bar-chart" ></i>
+                        <div class="tooltip">Login</div>
                     </a>
-                    <a class="social-icon social-icon--twitter">
-                        <i class="fa fa-clone"></i>
-                        <div class="tooltip">New tab</div>
-                    </a> -->
                 </div>
             </td>
 

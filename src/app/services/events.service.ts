@@ -30,25 +30,40 @@ export class EventsService {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
+    return this.http.get(Constants.FETCH_EVENTS_URL + encodeURIComponent(url));
+  }
+
+  fetchFilteredDataForDate(from, to) : Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Api-User-Agent', 'Example/1.0');
+    headers.append("Authorization", "Bearer " + this.userSession.token);
+    let url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + from + " and  LogDate <= " + to + " ORDER BY LogDate DESC LIMIT 20"
     return this.http.get(Constants.FETCH_EVENTS_URL + encodeURIComponent(url))
   }
 
-  fetchFilteredDataForDate(from, to) {
+  fetchFilteredDataForEventType(eventType): Observable<any> {
+    let today = new Date();
+    today.setDate(today.getDate())
+    new Date(today.toString().split('GMT')[0] + 'UTC').toISOString();
+    console.log("today", new Date(today.toString().split('GMT')[0] + ' UTC').toISOString());
+    let date = new Date();
+    date.setDate(date.getDate() - 15);
+
+    console.log(new Date(date.toString().split('GMT')[0] + ' UTC').toISOString());
+    console.log("15 din baad date", date);
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
+    let url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + new Date(date.toString().split('GMT')[0] + ' UTC').toISOString() + " and  eventtype = " + "'" + eventType + "'" + " ORDER BY LogDate DESC LIMIT 20";
+    return this.http.get(Constants.FETCH_EVENTS_URL + encodeURIComponent(url))
   }
 
-  fetchFilteredDataForEventType() {
+
+  fetchFilteredDataForEventTypeAndDate(from, to, eventType) : Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-  }
-
-
-  fetchFilteredDataForEventTypeAndDate(from, to, eventType) {
-    let headers = new HttpHeaders();
-    headers.append('Api-User-Agent', 'Example/1.0');
-    headers.append("Authorization", "Bearer " + this.userSession.token);
+    let url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + from + " and  LogDate <= " + to + " and  eventtype = " + "'" + eventType + "'" + " ORDER BY LogDate DESC LIMIT 20"
+    return this.http.get(Constants.FETCH_EVENTS_URL + encodeURIComponent(url))
   }
 }
