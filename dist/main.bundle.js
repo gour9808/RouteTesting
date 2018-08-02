@@ -364,7 +364,7 @@ var AllComponent = (function () {
     };
     AllComponent.prototype.goToViewPage = function (event) {
         // console.log("on row select", event.data);
-        this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
+        // this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
     };
     AllComponent.prototype.deleteAllCached = function () {
         var _this = this;
@@ -401,6 +401,15 @@ var AllComponent = (function () {
         var filename = "Apex- " + this.recordId;
         var blob = new Blob([response], { type: 'application/octet-stream' });
         Object(__WEBPACK_IMPORTED_MODULE_4_file_saver__["saveAs"])(blob, filename);
+    };
+    AllComponent.prototype.goToNewWindow = function (event) {
+        console.log(event);
+        chrome.windows.create({
+            url: "index.html",
+            type: 'panel',
+            width: 1200,
+            height: 800,
+        }, function () { });
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_5__utils_storage_provider__["a" /* Cache */])({ pool: 'DeleteAllCached' }),
@@ -777,15 +786,18 @@ var CallbackComponent = (function () {
         this.currentRoute = currentRoute;
         this.auth = auth;
         this.getCurrentTabUrl();
-        this.getLogUserId();
     }
     CallbackComponent.prototype.ngOnInit = function () {
-        this.getCookies1();
-        console.log('Access token is', this.userSession);
+        if (localStorage.getItem('URL')) {
+            this.getCookies();
+        }
+        this.getCurrentTabUrl();
+        // this.getLogUserId();
     };
-    CallbackComponent.prototype.getCookies1 = function () {
+    CallbackComponent.prototype.getCookies = function () {
         var _this = this;
-        chrome.cookies.get({ url: 'https://ap5.salesforce.com/home', name: 'sid' }, function (cookie) {
+        var url = localStorage.getItem("URL");
+        chrome.cookies.get({ url: url, name: 'sid' }, function (cookie) {
             console.log('cookie value', cookie.value);
             if (cookie.value) {
                 _this.userSession = {
@@ -803,14 +815,16 @@ var CallbackComponent = (function () {
         chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
             console.log("tab is", tab);
             var path = new URL(tab[0].url).host;
-            console.log("https://" + path);
             path = "https://" + path;
-            this.url = path;
+            localStorage.setItem("URL", path);
+            this.currentUrl = path;
+            console.log("url is", path);
         });
     };
     CallbackComponent.prototype.getLogUserId = function () {
         var _this = this;
-        chrome.cookies.get({ url: 'https://ap5.salesforce.com/home', name: 'disco' }, function (logUserId) {
+        var url = localStorage.getItem("URL");
+        chrome.cookies.get({ url: url, name: 'disco' }, function (logUserId) {
             console.log('log userid value value', logUserId.value);
             var str = logUserId.value;
             var a = str.split(':')[2];
@@ -824,10 +838,6 @@ var CallbackComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'Session' }),
         __metadata("design:type", Object)
     ], CallbackComponent.prototype, "userSession", void 0);
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'url' }),
-        __metadata("design:type", Object)
-    ], CallbackComponent.prototype, "url", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'LogUserId' }),
         __metadata("design:type", Object)
@@ -1224,16 +1234,11 @@ var EventsComponent = (function () {
         });
     };
     EventsComponent.prototype.downloadLogs = function (event) {
-        var _this = this;
         console.log("log Id is", event.Id);
         this.recordId = event.Id;
         var title = "apex - " + event.Id;
-        this.mineService.downloadLogs(this.recordId).subscribe(function (res) {
+        this.events.downloadEventLogs(this.recordId).subscribe(function (res) {
             console.log(res);
-        }, function (err) {
-            console.log(err.error.text);
-            _this.data = err.error.text;
-            _this.saveToFileSystem(_this.data);
         });
     };
     EventsComponent.prototype.saveToFileSystem = function (response) {
@@ -2374,6 +2379,13 @@ var EventsService = (function () {
         var url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + from + " and  LogDate <= " + to + " and  eventtype = " + "'" + eventType + "'" + " ORDER BY LogDate DESC LIMIT 20";
         return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].FETCH_EVENTS_URL + encodeURIComponent(url));
     };
+    EventsService.prototype.downloadEventLogs = function (logId) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
+        headers.append('Api-User-Agent', 'Example/1.0');
+        headers.append("Authorization", "Bearer " + this.userSession.token);
+        var url = "https://ap5.salesforce.com/services/data/v35.0/tooling/sobjects/EventLogFile/" + logId + "/LogFile";
+        return this.http.get(url);
+    };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'Session' }),
         __metadata("design:type", Object)
@@ -2420,6 +2432,7 @@ var MineLogsService = (function () {
     MineLogsService.prototype.getMineLogs = function (logUserId) {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
+        console.log("mine logs services", this.userSession.token);
         headers.append("Authorization", "Bearer " + this.userSession.token);
         headers.append('Accept', "application/json");
         return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].GET_MINE_LOGS(logUserId), { headers: headers });

@@ -14,26 +14,27 @@ import { AuthService } from '../services/auth.service';
 })
 export class CallbackComponent implements OnInit {
     @Cache({ pool: 'Session' }) userSession: any;
-    @Cache({ pool: 'url' }) url: any;
-    @Cache({ pool: 'LogUserId' }) logUserId: any
+    @Cache({ pool: 'LogUserId' }) logUserId: any;
+    currentUrl: any;
+
 
     constructor(private router: Router, private currentRoute: ActivatedRoute, private auth: AuthService) {
         this.getCurrentTabUrl();
-        this.getLogUserId();
     }
 
     ngOnInit() {
-        this.getCookies1();
-        console.log('Access token is', this.userSession);
+       
     }
 
-    getCookies1() {
-        chrome.cookies.get({ url: 'https://ap5.salesforce.com/home', name: 'sid' }, (cookie) => {
+    getCookies() {
+        let url = localStorage.getItem("URL")
+        chrome.cookies.get({ url: url, name: 'sid' }, (cookie) => {
             console.log('cookie value', cookie.value);
             if (cookie.value) {
                 this.userSession = {
                     token: cookie.value, expires: moment().add(1, 'days')
                 };
+
                 console.log("get Cookies", this.userSession);
                 this.router.navigate(['/load'])
             }
@@ -47,15 +48,16 @@ export class CallbackComponent implements OnInit {
         chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
             console.log("tab is", tab);
             let path = new URL(tab[0].url).host;
-            console.log("https://" + path);
             path = "https://" + path;
-            this.url = path;
-
+            localStorage.setItem("URL", path)
+            this.currentUrl = path;
+            console.log("url is", path);
         });
     }
 
     getLogUserId() {
-        chrome.cookies.get({ url: 'https://ap5.salesforce.com/home', name: 'disco' }, (logUserId) => {
+        let url = localStorage.getItem("URL")
+        chrome.cookies.get({ url: url, name: 'disco' }, (logUserId) => {
             console.log('log userid value value', logUserId.value);
             let str = logUserId.value;
             let a = str.split(':')[2];
@@ -68,4 +70,3 @@ export class CallbackComponent implements OnInit {
     }
 
 }
-

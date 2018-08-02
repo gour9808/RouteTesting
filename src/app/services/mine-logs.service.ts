@@ -16,6 +16,8 @@ export class MineLogsService {
   getMineLogs(logUserId): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
+    console.log("mine logs services", this.userSession.token);
+    
     headers.append("Authorization", "Bearer " + this.userSession.token);
     headers.append('Accept', "application/json")
     return this.http.get(Constants.GET_MINE_LOGS(logUserId), { headers: headers });

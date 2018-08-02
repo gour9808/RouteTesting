@@ -108,7 +108,4 @@ export class MineComponent implements OnInit, OnDestroy {
 
 
   }
-
-
-
 }

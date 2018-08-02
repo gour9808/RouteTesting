@@ -33,7 +33,7 @@ export class EventsService {
     return this.http.get(Constants.FETCH_EVENTS_URL + encodeURIComponent(url));
   }
 
-  fetchFilteredDataForDate(from, to) : Observable<any> {
+  fetchFilteredDataForDate(from, to): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
@@ -59,11 +59,19 @@ export class EventsService {
   }
 
 
-  fetchFilteredDataForEventTypeAndDate(from, to, eventType) : Observable<any> {
+  fetchFilteredDataForEventTypeAndDate(from, to, eventType): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
     let url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + from + " and  LogDate <= " + to + " and  eventtype = " + "'" + eventType + "'" + " ORDER BY LogDate DESC LIMIT 20"
     return this.http.get(Constants.FETCH_EVENTS_URL + encodeURIComponent(url))
+  }
+
+  downloadEventLogs(logId): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Api-User-Agent', 'Example/1.0');
+    headers.append("Authorization", "Bearer " + this.userSession.token);
+    let url = "https://ap5.salesforce.com/services/data/v35.0/tooling/sobjects/EventLogFile/" + logId + "/LogFile"
+    return this.http.get(url)
   }
 }

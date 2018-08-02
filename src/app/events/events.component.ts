@@ -10,6 +10,7 @@ import { EventsService } from '../services/events.service';
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.scss']
 })
+
 @AutoUnsubscribe()
 export class EventsComponent implements OnInit, OnDestroy {
 
@@ -35,7 +36,7 @@ export class EventsComponent implements OnInit, OnDestroy {
     this.fromRangeDates.setDate(this.fromRangeDates.getDate() - 15);
     this.toRangeDates = new Date();
     this.toRangeDates.setDate(this.toRangeDates.getDate());
-    
+
     this.fetchEventsData();
     this.config = [
       { label: 'All', value: 'All' },
@@ -85,12 +86,8 @@ export class EventsComponent implements OnInit, OnDestroy {
     console.log("log Id is", event.Id);
     this.recordId = event.Id;
     let title = "apex - " + event.Id
-    this.mineService.downloadLogs(this.recordId).subscribe(res => {
+    this.events.downloadEventLogs(this.recordId).subscribe(res => {
       console.log(res);
-    }, err => {
-      console.log(err.error.text);
-      this.data = err.error.text;
-      this.saveToFileSystem(this.data)
     })
   }
 
