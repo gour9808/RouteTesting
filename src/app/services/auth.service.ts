@@ -12,12 +12,11 @@ export class AuthService {
 
     public createSession(data) {
         this.userSession.token = data;
-        this.userSession.expires = moment().add(1, 'days');
     }
 
     public isAuthenticated() {
         if (this.userSession && this.userSession.token) {
-            return moment(this.userSession.expires).isAfter();
+            return true;
         }
         return false;
     }

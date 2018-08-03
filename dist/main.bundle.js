@@ -1,274 +1,5 @@
 webpackJsonp(["main"],{
 
-/***/ "./node_modules/moment/locale recursive ^\\.\\/.*$":
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"./af": "./node_modules/moment/locale/af.js",
-	"./af.js": "./node_modules/moment/locale/af.js",
-	"./ar": "./node_modules/moment/locale/ar.js",
-	"./ar-dz": "./node_modules/moment/locale/ar-dz.js",
-	"./ar-dz.js": "./node_modules/moment/locale/ar-dz.js",
-	"./ar-kw": "./node_modules/moment/locale/ar-kw.js",
-	"./ar-kw.js": "./node_modules/moment/locale/ar-kw.js",
-	"./ar-ly": "./node_modules/moment/locale/ar-ly.js",
-	"./ar-ly.js": "./node_modules/moment/locale/ar-ly.js",
-	"./ar-ma": "./node_modules/moment/locale/ar-ma.js",
-	"./ar-ma.js": "./node_modules/moment/locale/ar-ma.js",
-	"./ar-sa": "./node_modules/moment/locale/ar-sa.js",
-	"./ar-sa.js": "./node_modules/moment/locale/ar-sa.js",
-	"./ar-tn": "./node_modules/moment/locale/ar-tn.js",
-	"./ar-tn.js": "./node_modules/moment/locale/ar-tn.js",
-	"./ar.js": "./node_modules/moment/locale/ar.js",
-	"./az": "./node_modules/moment/locale/az.js",
-	"./az.js": "./node_modules/moment/locale/az.js",
-	"./be": "./node_modules/moment/locale/be.js",
-	"./be.js": "./node_modules/moment/locale/be.js",
-	"./bg": "./node_modules/moment/locale/bg.js",
-	"./bg.js": "./node_modules/moment/locale/bg.js",
-	"./bm": "./node_modules/moment/locale/bm.js",
-	"./bm.js": "./node_modules/moment/locale/bm.js",
-	"./bn": "./node_modules/moment/locale/bn.js",
-	"./bn.js": "./node_modules/moment/locale/bn.js",
-	"./bo": "./node_modules/moment/locale/bo.js",
-	"./bo.js": "./node_modules/moment/locale/bo.js",
-	"./br": "./node_modules/moment/locale/br.js",
-	"./br.js": "./node_modules/moment/locale/br.js",
-	"./bs": "./node_modules/moment/locale/bs.js",
-	"./bs.js": "./node_modules/moment/locale/bs.js",
-	"./ca": "./node_modules/moment/locale/ca.js",
-	"./ca.js": "./node_modules/moment/locale/ca.js",
-	"./cs": "./node_modules/moment/locale/cs.js",
-	"./cs.js": "./node_modules/moment/locale/cs.js",
-	"./cv": "./node_modules/moment/locale/cv.js",
-	"./cv.js": "./node_modules/moment/locale/cv.js",
-	"./cy": "./node_modules/moment/locale/cy.js",
-	"./cy.js": "./node_modules/moment/locale/cy.js",
-	"./da": "./node_modules/moment/locale/da.js",
-	"./da.js": "./node_modules/moment/locale/da.js",
-	"./de": "./node_modules/moment/locale/de.js",
-	"./de-at": "./node_modules/moment/locale/de-at.js",
-	"./de-at.js": "./node_modules/moment/locale/de-at.js",
-	"./de-ch": "./node_modules/moment/locale/de-ch.js",
-	"./de-ch.js": "./node_modules/moment/locale/de-ch.js",
-	"./de.js": "./node_modules/moment/locale/de.js",
-	"./dv": "./node_modules/moment/locale/dv.js",
-	"./dv.js": "./node_modules/moment/locale/dv.js",
-	"./el": "./node_modules/moment/locale/el.js",
-	"./el.js": "./node_modules/moment/locale/el.js",
-	"./en-au": "./node_modules/moment/locale/en-au.js",
-	"./en-au.js": "./node_modules/moment/locale/en-au.js",
-	"./en-ca": "./node_modules/moment/locale/en-ca.js",
-	"./en-ca.js": "./node_modules/moment/locale/en-ca.js",
-	"./en-gb": "./node_modules/moment/locale/en-gb.js",
-	"./en-gb.js": "./node_modules/moment/locale/en-gb.js",
-	"./en-ie": "./node_modules/moment/locale/en-ie.js",
-	"./en-ie.js": "./node_modules/moment/locale/en-ie.js",
-	"./en-il": "./node_modules/moment/locale/en-il.js",
-	"./en-il.js": "./node_modules/moment/locale/en-il.js",
-	"./en-nz": "./node_modules/moment/locale/en-nz.js",
-	"./en-nz.js": "./node_modules/moment/locale/en-nz.js",
-	"./eo": "./node_modules/moment/locale/eo.js",
-	"./eo.js": "./node_modules/moment/locale/eo.js",
-	"./es": "./node_modules/moment/locale/es.js",
-	"./es-do": "./node_modules/moment/locale/es-do.js",
-	"./es-do.js": "./node_modules/moment/locale/es-do.js",
-	"./es-us": "./node_modules/moment/locale/es-us.js",
-	"./es-us.js": "./node_modules/moment/locale/es-us.js",
-	"./es.js": "./node_modules/moment/locale/es.js",
-	"./et": "./node_modules/moment/locale/et.js",
-	"./et.js": "./node_modules/moment/locale/et.js",
-	"./eu": "./node_modules/moment/locale/eu.js",
-	"./eu.js": "./node_modules/moment/locale/eu.js",
-	"./fa": "./node_modules/moment/locale/fa.js",
-	"./fa.js": "./node_modules/moment/locale/fa.js",
-	"./fi": "./node_modules/moment/locale/fi.js",
-	"./fi.js": "./node_modules/moment/locale/fi.js",
-	"./fo": "./node_modules/moment/locale/fo.js",
-	"./fo.js": "./node_modules/moment/locale/fo.js",
-	"./fr": "./node_modules/moment/locale/fr.js",
-	"./fr-ca": "./node_modules/moment/locale/fr-ca.js",
-	"./fr-ca.js": "./node_modules/moment/locale/fr-ca.js",
-	"./fr-ch": "./node_modules/moment/locale/fr-ch.js",
-	"./fr-ch.js": "./node_modules/moment/locale/fr-ch.js",
-	"./fr.js": "./node_modules/moment/locale/fr.js",
-	"./fy": "./node_modules/moment/locale/fy.js",
-	"./fy.js": "./node_modules/moment/locale/fy.js",
-	"./gd": "./node_modules/moment/locale/gd.js",
-	"./gd.js": "./node_modules/moment/locale/gd.js",
-	"./gl": "./node_modules/moment/locale/gl.js",
-	"./gl.js": "./node_modules/moment/locale/gl.js",
-	"./gom-latn": "./node_modules/moment/locale/gom-latn.js",
-	"./gom-latn.js": "./node_modules/moment/locale/gom-latn.js",
-	"./gu": "./node_modules/moment/locale/gu.js",
-	"./gu.js": "./node_modules/moment/locale/gu.js",
-	"./he": "./node_modules/moment/locale/he.js",
-	"./he.js": "./node_modules/moment/locale/he.js",
-	"./hi": "./node_modules/moment/locale/hi.js",
-	"./hi.js": "./node_modules/moment/locale/hi.js",
-	"./hr": "./node_modules/moment/locale/hr.js",
-	"./hr.js": "./node_modules/moment/locale/hr.js",
-	"./hu": "./node_modules/moment/locale/hu.js",
-	"./hu.js": "./node_modules/moment/locale/hu.js",
-	"./hy-am": "./node_modules/moment/locale/hy-am.js",
-	"./hy-am.js": "./node_modules/moment/locale/hy-am.js",
-	"./id": "./node_modules/moment/locale/id.js",
-	"./id.js": "./node_modules/moment/locale/id.js",
-	"./is": "./node_modules/moment/locale/is.js",
-	"./is.js": "./node_modules/moment/locale/is.js",
-	"./it": "./node_modules/moment/locale/it.js",
-	"./it.js": "./node_modules/moment/locale/it.js",
-	"./ja": "./node_modules/moment/locale/ja.js",
-	"./ja.js": "./node_modules/moment/locale/ja.js",
-	"./jv": "./node_modules/moment/locale/jv.js",
-	"./jv.js": "./node_modules/moment/locale/jv.js",
-	"./ka": "./node_modules/moment/locale/ka.js",
-	"./ka.js": "./node_modules/moment/locale/ka.js",
-	"./kk": "./node_modules/moment/locale/kk.js",
-	"./kk.js": "./node_modules/moment/locale/kk.js",
-	"./km": "./node_modules/moment/locale/km.js",
-	"./km.js": "./node_modules/moment/locale/km.js",
-	"./kn": "./node_modules/moment/locale/kn.js",
-	"./kn.js": "./node_modules/moment/locale/kn.js",
-	"./ko": "./node_modules/moment/locale/ko.js",
-	"./ko.js": "./node_modules/moment/locale/ko.js",
-	"./ky": "./node_modules/moment/locale/ky.js",
-	"./ky.js": "./node_modules/moment/locale/ky.js",
-	"./lb": "./node_modules/moment/locale/lb.js",
-	"./lb.js": "./node_modules/moment/locale/lb.js",
-	"./lo": "./node_modules/moment/locale/lo.js",
-	"./lo.js": "./node_modules/moment/locale/lo.js",
-	"./lt": "./node_modules/moment/locale/lt.js",
-	"./lt.js": "./node_modules/moment/locale/lt.js",
-	"./lv": "./node_modules/moment/locale/lv.js",
-	"./lv.js": "./node_modules/moment/locale/lv.js",
-	"./me": "./node_modules/moment/locale/me.js",
-	"./me.js": "./node_modules/moment/locale/me.js",
-	"./mi": "./node_modules/moment/locale/mi.js",
-	"./mi.js": "./node_modules/moment/locale/mi.js",
-	"./mk": "./node_modules/moment/locale/mk.js",
-	"./mk.js": "./node_modules/moment/locale/mk.js",
-	"./ml": "./node_modules/moment/locale/ml.js",
-	"./ml.js": "./node_modules/moment/locale/ml.js",
-	"./mn": "./node_modules/moment/locale/mn.js",
-	"./mn.js": "./node_modules/moment/locale/mn.js",
-	"./mr": "./node_modules/moment/locale/mr.js",
-	"./mr.js": "./node_modules/moment/locale/mr.js",
-	"./ms": "./node_modules/moment/locale/ms.js",
-	"./ms-my": "./node_modules/moment/locale/ms-my.js",
-	"./ms-my.js": "./node_modules/moment/locale/ms-my.js",
-	"./ms.js": "./node_modules/moment/locale/ms.js",
-	"./mt": "./node_modules/moment/locale/mt.js",
-	"./mt.js": "./node_modules/moment/locale/mt.js",
-	"./my": "./node_modules/moment/locale/my.js",
-	"./my.js": "./node_modules/moment/locale/my.js",
-	"./nb": "./node_modules/moment/locale/nb.js",
-	"./nb.js": "./node_modules/moment/locale/nb.js",
-	"./ne": "./node_modules/moment/locale/ne.js",
-	"./ne.js": "./node_modules/moment/locale/ne.js",
-	"./nl": "./node_modules/moment/locale/nl.js",
-	"./nl-be": "./node_modules/moment/locale/nl-be.js",
-	"./nl-be.js": "./node_modules/moment/locale/nl-be.js",
-	"./nl.js": "./node_modules/moment/locale/nl.js",
-	"./nn": "./node_modules/moment/locale/nn.js",
-	"./nn.js": "./node_modules/moment/locale/nn.js",
-	"./pa-in": "./node_modules/moment/locale/pa-in.js",
-	"./pa-in.js": "./node_modules/moment/locale/pa-in.js",
-	"./pl": "./node_modules/moment/locale/pl.js",
-	"./pl.js": "./node_modules/moment/locale/pl.js",
-	"./pt": "./node_modules/moment/locale/pt.js",
-	"./pt-br": "./node_modules/moment/locale/pt-br.js",
-	"./pt-br.js": "./node_modules/moment/locale/pt-br.js",
-	"./pt.js": "./node_modules/moment/locale/pt.js",
-	"./ro": "./node_modules/moment/locale/ro.js",
-	"./ro.js": "./node_modules/moment/locale/ro.js",
-	"./ru": "./node_modules/moment/locale/ru.js",
-	"./ru.js": "./node_modules/moment/locale/ru.js",
-	"./sd": "./node_modules/moment/locale/sd.js",
-	"./sd.js": "./node_modules/moment/locale/sd.js",
-	"./se": "./node_modules/moment/locale/se.js",
-	"./se.js": "./node_modules/moment/locale/se.js",
-	"./si": "./node_modules/moment/locale/si.js",
-	"./si.js": "./node_modules/moment/locale/si.js",
-	"./sk": "./node_modules/moment/locale/sk.js",
-	"./sk.js": "./node_modules/moment/locale/sk.js",
-	"./sl": "./node_modules/moment/locale/sl.js",
-	"./sl.js": "./node_modules/moment/locale/sl.js",
-	"./sq": "./node_modules/moment/locale/sq.js",
-	"./sq.js": "./node_modules/moment/locale/sq.js",
-	"./sr": "./node_modules/moment/locale/sr.js",
-	"./sr-cyrl": "./node_modules/moment/locale/sr-cyrl.js",
-	"./sr-cyrl.js": "./node_modules/moment/locale/sr-cyrl.js",
-	"./sr.js": "./node_modules/moment/locale/sr.js",
-	"./ss": "./node_modules/moment/locale/ss.js",
-	"./ss.js": "./node_modules/moment/locale/ss.js",
-	"./sv": "./node_modules/moment/locale/sv.js",
-	"./sv.js": "./node_modules/moment/locale/sv.js",
-	"./sw": "./node_modules/moment/locale/sw.js",
-	"./sw.js": "./node_modules/moment/locale/sw.js",
-	"./ta": "./node_modules/moment/locale/ta.js",
-	"./ta.js": "./node_modules/moment/locale/ta.js",
-	"./te": "./node_modules/moment/locale/te.js",
-	"./te.js": "./node_modules/moment/locale/te.js",
-	"./tet": "./node_modules/moment/locale/tet.js",
-	"./tet.js": "./node_modules/moment/locale/tet.js",
-	"./tg": "./node_modules/moment/locale/tg.js",
-	"./tg.js": "./node_modules/moment/locale/tg.js",
-	"./th": "./node_modules/moment/locale/th.js",
-	"./th.js": "./node_modules/moment/locale/th.js",
-	"./tl-ph": "./node_modules/moment/locale/tl-ph.js",
-	"./tl-ph.js": "./node_modules/moment/locale/tl-ph.js",
-	"./tlh": "./node_modules/moment/locale/tlh.js",
-	"./tlh.js": "./node_modules/moment/locale/tlh.js",
-	"./tr": "./node_modules/moment/locale/tr.js",
-	"./tr.js": "./node_modules/moment/locale/tr.js",
-	"./tzl": "./node_modules/moment/locale/tzl.js",
-	"./tzl.js": "./node_modules/moment/locale/tzl.js",
-	"./tzm": "./node_modules/moment/locale/tzm.js",
-	"./tzm-latn": "./node_modules/moment/locale/tzm-latn.js",
-	"./tzm-latn.js": "./node_modules/moment/locale/tzm-latn.js",
-	"./tzm.js": "./node_modules/moment/locale/tzm.js",
-	"./ug-cn": "./node_modules/moment/locale/ug-cn.js",
-	"./ug-cn.js": "./node_modules/moment/locale/ug-cn.js",
-	"./uk": "./node_modules/moment/locale/uk.js",
-	"./uk.js": "./node_modules/moment/locale/uk.js",
-	"./ur": "./node_modules/moment/locale/ur.js",
-	"./ur.js": "./node_modules/moment/locale/ur.js",
-	"./uz": "./node_modules/moment/locale/uz.js",
-	"./uz-latn": "./node_modules/moment/locale/uz-latn.js",
-	"./uz-latn.js": "./node_modules/moment/locale/uz-latn.js",
-	"./uz.js": "./node_modules/moment/locale/uz.js",
-	"./vi": "./node_modules/moment/locale/vi.js",
-	"./vi.js": "./node_modules/moment/locale/vi.js",
-	"./x-pseudo": "./node_modules/moment/locale/x-pseudo.js",
-	"./x-pseudo.js": "./node_modules/moment/locale/x-pseudo.js",
-	"./yo": "./node_modules/moment/locale/yo.js",
-	"./yo.js": "./node_modules/moment/locale/yo.js",
-	"./zh-cn": "./node_modules/moment/locale/zh-cn.js",
-	"./zh-cn.js": "./node_modules/moment/locale/zh-cn.js",
-	"./zh-hk": "./node_modules/moment/locale/zh-hk.js",
-	"./zh-hk.js": "./node_modules/moment/locale/zh-hk.js",
-	"./zh-tw": "./node_modules/moment/locale/zh-tw.js",
-	"./zh-tw.js": "./node_modules/moment/locale/zh-tw.js"
-};
-function webpackContext(req) {
-	return __webpack_require__(webpackContextResolve(req));
-};
-function webpackContextResolve(req) {
-	var id = map[req];
-	if(!(id + 1)) // check for number or string
-		throw new Error("Cannot find module '" + req + "'.");
-	return id;
-};
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = "./node_modules/moment/locale recursive ^\\.\\/.*$";
-
-/***/ }),
-
 /***/ "./src/$$_lazy_route_resource lazy recursive":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -410,6 +141,26 @@ var AllComponent = (function () {
             width: 1200,
             height: 800,
         }, function () { });
+    };
+    AllComponent.prototype.hostName = function (name) {
+        return name.substring(0, name.indexOf('.salesforce.com'));
+    };
+    AllComponent.prototype.getHostName = function () {
+        var _this = this;
+        chrome.cookies.getAll({ domain: "salesforce.com", name: "sid_Client" }, function (value) {
+            console.log(value);
+            for (var idx = 0; idx < value.length; idx++) {
+                var replacementNodeName = _this.hostName(value[idx].domain);
+                console.log('Visualforce / lightning - Salesforce URL Match ', replacementNodeName);
+                chrome.cookies.get({
+                    "url": 'https://' + value[idx].domain,
+                    "name": "sid"
+                }, function (cookie) {
+                    var requiredSidClient = cookie.value;
+                    console.log('vf sid_Client:' + requiredSidClient);
+                });
+            }
+        });
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_5__utils_storage_provider__["a" /* Cache */])({ pool: 'DeleteAllCached' }),
@@ -761,10 +512,8 @@ var CallbackComponentNgFactory = __WEBPACK_IMPORTED_MODULE_0__angular_core__["ɵ
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CallbackComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__("./node_modules/moment/moment.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__ = __webpack_require__("./src/app/utils/storage.provider.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_auth_service__ = __webpack_require__("./src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_storage_provider__ = __webpack_require__("./src/app/utils/storage.provider.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_auth_service__ = __webpack_require__("./src/app/services/auth.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -777,75 +526,68 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var CallbackComponent = (function () {
     function CallbackComponent(router, currentRoute, auth) {
         this.router = router;
         this.currentRoute = currentRoute;
         this.auth = auth;
-        // this.getCurrentTabUrl();
-        this.getHostName();
     }
     CallbackComponent.prototype.ngOnInit = function () {
-        // this.getCookies();
+        this.getHostName();
     };
     CallbackComponent.prototype.getHostName = function () {
-        chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-            console.log(tab);
-            console.log(tabId);
-            console.log(changeInfo);
-            var host = new URL(tab.url).host;
-            console.log('HOST:' + host);
-        });
-    };
-    CallbackComponent.prototype.getCookies = function () {
         var _this = this;
-        var url = localStorage.getItem("URL");
-        chrome.cookies.get({ url: url, name: 'sid' }, function (cookie) {
-            console.log('cookie value', cookie.value);
-            if (cookie.value) {
-                _this.userSession = {
-                    token: cookie.value, expires: __WEBPACK_IMPORTED_MODULE_1_moment__().add(1, 'days')
+        chrome.cookies.getAll({ domain: "salesforce.com", name: "sid_Client" }, function (value) {
+            console.log(value);
+            for (var idx = 0; idx < value.length; idx++) {
+                var replacementNodeName = _this.hostName(value[idx].domain);
+                console.log('Visualforce / lightning - Salesforce URL Match ', replacementNodeName);
+                console.log("instance url ", value[idx].domain);
+                _this.instanceUrl = {
+                    currentURL: "https://" + value[idx].domain
                 };
-                console.log("get Cookies", _this.userSession);
-                _this.router.navigate(['/load']);
-            }
-            else {
-                _this.router.navigate(['/auth/callback']);
+                chrome.cookies.get({ url: _this.instanceUrl.currentURL, name: 'disco' }, function (logUserId) {
+                    var str = logUserId.value;
+                    var a = str.split(':')[2];
+                    console.log("value of a ", a);
+                    _this.logUserId = {
+                        userId: a
+                    };
+                });
+                chrome.cookies.get({
+                    "url": 'https://' + value[idx].domain,
+                    "name": "sid"
+                }, function (cookie) {
+                    console.log('cookie value', cookie.value);
+                    if (cookie.value) {
+                        _this.userSession = {
+                            token: cookie.value
+                        };
+                        console.log("get Cookies", _this.userSession);
+                        _this.router.navigate(['/home']);
+                    }
+                    else {
+                        _this.router.navigate(['/auth/callback']);
+                    }
+                });
             }
         });
     };
-    CallbackComponent.prototype.getCurrentTabUrl = function () {
-        chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
-            console.log("tab is", tab);
-            var path = new URL(tab[0].url).host;
-            path = "https://" + path;
-            localStorage.setItem("URL", path);
-            this.currentUrl = path;
-            console.log("url is", path);
-        });
-    };
-    CallbackComponent.prototype.getLogUserId = function () {
-        var _this = this;
-        var url = localStorage.getItem("URL");
-        chrome.cookies.get({ url: url, name: 'disco' }, function (logUserId) {
-            console.log('log userid value value', logUserId.value);
-            var str = logUserId.value;
-            var a = str.split(':')[2];
-            console.log("value of a ", a);
-            _this.logUserId = {
-                userId: a
-            };
-        });
+    CallbackComponent.prototype.hostName = function (name) {
+        return name.substring(0, name.indexOf('.salesforce.com'));
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'Session' }),
+        Object(__WEBPACK_IMPORTED_MODULE_1__utils_storage_provider__["a" /* Cache */])({ pool: 'Session' }),
         __metadata("design:type", Object)
     ], CallbackComponent.prototype, "userSession", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'LogUserId' }),
+        Object(__WEBPACK_IMPORTED_MODULE_1__utils_storage_provider__["a" /* Cache */])({ pool: 'LogUserId' }),
         __metadata("design:type", Object)
     ], CallbackComponent.prototype, "logUserId", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__utils_storage_provider__["a" /* Cache */])({ pool: 'instance' }),
+        __metadata("design:type", Object)
+    ], CallbackComponent.prototype, "instanceUrl", void 0);
     return CallbackComponent;
 }());
 
@@ -1101,7 +843,7 @@ var DataLoaderComponent = (function () {
         this.router = router;
         this.comms = comms;
         this.times = [{ odd: true }, { odd: false }, { odd: true }, { odd: false }];
-        this.getLogUserId();
+        //this.getLogUserId();
         console.log('Init Data Loader');
         console.log("token is on data loader", this.userSession.token);
         this.fetchSession();
@@ -1117,19 +859,6 @@ var DataLoaderComponent = (function () {
             this.router.navigate(['/auth/callback']);
         }
     };
-    DataLoaderComponent.prototype.getLogUserId = function () {
-        var _this = this;
-        var url = localStorage.getItem("URL");
-        chrome.cookies.get({ url: url, name: 'disco' }, function (logUserId) {
-            console.log('log userid value value', logUserId.value);
-            var str = logUserId.value;
-            var a = str.split(':')[2];
-            console.log("value of a ", a);
-            _this.logUserId = {
-                userId: a
-            };
-        });
-    };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__utils_storage_provider__["a" /* Cache */])({ pool: 'Session' }),
         __metadata("design:type", Object)
@@ -1138,6 +867,10 @@ var DataLoaderComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__utils_storage_provider__["a" /* Cache */])({ pool: 'LogUserId' }),
         __metadata("design:type", Object)
     ], DataLoaderComponent.prototype, "logUserId", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__utils_storage_provider__["a" /* Cache */])({ pool: 'instance' }),
+        __metadata("design:type", Object)
+    ], DataLoaderComponent.prototype, "instanceUrl", void 0);
     return DataLoaderComponent;
 }());
 
@@ -1846,7 +1579,9 @@ var MineComponent = (function () {
         this.loading = true;
         this.mineService.getMineLogs(this.logUserId.userId).subscribe(function (res) {
             console.log("mine logs", res.records[0].StartTime);
-            _this.lastSeenTime = res.records[0].StartTime;
+            _this.lastSeenTime = {
+                lastSeenISO: res.records[0].StartTime
+            };
             _this.mineLogs$ = res.records;
             _this.loading = false;
         });
@@ -1981,10 +1716,8 @@ var clearUsername = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__("./node_modules/moment/moment.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__ = __webpack_require__("./src/app/utils/storage.provider.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_storage_provider__ = __webpack_require__("./src/app/utils/storage.provider.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1996,18 +1729,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 var AuthService = (function () {
     function AuthService(router) {
         this.router = router;
     }
     AuthService.prototype.createSession = function (data) {
         this.userSession.token = data;
-        this.userSession.expires = __WEBPACK_IMPORTED_MODULE_0_moment__().add(1, 'days');
     };
     AuthService.prototype.isAuthenticated = function () {
         if (this.userSession && this.userSession.token) {
-            return __WEBPACK_IMPORTED_MODULE_0_moment__(this.userSession.expires).isAfter();
+            return true;
         }
         return false;
     };
@@ -2015,7 +1746,7 @@ var AuthService = (function () {
         return this.userSession.token ? this.userSession.token : false;
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'Session' }),
+        Object(__WEBPACK_IMPORTED_MODULE_1__utils_storage_provider__["a" /* Cache */])({ pool: 'Session' }),
         __metadata("design:type", Object)
     ], AuthService.prototype, "userSession", void 0);
     return AuthService;
@@ -2094,28 +1825,28 @@ var Constants = (function () {
     Constants.DELETE_DEBUG_LEVEL_LOG_BY_ID = "https://ap5.salesforce.com/services/data/v35.0/tooling/sobjects/DebugLevel/";
     Constants.UPDATE_DEBUG_LEVEL_BY_ID = "https://ap5.salesforce.com/services/data/v35.0/tooling/sobjects/DebugLevel/";
     Constants.GET_MINE_LOGS = function (LogUserId) {
-        return "https://ap5.salesforce.com/services/data/v35.0/tooling/query/?q=SELECT%20id%2C%20Application%2C%20Operation%2C%20Status%2C%20DurationMilliseconds%2C%20LogLength%2C%20StartTime%2C%20LogUser.Name%20from%20ApexLog%20where%20%20LogUserId%20%3D%20%27" + LogUserId + "%27%20%20ORDER%20BY%20StartTime%20DESC%20LIMIT%2020";
+        return "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where   LogUserId = " + "'" + LogUserId + "'" + "  ORDER BY StartTime  DESC LIMIT 20";
     };
     Constants.GET_ALL_LOGS = function () {
-        return "https://ap5.salesforce.com/services/data/v35.0/tooling/query/?q=SELECT%20id%2C%20Application%2C%20Operation%2C%20Status%2C%20DurationMilliseconds%2C%20LogLength%2C%20StartTime%2C%20LogUser.Name%20from%20ApexLog%20ORDER%20BY%20StartTime%20DESC%20LIMIT%2020";
+        return "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog ORDER BY StartTime DESC LIMIT 20";
     };
     Constants.GET_PARTICULAR_LOG = function (recordId) {
-        return "https://ap5.salesforce.com/services/data/v35.0/sobjects/ApexLog/" + recordId + "/Body/";
+        return "/services/data/v35.0/sobjects/ApexLog/" + recordId + "/Body/";
     };
     Constants.DOWNLOAD_LOGS = function (recordId) {
-        return "https://ap5.salesforce.com/servlet/servlet.FileDownload?file=" + recordId;
+        return "/servlet/servlet.FileDownload?file=" + recordId;
     };
     Constants.DELETE_PARTICULAR_FLAG = function (traceFlagId) {
-        return "https://ap5.salesforce.com/services/data/v35.0/tooling/sobjects/TraceFlag/" + traceFlagId;
+        return "/services/data/v35.0/tooling/sobjects/TraceFlag/" + traceFlagId;
     };
     Constants.DELETE_DEBUG_LEVEL_LOG_BY_ID_URL = function (logLevelId) {
-        return Constants.DELETE_DEBUG_LEVEL_LOG_BY_ID + logLevelId;
+        return "/services/data/v35.0/tooling/sobjects/DebugLevel/" + logLevelId;
     };
     Constants.FETCH_DEBUG_LEVEL_LOG_BY_ID_URL = function (logLevelId) {
-        return Constants.DELETE_DEBUG_LEVEL_LOG_BY_ID + logLevelId;
+        return "/services/data/v35.0/tooling/sobjects/DebugLevel/" + logLevelId;
     };
     Constants.UPDATE_DEBUG_LEVEL_LOG_BY_ID_URL = function (id) {
-        return Constants.UPDATE_DEBUG_LEVEL_BY_ID + id;
+        return "/services/data/v35.0/tooling/sobjects/DebugLevel/" + id;
     };
     return Constants;
 }());
@@ -2286,35 +2017,36 @@ var DebugLevelService = (function () {
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
         headers.append('Accept', "application/json");
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url), { headers: headers });
+        var BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
+        return this.http.get(BASE_URL + encodeURIComponent(url), { headers: headers });
     };
     DebugLevelService.prototype.createDebugLevel = function (body) {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
         headers.append('Accept', "application/json");
-        return this.http.post(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].CREATE_DEBUG_LEVEL_URL, body);
+        return this.http.post(this.instanceUrl.currentURL + "/services/data/v35.0/tooling/sobjects/DebugLevel/", body);
     };
     DebugLevelService.prototype.deleteDebugLogLevelById = function (debugLevelLogId) {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
         headers.append('Accept', "application/json");
-        return this.http.delete(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].DELETE_DEBUG_LEVEL_LOG_BY_ID_URL(debugLevelLogId), { headers: headers });
+        return this.http.delete(this.instanceUrl.currentURL + __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].DELETE_DEBUG_LEVEL_LOG_BY_ID_URL(debugLevelLogId), { headers: headers });
     };
     DebugLevelService.prototype.getparticularDebugLevelData = function (id) {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
         headers.append('Accept', "application/json");
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].DELETE_DEBUG_LEVEL_LOG_BY_ID_URL(id), { headers: headers });
+        return this.http.get(this.instanceUrl.currentURL + __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].DELETE_DEBUG_LEVEL_LOG_BY_ID_URL(id), { headers: headers });
     };
     DebugLevelService.prototype.updateDebugLevelData = function (id, body) {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
         headers.append('Accept', "application/json");
-        return this.http.patch(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].UPDATE_DEBUG_LEVEL_LOG_BY_ID_URL(id), body);
+        return this.http.patch(this.instanceUrl.currentURL + __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].UPDATE_DEBUG_LEVEL_LOG_BY_ID_URL(id), body);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'Session' }),
@@ -2324,6 +2056,10 @@ var DebugLevelService = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'LogUserId' }),
         __metadata("design:type", Object)
     ], DebugLevelService.prototype, "logUserId", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'instance' }),
+        __metadata("design:type", Object)
+    ], DebugLevelService.prototype, "instanceUrl", void 0);
     return DebugLevelService;
 }());
 
@@ -2337,8 +2073,7 @@ var DebugLevelService = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventsService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants__ = __webpack_require__("./src/app/services/constants.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__ = __webpack_require__("./src/app/utils/storage.provider.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_storage_provider__ = __webpack_require__("./src/app/utils/storage.provider.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2348,7 +2083,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 var EventsService = (function () {
@@ -2365,19 +2099,17 @@ var EventsService = (function () {
         console.log(new Date(date.toString().split('GMT')[0] + ' UTC').toISOString());
         console.log("15 din baad date", date);
         var url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + new Date(date.toString().split('GMT')[0] + ' UTC').toISOString() + " and  LogDate <= " + new Date(today.toString().split('GMT')[0] + ' UTC').toISOString() + " ORDER BY LogDate DESC LIMIT 20";
-        console.log("https://ap5.salesforce.com/services/data/v35.0/query/?q=" + encodeURIComponent(url));
-        console.log(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].FETCH_EVENTS_URL + encodeURIComponent(url));
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].FETCH_EVENTS_URL + encodeURIComponent(url));
+        return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url));
     };
     EventsService.prototype.fetchFilteredDataForDate = function (from, to) {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
         var url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + from + " and  LogDate <= " + to + " ORDER BY LogDate DESC LIMIT 20";
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].FETCH_EVENTS_URL + encodeURIComponent(url));
+        return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url));
     };
     EventsService.prototype.fetchFilteredDataForEventType = function (eventType) {
         var today = new Date();
@@ -2392,14 +2124,14 @@ var EventsService = (function () {
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
         var url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + new Date(date.toString().split('GMT')[0] + ' UTC').toISOString() + " and  eventtype = " + "'" + eventType + "'" + " ORDER BY LogDate DESC LIMIT 20";
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].FETCH_EVENTS_URL + encodeURIComponent(url));
+        return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url));
     };
     EventsService.prototype.fetchFilteredDataForEventTypeAndDate = function (from, to, eventType) {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
         var url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + from + " and  LogDate <= " + to + " and  eventtype = " + "'" + eventType + "'" + " ORDER BY LogDate DESC LIMIT 20";
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].FETCH_EVENTS_URL + encodeURIComponent(url));
+        return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url));
     };
     EventsService.prototype.downloadEventLogs = function (logId) {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
@@ -2409,17 +2141,21 @@ var EventsService = (function () {
         return this.http.get(url);
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'Session' }),
+        Object(__WEBPACK_IMPORTED_MODULE_1__utils_storage_provider__["a" /* Cache */])({ pool: 'Session' }),
         __metadata("design:type", Object)
     ], EventsService.prototype, "userSession", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'LogUserId' }),
+        Object(__WEBPACK_IMPORTED_MODULE_1__utils_storage_provider__["a" /* Cache */])({ pool: 'LogUserId' }),
         __metadata("design:type", Object)
     ], EventsService.prototype, "logUserId", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'LastSeenTime' }),
+        Object(__WEBPACK_IMPORTED_MODULE_1__utils_storage_provider__["a" /* Cache */])({ pool: 'LastSeenTime' }),
         __metadata("design:type", Object)
     ], EventsService.prototype, "lastSeenTime", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__utils_storage_provider__["a" /* Cache */])({ pool: 'instance' }),
+        __metadata("design:type", Object)
+    ], EventsService.prototype, "instanceUrl", void 0);
     return EventsService;
 }());
 
@@ -2455,93 +2191,97 @@ var MineLogsService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         console.log("mine logs services", this.userSession.token);
+        console.log("current URL", this.instanceUrl.currentURL);
         headers.append("Authorization", "Bearer " + this.userSession.token);
         headers.append('Accept', "application/json");
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].GET_MINE_LOGS(logUserId), { headers: headers });
+        var BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
+        return this.http.get(BASE_URL + encodeURIComponent(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].GET_MINE_LOGS(logUserId)), { headers: headers });
     };
     MineLogsService.prototype.getAllLogs = function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
         headers.append('Accept', "application/json");
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].GET_ALL_LOGS(), { headers: headers });
+        var BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
+        return this.http.get(BASE_URL + encodeURIComponent(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].GET_ALL_LOGS()), { headers: headers });
     };
     MineLogsService.prototype.getParticularLog = function (recordId) {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Accept', "text/plain");
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].GET_PARTICULAR_LOG(recordId), { headers: headers });
+        return this.http.get(this.instanceUrl.currentURL + __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].GET_PARTICULAR_LOG(recordId), { headers: headers });
     };
     MineLogsService.prototype.deleteMineCached = function () {
         var url = "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  StartTime > " + this.lastSeenTime + " and  LogUserId = " + "'" + this.logUserId.userId + "'" + "  ORDER BY StartTime DESC LIMIT 20";
-        console.log(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url));
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url), { headers: headers });
+        var BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
+        return this.http.get(BASE_URL + encodeURIComponent(url), { headers: headers });
     };
     MineLogsService.prototype.downloadLogs = function (recordId) {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].DOWNLOAD_LOGS(recordId), { headers: headers });
+        return this.http.get(this.instanceUrl.currentURL + __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].DOWNLOAD_LOGS(recordId), { headers: headers });
     };
     MineLogsService.prototype.deleteAllCached = function () {
         var url = "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  StartTime > " + this.lastSeenTime + " ORDER BY StartTime DESC LIMIT 20";
-        console.log(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url));
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url), { headers: headers });
+        var BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
+        return this.http.get(BASE_URL + encodeURIComponent(url), { headers: headers });
     };
     MineLogsService.prototype.fetchFlags = function () {
         var url = "Select Id, LogType, DebugLevelId, DebugLevel.DeveloperName,  TracedEntityId, TracedEntity.Name, ExpirationDate  from TraceFlag  order by ExpirationDate DESC ";
-        console.log(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url));
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url), { headers: headers });
+        var BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
+        return this.http.get(BASE_URL + encodeURIComponent(url), { headers: headers });
     };
     MineLogsService.prototype.deleteParticularTracelag = function (traceFlagId) {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
-        return this.http.delete(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].DELETE_PARTICULAR_FLAG(traceFlagId), { headers: headers });
+        return this.http.delete(this.instanceUrl.currentURL + __WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].DELETE_PARTICULAR_FLAG(traceFlagId), { headers: headers });
     };
     MineLogsService.prototype.searchUserForUser = function (name) {
         var url = "Select Id, Name, Profile.Name from User where IsActive = true AND Name like '%" + name + "%'";
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].USER_SEARCH_BASE_URL + encodeURIComponent(url));
+        return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url));
     };
     MineLogsService.prototype.searchDebugLevel = function (name) {
         var url = "Select Id, DeveloperName from DebugLevel where DeveloperName like '%" + name + "%'";
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].BASE_URL + encodeURIComponent(url));
+        var BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
+        return this.http.get(BASE_URL + encodeURIComponent(url));
     };
     MineLogsService.prototype.searchUserForClass = function (name) {
         var url = "Select NamespacePrefix, Name, Id From ApexClass Where Name like '%" + name + "%'";
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].USER_SEARCH_BASE_URL + encodeURIComponent(url));
+        return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url));
     };
     MineLogsService.prototype.searchUserForTrigger = function (name) {
         var url = "Select NamespacePrefix, Name, Id From ApexTrigger Where Name like '%" + name + "%'";
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
-        return this.http.get(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].USER_SEARCH_BASE_URL + encodeURIComponent(url));
+        return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url));
     };
     MineLogsService.prototype.create = function (body) {
         var headers = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["g" /* HttpHeaders */]();
         headers.append('Api-User-Agent', 'Example/1.0');
         headers.append("Authorization", "Bearer " + this.userSession.token);
-        return this.http.post(__WEBPACK_IMPORTED_MODULE_1__constants__["a" /* Constants */].CREATE_USER_URL, body);
+        return this.http.post(this.instanceUrl.currentURL + "/services/data/v35.0/tooling/sobjects/TraceFlag/", body);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'Session' }),
@@ -2555,6 +2295,10 @@ var MineLogsService = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'LastSeenTime' }),
         __metadata("design:type", Object)
     ], MineLogsService.prototype, "lastSeenTime", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'instance' }),
+        __metadata("design:type", Object)
+    ], MineLogsService.prototype, "instanceUrl", void 0);
     return MineLogsService;
 }());
 

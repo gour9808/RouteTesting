@@ -25,14 +25,12 @@ export class MineComponent implements OnInit, OnDestroy {
   @Cache({ pool: 'LastSeenTime' }) lastSeenTime: any;
   @Cache({ pool: 'DeleteMineCached' }) deleteMyCache: boolean;
 
-
-
   constructor(private mineService: MineLogsService, private route: ActivatedRoute, private router: Router,
     private toast: ToastMessageService) {
   }
 
   ngOnInit() {
-   this.choose();
+    this.choose();
   }
 
   ngOnDestroy() { }
@@ -42,7 +40,9 @@ export class MineComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.mineService.getMineLogs(this.logUserId.userId).subscribe(res => {
       console.log("mine logs", res.records[0].StartTime);
-      this.lastSeenTime = res.records[0].StartTime;
+      this.lastSeenTime = {
+        lastSeenISO: res.records[0].StartTime
+      }
       this.mineLogs$ = res.records;
       this.loading = false;
     })

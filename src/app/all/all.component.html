@@ -59,7 +59,7 @@
     [minY]="70">
     <span>Watching logs requires opening extension in a new window, are you sure ?</span>
     <p-footer>
-        <button pButton type="button" label="Yes"></button>
+        <button pButton type="button" label="Yes" (click) =  "getHostName()"></button>
         <button pButton type="button" label="Close" class="ui-button-secondary"></button>
     </p-footer>
 </p-dialog>

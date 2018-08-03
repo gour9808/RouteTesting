@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as moment from 'moment';
 import { Cache } from '../utils/storage.provider';
 import * as _ from 'lodash';
 import { AuthService } from '../services/auth.service';
@@ -15,58 +14,73 @@ import { AuthService } from '../services/auth.service';
 export class CallbackComponent implements OnInit {
     @Cache({ pool: 'Session' }) userSession: any;
     @Cache({ pool: 'LogUserId' }) logUserId: any;
-    currentUrl: any;
+    @Cache({ pool: 'instance' }) instanceUrl: any;
+
 
 
     constructor(private router: Router, private currentRoute: ActivatedRoute, private auth: AuthService) {
-        this.getCurrentTabUrl();
+
     }
 
     ngOnInit() {
-       
+        this.getHostName();
+
     }
 
-    getCookies() {
-        let url = localStorage.getItem("URL")
-        chrome.cookies.get({ url: url, name: 'sid' }, (cookie) => {
-            console.log('cookie value', cookie.value);
-            if (cookie.value) {
-                this.userSession = {
-                    token: cookie.value, expires: moment().add(1, 'days')
-                };
 
-                console.log("get Cookies", this.userSession);
-                this.router.navigate(['/load'])
+
+
+    getHostName() {
+
+        chrome.cookies.getAll({ domain: "salesforce.com", name: "sid_Client" }, (value) => {
+            console.log(value);
+            for (var idx = 0; idx < value.length; idx++) {
+                var replacementNodeName = this.hostName(value[idx].domain);
+                console.log('Visualforce / lightning - Salesforce URL Match ', replacementNodeName);
+                console.log("instance url ", value[idx].domain);
+                this.instanceUrl = {
+                    currentURL: "https://" + value[idx].domain
+                }
+
+                chrome.cookies.get({ url: this.instanceUrl.currentURL, name: 'disco' }, (logUserId) => {
+                    let str = logUserId.value;
+                    let a = str.split(':')[2];
+                    console.log("value of a ", a);
+                    this.logUserId = {
+                      userId: a
+                    }
+              
+                  });
+                chrome.cookies.get({
+                    "url": 'https://' + value[idx].domain,
+                    "name": "sid"
+                }, (cookie) => {
+                    console.log('cookie value', cookie.value);
+                    if (cookie.value) {
+                        this.userSession = {
+                            token: cookie.value
+                        };
+                        console.log("get Cookies", this.userSession);
+                        this.router.navigate(['/home'])
+                    }
+                    else {
+                        this.router.navigate(['/auth/callback'])
+                    }
+                })
+
+
             }
-            else {
-                this.router.navigate(['/auth/callback'])
-            }
-        });
+        })
     }
 
-    getCurrentTabUrl() {
-        chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
-            console.log("tab is", tab);
-            let path = new URL(tab[0].url).host;
-            path = "https://" + path;
-            localStorage.setItem("URL", path)
-            this.currentUrl = path;
-            console.log("url is", path);
-        });
+    hostName(name) {
+        return name.substring(0, name.indexOf('.salesforce.com'));
     }
 
-    getLogUserId() {
-        let url = localStorage.getItem("URL")
-        chrome.cookies.get({ url: url, name: 'disco' }, (logUserId) => {
-            console.log('log userid value value', logUserId.value);
-            let str = logUserId.value;
-            let a = str.split(':')[2];
-            console.log("value of a ", a);
-            this.logUserId = {
-                userId: a
-            }
 
-        });
-    }
+
+
+
+
 
 }

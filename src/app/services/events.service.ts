@@ -10,8 +10,10 @@ export class EventsService {
   @Cache({ pool: 'Session' }) userSession: any;
   @Cache({ pool: 'LogUserId' }) logUserId: any;
   @Cache({ pool: 'LastSeenTime' }) lastSeenTime: any;
+  @Cache({ pool: 'instance' }) instanceUrl: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+   }
 
   fetchEventData(): Observable<any> {
     let today = new Date();
@@ -25,12 +27,10 @@ export class EventsService {
     console.log(new Date(date.toString().split('GMT')[0] + ' UTC').toISOString());
     console.log("15 din baad date", date);
     let url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + new Date(date.toString().split('GMT')[0] + ' UTC').toISOString() + " and  LogDate <= " + new Date(today.toString().split('GMT')[0] + ' UTC').toISOString() + " ORDER BY LogDate DESC LIMIT 20"
-    console.log("https://ap5.salesforce.com/services/data/v35.0/query/?q=" + encodeURIComponent(url));
-    console.log(Constants.FETCH_EVENTS_URL + encodeURIComponent(url));
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.FETCH_EVENTS_URL + encodeURIComponent(url));
+    return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url));
   }
 
   fetchFilteredDataForDate(from, to): Observable<any> {
@@ -38,7 +38,7 @@ export class EventsService {
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
     let url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + from + " and  LogDate <= " + to + " ORDER BY LogDate DESC LIMIT 20"
-    return this.http.get(Constants.FETCH_EVENTS_URL + encodeURIComponent(url))
+    return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url))
   }
 
   fetchFilteredDataForEventType(eventType): Observable<any> {
@@ -55,7 +55,7 @@ export class EventsService {
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
     let url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + new Date(date.toString().split('GMT')[0] + ' UTC').toISOString() + " and  eventtype = " + "'" + eventType + "'" + " ORDER BY LogDate DESC LIMIT 20";
-    return this.http.get(Constants.FETCH_EVENTS_URL + encodeURIComponent(url))
+    return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url))
   }
 
 
@@ -64,7 +64,7 @@ export class EventsService {
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
     let url = "SELECT Id, EventType, LogDate, LogFileLength, LogFile From EventLogFile  where  LogDate >= " + from + " and  LogDate <= " + to + " and  eventtype = " + "'" + eventType + "'" + " ORDER BY LogDate DESC LIMIT 20"
-    return this.http.get(Constants.FETCH_EVENTS_URL + encodeURIComponent(url))
+    return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url))
   }
 
   downloadEventLogs(logId): Observable<any> {

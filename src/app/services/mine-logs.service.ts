@@ -9,18 +9,26 @@ export class MineLogsService {
   @Cache({ pool: 'Session' }) userSession: any;
   @Cache({ pool: 'LogUserId' }) logUserId: any;
   @Cache({ pool: 'LastSeenTime' }) lastSeenTime: any;
+  @Cache({ pool: 'instance' }) instanceUrl: any;
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+
+  }
+
+ 
 
 
   getMineLogs(logUserId): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     console.log("mine logs services", this.userSession.token);
+    console.log("current URL", this.instanceUrl.currentURL);
     
     headers.append("Authorization", "Bearer " + this.userSession.token);
     headers.append('Accept', "application/json")
-    return this.http.get(Constants.GET_MINE_LOGS(logUserId), { headers: headers });
+    let BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
+    return this.http.get(BASE_URL + encodeURIComponent(Constants.GET_MINE_LOGS(logUserId)), { headers: headers });
   }
 
 
@@ -28,8 +36,9 @@ export class MineLogsService {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    headers.append('Accept', "application/json")
-    return this.http.get(Constants.GET_ALL_LOGS(), { headers: headers });
+    headers.append('Accept', "application/json");
+    let BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
+    return this.http.get(BASE_URL + encodeURIComponent(Constants.GET_ALL_LOGS()), { headers: headers });
   }
 
   getParticularLog(recordId) {
@@ -38,18 +47,18 @@ export class MineLogsService {
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
 
-    return this.http.get<any>(Constants.GET_PARTICULAR_LOG(recordId), { headers: headers })
+    return this.http.get<any>(this.instanceUrl.currentURL + Constants.GET_PARTICULAR_LOG(recordId), { headers: headers })
 
   }
 
 
   deleteMineCached(): Observable<any> {
     let url = "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  StartTime > " + this.lastSeenTime + " and  LogUserId = " + "'" + this.logUserId.userId + "'" + "  ORDER BY StartTime DESC LIMIT 20"
-    console.log(Constants.BASE_URL + encodeURIComponent(url));
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.BASE_URL + encodeURIComponent(url), { headers: headers })
+    let BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
+    return this.http.get(BASE_URL + encodeURIComponent(url), { headers: headers })
 
   }
 
@@ -57,29 +66,29 @@ export class MineLogsService {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.DOWNLOAD_LOGS(recordId), { headers: headers })
+    return this.http.get(this.instanceUrl.currentURL + Constants.DOWNLOAD_LOGS(recordId), { headers: headers })
 
 
   }
 
   deleteAllCached(): Observable<any> {
     let url = "SELECT id, Application, Operation, Status, DurationMilliseconds, LogLength, StartTime, LogUser.Name from ApexLog where  StartTime > " + this.lastSeenTime + " ORDER BY StartTime DESC LIMIT 20"
-    console.log(Constants.BASE_URL + encodeURIComponent(url));
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.BASE_URL + encodeURIComponent(url), { headers: headers })
+    let BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
+    return this.http.get(BASE_URL + encodeURIComponent(url), { headers: headers })
 
   }
 
 
   fetchFlags(): Observable<any> {
     let url = "Select Id, LogType, DebugLevelId, DebugLevel.DeveloperName,  TracedEntityId, TracedEntity.Name, ExpirationDate  from TraceFlag  order by ExpirationDate DESC "
-    console.log(Constants.BASE_URL + encodeURIComponent(url));
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.BASE_URL + encodeURIComponent(url), { headers: headers })
+    let BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
+    return this.http.get(BASE_URL + encodeURIComponent(url), { headers: headers })
 
   }
 
@@ -87,7 +96,7 @@ export class MineLogsService {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.delete(Constants.DELETE_PARTICULAR_FLAG(traceFlagId), { headers: headers })
+    return this.http.delete(this.instanceUrl.currentURL + Constants.DELETE_PARTICULAR_FLAG(traceFlagId), { headers: headers })
   }
 
   searchUserForUser(name): Observable<any> {
@@ -95,7 +104,7 @@ export class MineLogsService {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.USER_SEARCH_BASE_URL + encodeURIComponent(url))
+    return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url))
 
   }
 
@@ -104,7 +113,9 @@ export class MineLogsService {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.BASE_URL + encodeURIComponent(url))
+    let BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
+
+    return this.http.get(BASE_URL + encodeURIComponent(url))
 
   }
 
@@ -114,7 +125,7 @@ export class MineLogsService {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.USER_SEARCH_BASE_URL + encodeURIComponent(url))
+    return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url))
 
   }
 
@@ -124,14 +135,14 @@ export class MineLogsService {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get(Constants.USER_SEARCH_BASE_URL + encodeURIComponent(url))
+    return this.http.get(this.instanceUrl.currentURL + "/services/data/v35.0/query/?q=" + encodeURIComponent(url))
   }
 
   create(body) {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.post(Constants.CREATE_USER_URL, body)
+    return this.http.post(this.instanceUrl.currentURL + "/services/data/v35.0/tooling/sobjects/TraceFlag/", body)
   }
 
 
