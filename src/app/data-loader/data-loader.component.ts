@@ -13,9 +13,11 @@ export class DataLoaderComponent implements OnInit {
 
   times = [{ odd: true }, { odd: false }, { odd: true }, { odd: false }];
   @Cache({ pool: 'Session' }) userSession: any;
+  @Cache({ pool: 'LogUserId' }) logUserId: any;
+
   comms$: any;
   constructor(private msgService: ToastMessageService, private current: ActivatedRoute, private router: Router, private comms: CommunicatorService) {
-
+    this.getLogUserId();
     console.log('Init Data Loader');
     console.log("token is on data loader", this.userSession.token);
     this.fetchSession();
@@ -33,6 +35,20 @@ export class DataLoaderComponent implements OnInit {
     else {
       this.router.navigate(['/auth/callback'])
     }
+  }
+
+  getLogUserId() {
+    let url = localStorage.getItem("URL")
+    chrome.cookies.get({ url: url, name: 'disco' }, (logUserId) => {
+      console.log('log userid value value', logUserId.value);
+      let str = logUserId.value;
+      let a = str.split(':')[2];
+      console.log("value of a ", a);
+      this.logUserId = {
+        userId: a
+      }
+
+    });
   }
 
 }

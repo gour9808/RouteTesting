@@ -41,9 +41,9 @@ export const dashboardRoutes: Routes = [
 ];
 
 export const appRoutes: Routes = [
-    { path: '', redirectTo: 'load', pathMatch: 'full' },
+    { path: '', redirectTo: 'auth/callback', pathMatch: 'full' },
     { path: 'auth/callback', component: CallbackComponent },
-    { path: 'load', component: DataLoaderComponent, canActivate: [OAuthGuard] },
+    { path: 'load', component: DataLoaderComponent },
     { path: 'home', component: ContainerComponent, loadChildren: 'app/dashboard/home.module#HomeModule' }
 
 ];
