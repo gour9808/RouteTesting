@@ -16,8 +16,6 @@ export class CallbackComponent implements OnInit {
     @Cache({ pool: 'LogUserId' }) logUserId: any;
     @Cache({ pool: 'instance' }) instanceUrl: any;
 
-
-
     constructor(private router: Router, private currentRoute: ActivatedRoute, private auth: AuthService) {
 
     }
@@ -27,11 +25,7 @@ export class CallbackComponent implements OnInit {
 
     }
 
-
-
-
     getHostName() {
-
         chrome.cookies.getAll({ domain: "salesforce.com", name: "sid_Client" }, (value) => {
             console.log(value);
             for (var idx = 0; idx < value.length; idx++) {
@@ -47,10 +41,10 @@ export class CallbackComponent implements OnInit {
                     let a = str.split(':')[2];
                     console.log("value of a ", a);
                     this.logUserId = {
-                      userId: a
+                        userId: a
                     }
-              
-                  });
+
+                });
                 chrome.cookies.get({
                     "url": 'https://' + value[idx].domain,
                     "name": "sid"
@@ -67,8 +61,6 @@ export class CallbackComponent implements OnInit {
                         this.router.navigate(['/auth/callback'])
                     }
                 })
-
-
             }
         })
     }
@@ -77,10 +69,5 @@ export class CallbackComponent implements OnInit {
         return name.substring(0, name.indexOf('.salesforce.com'));
     }
 
-
-
-
-
-
-
+    
 }

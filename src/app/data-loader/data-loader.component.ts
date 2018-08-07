@@ -19,21 +19,19 @@ export class DataLoaderComponent implements OnInit {
 
   comms$: any;
   constructor(private msgService: ToastMessageService, private current: ActivatedRoute, private router: Router, private comms: CommunicatorService) {
-    //this.getLogUserId();
     console.log('Init Data Loader');
-    
     console.log("token is on data loader", this.userSession.token);
-    this.fetchSession();
-
+    this.router.navigate(['/home'])
   }
 
   ngOnInit() {
+   // this.fetchSession();
   }
 
   fetchSession() {
     console.log('go to route');
     if (this.userSession.token) {
-      this.router.navigate(['/home'])
+      this.router.navigate(['/home'], { relativeTo: this.current })
     }
     else {
       this.router.navigate(['/auth/callback'])

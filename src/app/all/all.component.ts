@@ -103,32 +103,6 @@ export class AllComponent implements OnInit, OnDestroy {
     },
       function () { });
   }
-
-  hostName(name) {
-    return name.substring(0, name.indexOf('.salesforce.com'));
-  }
-
-  getHostName() {
-    
-    chrome.cookies.getAll({ domain: "salesforce.com", name: "sid_Client" }, (value) => {
-      console.log(value);
-      for (var idx = 0; idx < value.length; idx++) {
-         var   replacementNodeName = this.hostName(value[idx].domain);
-            console.log('Visualforce / lightning - Salesforce URL Match ' , replacementNodeName);
-
-            chrome.cookies.get({
-              "url": 'https://' + value[idx].domain ,
-              "name": "sid"
-          }, function(cookie) {
-              var requiredSidClient = cookie.value;
-              console.log('vf sid_Client:' + requiredSidClient);
-                   
-    } )
-
-  
-}
-})
-  }
 }
 
 

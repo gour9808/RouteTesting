@@ -4,9 +4,10 @@
 .label {
     text-align: left;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 13px;
     margin-bottom: 5px;
     width: 100%;
+    font-family: "monospace";
 }
 
 .input-group {
@@ -109,4 +110,8 @@
 
 .ui-dropdown.ui-widget.ui-state-default.ui-corner-all.ui-helper-clearfix {
     width: 100% !important;
+}
+.ui-table
+{
+    font-family: monospace;
 }

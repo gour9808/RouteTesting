@@ -52,7 +52,7 @@ import { EventsService } from './services/events.service';
     DataLoaderComponent,
     CallbackComponent,
     ViewLogDetailComponent,
-    ViewDebugLevelLogComponent
+    ViewDebugLevelLogComponent,
   ],
   imports: [
     BrowserAnimationsModule,
