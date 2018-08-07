@@ -61,7 +61,7 @@ export class CallbackComponent implements OnInit {
                             token: cookie.value
                         };
                         console.log("get Cookies", this.userSession);
-                        this.router.navigate(['/home'])
+                        this.router.navigate(['/load'])
                     }
                     else {
                         this.router.navigate(['/auth/callback'])

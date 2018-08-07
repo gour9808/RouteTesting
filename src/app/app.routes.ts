@@ -29,7 +29,7 @@ export const MineRoutes: Routes = [
     { path: "details/:recordId", component: ViewLogDetailComponent },
     { path: "allLogs", component: AllComponent },
     { path: "flag", component: FlagComponent },
-    {path: "debugLevelLog", component : ViewDebugLevelLogComponent}
+    { path: "debugLevelLog", component: ViewDebugLevelLogComponent }
 
 ]
 
@@ -41,9 +41,9 @@ export const dashboardRoutes: Routes = [
 ];
 
 export const appRoutes: Routes = [
-    { path: '', redirectTo: 'auth/callback', pathMatch: 'full' },
+    { path: '', redirectTo: 'load', pathMatch: 'full' },
     { path: 'auth/callback', component: CallbackComponent },
-    { path: 'load', component: DataLoaderComponent },
+    { path: 'load', component: DataLoaderComponent, canActivate: [OAuthGuard] },
     { path: 'home', component: ContainerComponent, loadChildren: 'app/dashboard/home.module#HomeModule' }
 
 ];
