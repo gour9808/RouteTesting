@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Cache } from '../utils/storage.provider';
+import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,17 +9,36 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 
 })
 export class ToolbarComponent implements OnInit {
-
+  @Cache({ pool: 'salesforcePodName' }) salesforcePodName: any;
   @Input() menu: Array<Object>;
-  
-  constructor() { }
+  label: string;
+  showDialog: boolean = false;
+  items: any;
+
+  constructor(private rourter: Router) { }
 
   ngOnInit() {
+    console.log("instance url from toolbar", this.salesforcePodName);
+    this.label = this.salesforcePodName.name;
+    this.items = [
+      {
+        label: 'Facebook', url: "https://www.facebook.com/sharer/sharer.php?u=https://chrome.google.com/webstore/detail/salesforce-developer-tool/boadeeihehociaicnjjegenhdbifbllm/"
+      },
+      {
+        label: 'Twitter', url: "https://twitter.com/home?status=https://chrome.google.com/webstore/detail/salesforce-developer-tool/boadeeihehociaicnjjegenhdbifbllm/", 
+      },
+    ];
+
+  }
+
+  facebook()
+  {
+    
   }
 
   openInNewWindow(event) {
-    console.log("new window event",event);
-    
+    console.log("new window event", event);
+
     chrome.windows.create({
       url: "index.html",
       type: 'panel',
@@ -29,7 +50,11 @@ export class ToolbarComponent implements OnInit {
 
   }
 
+  go() {
+    this.showDialog = true;
+  }
 
-  
+
+
 
 }

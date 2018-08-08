@@ -5,7 +5,7 @@ import {Cache} from '../utils/storage.provider';
 
 @Injectable()
 export class AuthService {
-    @Cache({pool: 'Session' }) userSession:any;
+    @Cache({ pool: 'Session' }) userSession: any;
 
     constructor(private router: Router) {
     }

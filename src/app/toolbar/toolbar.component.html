@@ -1,5 +1,50 @@
 <nav class="navbar navbar-default">
-    <div class="navbar-header" style="float: left;" *ngFor="let menuItem of menu">
-      <app-list-item *ngIf="!menuItem.children && menuItem.active" [label]="menuItem.name" [icon]="menuItem.icon" [path]="menuItem.path"></app-list-item> 
-    </div>
+  <div class="navbar-header" style="float: left;" *ngFor="let menuItem of menu">
+    <app-list-item *ngIf="!menuItem.children && menuItem.active" [label]="menuItem.name" [icon]="menuItem.icon" [path]="menuItem.path"></app-list-item>
+  </div>
+  <ul class="nav navbar-nav navbar-right" style="margin-right:10px;">
+    <li>
+      <a (click)="go()" style="font-size: 14px">
+        <span class="fa fa-share-alt" style="color: #2196f3">
+        </span> {{label}}</a>
+    </li>
+  </ul>
 </nav>
+
+<p-dialog header="Share with devs/admins !" [(visible)]="showDialog" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200"
+    [minY]="70">
+    <span>Hope you are liking the extension, why don't spread word about this extension and let other developers benefit as well.</span>
+    <p-footer>
+        <!-- <div class="modal-footer">
+            <div class="btn-group" uib-dropdown>
+                <button id="single-button" type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle>
+                    Share &nbsp; <span class="caret"></span>
+                </button>
+                <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
+                    <li role="menuitem">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://chrome.google.com/webstore/detail/salesforce-developer-tool/boadeeihehociaicnjjegenhdbifbllm/" target="_blank"  >Facebook</a>
+                    </li>
+                    <li role="menuitem">
+                        <a href="https://twitter.com/home?status=https://chrome.google.com/webstore/detail/salesforce-developer-tool/boadeeihehociaicnjjegenhdbifbllm/" target="_blank">Twitter</a>
+                    </li>
+                </ul>
+            </div>
+        </div> -->
+        <div class="container">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Dropdown Example
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>    
+              </ul>
+            </div>
+          </div>
+          
+    </p-footer>
+</p-dialog>
+
+

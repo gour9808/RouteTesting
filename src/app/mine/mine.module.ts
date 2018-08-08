@@ -14,12 +14,14 @@ import { DropdownModule, ScrollPanelModule, AutoCompleteModule, TabViewModule, C
 import { FormsModule } from '@angular/forms';
 import { TimeAgoPipe } from '../../../node_modules/time-ago-pipe';
 import { FilterPipe } from '../utils/filter.pipe';
+import {SplitButtonModule} from 'primeng/splitbutton';
+
 
 
 @NgModule({
     imports: [
         RouterModule.forChild(MineRoutes),
-        CommonModule, FormsModule,AutoCompleteModule,TabViewModule,CalendarModule,
+        CommonModule, FormsModule,AutoCompleteModule,TabViewModule,CalendarModule,SplitButtonModule,
         FlexLayoutModule, TableModule,ScrollPanelModule, WidgetsModule, DialogModule, ButtonModule, DropdownModule, WidgetsModule
     ],
     exports: [RouterModule, MineComponent, FlagComponent, AllComponent],

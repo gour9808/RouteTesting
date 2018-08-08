@@ -39,6 +39,9 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { DebugLevelService } from './services/debug-level.service';
 import { ViewDebugLevelLogComponent } from './view-debug-level-log/view-debug-level-log.component';
 import { EventsService } from './services/events.service';
+import { CreditsComponent } from './credits/credits.component';
+import {SplitButtonModule} from 'primeng/splitbutton';
+
 
 
 
@@ -53,6 +56,7 @@ import { EventsService } from './services/events.service';
     CallbackComponent,
     ViewLogDetailComponent,
     ViewDebugLevelLogComponent,
+    CreditsComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -60,6 +64,7 @@ import { EventsService } from './services/events.service';
     CalendarModule,
     TabMenuModule,
     ReactiveFormsModule,
+    SplitButtonModule,
     WidgetsModule,
     DialogModule,
     AutoCompleteModule,

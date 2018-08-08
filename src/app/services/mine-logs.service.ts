@@ -12,19 +12,14 @@ export class MineLogsService {
   @Cache({ pool: 'instance' }) instanceUrl: any;
 
 
-  constructor(private http: HttpClient) {
-
-  }
-
- 
-
+  constructor(private http: HttpClient) { }
 
   getMineLogs(logUserId): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Api-User-Agent', 'Example/1.0');
     console.log("mine logs services", this.userSession.token);
     console.log("current URL", this.instanceUrl.currentURL);
-    
+
     headers.append("Authorization", "Bearer " + this.userSession.token);
     headers.append('Accept', "application/json")
     let BASE_URL = this.instanceUrl.currentURL + "/services/data/v35.0/tooling/query/?q=";
@@ -46,7 +41,6 @@ export class MineLogsService {
     headers.append('Accept', "text/plain");
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-
     return this.http.get<any>(this.instanceUrl.currentURL + Constants.GET_PARTICULAR_LOG(recordId), { headers: headers })
 
   }
@@ -67,8 +61,6 @@ export class MineLogsService {
     headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
     return this.http.get(this.instanceUrl.currentURL + Constants.DOWNLOAD_LOGS(recordId), { headers: headers })
-
-
   }
 
   deleteAllCached(): Observable<any> {

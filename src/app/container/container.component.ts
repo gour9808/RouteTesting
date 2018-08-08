@@ -31,9 +31,6 @@ export class ContainerComponent implements OnInit {
   },
   ];
 
-
-
-
   constructor(private router: Router, private currentRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -52,8 +49,13 @@ export class ContainerComponent implements OnInit {
       height: 800,
 
     },
-      function () { });
+      () => { });
 
+  }
+
+  goToCredits() {
+    console.log(this.currentRoute);
+    this.router.navigate(['./credits'], { relativeTo: this.currentRoute })
   }
 
 }

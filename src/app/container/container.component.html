@@ -1,9 +1,7 @@
-<div class="container-fluid">
     <div>
         <app-toolbar [menu]=menuItems [style.z-index]="10"></app-toolbar>
     </div>
     <router-outlet></router-outlet>
-</div>
 <footer class="footer">
         <div class="container-fluid" style="padding:5px;">
             <div class="pull-left">
@@ -13,7 +11,7 @@
                 <a title="Report bug" class="text-muted" target="_blank" href="https://bitbucket.org/concretio/tooling-chrome-ext/">
                     <i class="fa fa-bug" ></i> Bugs &nbsp;
                 </a>
-                <a href ui-sref="unauth.credits" class="text-muted" ><i class="fa fa-thumbs-up"></i> Credits</a>
+                <a  class="text-muted" (click) = "goToCredits()" ><i class="fa fa-thumbs-up"></i> Credits</a>
             </div>
         </div>
     </footer>

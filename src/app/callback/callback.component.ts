@@ -15,6 +15,7 @@ export class CallbackComponent implements OnInit {
     @Cache({ pool: 'Session' }) userSession: any;
     @Cache({ pool: 'LogUserId' }) logUserId: any;
     @Cache({ pool: 'instance' }) instanceUrl: any;
+    @Cache({ pool: 'salesforcePodName' }) salesforcePodName: any;
 
     constructor(private router: Router, private currentRoute: ActivatedRoute, private auth: AuthService) {
 
@@ -31,6 +32,9 @@ export class CallbackComponent implements OnInit {
             for (var idx = 0; idx < value.length; idx++) {
                 var replacementNodeName = this.hostName(value[idx].domain);
                 console.log('Visualforce / lightning - Salesforce URL Match ', replacementNodeName);
+                this.salesforcePodName = {
+                    name: replacementNodeName
+                }
                 console.log("instance url ", value[idx].domain);
                 this.instanceUrl = {
                     currentURL: "https://" + value[idx].domain
@@ -69,5 +73,5 @@ export class CallbackComponent implements OnInit {
         return name.substring(0, name.indexOf('.salesforce.com'));
     }
 
-    
+
 }
