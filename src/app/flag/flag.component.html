@@ -1,14 +1,14 @@
 <div class="home-container">
     <div class="dashboard-header" fxLayout="column">
         <div fxLayout="row">
-            <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
-                <div fxLayout="column" fxFlex>
+            <div class="metrics" fxLayout="row" fxLayoutAlign="start center">
+                <div fxLayout="column">
                     <p-dropdown [options]="config" [(ngModel)]="selected" (onChange)="setData($event)" placeholder="Select Trace Config"></p-dropdown>
                 </div>
-                <div fxLayout="column" fxFlex>
+                <div fxLayout="column" style="margin-left: 20px">
                     <app-button label="REFRESH" (click)="fetchTraceLogs()"></app-button>
                 </div>
-                <div fxLayout="column" fxFlex>
+                <div fxLayout="column" style="margin-left: 20px">
                     <app-button label="MANAGE DEBUG LEVELS" (click)="select()"></app-button>
                 </div>
             </div>
@@ -17,8 +17,8 @@
 </div>
 
 
-<p-table [value]="fetchLogs$" [paginator]="true" [scrollable]="true" scrollHeight="317px" [rows]="10" loadingIcon="fa-circle-o-notch"
-    [loading]="loading">
+<p-table [value]="fetchLogs$" [paginator]="true" [style]="{'margin-top':'10px', 'font-family': 'monospace'}" [rows]="10"
+    loadingIcon="fa-circle-o-notch" [loading]="loading">
     <ng-template pTemplate="header">
         <tr>
             <th>Action</th>
@@ -30,15 +30,12 @@
     <ng-template pTemplate="body" let-mine>
         <tr>
             <td>
-                <!-- <i class="fa fa-trash" style="font-size:18px;color:black" (click)="deleteTraceLogs(mine)" fxFlex></i>
-                <i class="glyphicon glyphicon-new-window" style="font-size:18px;color:black" fxFlex></i> -->
-
                 <div class="social-icons">
                     <a class="social-icon social-icon--codepen" (click)="deleteTraceLogs(mine)" download>
                         <i class="fa fa-trash"></i>
                         <div class="tooltip">Delete</div>
                     </a>
-                    <a class="social-icon social-icon--github" (click) = "addNewTab(mine)">
+                    <a class="social-icon social-icon--github" (click)="addNewTab(mine)">
                         <i class="glyphicon glyphicon-new-window"></i>
                         <div class="tooltip">New tab</div>
                     </a>
@@ -60,18 +57,6 @@
         <button pButton type="button" label="Close" (click)="showDialog = false" class="ui-button-secondary"></button>
     </p-footer>
 </p-dialog>
-
-<!-- 
-<p-dialog header="Please confirm" [(visible)]="showDialogForNewWindow" [modal]="true" [responsive]="true" [width]="800" [minWidth]="200"
-    [minY]="70">
-    <ng2-smart-table [settings]="settings" [source]="fetchDebugLevel$"></ng2-smart-table>
-        
-    <p-footer>
-        <button pButton type="button" label="New Debug level"></button>
-        <button pButton type="button" label="Cancel" (click)="showDialogForNewWindow = false" class="ui-button-secondary"></button>
-    </p-footer>
-</p-dialog> -->
-
 
 <p-dialog header="Add Trigger" [(visible)]="showTriggerDialog" [modal]="true" [responsive]="true" [width]="500">
 

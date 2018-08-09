@@ -20,21 +20,8 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
     console.log("instance url from toolbar", this.salesforcePodName);
     this.label = this.salesforcePodName.name;
-    this.items = [
-      {
-        label: 'Facebook', url: "https://www.facebook.com/sharer/sharer.php?u=https://chrome.google.com/webstore/detail/salesforce-developer-tool/boadeeihehociaicnjjegenhdbifbllm/"
-      },
-      {
-        label: 'Twitter', url: "https://twitter.com/home?status=https://chrome.google.com/webstore/detail/salesforce-developer-tool/boadeeihehociaicnjjegenhdbifbllm/", 
-      },
-    ];
-
   }
 
-  facebook()
-  {
-    
-  }
 
   openInNewWindow(event) {
     console.log("new window event", event);
@@ -53,8 +40,9 @@ export class ToolbarComponent implements OnInit {
   go() {
     this.showDialog = true;
   }
-
-
-
+  
+  close() {
+    this.showDialog = false;
+  }
 
 }

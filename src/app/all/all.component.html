@@ -1,14 +1,14 @@
 <div class="home-container">
     <div class="dashboard-header" fxLayout="column">
         <div fxLayout="row">
-            <div class="metrics" fxLayout="row"  fxLayoutAlign="start center">
-                <div fxLayout="column" >
+            <div class="metrics" fxLayout="row" fxLayoutAlign="start center">
+                <div fxLayout="column">
                     <app-button label="Fetch logs" (click)="choose()"></app-button>
                 </div>
-                <div fxLayout="column" style="margin-left: 20px" >
-                    <app-button label="Watch new logs" (click)="showDialog=!showDialog"></app-button>
+                <div fxLayout="column" style="margin-left: 20px">
+                    <p-toggleButton (onChange)="handleChange($event)"  offLabel="I reject"  onLabel = "Stop" [style]="{'width':'150px'}"></p-toggleButton>
                 </div>
-                <div fxLayout="column" style="margin-left: 20px" >
+                <div fxLayout="column" style="margin-left: 20px">
                     <app-button label="Delete cached" (click)="deleteAllCached()"></app-button>
                 </div>
             </div>
@@ -16,8 +16,8 @@
     </div>
 </div>
 
-<p-table [value]="allLogs$" [paginator]="true" [style]="{'margin-top':'10px', 'font-family': 'monospace'}"  selectionMode="single" (onRowSelect)="goToViewPage($event)" [(selection)]="selected"
-    [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
+<p-table [value]="allLogs$" [paginator]="true" [style]="{'margin-top':'10px', 'font-family': 'monospace'}" selectionMode="single"
+    (onRowSelect)="goToViewPage($event)" [(selection)]="selected" [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
     <ng-template pTemplate="header">
         <tr>
             <th>Actions</th>
@@ -33,10 +33,10 @@
             <td>
                 <div class="social-icons">
                     <a class="social-icon social-icon--codepen" (click)="downloadLogs(all)" download>
-                        <i class="fa fa-cloud-download" ></i>
+                        <i class="fa fa-cloud-download"></i>
                         <div class="tooltip">Download</div>
                     </a>
-                    <a class="social-icon social-icon--github" (click) = "goToNewWindow(all)">
+                    <a class="social-icon social-icon--github" (click)="goToNewWindow(all)">
                         <i class="glyphicon glyphicon-new-window"></i>
                         <div class="tooltip">New Window</div>
                     </a>
@@ -55,13 +55,5 @@
     </ng-template>
 </p-table>
 
-<p-dialog header="Please confirm" [(visible)]="showDialog" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200"
-    [minY]="70">
-    <span>Watching logs requires opening extension in a new window, are you sure ?</span>
-    <p-footer>
-        <button pButton type="button" label="Yes"></button>
-        <button pButton type="button" label="Close" class="ui-button-secondary"></button>
-    </p-footer>
-</p-dialog>
 
 <router-outlet></router-outlet>

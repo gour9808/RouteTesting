@@ -3,10 +3,10 @@ import { MineLogsService } from '../services/mine-logs.service';
 import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
 import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 import { saveAs } from 'file-saver';
-import { Utils } from '../utils/utils';
 import { Cache } from '../utils/storage.provider';
 import { ToastsManager } from '../../../node_modules/ng2-toastr';
-
+import { Observable } from '../../../node_modules/rxjs';
+import 'rxjs/add/observable/interval';
 
 @Component({
   selector: 'app-all',
@@ -24,6 +24,9 @@ export class AllComponent implements OnInit, OnDestroy {
   @Cache({ pool: 'DeleteAllCached' }) deleteAllCache: boolean;
   @Cache({ pool: 'LogUserId' }) logUserId: any;
   @Cache({ pool: 'LastSeenTime' }) lastSeenTime: any;
+  @Cache({ pool: 'NewWindow' }) NewWindow: boolean;
+  label: string = "Watch new logs"
+
 
   constructor(private mineService: MineLogsService, private toast: ToastsManager, vcr: ViewContainerRef, private router: Router, private route: ActivatedRoute) {
     this.toast.setRootViewContainerRef(vcr)
@@ -91,18 +94,23 @@ export class AllComponent implements OnInit, OnDestroy {
     saveAs(blob, filename);
   }
 
-  goToNewWindow(event) {
-    console.log(event);
-
+  goToNewWindow() {
     chrome.windows.create({
       url: "index.html",
       type: 'panel',
       width: 1200,
       height: 800,
-
     },
-      function () { });
+      () => {
+      });
   }
+
+  handleChange(event) {
+    console.log("click", event);
+
+  }
+
 }
+
 
 

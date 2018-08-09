@@ -89,7 +89,7 @@ export class ViewDebugLevelLogComponent implements OnInit {
       this.toast.success("Successfully Updated");
       this.getDebugLevel();
     }, err => {
-      this.toast.error(err)
+      this.toast.error(err.error[0].message)
     })
   }
 
@@ -103,6 +103,7 @@ export class ViewDebugLevelLogComponent implements OnInit {
     this.debug.Validation = this.config[0].value;
     this.debug.Visualforce = this.config[0].value;
     this.debug.Workflow = this.config[0].value;
+    this.debug.MasterLabel =  this.config[0].value;
   }
 
   createNewDebugLevel() {
@@ -113,7 +114,7 @@ export class ViewDebugLevelLogComponent implements OnInit {
       this.debug = new post.CreateDebugLevel();
       this.getDebugLevel();
     }, err => {
-      this.toast.error(err)
+      this.toast.error(err.error[0].message)
     })
   }
 

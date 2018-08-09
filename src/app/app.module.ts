@@ -40,7 +40,8 @@ import { DebugLevelService } from './services/debug-level.service';
 import { ViewDebugLevelLogComponent } from './view-debug-level-log/view-debug-level-log.component';
 import { EventsService } from './services/events.service';
 import { CreditsComponent } from './credits/credits.component';
-import {SplitButtonModule} from 'primeng/splitbutton';
+import {ToggleButtonModule} from 'primeng/togglebutton';
+
 
 
 
@@ -64,8 +65,8 @@ import {SplitButtonModule} from 'primeng/splitbutton';
     CalendarModule,
     TabMenuModule,
     ReactiveFormsModule,
-    SplitButtonModule,
     WidgetsModule,
+    ToggleButtonModule,
     DialogModule,
     AutoCompleteModule,
     AppRoutingModule,

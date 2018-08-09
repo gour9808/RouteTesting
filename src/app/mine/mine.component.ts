@@ -4,9 +4,8 @@ import { MineLogsService } from '../services/mine-logs.service';
 import { Cache } from '../utils/storage.provider';
 import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
 import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
-import { Constants } from '../services/constants';
 import { saveAs } from 'file-saver';
-
+import 'rxjs/add/observable/interval';
 
 @Component({
   selector: 'app-mine',
@@ -21,9 +20,13 @@ export class MineComponent implements OnInit, OnDestroy {
   recordId: any;
   loading: boolean;
   showDialog: boolean;
+  colors: any;
   @Cache({ pool: 'LogUserId' }) logUserId: any;
   @Cache({ pool: 'LastSeenTime' }) lastSeenTime: any;
   @Cache({ pool: 'DeleteMineCached' }) deleteMyCache: boolean;
+  @Cache({ pool: 'instance' }) instanceUrl: any;
+
+
 
   constructor(private mineService: MineLogsService, private route: ActivatedRoute, private router: Router,
     private toast: ToastMessageService) {
@@ -102,7 +105,15 @@ export class MineComponent implements OnInit, OnDestroy {
 
     },
       function () { });
+  }
 
+  goToNewTab(event) {
+    console.log(event);
+    chrome.tabs.create({
+      url: "/home/my/details/" + event.Id + '&instanceUrl=' + this.instanceUrl.currentURL,
+      selected: true
+    }, () => { })
 
   }
+
 }
