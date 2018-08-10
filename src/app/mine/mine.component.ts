@@ -18,6 +18,7 @@ export class MineComponent implements OnInit, OnDestroy {
   selected: any;
   data: any;
   recordId: any;
+  i: any;
   loading: boolean;
   showDialog: boolean;
   colors: any;
@@ -114,6 +115,19 @@ export class MineComponent implements OnInit, OnDestroy {
       selected: true
     }, () => { })
 
+  }
+
+  handleChange(event) {
+    console.log("click", event);
+    if (event.checked === true) {
+      this.i = setInterval(() => {
+        this.choose();
+      }, 2000 * 30)
+    }
+    else {
+      clearInterval(this.i);
+      this.choose();
+    }
   }
 
 }

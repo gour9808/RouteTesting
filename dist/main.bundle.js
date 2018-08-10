@@ -78,7 +78,6 @@ var AllComponent = (function () {
         this.router = router;
         this.route = route;
         this.allLogs$ = [];
-        this.label = "Watch new logs";
         this.toast.setRootViewContainerRef(vcr);
     }
     AllComponent.prototype.ngOnInit = function () {
@@ -146,20 +145,17 @@ var AllComponent = (function () {
         });
     };
     AllComponent.prototype.handleChange = function (event) {
+        var _this = this;
         console.log("click", event);
-        // if (event.checked === true) {
-        //   setInterval(() => {
-        //     this.getAllLogs();
-        //   }, 2000);
-        // }
         if (event.checked === true) {
-            var a = setInterval(function () {
-                console.log("hi");
-            }, 5000);
+            console.log("hi");
+            this.i = setInterval(function () {
+                _this.choose();
+            }, 2000 * 30);
         }
         else {
-            console.log("bye");
-            clearInterval(a);
+            clearInterval(this.i);
+            this.choose();
         }
     };
     __decorate([
@@ -1683,6 +1679,19 @@ var MineComponent = (function () {
             url: "/home/my/details/" + event.Id + '&instanceUrl=' + this.instanceUrl.currentURL,
             selected: true
         }, function () { });
+    };
+    MineComponent.prototype.handleChange = function (event) {
+        var _this = this;
+        console.log("click", event);
+        if (event.checked === true) {
+            this.i = setInterval(function () {
+                _this.choose();
+            }, 2000 * 30);
+        }
+        else {
+            clearInterval(this.i);
+            this.choose();
+        }
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__["a" /* Cache */])({ pool: 'LogUserId' }),

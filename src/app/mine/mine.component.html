@@ -1,22 +1,22 @@
 <div class="home-container">
-    <div class="dashboard-header" >
+    <div class="dashboard-header">
         <div fxLayout="row">
-            <div class="metrics" fxLayout="row"  fxLayoutAlign="start center">
+            <div class="metrics" fxLayout="row" fxLayoutAlign="start center">
                 <div fxLayout="column">
                     <app-button label="Fetch logs" (click)="choose()"></app-button>
                 </div>
                 <div fxLayout="column" style="margin-left: 20px">
-                    <app-button label="Watch new logs" (click)="showDialog=!showDialog"></app-button>
+                    <p-toggleButton (onChange)="handleChange($event)" offLabel="Watch new Logs" onLabel="Stop" [style]="{'width':'150px', 'padding': '4px'}"></p-toggleButton>
                 </div>
-                <div fxLayout="column" style="margin-left: 20px" >
-                    <app-button label="Delete cached" (click) ="deleteMineCached()" ></app-button>
+                <div fxLayout="column" style="margin-left: 20px">
+                    <app-button label="Delete cached" (click)="deleteMineCached()"></app-button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<p-table [value]="mineLogs$" [paginator]="true" [style]="{'margin-top':'10px', 'font-family': 'monospace'}"   selectionMode="single" (onRowSelect)="goToViewPage($event)" [(selection)]="selected"
-    [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
+<p-table [value]="mineLogs$" [paginator]="true" [style]="{'margin-top':'10px', 'font-family': 'monospace'}" selectionMode="single"
+    (onRowSelect)="goToViewPage($event)" [(selection)]="selected" [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
     <ng-template pTemplate="header">
         <tr>
             <th>Actions</th>
@@ -32,14 +32,14 @@
             <td>
                 <div class="social-icons">
                     <a class="social-icon social-icon--codepen" (click)="downloadLogs(mine)" download>
-                        <i class="fa fa-cloud-download" ></i>
+                        <i class="fa fa-cloud-download"></i>
                         <div class="tooltip">Download</div>
                     </a>
-                    <a class="social-icon social-icon--github" (click) = "goToNewWindow(mine)">
+                    <a class="social-icon social-icon--github" (click)="goToNewWindow(mine)">
                         <i class="glyphicon glyphicon-new-window"></i>
                         <div class="tooltip">New Window</div>
                     </a>
-                    <a class="social-icon social-icon--twitter" (click) = "goToNewTab(mine)" >
+                    <a class="social-icon social-icon--twitter" (click)="goToNewTab(mine)">
                         <i class="fa fa-clone"></i>
                         <div class="tooltip">New tab</div>
                     </a>
@@ -49,7 +49,14 @@
             <td style="overflow: auto;">{{mine.Operation}}</td>
             <td>{{mine.DurationMilliseconds}}</td>
             <td>{{mine.LogLength}}</td>
-            <td>{{mine.StartTime | timeAgo}}</td>
+            <td>
+                <span> {{mine.StartTime | timeAgo}}</span>
+                <a class="date-icon">
+                    <i class="fa fa-info-circle"></i>
+                    <div class="tooltip">{{mine.StartTime | date:'dd/MM HH:mm:ss'}}</div>
+                </a>
+
+            </td>
         </tr>
     </ng-template>
 </p-table>
@@ -62,4 +69,3 @@
         <button pButton type="button" label="Close" class="ui-button-secondary"></button>
     </p-footer>
 </p-dialog>
-

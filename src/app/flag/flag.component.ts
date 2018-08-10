@@ -37,6 +37,7 @@ export class FlagComponent implements OnInit, OnDestroy {
   fetchDebugLevel$: any = [];
   deleteConfirmDialog: boolean;
   emptyMessage: string;
+  isExpired: any;
   add: post.CreateUser = new post.CreateUser();
   remove: post.clearUsername = new post.clearUsername();
   constructor(private mine: MineLogsService, private comms: CommunicatorService, private route: Router, private router: ActivatedRoute, private toast: ToastsManager, private debugLevel: DebugLevelService, private vcr: ViewContainerRef) {

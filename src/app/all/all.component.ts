@@ -5,7 +5,6 @@ import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 import { saveAs } from 'file-saver';
 import { Cache } from '../utils/storage.provider';
 import { ToastsManager } from '../../../node_modules/ng2-toastr';
-import { Observable } from '../../../node_modules/rxjs';
 import 'rxjs/add/observable/interval';
 
 @Component({
@@ -20,12 +19,13 @@ export class AllComponent implements OnInit, OnDestroy {
   showDialog: boolean;
   selected: any;
   recordId: any;
+  i: any;
   data: any;
   @Cache({ pool: 'DeleteAllCached' }) deleteAllCache: boolean;
   @Cache({ pool: 'LogUserId' }) logUserId: any;
   @Cache({ pool: 'LastSeenTime' }) lastSeenTime: any;
   @Cache({ pool: 'NewWindow' }) NewWindow: boolean;
-  label: string = "Watch new logs"
+  label: string;
 
 
   constructor(private mineService: MineLogsService, private toast: ToastsManager, vcr: ViewContainerRef, private router: Router, private route: ActivatedRoute) {
@@ -107,10 +107,24 @@ export class AllComponent implements OnInit, OnDestroy {
 
   handleChange(event) {
     console.log("click", event);
+    if (event.checked === true) {
+      console.log("hi");
+      this.i = setInterval(() => {
+        this.choose();
+      }, 2000 * 30)
+    }
+    else {
+      clearInterval(this.i);
+      this.choose();
+    }
+
 
   }
 
+
 }
+
+
 
 
 

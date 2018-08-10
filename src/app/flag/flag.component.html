@@ -42,7 +42,7 @@
                 </div>
             </td>
             <td>{{mine.TracedEntity.Name}}</td>
-            <td>{{mine.ExpirationDate | date:'medium'}}</td>
+            <td>{{mine.ExpirationDate | timeAgo}}</td>
             <td>{{mine.DebugLevel.DeveloperName}}</td>
         </tr>
     </ng-template>
