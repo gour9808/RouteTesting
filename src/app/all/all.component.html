@@ -6,7 +6,7 @@
                     <app-button label="Fetch logs" (click)="choose()"></app-button>
                 </div>
                 <div fxLayout="column" style="margin-left: 20px">
-                    <p-toggleButton (onChange)="handleChange($event)" offLabel="Watch new Logs" onLabel="Stop" [style]="{'width':'150px', 'padding': '4px'}"></p-toggleButton>
+                    <p-toggleButton (onChange)="handleChange($event)" offLabel="Watch new Logs" [onLabel]="label" [style]="{'width':'150px', 'padding': '4px'}"></p-toggleButton>
                 </div>
                 <div fxLayout="column" style="margin-left: 20px">
                     <app-button label="Delete cached" (click)="deleteAllCached()"></app-button>
@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<p-table [value]="allLogs$" [paginator]="true" [style]="{'margin-top':'10px', 'font-family': 'monospace'}" selectionMode="single"
+<p-table [value]="allLogs$" [paginator]="true" [style]="{'margin-top':'10px'}" selectionMode="single"
     (onRowSelect)="goToViewPage($event)" [(selection)]="selected" [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
     <ng-template pTemplate="header">
         <tr>

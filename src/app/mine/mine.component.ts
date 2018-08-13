@@ -15,6 +15,7 @@ import 'rxjs/add/observable/interval';
 @AutoUnsubscribe()
 export class MineComponent implements OnInit, OnDestroy {
   mineLogs$: any = [];
+  label: string = "Stop watching"
   selected: any;
   data: any;
   recordId: any;
@@ -22,6 +23,17 @@ export class MineComponent implements OnInit, OnDestroy {
   loading: boolean;
   showDialog: boolean;
   colors: any;
+  selectedCar: any;
+
+  displayDialog: boolean;
+
+  sortOptions: any[];
+
+  sortKey: string;
+
+  sortField: string;
+
+  sortOrder: number;
   @Cache({ pool: 'LogUserId' }) logUserId: any;
   @Cache({ pool: 'LastSeenTime' }) lastSeenTime: any;
   @Cache({ pool: 'DeleteMineCached' }) deleteMyCache: boolean;
@@ -34,6 +46,11 @@ export class MineComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.sortOptions = [
+      { label: 'Newest First', value: '!year' },
+      { label: 'Oldest First', value: 'year' },
+      { label: 'Brand', value: 'brand' }
+    ];
     this.choose();
   }
 
@@ -51,8 +68,8 @@ export class MineComponent implements OnInit, OnDestroy {
   }
 
   goToViewPage(event) {
-    // console.log("on row select", event.data);
-    // this.router.navigate(['../details', event.data.Id], { relativeTo: this.route });
+    console.log("on row select", event);
+    this.router.navigate(['../details', event.Id], { relativeTo: this.route });
   }
 
   deleteMineCached() {
@@ -130,4 +147,27 @@ export class MineComponent implements OnInit, OnDestroy {
     }
   }
 
+  selectCar(event, mine) {
+    console.log(event, mine);
+    this.selectedCar = mine;
+    this.displayDialog = true;
+    event.preventDefault();
+  }
+
+  onSortChange(event) {
+    let value = event.value;
+
+    if (value.indexOf('!') === 0) {
+      this.sortOrder = -1;
+      this.sortField = value.substring(1, value.length);
+    }
+    else {
+      this.sortOrder = 1;
+      this.sortField = value;
+    }
+  }
+
+  onDialogHide() {
+    this.selectedCar = null;
+  }
 }

@@ -15,13 +15,14 @@ import { FormsModule } from '@angular/forms';
 import { TimeAgoPipe } from '../../../node_modules/time-ago-pipe';
 import { FilterPipe } from '../utils/filter.pipe';
 import {ToggleButtonModule} from 'primeng/togglebutton';
-
+import {DataViewModule} from 'primeng/dataview';
+import {PanelModule} from 'primeng/panel';
 
 
 
 @NgModule({
     imports: [
-        RouterModule.forChild(MineRoutes),
+        RouterModule.forChild(MineRoutes),DataViewModule,PanelModule,
         CommonModule, FormsModule,AutoCompleteModule,TabViewModule,CalendarModule,CardModule,ToggleButtonModule,
         FlexLayoutModule, TableModule,ScrollPanelModule, WidgetsModule, DialogModule, ButtonModule, DropdownModule, WidgetsModule
     ],

@@ -25,7 +25,7 @@ export class AllComponent implements OnInit, OnDestroy {
   @Cache({ pool: 'LogUserId' }) logUserId: any;
   @Cache({ pool: 'LastSeenTime' }) lastSeenTime: any;
   @Cache({ pool: 'NewWindow' }) NewWindow: boolean;
-  label: string;
+  label: string = "Stop watching"
 
 
   constructor(private mineService: MineLogsService, private toast: ToastsManager, vcr: ViewContainerRef, private router: Router, private route: ActivatedRoute) {

@@ -41,6 +41,10 @@ import { ViewDebugLevelLogComponent } from './view-debug-level-log/view-debug-le
 import { EventsService } from './services/events.service';
 import { CreditsComponent } from './credits/credits.component';
 import {ToggleButtonModule} from 'primeng/togglebutton';
+import {DataViewModule} from 'primeng/dataview';
+import {PanelModule} from 'primeng/panel';
+
+
 
 
 
@@ -61,7 +65,8 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
   ],
   imports: [
     BrowserAnimationsModule,
-    ScrollPanelModule,
+    DataViewModule,
+    ScrollPanelModule,PanelModule,
     CalendarModule,
     TabMenuModule,
     ReactiveFormsModule,

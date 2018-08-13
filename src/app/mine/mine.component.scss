@@ -89,7 +89,7 @@ body {
     margin: 0 0.5rem;
     border-radius: 50%;
     cursor: pointer;
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 20px;
     text-decoration: none;
     text-shadow: 0 1px 0 rgba(0,0,0,0.2);
@@ -160,8 +160,7 @@ body {
     margin: 0 0.5rem;
     border-radius: 50%;
     cursor: pointer;
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    font-size: 20px;
+    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
     text-decoration: none;
     text-shadow: 0 1px 0 rgba(0,0,0,0.2);
     transition: all 0.15s ease;
@@ -175,5 +174,9 @@ body {
         transform: translate(-50%, -150%);
       }
     }
+}
+.operation
+{
+  overflow: hidden;;
 }
 
