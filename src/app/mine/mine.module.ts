@@ -17,12 +17,12 @@ import { FilterPipe } from '../utils/filter.pipe';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {DataViewModule} from 'primeng/dataview';
 import {PanelModule} from 'primeng/panel';
-
+import {CheckboxModule} from 'primeng/checkbox';
 
 
 @NgModule({
     imports: [
-        RouterModule.forChild(MineRoutes),DataViewModule,PanelModule,
+        RouterModule.forChild(MineRoutes),DataViewModule,PanelModule,CheckboxModule,
         CommonModule, FormsModule,AutoCompleteModule,TabViewModule,CalendarModule,CardModule,ToggleButtonModule,
         FlexLayoutModule, TableModule,ScrollPanelModule, WidgetsModule, DialogModule, ButtonModule, DropdownModule, WidgetsModule
     ],

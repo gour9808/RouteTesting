@@ -1,12 +1,17 @@
 export class Root {
-    expanded: true;
-    leaf: false;
+    expanded: boolean;
+    leaf: boolean;
     children: any[];
-    isHeader: true;
-    text: 'TEXT';
-    time: 'TIME';
-    microseconds: 'MICROSECONDS';
-    category: 'CATEGORY';
-    line: 'LINE/SUBCAT';
-    objectId: 'OBJECTID';
+    isHeader: boolean;
+    text: any;
+    time: any;
+    microseconds: any;
+    category: any;
+    line: any;
+    objectId: any;
+    isExit : boolean;
+    isEntry : boolean;
+    isDebug : boolean;
+    icon : any;
+    isException : boolean;
 }

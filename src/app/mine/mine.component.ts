@@ -60,7 +60,11 @@ export class MineComponent implements OnInit, OnDestroy {
   getMineLogs() {
     this.loading = true;
     this.mineService.getMineLogs(this.logUserId.userId).subscribe(res => {
-      console.log("mine logs", res.records[0].StartTime);
+      console.log("mine logs", res.records);
+      if(res.records.length === 0)
+      {
+        this.lastSeenTime = "";
+      }
       this.lastSeenTime = res.records[0].StartTime
       this.mineLogs$ = res.records;
       this.loading = false;

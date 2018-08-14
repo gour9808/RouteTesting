@@ -1,18 +1,45 @@
-<div class="home-container">
+<!-- <div class="home-container">
     <div class="dashboard-header" fxLayout="column">
         <div fxLayout="row">
-            <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
+            <div class="metrics" fxLayout="row"  fxLayoutAlign="start center">
                 <div fxLayout="column" fxFlex>
+                        <span>From</span>
                     <p-calendar [(ngModel)]="fromRangeDates" (onSelect) ="fromDateValues($event)" selectionMode="single" [readonlyInput]="true"></p-calendar>
                 </div>
                 <div fxLayout="column" fxFlex>
+                        <span>To</span>
                         <p-calendar [(ngModel)]="toRangeDates" (onSelect) ="toDateValues($event)" selectionMode="single" [readonlyInput]="true"></p-calendar>
                     </div>
                 <div fxLayout="column" fxFlex>
-                    <p-dropdown [options]="config" (onChange)="setEventType($event)" placeholder="Event Type"></p-dropdown>
+                        <span>Event Type</span>
+                    <p-dropdown [options]="config" (onChange)="setEventType($event)"></p-dropdown>
                 </div>
                 <div fxLayout="column" fxFlex>
                     <app-button label="APPLY" (click) = "choose()" ></app-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="home-container">
+    <div class="dashboard-header" fxLayout="column">
+        <div fxLayout="row">
+            <div class="metrics" fxLayout="row" fxLayoutAlign="start center">
+                <div fxLayout="column">
+                    <span>From</span>
+                    <p-calendar [(ngModel)]="fromRangeDates" (onSelect)="fromDateValues($event)" selectionMode="single" [readonlyInput]="true"></p-calendar>
+                </div>
+                <div fxLayout="column" style="margin-left: 20px">
+                    <span>To</span>
+                    <p-calendar [(ngModel)]="toRangeDates" (onSelect)="toDateValues($event)" selectionMode="single" [readonlyInput]="true"></p-calendar>
+                </div>
+                <div fxLayout="column" style="margin-left: 20px">
+                    <span>Event Type</span>
+                    <p-dropdown [options]="config" (onChange)="setEventType($event)"></p-dropdown>
+                </div>
+                <div fxLayout="column" style="margin-left: 20px; margin-top: 17px;">
+                    <app-button label="APPLY" (click)="choose()"></app-button>
                 </div>
             </div>
         </div>
@@ -34,13 +61,13 @@
     <ng-template pTemplate="body" let-events>
         <tr [pSelectableRow]="all">
             <td>
-                <div class="social-icons" >
+                <div class="social-icons">
                     <a class="social-icon social-icon--codepen" (click)="downloadLogs(events)" download>
                         <i class="fa fa-cloud-download"></i>
                         <div class="tooltip">Download</div>
                     </a>
-                    <a class="social-icon social-icon--github" *ngIf  = "events.EventType==='Login'">
-                        <i class="fa fa-bar-chart" ></i>
+                    <a class="social-icon social-icon--github" *ngIf="events.EventType==='Login'">
+                        <i class="fa fa-bar-chart"></i>
                         <div class="tooltip">Login</div>
                     </a>
                 </div>

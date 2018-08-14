@@ -43,11 +43,7 @@ import { CreditsComponent } from './credits/credits.component';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {DataViewModule} from 'primeng/dataview';
 import {PanelModule} from 'primeng/panel';
-
-
-
-
-
+import {CheckboxModule} from 'primeng/checkbox';
 
 
 @NgModule({
@@ -67,6 +63,7 @@ import {PanelModule} from 'primeng/panel';
     BrowserAnimationsModule,
     DataViewModule,
     ScrollPanelModule,PanelModule,
+    CheckboxModule,
     CalendarModule,
     TabMenuModule,
     ReactiveFormsModule,

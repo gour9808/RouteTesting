@@ -57,25 +57,11 @@ body {
   }
   
   /* Color Variables */
-  $color-codepen:  #4284c0;
-  $color-github: #4284c0;
+  $color-codepen:  #2b97f1;
+  $color-github: #2b97f1;
   $color-twitter: #2b97f1;
-  $color-dribbble: #ef5a92;
-  $color-instagram: #527fa6;
-  $color-linkedin: #006599;
-  $color-facebook: #3b5a9b;
-  
   /* Social Icon Mixin */
   @mixin social-icon($color) {
-// background: $color;
-    // background: linear-gradient(tint($color, 5%), shade($color, 5%));
-    // border-bottom: 1px solid shade($color, 20%);
-    // color: tint($color, 50%);
-  
-    // &:hover {
-    //   color: tint($color, 80%);
-    //   text-shadow: 0px 1px 0px shade($color, 20%);
-    // }
   
     .tooltip {
       background: $color;
@@ -98,7 +84,7 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 80px;
+    width: 40px;
     height: 50px;
     margin: 0 0.5rem;
     border-radius: 50%;
@@ -123,12 +109,8 @@ body {
       box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5) inset;
     }
     
-    &--linkedin { @include social-icon($color-linkedin); }
     &--twitter { @include social-icon($color-twitter); }
     &--codepen { @include social-icon($color-codepen); }
-    &--facebook { @include social-icon($color-facebook); }
-    &--instagram { @include social-icon($color-instagram); }
-    &--dribbble { @include social-icon($color-dribbble); }
     &--github { @include social-icon($color-github); }
     
     i {
@@ -168,4 +150,3 @@ body {
       transform: translate(-50%, 100%);
     }
   }
-
