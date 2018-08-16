@@ -61,6 +61,7 @@ export class FlagComponent implements OnInit, OnDestroy {
     this.mine.fetchFlags().subscribe(res => {
       console.log("Trace flag data", res);
       this.fetchLogs$ = res.records;
+      
       this.loading = false;
     }, err => {
       this.toast.error("Error in fetching Logs")

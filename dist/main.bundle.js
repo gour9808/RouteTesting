@@ -3374,7 +3374,7 @@ var ViewLogDetailComponent = (function () {
         this.root = new __WEBPACK_IMPORTED_MODULE_3__model_root__["a" /* Root */]();
         this.clearedInput = '';
         this.indent = 0;
-        this.timeRegex = /\d\d:\d\d:\d\d\.\d\d\d/i;
+        this.timeRegex = /\d\d:\d\d:\d\d\.\d*/i;
         this.microsecondsRegex = /\(\d\d*\)/i;
         this.categoryRegex = /\|[^|]*/i;
         this.subcategoryRegex = /\|\[\w*\]/i;
@@ -3516,6 +3516,7 @@ var ViewLogDetailComponent = (function () {
         if (input && input.length > 0 && numOk === 0) {
             alert("Didn't understand the input.");
         }
+        alert("got data");
     };
     ViewLogDetailComponent.prototype.format = function (resultsArray) {
         if (resultsArray && resultsArray[0]) {

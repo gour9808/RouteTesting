@@ -35,7 +35,7 @@
                         <i class="fa fa-trash"></i>
                         <div class="tooltip">Delete</div>
                     </a>
-                    <a class="social-icon social-icon--github" (click)="addNewTab(mine)">
+                    <a class="social-icon social-icon--github" *ngIf  = "mine.LogType === 'DEVELOPER_LOG' || mine.LogType === 'USER_DEBUG'" (click)="addNewTab(mine)">
                         <i class="glyphicon glyphicon-new-window"></i>
                         <div class="tooltip">New tab</div>
                     </a>

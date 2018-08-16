@@ -19,7 +19,7 @@ export class ViewLogDetailComponent implements OnInit {
   nodeStack: any
   clearedInput = '';
   indent = 0;
-  timeRegex = /\d\d:\d\d:\d\d\.\d\d\d/i;
+  timeRegex = /\d\d:\d\d:\d\d\.\d*/i;
   microsecondsRegex = /\(\d\d*\)/i;
   categoryRegex = /\|[^|]*/i;
   subcategoryRegex = /\|\[\w*\]/i;
@@ -180,8 +180,7 @@ export class ViewLogDetailComponent implements OnInit {
     if (input && input.length > 0 && numOk === 0) {
       alert("Didn't understand the input.");
     }
-
-
+     alert("got data")
   }
 
 
