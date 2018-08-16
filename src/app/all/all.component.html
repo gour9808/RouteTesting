@@ -16,8 +16,8 @@
     </div>
 </div>
 
-<p-table [value]="allLogs$" [paginator]="true" [style]="{'margin-top':'10px'}" selectionMode="single"
-    (onRowSelect)="goToViewPage($event)" [(selection)]="selected" [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading">
+<p-table [value]="allLogs$" [paginator]="true" [style]="{'margin-top':'10px'}" 
+      [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading" paginatorPosition  = "top">
     <ng-template pTemplate="header">
         <tr>
             <th>Actions</th>
@@ -32,6 +32,10 @@
         <tr [pSelectableRow]="all">
             <td>
                 <div class="social-icons">
+                        <a class="social-icon social-icon--codepen" (click)="goToViewPage(all)" download>
+                                <i class="fa fa-eye"></i>
+                                <div class="tooltip">View</div>
+                            </a>
                     <a class="social-icon social-icon--codepen" (click)="downloadLogs(all)" download>
                         <i class="fa fa-cloud-download"></i>
                         <div class="tooltip">Download</div>

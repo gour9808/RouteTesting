@@ -18,7 +18,7 @@
 
 
 <p-table [value]="fetchLogs$" [paginator]="true" [style]="{'margin-top':'10px'}" [rows]="10"
-    loadingIcon="fa-circle-o-notch" [loading]="loading">
+   paginatorPosition  = "top"  loadingIcon="fa-circle-o-notch" [loading]="loading">
     <ng-template pTemplate="header">
         <tr>
             <th>Action</th>
@@ -87,13 +87,13 @@
 
 <p-dialog header="Add Class" [(visible)]="showClassDialog" [modal]="true" [responsive]="true" [width]="500">
 
-    <p-autoComplete [suggestions]="filterUserForClass$" [emptyMessage]="emptyMessage" (completeMethod)="filterUserDataForClass($event)"
+    <p-autoComplete [suggestions]="filterUserForClass$" [(ngModel)]="remove.userName" [emptyMessage]="emptyMessage" (completeMethod)="filterUserDataForClass($event)"
         placeholder="User" [minLength]="1" field="Name" (onSelect)="setUserIdForUser($event)" fxFlex></p-autoComplete>
-    <p-autoComplete [suggestions]="filterDebugLevel$" [emptyMessage]="emptyMessage" (completeMethod)="filterDebugLevel($event)"
+    <p-autoComplete [suggestions]="filterDebugLevel$" [(ngModel)]="remove.devName" [emptyMessage]="emptyMessage" (completeMethod)="filterDebugLevel($event)"
         field="DeveloperName" placeholder="Debug Level" [minLength]="1" (onSelect)="setDebugLevelId($event)" fxFlex></p-autoComplete>
 
     <p-footer>
         <button pButton type="button" (click)="createClass()" [disabled]="!goForIgnition()" label="Create"></button>
-        <button type="button" pButton icon="pi pi-close" (click)="showClassDialog=false" label="Cancel" class="ui-button-secondary"></button>
+        <button type="button" pButton icon="pi pi-close" (click)="cancelClass()" label="Cancel" class="ui-button-secondary"></button>
     </p-footer>
 </p-dialog>

@@ -47,7 +47,6 @@ export class FlagComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.fetchTraceLogs();
     this.config = [
-
       { label: 'User', value: 'User' },
       { label: 'Class', value: 'Class' },
       { label: 'Trigger', value: 'Trigger' },
@@ -61,7 +60,7 @@ export class FlagComponent implements OnInit, OnDestroy {
     this.mine.fetchFlags().subscribe(res => {
       console.log("Trace flag data", res);
       this.fetchLogs$ = res.records;
-      
+
       this.loading = false;
     }, err => {
       this.toast.error("Error in fetching Logs")
@@ -194,6 +193,12 @@ export class FlagComponent implements OnInit, OnDestroy {
       console.log(err.error[0].message);
       this.toast.error("error", err.error[0].message)
     })
+  }
+
+  cancelClass() {
+    this.showClassDialog = false;
+    this.remove.devName = "";
+    this.remove.userName = "";
   }
 
   createTrigger() {

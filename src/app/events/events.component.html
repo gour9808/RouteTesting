@@ -1,27 +1,3 @@
-<!-- <div class="home-container">
-    <div class="dashboard-header" fxLayout="column">
-        <div fxLayout="row">
-            <div class="metrics" fxLayout="row"  fxLayoutAlign="start center">
-                <div fxLayout="column" fxFlex>
-                        <span>From</span>
-                    <p-calendar [(ngModel)]="fromRangeDates" (onSelect) ="fromDateValues($event)" selectionMode="single" [readonlyInput]="true"></p-calendar>
-                </div>
-                <div fxLayout="column" fxFlex>
-                        <span>To</span>
-                        <p-calendar [(ngModel)]="toRangeDates" (onSelect) ="toDateValues($event)" selectionMode="single" [readonlyInput]="true"></p-calendar>
-                    </div>
-                <div fxLayout="column" fxFlex>
-                        <span>Event Type</span>
-                    <p-dropdown [options]="config" (onChange)="setEventType($event)"></p-dropdown>
-                </div>
-                <div fxLayout="column" fxFlex>
-                    <app-button label="APPLY" (click) = "choose()" ></app-button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <div class="home-container">
     <div class="dashboard-header" fxLayout="column">
         <div fxLayout="row">
@@ -47,7 +23,7 @@
 </div>
 
 
-<p-table [value]="events$" [paginator]="true" [scrollable]="true" scrollHeight="317px" selectionMode="single" [rows]="10"
+<p-table [value]="events$" [paginator]="true" paginatorPosition  = "top"  selectionMode="single" [rows]="10"
     loadingIcon="fa-circle-o-notch" [loading]="loading">
     <ng-template pTemplate="header">
         <tr>

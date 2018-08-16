@@ -1,4 +1,4 @@
-<p-table [value]="fetchDebugLevel$" [paginator]="true"   [rows]="10" loadingIcon="fa-circle-o-notch"
+<p-table [value]="fetchDebugLevel$" [paginator]="true"   [rows]="5" loadingIcon="fa-circle-o-notch"
   [loading]="loading">
   <ng-template pTemplate="header">
     <tr>
@@ -128,7 +128,7 @@
   </ng-template>
 </p-table>
 
-<p-dialog header="Log Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="800">
+<p-dialog header="Log Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="800" >
   <div class="home-container">
     <div class="dashboard-header" fxLayout="column">
       <div fxLayout="row">

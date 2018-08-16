@@ -44,6 +44,7 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
 import {DataViewModule} from 'primeng/dataview';
 import {PanelModule} from 'primeng/panel';
 import {CheckboxModule} from 'primeng/checkbox';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import {CheckboxModule} from 'primeng/checkbox';
     ViewLogDetailComponent,
     ViewDebugLevelLogComponent,
     CreditsComponent,
+    AccessDeniedComponent,
   ],
   imports: [
     BrowserAnimationsModule,
