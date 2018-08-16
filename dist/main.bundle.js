@@ -439,6 +439,8 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__view_log_detail_view_log_detail_component__ = __webpack_require__("./src/app/view-log-detail/view-log-detail.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__view_debug_level_log_view_debug_level_log_component__ = __webpack_require__("./src/app/view-debug-level-log/view-debug-level-log.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__credits_credits_component__ = __webpack_require__("./src/app/credits/credits.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__view_logs_by_user_view_logs_by_user_component__ = __webpack_require__("./src/app/view-logs-by-user/view-logs-by-user.component.ts");
+
 
 
 
@@ -463,6 +465,7 @@ var MineRoutes = [
     { path: "logs", component: __WEBPACK_IMPORTED_MODULE_7__mine_mine_component__["a" /* MineComponent */] },
     { path: "details/:recordId", component: __WEBPACK_IMPORTED_MODULE_10__view_log_detail_view_log_detail_component__["a" /* ViewLogDetailComponent */] },
     { path: "allLogs", component: __WEBPACK_IMPORTED_MODULE_8__all_all_component__["a" /* AllComponent */] },
+    { path: 'view', component: __WEBPACK_IMPORTED_MODULE_13__view_logs_by_user_view_logs_by_user_component__["a" /* ViewLogsByUserComponent */] },
     { path: "flag", component: __WEBPACK_IMPORTED_MODULE_9__flag_flag_component__["a" /* FlagComponent */] },
     { path: "debugLevelLog", component: __WEBPACK_IMPORTED_MODULE_11__view_debug_level_log_view_debug_level_log_component__["a" /* ViewDebugLevelLogComponent */] },
 ];
@@ -471,7 +474,7 @@ var dashboardRoutes = [
     { path: 'my', component: __WEBPACK_IMPORTED_MODULE_3__dashboard_dashboard_component__["a" /* DashboardComponent */], loadChildren: "app/mine/mine.module#MineModule" },
     { path: 'events', loadChildren: 'app/events/events.module#EventsModule' },
     { path: 'discussions', loadChildren: 'app/discussions/discussion.module#DisscussionsModule' },
-    { path: "credits", component: __WEBPACK_IMPORTED_MODULE_12__credits_credits_component__["a" /* CreditsComponent */] }
+    { path: "credits", component: __WEBPACK_IMPORTED_MODULE_12__credits_credits_component__["a" /* CreditsComponent */] },
 ];
 var appRoutes = [
     { path: '', redirectTo: 'load', pathMatch: 'full' },
@@ -780,8 +783,8 @@ var DashboardComponent = (function () {
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.comms.on('Add-new-tab', function (a) {
-            console.log("Adding new Tab", a.DebugLevel.DeveloperName);
-            _this.tabs.push({ name: a.DebugLevel.DeveloperName, path: '', closable: true });
+            console.log("Adding new Tab", a);
+            _this.tabs.push({ name: a.DebugLevel.DeveloperName, path: 'view', closable: true });
         });
     };
     DashboardComponent.prototype.ngOnDestroy = function () { };
@@ -3533,6 +3536,23 @@ var ViewLogDetailComponent = (function () {
         }
     };
     return ViewLogDetailComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/view-logs-by-user/view-logs-by-user.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewLogsByUserComponent; });
+var ViewLogsByUserComponent = (function () {
+    function ViewLogsByUserComponent() {
+    }
+    ViewLogsByUserComponent.prototype.ngOnInit = function () {
+    };
+    return ViewLogsByUserComponent;
 }());
 
 

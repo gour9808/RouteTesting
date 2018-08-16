@@ -20,8 +20,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.comms.on('Add-new-tab', a => {
-      console.log("Adding new Tab",a.DebugLevel.DeveloperName);
-      this.tabs.push({name: a.DebugLevel.DeveloperName ,path:'', closable : true})
+      console.log("Adding new Tab",a);
+      this.tabs.push({name: a.DebugLevel.DeveloperName ,path:'view', closable : true})
     })
   }
 

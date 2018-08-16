@@ -14,6 +14,7 @@ import { FlagComponent } from './flag/flag.component';
 import { ViewLogDetailComponent } from './view-log-detail/view-log-detail.component';
 import { ViewDebugLevelLogComponent } from './view-debug-level-log/view-debug-level-log.component';
 import { CreditsComponent } from './credits/credits.component';
+import { ViewLogsByUserComponent } from './view-logs-by-user/view-logs-by-user.component';
 
 export const eventRoutes: Routes = [
     { path: 'all', component: EventsComponent },
@@ -29,6 +30,7 @@ export const MineRoutes: Routes = [
     { path: "logs", component: MineComponent },
     { path: "details/:recordId", component: ViewLogDetailComponent },
     { path: "allLogs", component: AllComponent },
+    {path : 'view', component : ViewLogsByUserComponent},
     { path: "flag", component: FlagComponent },
     { path: "debugLevelLog", component: ViewDebugLevelLogComponent },
 
@@ -39,7 +41,7 @@ export const dashboardRoutes: Routes = [
     { path: 'my', component: DashboardComponent, loadChildren: "app/mine/mine.module#MineModule" },
     { path: 'events', loadChildren: 'app/events/events.module#EventsModule' },
     { path: 'discussions', loadChildren: 'app/discussions/discussion.module#DisscussionsModule' },
-    { path: "credits", component: CreditsComponent }
+    { path: "credits", component: CreditsComponent },
 
 ];
 

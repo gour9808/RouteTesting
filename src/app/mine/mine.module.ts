@@ -18,6 +18,7 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
 import {DataViewModule} from 'primeng/dataview';
 import {PanelModule} from 'primeng/panel';
 import {CheckboxModule} from 'primeng/checkbox';
+import { ViewLogsByUserComponent } from '../view-logs-by-user/view-logs-by-user.component';
 
 
 @NgModule({
@@ -26,8 +27,8 @@ import {CheckboxModule} from 'primeng/checkbox';
         CommonModule, FormsModule,AutoCompleteModule,TabViewModule,CalendarModule,CardModule,ToggleButtonModule,
         FlexLayoutModule, TableModule,ScrollPanelModule, WidgetsModule, DialogModule, ButtonModule, DropdownModule, WidgetsModule
     ],
-    exports: [RouterModule, MineComponent, FlagComponent, AllComponent],
-    declarations: [ AllComponent, MineComponent, FlagComponent, TimeAgoPipe, FilterPipe],
+    exports: [RouterModule, MineComponent, FlagComponent,ViewLogsByUserComponent, AllComponent],
+    declarations: [ AllComponent, MineComponent, FlagComponent, TimeAgoPipe, ViewLogsByUserComponent, FilterPipe],
     providers: [],
 })
 export class MineModule {
