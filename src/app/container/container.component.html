@@ -1,17 +1,18 @@
-    <div>
-        <app-toolbar [menu]=menuItems [style.z-index]="10"></app-toolbar>
-    </div>
-    <router-outlet></router-outlet>
+<app-toolbar>
+</app-toolbar>
+<router-outlet></router-outlet>
+
 <footer class="footer">
-        <div class="container-fluid" style="padding:5px;">
-            <div class="pull-left">
-                <small class="text-muted">Created for devs by devs with &#x2661; </small>
-            </div>
-            <div class="pull-right">
-                <a title="Report bug" class="text-muted" target="_blank" href="https://bitbucket.org/concretio/tooling-chrome-ext/">
-                    <i class="fa fa-bug" ></i> Bugs &nbsp;
-                </a>
-                <a  class="text-muted" (click) = "goToCredits()" ><i class="fa fa-thumbs-up"></i> Credits</a>
-            </div>
+    <div class="container-fluid" style="padding:5px;">
+        <div class="pull-left">
+            <small class="text-muted">Created for devs by devs with &#x2661; </small>
         </div>
-    </footer>
+        <div class="pull-right">
+            <a title="Report bug" class="text-muted" target="_blank" href="https://bitbucket.org/concretio/tooling-chrome-ext/">
+                <i class="fa fa-bug"></i> Bugs &nbsp;
+            </a>
+            <a class="text-muted" (click)="goToCredits()">
+                <i class="fa fa-thumbs-up"></i> Credits</a>
+        </div>
+    </div>
+</footer>

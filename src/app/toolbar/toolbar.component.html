@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<!-- <nav class="navbar navbar-default">
   <div class="navbar">
     <ul class="nav navbar-nav">
       <a class="navbar-brand" href="http://concret.io" target="_blank" style="padding:0px;outline:0;">
@@ -16,7 +16,46 @@
       </li>
     </ul>
   </div>
+</nav> -->
+
+<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom:0px;">
+  <div class="navbar">
+      <ul class="nav navbar-nav">
+          <a class="navbar-brand" href="http://concret.io" target="_blank" style="padding:0px;outline:0;" gacat="Container" ga-click-event="Visit Concretio">
+              <img src="../../assets/logo.png" height="60" />
+          </a>
+          <li ui-sref-active="active" >
+              <a  gacat="Container" ga-click-event="View Debug Logs Tab">
+              <i class="ion-bug"></i> Debug </a>
+          </li>
+          <li ui-sref-active="active">
+              <a gacat="Container" ga-click-event="View Event Monitoring Tab"><i class="ion-arrow-graph-up-right"></i> Events (beta)</a>
+          </li>
+          <!--
+          <li ui-sref-active="active" ng-hide="sfdcSession.hasInvalidSession">
+              <a href ui-sref="container.schemax({podName: sfdcSession.sfdcPodName})" gacat="Container" ga-click-event="View Schema Explorer Tab"><i class="ion-ios-list-outline"></i> Schema <small>(beta)</small></a>
+          </li>
+          -->
+          <li ui-sref-active="active"><a href ui-sref="unauth.disgus" gacat="Container" ga-click-event="View Discussions Tab">Discussions</a>
+          </li>
+          <li >
+              <a ng-click="openInNewWindow()" gacat="Container" ga-click-event="Open in new window"><i class="glyphicon glyphicon-new-window"></i>
+               <small><i>New window</i></small>
+              </a>
+          </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" style="margin-right:10px;">
+          <li>
+              <small  gacat="Container" ga-click-event="Social Share"><i style="font-size:16px;" class="text-primary ion-android-share-alt"></i></small> &nbsp;
+          </li>
+          <li>
+              <p>ap5</p>
+          </li>
+      </ul>
+  </div>
 </nav>
+<!-- Content of a tab from nav bar above -->
+
 
 <p-dialog header="Share with devs/admins !" [(visible)]="showDialog" [modal]="true" [responsive]="true" [width]="400" [height]="250"
   [minY]="70">
