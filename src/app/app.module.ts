@@ -45,6 +45,8 @@ import {DataViewModule} from 'primeng/dataview';
 import {PanelModule} from 'primeng/panel';
 import {CheckboxModule} from 'primeng/checkbox';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+
 
 
 @NgModule({
@@ -76,6 +78,7 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
     AppRoutingModule,
     BrowserModule,
     FormsModule, ToastModule.forRoot(),
+    OverlayPanelModule,
     HttpModule,
     DataTableModule,
     SharedModule,

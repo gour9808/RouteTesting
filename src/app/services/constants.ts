@@ -23,7 +23,7 @@ export class Constants {
     }
 
     public static GET_PARTICULAR_LOG = function (recordId) {
-        return "/services/data/v35.0/sobjects/ApexLog/" + recordId + "/Body/"
+        return "/services/data/v41.0/sobjects/ApexLog/" + recordId + "/Body/"
     }
 
     public static DOWNLOAD_LOGS = function (recordId) {

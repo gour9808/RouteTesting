@@ -11,6 +11,7 @@ import * as  root from '../model/root';
 })
 export class ViewLogDetailComponent implements OnInit {
   sub$;
+  checked: boolean;
   time: any[] = [];
   id: any;
   data: any;
@@ -44,12 +45,16 @@ export class ViewLogDetailComponent implements OnInit {
 
   }
 
+  check(event) {
+    console.log("checkd or not",event);
+  }
+
 
   getParticularLog() {
     this.mine.getParticularLog(this.id).subscribe(res => {
-      console.log(res);
+      console.log("success", res);
     }, err => {
-      console.log(err);
+      console.log("error is", err);
       this.data = this.realParse(err.error.text)
     })
   }
@@ -63,6 +68,7 @@ export class ViewLogDetailComponent implements OnInit {
     this.root.category = this.format(this.categoryRegex.exec(line));
     this.root.line = this.format(this.subcategoryRegex.exec(line));
     this.root.objectId = this.format(this.objectIdRegex.exec(line));
+
 
     line = line.replace(this.timeRegex, '');
     line = line.replace(this.microsecondsRegex, '');
@@ -120,7 +126,11 @@ export class ViewLogDetailComponent implements OnInit {
     }
 
     this.root.text = this.format([line]);
+    console.log('root', this.root);
+    
+    
     return this.root;
+    
 
 
   }
@@ -180,7 +190,7 @@ export class ViewLogDetailComponent implements OnInit {
     if (input && input.length > 0 && numOk === 0) {
       alert("Didn't understand the input.");
     }
-     alert("got data")
+    alert("got data")
   }
 
 

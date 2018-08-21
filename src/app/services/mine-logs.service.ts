@@ -38,10 +38,11 @@ export class MineLogsService {
 
   getParticularLog(recordId) {
     let headers = new HttpHeaders();
-    headers.append('Accept', "text/plain");
-    headers.append('Api-User-Agent', 'Example/1.0');
+    // headers.append('Accept', "text/plain");
+   
+    // headers.append('Api-User-Agent', 'Example/1.0');
     headers.append("Authorization", "Bearer " + this.userSession.token);
-    return this.http.get<any>(this.instanceUrl.currentURL + Constants.GET_PARTICULAR_LOG(recordId), { headers: headers })
+    return this.http.get(this.instanceUrl.currentURL + Constants.GET_PARTICULAR_LOG(recordId),  { headers: headers })
 
   }
 

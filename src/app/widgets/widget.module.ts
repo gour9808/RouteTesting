@@ -4,12 +4,14 @@ import { CardComponent } from './card/card.component';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ButtonComponent } from './button/button.component';
+import { MenuItemComponent } from './menu-item/menu-item.component';
 
 @NgModule({
     providers: [],
     declarations: [
         CardComponent,
         ButtonComponent,
+        MenuItemComponent,
     ],
     imports: [
         CommonModule,

@@ -1,12 +1,4 @@
-<app-card label = "Log Detail">
-
-<ul>
-
-  <li *ngFor = "let t of time">
-    {{t}}
-  </li>
-</ul>
-
-
-</app-card>
-
+<div class="ui-g-12"><p-checkbox name="group2" value="Technology" label="Technology" [(ngModel)]="selectedCategories" (onChange) = "check($event)" inputId="technology"></p-checkbox></div>
+<div class="ui-g-12"><p-checkbox name="group2" value="Finance" label="Finance" [(ngModel)]="selectedCategories" (onChange) = "check($event)" inputId="finance"></p-checkbox></div>
+<div class="ui-g-12"><p-checkbox name="group2" value="Sports" label="Sports" [(ngModel)]="selectedCategories" (onChange) = "check($event)" inputId="sports"></p-checkbox></div>
+<div class="ui-g-12"><p-checkbox name="group2" value="Entertainment" label="Entertainment" [(ngModel)]="selectedCategories" (onChange) = "check($event)" inputId="entertainment"></p-checkbox></div>
