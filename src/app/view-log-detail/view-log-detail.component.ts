@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MineLogsService } from '../services/mine-logs.service';
 import { ActivatedRoute } from '../../../node_modules/@angular/router';
 import { ToastMessageService } from '../services/toast-message.service';
@@ -37,16 +37,15 @@ export class ViewLogDetailComponent implements OnInit {
       console.log("id is", this.id);
 
     });
-    this.getParticularLog();
+
+   
+    
+   this.getParticularLog();
   }
 
   checkTimeValue(e) {
     console.log(e);
 
-  }
-
-  check(event) {
-    console.log("checkd or not",event);
   }
 
 
@@ -207,7 +206,6 @@ export class ViewLogDetailComponent implements OnInit {
       return '';
     }
   }
-
 
 
 }

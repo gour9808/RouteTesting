@@ -3314,9 +3314,6 @@ var ViewLogDetailComponent = (function () {
     ViewLogDetailComponent.prototype.checkTimeValue = function (e) {
         console.log(e);
     };
-    ViewLogDetailComponent.prototype.check = function (event) {
-        console.log("checkd or not", event);
-    };
     ViewLogDetailComponent.prototype.getParticularLog = function () {
         var _this = this;
         this.mine.getParticularLog(this.id).subscribe(function (res) {

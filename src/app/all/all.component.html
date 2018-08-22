@@ -89,11 +89,22 @@
     </thead>
     <tbody>
         <tr *ngFor="let all of allLogs$ ">
-                <td class="nowrapcol">
-                        
-
-                    
-                    </td>
+            <td class="nowrapcol">
+                    <div class="btn-group">
+                            <button type="button" class="btn btn-danger">Action</button>
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                              <span class="caret"></span>
+                              <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                              <li><a href="#">Action</a></li>
+                              <li><a href="#">Another action</a></li>
+                              <li><a href="#">Something else here</a></li>
+                              <li class="divider"></li>
+                              <li><a href="#">Separated link</a></li>
+                            </ul>
+                          </div></td>
+                          
             <td>{{all.LogUser.Name}}</td>
             <td>{{all.Application}}</td>
             <td>
@@ -101,15 +112,15 @@
                     <span title="{{greet.Status}}" class="glyphicon glyphicon-thumbs-down text-danger" ng-show="greet.Status != 'Success'" ></span> -->
                 <a>{{all.Operation}}</a>
             </td>
-           
+
             <td>{{all.DurationMilliseconds}}</td>
             <td>{{all.LogLength}}</td>
             <td class="nowrapcol">
-                    <span> {{all.StartTime | timeAgo}}</span>
-                    <a class="date-icon">
-                            <i class="fa fa-info-circle"></i>
-                            <div class="tooltip">{{all.StartTime | date:'dd/MM HH:mm:ss'}}</div>
-                        </a>
+                <span> {{all.StartTime | timeAgo}}</span>
+                <a class="date-icon">
+                    <i class="fa fa-info-circle"></i>
+                    <div class="tooltip">{{all.StartTime | date:'dd/MM HH:mm:ss'}}</div>
+                </a>
             </td>
         </tr>
 

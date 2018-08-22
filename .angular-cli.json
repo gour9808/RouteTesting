@@ -22,9 +22,12 @@
       "styles": [
         "styles.scss",
         "bootstrap.css",
-        "custom.css"
+      "custom.css"
       ],
-      "scripts": [],
+      "scripts": [
+    "./node_modules/popper.js/dist/umd/popper.min.js",
+    "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
