@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { DebugLevelService } from '../services/debug-level.service';
 import * as  post from '../model/debug-level';
-import { ToastsManager } from '../../../node_modules/ng2-toastr';
+import { ToastsManager } from 'ng2-toastr';
 
 
 @Component({

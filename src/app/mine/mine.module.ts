@@ -12,7 +12,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule, ScrollPanelModule, AutoCompleteModule, TabViewModule, CalendarModule, CardModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
-import { TimeAgoPipe } from '../../../node_modules/time-ago-pipe';
+import { TimeAgoPipe } from 'time-ago-pipe';
 import { FilterPipe } from '../utils/filter.pipe';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {DataViewModule} from 'primeng/dataview';

@@ -46,13 +46,13 @@ module.exports = webpackAsyncContext;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AllComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__ = __webpack_require__("./src/app/services/mine-logs.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_auto_unsubscribe__ = __webpack_require__("./src/app/utils/auto-unsubscribe.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_file_saver__ = __webpack_require__("./node_modules/file-saver/FileSaver.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_file_saver___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_file_saver__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_storage_provider__ = __webpack_require__("./src/app/utils/storage.provider.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__node_modules_ng2_toastr__ = __webpack_require__("./node_modules/ng2-toastr/ng2-toastr.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__node_modules_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__node_modules_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_toastr__ = __webpack_require__("./node_modules/ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ng2_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_add_observable_interval__ = __webpack_require__("./node_modules/rxjs/_esm5/add/observable/interval.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -177,7 +177,7 @@ var AllComponent = (function () {
     ], AllComponent.prototype, "NewWindow", void 0);
     AllComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_3__utils_auto_unsubscribe__["a" /* AutoUnsubscribe */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__["a" /* MineLogsService */], __WEBPACK_IMPORTED_MODULE_6__node_modules_ng2_toastr__["ToastsManager"], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_2__node_modules_angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_2__node_modules_angular_router__["ActivatedRoute"]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__["a" /* MineLogsService */], __WEBPACK_IMPORTED_MODULE_6_ng2_toastr__["ToastsManager"], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"], __WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_2__angular_router__["ActivatedRoute"]])
     ], AllComponent);
     return AllComponent;
 }());
@@ -1127,11 +1127,11 @@ var EventsComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__ = __webpack_require__("./src/app/services/mine-logs.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_auto_unsubscribe__ = __webpack_require__("./src/app/utils/auto-unsubscribe.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model_user__ = __webpack_require__("./src/app/model/user.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_toastr_ng2_toastr__ = __webpack_require__("./node_modules/ng2-toastr/ng2-toastr.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_toastr_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_toastr_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_toastr__ = __webpack_require__("./node_modules/ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_storage_provider__ = __webpack_require__("./src/app/utils/storage.provider.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_debug_level_service__ = __webpack_require__("./src/app/services/debug-level.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__node_modules_angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_communicator_service__ = __webpack_require__("./src/app/services/communicator.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1372,7 +1372,7 @@ var FlagComponent = (function () {
     ], FlagComponent.prototype, "NewWindow", void 0);
     FlagComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__utils_auto_unsubscribe__["a" /* AutoUnsubscribe */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__["a" /* MineLogsService */], __WEBPACK_IMPORTED_MODULE_8__services_communicator_service__["a" /* CommunicatorService */], __WEBPACK_IMPORTED_MODULE_7__node_modules_angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_7__node_modules_angular_router__["ActivatedRoute"], __WEBPACK_IMPORTED_MODULE_4_ng2_toastr_ng2_toastr__["ToastsManager"], __WEBPACK_IMPORTED_MODULE_6__services_debug_level_service__["a" /* DebugLevelService */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__["a" /* MineLogsService */], __WEBPACK_IMPORTED_MODULE_8__services_communicator_service__["a" /* CommunicatorService */], __WEBPACK_IMPORTED_MODULE_7__angular_router__["Router"], __WEBPACK_IMPORTED_MODULE_7__angular_router__["ActivatedRoute"], __WEBPACK_IMPORTED_MODULE_4_ng2_toastr__["ToastsManager"], __WEBPACK_IMPORTED_MODULE_6__services_debug_level_service__["a" /* DebugLevelService */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"]])
     ], FlagComponent);
     return FlagComponent;
 }());
@@ -1524,7 +1524,7 @@ var HttpInterceptorService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_toast_message_service__ = __webpack_require__("./src/app/services/toast-message.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__ = __webpack_require__("./src/app/services/mine-logs.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_storage_provider__ = __webpack_require__("./src/app/utils/storage.provider.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_auto_unsubscribe__ = __webpack_require__("./src/app/utils/auto-unsubscribe.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_file_saver__ = __webpack_require__("./node_modules/file-saver/FileSaver.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_file_saver___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_file_saver__);
@@ -1683,7 +1683,7 @@ var MineComponent = (function () {
     ], MineComponent.prototype, "instanceUrl", void 0);
     MineComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_4__utils_auto_unsubscribe__["a" /* AutoUnsubscribe */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__["a" /* MineLogsService */], __WEBPACK_IMPORTED_MODULE_3__node_modules_angular_router__["ActivatedRoute"], __WEBPACK_IMPORTED_MODULE_3__node_modules_angular_router__["Router"],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__["a" /* MineLogsService */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["ActivatedRoute"], __WEBPACK_IMPORTED_MODULE_3__angular_router__["Router"],
             __WEBPACK_IMPORTED_MODULE_0__services_toast_message_service__["a" /* ToastMessageService */]])
     ], MineComponent);
     return MineComponent;
@@ -1718,11 +1718,28 @@ var CreateDebugLevel = (function () {
 
 /***/ }),
 
+/***/ "./src/app/model/node.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Node", function() { return Node; });
+var Node = (function () {
+    function Node() {
+    }
+    return Node;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/model/root.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Root; });
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Root", function() { return Root; });
 var Root = (function () {
     function Root() {
     }
@@ -1814,17 +1831,16 @@ var AuthService = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommunicatorService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx__ = __webpack_require__("./node_modules/rxjs/_esm5/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs__ = __webpack_require__("./node_modules/rxjs/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs__ = __webpack_require__("./node_modules/rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs__);
 
 
 var CommunicatorService = (function () {
     function CommunicatorService() {
         var _this = this;
         this.listeners = {};
-        this.eventsSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs__["BehaviorSubject"]({});
-        this.events = __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx__["a" /* Observable */].from(this.eventsSubject);
+        this.eventsSubject = new __WEBPACK_IMPORTED_MODULE_0_rxjs__["BehaviorSubject"]({});
+        this.events = __WEBPACK_IMPORTED_MODULE_0_rxjs__["Observable"].from(this.eventsSubject);
         this.events.subscribe(function (params) {
             if (_this.listeners[params.name]) {
                 for (var _i = 0, _a = _this.listeners[params.name]; _i < _a.length; _i++) {
@@ -2591,7 +2607,7 @@ var styles = [""];
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ToolbarComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_storage_provider__ = __webpack_require__("./src/app/utils/storage.provider.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2682,7 +2698,8 @@ function AutoUnsubscribe(blackList) {
 /* unused harmony export STORAGE_PROVIDERS */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__ = __webpack_require__("./node_modules/rxjs/_esm5/Observable.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_observable_fromPromise__ = __webpack_require__("./node_modules/rxjs/_esm5/observable/fromPromise.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("./node_modules/rxjs/_esm5/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__("./node_modules/rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
 
 
 
@@ -2711,7 +2728,7 @@ var MemoryCacheService = (function () {
             return this.inFlightObservables.get(key);
         }
         else if (fallback && fallback instanceof __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["a" /* Observable */]) {
-            this.inFlightObservables.set(key, new __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__["b" /* Subject */]());
+            this.inFlightObservables.set(key, new __WEBPACK_IMPORTED_MODULE_2_rxjs__["Subject"]());
             console.log("%c Calling api for " + key, 'color: purple');
             return fallback.do(function (value) { _this.set(key, value, maxAge); });
         }
@@ -3121,8 +3138,8 @@ var STORAGE_PROVIDERS = [
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_debug_level_service__ = __webpack_require__("./src/app/services/debug-level.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_debug_level__ = __webpack_require__("./src/app/model/debug-level.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_toastr__ = __webpack_require__("./node_modules/ng2-toastr/ng2-toastr.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_toastr__ = __webpack_require__("./node_modules/ng2-toastr/ng2-toastr.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ng2_toastr__);
 
 
 
@@ -3278,21 +3295,28 @@ var ViewDebugLevelLogComponent = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewLogDetailComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_mine_logs_service__ = __webpack_require__("./src/app/services/mine-logs.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_toast_message_service__ = __webpack_require__("./src/app/services/toast-message.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model_root__ = __webpack_require__("./src/app/model/root.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_mine_logs_service__ = __webpack_require__("./src/app/services/mine-logs.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_toast_message_service__ = __webpack_require__("./src/app/services/toast-message.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_root__ = __webpack_require__("./src/app/model/root.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__model_node__ = __webpack_require__("./src/app/model/node.ts");
+
+
 
 
 
 
 var ViewLogDetailComponent = (function () {
-    function ViewLogDetailComponent(mine, toast, route) {
+    function ViewLogDetailComponent(mine, toast, route, elementRef) {
         this.mine = mine;
         this.toast = toast;
         this.route = route;
+        this.elementRef = elementRef;
         this.time = [];
-        this.root = new __WEBPACK_IMPORTED_MODULE_3__model_root__["a" /* Root */]();
+        this.root = new __WEBPACK_IMPORTED_MODULE_4__model_root__["Root"]();
+        this.node = new __WEBPACK_IMPORTED_MODULE_5__model_node__["Node"]();
+        this.nodeStack = [];
         this.clearedInput = '';
         this.indent = 0;
         this.timeRegex = /\d\d:\d\d:\d\d\.\d*/i;
@@ -3310,9 +3334,7 @@ var ViewLogDetailComponent = (function () {
             console.log("id is", _this.id);
         });
         this.getParticularLog();
-    };
-    ViewLogDetailComponent.prototype.checkTimeValue = function (e) {
-        console.log(e);
+        //this.hero = JSON.stringify(this.root)
     };
     ViewLogDetailComponent.prototype.getParticularLog = function () {
         var _this = this;
@@ -3323,75 +3345,6 @@ var ViewLogDetailComponent = (function () {
             _this.data = _this.realParse(err.error.text);
         });
     };
-    ViewLogDetailComponent.prototype.parse = function (line, isDebug) {
-        this.root.leaf = false;
-        this.root.children = [];
-        this.root.time = this.format(this.timeRegex.exec(line));
-        this.root.microseconds = this.format(this.microsecondsRegex.exec(line));
-        this.root.category = this.format(this.categoryRegex.exec(line));
-        this.root.line = this.format(this.subcategoryRegex.exec(line));
-        this.root.objectId = this.format(this.objectIdRegex.exec(line));
-        line = line.replace(this.timeRegex, '');
-        line = line.replace(this.microsecondsRegex, '');
-        line = line.replace(this.categoryRegex, '');
-        line = line.replace(this.subcategoryRegex, '');
-        line = line.replace(this.objectIdRegex, '');
-        var isEntry = false;
-        var isExit = false;
-        if (line.trim().length === 0) {
-            line = this.root.category;
-        }
-        this.root.isEntry = false;
-        this.root.isExit = false;
-        this.root.isException = false;
-        if (isDebug == true) {
-            this.root.isDebug = true;
-        }
-        else {
-            this.root.isDebug = false;
-        }
-        if (this.root.category.length > 0) {
-            if (/METHOD_ENTRY|CONSTRUCTOR_ENTRY|DML_BEGIN|SOQL_EXECUTE_BEGIN|CODE_UNIT_STARTED|VF_DESERIALIZE_VIEWSTATE_BEGIN|CUMULATIVE_LIMIT_USAGE/.test(this.root.category)) {
-                this.root.isEntry = true;
-            }
-            else if (/METHOD_EXIT|CONSTRUCTOR_EXIT|DML_END|SOQL_EXECUTE_END|CODE_UNIT_FINISHED|VF_DESERIALIZE_VIEWSTATE_END|CUMULATIVE_LIMIT_USAGE_END/.test(this.root.category)) {
-                this.root.isExit = true;
-            }
-            else if (/EXCEPTION_THROWN|FATAL_ERROR/.test(this.root.category)) {
-                this.root.isException = true;
-                this.root.icon = 'http://extjs-public.googlecode.com/svn/tags/extjs-4.1.1a/release/resources/themes/images/default/form/exclamation.gif';
-            }
-            else if (/USER_DEBUG/.test(this.root.category)) {
-                this.root.isDebug = true;
-                this.root.icon = 'http://extjs-public.googlecode.com/svn/tags/extjs-4.1.1a/release/resources/themes/images/default/shared/warning.gif';
-            }
-        }
-        if (this.root.isEntry) {
-            this.indent++;
-            this.nodeStack[this.nodeStack.length - 1].children.push(this.root);
-            this.nodeStack.push(this.root);
-        }
-        else if (this.root.isExit) {
-            this.indent--;
-            var offNode = this.nodeStack.pop();
-            if (offNode.children.length === 0) {
-                offNode.leaf = true;
-            }
-            else {
-                offNode.expanded = true;
-            }
-        }
-        else {
-            this.root.leaf = true;
-            this.nodeStack[this.nodeStack.length - 1].children.push(this.root);
-        }
-        if (this.indent < 0) {
-            line += " NEGATIVE INDENT ";
-        }
-        this.root.text = this.format([line]);
-        console.log('root', this.root);
-        return this.root;
-    };
     ViewLogDetailComponent.prototype.realParse = function (input) {
         delete this.root.children;
         this.root.children = [];
@@ -3401,31 +3354,29 @@ var ViewLogDetailComponent = (function () {
         this.indent = 0;
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
-            this.time.push(lines[i]);
-            console.log("lines are", line);
             if (this.timeRegex.test(line)) {
-                this.node4Line = this.parse(line, false);
+                var node4Line = this.parseLine(line, false);
                 if (line.indexOf('USER_DEBUG') > 0) {
                     while (!this.timeRegex.test(lines[++i])) {
-                        this.node4Line = this.parse(lines[i], true);
+                        this.node4Line = this.parseLine(lines[i], true);
                     }
                     --i;
                 }
                 if (line.indexOf('CUMULATIVE_LIMIT_USAGE') > 0 && line.indexOf('CUMULATIVE_LIMIT_USAGE_END') < 0) {
                     while (lines[++i].indexOf('CUMULATIVE_LIMIT_USAGE_END') < 0) {
-                        this.node4Line.children.push({
-                            time: '',
-                            line: '',
-                            microseconds: '',
-                            objectId: '',
-                            category: '',
-                            leaf: true,
-                            text: '\r\n' + lines[i],
-                            isEntry: false,
-                            isExit: false,
-                            isException: false,
-                            isDebug: false
-                        });
+                        // node4Line.children.push({
+                        //     time: '',
+                        //     line: '',
+                        //     microseconds: '',
+                        //     objectId: '',
+                        //     category: '',
+                        //     leaf: true,
+                        //     text: '\r\n' + lines[i],
+                        //     isEntry: false,
+                        //     isExit : false,
+                        //     isException : false,
+                        //     isDebug : false
+                        // });
                     }
                     --i;
                 }
@@ -3439,6 +3390,76 @@ var ViewLogDetailComponent = (function () {
             alert("Didn't understand the input.");
         }
         alert("got data");
+        this.render();
+    };
+    ViewLogDetailComponent.prototype.parseLine = function (line, isDebug) {
+        this.node.leaf = false;
+        this.node.children = [];
+        this.node.time = this.format(this.timeRegex.exec(line));
+        this.node.microseconds = this.format(this.microsecondsRegex.exec(line));
+        this.node.category = this.format(this.categoryRegex.exec(line));
+        this.node.line = this.format(this.subcategoryRegex.exec(line));
+        this.node.objectId = this.format(this.objectIdRegex.exec(line));
+        line = line.replace(this.timeRegex, '');
+        line = line.replace(this.microsecondsRegex, '');
+        line = line.replace(this.categoryRegex, '');
+        line = line.replace(this.subcategoryRegex, '');
+        line = line.replace(this.objectIdRegex, '');
+        var isEntry = false;
+        var isExit = false;
+        if (line.trim().length === 0) {
+            line = this.node.category;
+        }
+        this.node.isEntry = false;
+        this.node.isExit = false;
+        this.node.isException = false;
+        if (isDebug == true) {
+            this.node.isDebug = true;
+        }
+        else {
+            this.node.isDebug = false;
+        }
+        if (this.node.category.length > 0) {
+            if (/METHOD_ENTRY|CONSTRUCTOR_ENTRY|DML_BEGIN|SOQL_EXECUTE_BEGIN|CODE_UNIT_STARTED|VF_DESERIALIZE_VIEWSTATE_BEGIN|CUMULATIVE_LIMIT_USAGE/.test(this.node.category)) {
+                this.node.isEntry = true;
+            }
+            else if (/METHOD_EXIT|CONSTRUCTOR_EXIT|DML_END|SOQL_EXECUTE_END|CODE_UNIT_FINISHED|VF_DESERIALIZE_VIEWSTATE_END|CUMULATIVE_LIMIT_USAGE_END/.test(this.node.category)) {
+                this.node.isExit = true;
+            }
+            else if (/EXCEPTION_THROWN|FATAL_ERROR/.test(this.node.category)) {
+                this.node.isException = true;
+                this.node.icon = 'http://extjs-public.googlecode.com/svn/tags/extjs-4.1.1a/release/resources/themes/images/default/form/exclamation.gif';
+            }
+            else if (/USER_DEBUG/.test(this.node.category)) {
+                this.node.isDebug = true;
+                this.node.icon = 'http://extjs-public.googlecode.com/svn/tags/extjs-4.1.1a/release/resources/themes/images/default/shared/warning.gif';
+            }
+        }
+        if (this.node.isEntry) {
+            this.indent++;
+            this.nodeStack[this.nodeStack.length - 1].children.push(this.node);
+            this.nodeStack.push(__WEBPACK_IMPORTED_MODULE_5__model_node__);
+        }
+        else if (this.node.isExit) {
+            this.indent--;
+            var offNode = this.nodeStack.pop();
+            if (offNode.children.length === 0) {
+                offNode.leaf = true;
+            }
+            else {
+                offNode.expanded = true;
+            }
+        }
+        else {
+            this.node.leaf = true;
+            this.nodeStack[this.nodeStack.length - 1].children.push(this.node);
+        }
+        if (this.indent < 0) {
+            line += " NEGATIVE INDENT ";
+        }
+        this.node.text = this.format([line]);
+        console.log("node is", this.node);
+        return this.node;
     };
     ViewLogDetailComponent.prototype.format = function (resultsArray) {
         if (resultsArray && resultsArray[0]) {
@@ -3450,6 +3471,96 @@ var ViewLogDetailComponent = (function () {
         }
         else {
             return '';
+        }
+    };
+    ViewLogDetailComponent.prototype.render = function () {
+        this.realRender();
+    };
+    ViewLogDetailComponent.prototype.realRender = function () {
+        var table = document.getElementById('output');
+        table.innerHTML = ''; // Remove existing output
+        // Faster plain table rendering
+        var includeTime = true;
+        var includeMicroseconds = true;
+        var includeCategory = true;
+        var includeSubcategory = true;
+        var includeObjectId = true;
+        if (!this.root.children || this.root.children.length == 0) {
+            return;
+        }
+        this.renderNode(table, __WEBPACK_IMPORTED_MODULE_4__model_root__, -1, includeTime, includeMicroseconds, includeCategory, includeSubcategory, includeObjectId);
+    };
+    ViewLogDetailComponent.prototype.renderNode = function (table, node, depth, includeTime, includeMicroseconds, includeCategory, includeSubcategory, includeObjectId) {
+        var tr = document.createElement('tr');
+        node.tr = tr;
+        tr['node'] = node;
+        console.log("node in render node", node);
+        if (includeTime)
+            this.createCell(tr, node.time);
+        if (includeMicroseconds)
+            this.createCell(tr, node.microseconds);
+        if (includeObjectId)
+            this.createCell(tr, node.objectId);
+        if (includeSubcategory)
+            this.createCell(tr, node.line);
+        if (includeCategory)
+            this.createCell(tr, node.category);
+        var paddingLeft = 30 * depth;
+        if (true)
+            this.createCell(tr, node.text);
+        if (node.isException) {
+            tr.className = 'exception';
+        }
+        else if (node.isDebug) {
+            tr.className = 'debug';
+        }
+        else if (node.isHeader) {
+            tr.className = 'header';
+        }
+        else {
+            tr.className = 'logRow';
+        }
+        table.appendChild(tr);
+        if (node.children) {
+            for (var i = 0; i < node.children.length; i++) {
+                this.renderNode(table, node.children[i], depth + 1, includeTime, includeMicroseconds, includeCategory, includeSubcategory, includeObjectId);
+            }
+        }
+    };
+    ViewLogDetailComponent.prototype.createCell = function (tr, text) {
+        var td = document.createElement('td');
+        td.className = 'logCell';
+        td.appendChild(document.createTextNode((text)));
+        tr.appendChild(td);
+    };
+    ViewLogDetailComponent.prototype.handleToggle = function (e) {
+        var event = e ? e : window.event;
+        var target = event.target ? event.target : event.srcElement;
+        var row = target.parentElement.parentElement;
+        var node = row['node'];
+        var isExpand = !node.expanded;
+        node.expanded = isExpand;
+        //previously image change function used as given below... 
+        //node.tr.src = isExpand ? 'expand.png' : 'collapse.png';
+        //Now its changed...
+        var numberOfNodeTrChilds = node.tr.children.length;
+        node.tr.children[numberOfNodeTrChilds - 1].children[0].src = isExpand ? 'collapse.png' : 'expand.png';
+        node.tr.style.backgroundColor = isExpand ? '#eee' : '#fdf';
+        this.toggle(node, isExpand);
+    };
+    ViewLogDetailComponent.prototype.toggle = function (node, isExpand) {
+        for (var i = 0; node.children && i < node.children.length; i++) {
+            var child = node.children[i];
+            if (!isExpand) {
+                child.tr.style.display = 'none';
+                this.toggle(child, isExpand);
+            }
+            else {
+                child.tr.style.display = '';
+                if (child.expanded) {
+                    this.toggle(child, isExpand);
+                }
+            }
         }
     };
     return ViewLogDetailComponent;

@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, ViewContainerRef, Host } from '@angular/core';
 import { MineLogsService } from '../services/mine-logs.service';
-import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 import { saveAs } from 'file-saver';
 import { Cache } from '../utils/storage.provider';
-import { ToastsManager } from '../../../node_modules/ng2-toastr';
+import { ToastsManager } from 'ng2-toastr';
 import 'rxjs/add/observable/interval';
 
 @Component({

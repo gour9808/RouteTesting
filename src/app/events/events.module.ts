@@ -6,8 +6,8 @@ import {eventRoutes} from '../app.routes';
 import { TableModule } from 'primeng/table';
 import { EventsComponent } from './events.component';
 import { WidgetsModule } from '../widgets/widget.module';
-import { CalendarModule, DropdownModule, Dialog, ButtonModule, DialogModule } from '../../../node_modules/primeng/primeng';
-import { FormsModule } from '../../../node_modules/@angular/forms';
+import { CalendarModule, DropdownModule, Dialog, ButtonModule, DialogModule } from 'primeng/primeng';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [

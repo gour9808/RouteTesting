@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastMessageService } from '../services/toast-message.service';
 import { MineLogsService } from '../services/mine-logs.service';
 import { Cache } from '../utils/storage.provider';
-import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 import { saveAs } from 'file-saver';
 import 'rxjs/add/observable/interval';

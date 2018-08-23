@@ -3,10 +3,10 @@ import { MineLogsService } from '../services/mine-logs.service';
 import { AutoUnsubscribe } from '../utils/auto-unsubscribe';
 import * as  post from '../model/user';
 import * as _ from 'lodash';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastsManager } from 'ng2-toastr';
 import { Cache } from '../utils/storage.provider';
 import { DebugLevelService } from '../services/debug-level.service';
-import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommunicatorService } from '../services/communicator.service';
 
 
