@@ -21,7 +21,7 @@ export class ViewLogDetailComponent implements OnInit {
   data: any;
   root: root.Root = new root.Root();
   node: node.Node = new node.Node();
-  node4Line: any;
+  node4Line: node4Line.Node4Line = new node4Line.Node4Line();
   extTree: any
   nodeStack: any[] = [];
   hero: any
@@ -88,19 +88,19 @@ export class ViewLogDetailComponent implements OnInit {
         }
         if (line.indexOf('CUMULATIVE_LIMIT_USAGE') > 0 && line.indexOf('CUMULATIVE_LIMIT_USAGE_END') < 0) {
           while (lines[++i].indexOf('CUMULATIVE_LIMIT_USAGE_END') < 0) {
-            // node4Line.children.push({
-            //     time: '',
-            //     line: '',
-            //     microseconds: '',
-            //     objectId: '',
-            //     category: '',
-            //     leaf: true,
-            //     text: '\r\n' + lines[i],
-            //     isEntry: false,
-            //     isExit : false,
-            //     isException : false,
-            //     isDebug : false
-            // });
+            this.node4Line.children.push({
+                time: '',
+                line: '',
+                microseconds: '',
+                objectId: '',
+                category: '',
+                leaf: true,
+                text: '\r\n' + lines[i],
+                isEntry: false,
+                isExit : false,
+                isException : false,
+                isDebug : false
+            });
           }
           --i;
         }
@@ -288,12 +288,7 @@ export class ViewLogDetailComponent implements OnInit {
       var td = document.createElement('td');
 
       td.className = 'logCell';
-
-
       td.appendChild(document.createTextNode((text)));
-
-     
-
       tr.appendChild(td);
   }
 

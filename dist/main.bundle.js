@@ -1734,6 +1734,21 @@ var Node = (function () {
 
 /***/ }),
 
+/***/ "./src/app/model/nodeLine.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Node4Line; });
+var Node4Line = (function () {
+    function Node4Line() {
+    }
+    return Node4Line;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/model/root.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3301,6 +3316,8 @@ var ViewDebugLevelLogComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_toast_message_service__ = __webpack_require__("./src/app/services/toast-message.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_root__ = __webpack_require__("./src/app/model/root.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__model_node__ = __webpack_require__("./src/app/model/node.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__model_nodeLine__ = __webpack_require__("./src/app/model/nodeLine.ts");
+
 
 
 
@@ -3316,6 +3333,7 @@ var ViewLogDetailComponent = (function () {
         this.time = [];
         this.root = new __WEBPACK_IMPORTED_MODULE_4__model_root__["Root"]();
         this.node = new __WEBPACK_IMPORTED_MODULE_5__model_node__["Node"]();
+        this.node4Line = new __WEBPACK_IMPORTED_MODULE_6__model_nodeLine__["a" /* Node4Line */]();
         this.nodeStack = [];
         this.clearedInput = '';
         this.indent = 0;
@@ -3364,19 +3382,19 @@ var ViewLogDetailComponent = (function () {
                 }
                 if (line.indexOf('CUMULATIVE_LIMIT_USAGE') > 0 && line.indexOf('CUMULATIVE_LIMIT_USAGE_END') < 0) {
                     while (lines[++i].indexOf('CUMULATIVE_LIMIT_USAGE_END') < 0) {
-                        // node4Line.children.push({
-                        //     time: '',
-                        //     line: '',
-                        //     microseconds: '',
-                        //     objectId: '',
-                        //     category: '',
-                        //     leaf: true,
-                        //     text: '\r\n' + lines[i],
-                        //     isEntry: false,
-                        //     isExit : false,
-                        //     isException : false,
-                        //     isDebug : false
-                        // });
+                        this.node4Line.children.push({
+                            time: '',
+                            line: '',
+                            microseconds: '',
+                            objectId: '',
+                            category: '',
+                            leaf: true,
+                            text: '\r\n' + lines[i],
+                            isEntry: false,
+                            isExit: false,
+                            isException: false,
+                            isDebug: false
+                        });
                     }
                     --i;
                 }
