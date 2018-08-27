@@ -25,31 +25,31 @@
               <img src="../../assets/logo.png" height="60" />
           </a>
           <li ui-sref-active="active" >
-              <a  gacat="Container" ga-click-event="View Debug Logs Tab">
-              <i class="ion-bug"></i> Debug </a>
+              <a  gacat="Container" ga-click-event="View Debug Logs Tab" routerLink="/home/my">
+              <i class="fa fa-bug"></i> Debug </a>
           </li>
           <li ui-sref-active="active">
-              <a gacat="Container" ga-click-event="View Event Monitoring Tab"><i class="ion-arrow-graph-up-right"></i> Events (beta)</a>
+              <a gacat="Container" routerLink="/home/events/all"><i class="fa fa-line-chart"></i> Events (beta)</a>
           </li>
           <!--
           <li ui-sref-active="active" ng-hide="sfdcSession.hasInvalidSession">
               <a href ui-sref="container.schemax({podName: sfdcSession.sfdcPodName})" gacat="Container" ga-click-event="View Schema Explorer Tab"><i class="ion-ios-list-outline"></i> Schema <small>(beta)</small></a>
           </li>
           -->
-          <li ui-sref-active="active"><a href ui-sref="unauth.disgus" gacat="Container" ga-click-event="View Discussions Tab">Discussions</a>
+          <li ui-sref-active="active"><a routerLink ="/home/discussions/all">Discussions</a>
           </li>
           <li >
-              <a ng-click="openInNewWindow()" gacat="Container" ga-click-event="Open in new window"><i class="glyphicon glyphicon-new-window"></i>
+              <a (click)="openInNewWindow($event)" ><i class="fa fa-external-link"></i>
                <small><i>New window</i></small>
               </a>
           </li>
       </ul>
       <ul class="nav navbar-nav navbar-right" style="margin-right:10px;">
           <li>
-              <small  gacat="Container" ga-click-event="Social Share"><i style="font-size:16px;" class="text-primary ion-android-share-alt"></i></small> &nbsp;
+              <small  gacat="Container" (click)="go()"><i style="font-size:16px;color: #2196f3" class="fa fa-share-alt"></i></small> &nbsp;
           </li>
           <li>
-              <p>ap5</p>
+              <p>{{label}}</p>
           </li>
       </ul>
   </div>

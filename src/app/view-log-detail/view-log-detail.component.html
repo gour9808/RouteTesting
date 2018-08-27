@@ -1,9 +1,20 @@
-<!-- <table><tr><td>{{root.time}}</td></tr></table>
+<div id="DebugLog" style="display:block;overflow-x:  scroll;padding:  10px;font-size:  90%;">
+    <div style="display: block;" id="controls" title="Salesforce Debug Log">
+        <div id="toolbar">
+            <span id="include" style="display: inline-block; margin-left: 19px;">
+                <input id="userDebugOnly" type="checkbox" checked="" (click)="render();"><label for="userDebugOnly">User Debug Only</label>
+                <input id="includeTime" type="checkbox" checked="" (click)="render();"><label for="includeTime">Time</label>
+                <input id="includeMicroseconds" type="checkbox" checked="" (click)="render();"><label for="includeMicroseconds">Microseconds</label>
+                <input id="includeObjectId" type="checkbox" checked="" (click)="render();"><label for="includeObjectId">ObjectId</label>
+                <input id="includeSubcategory" type="checkbox" checked="" (click)="render();"><label for="includeSubcategory">Line/Subcat</label>
+                <input id="includeCategory" type="checkbox" checked="" (click)="render();"><label for="includeCategory">Category</label>
+            </span>
+        </div>
+    </div>
 
-<pre>{{ hero}}</pre>
-<div id="output">testpage </div> -->
+    <div id="log">
+        <table id="output" style="font-family: monospace">
+        </table>
+    </div>
 
-<div id='log'>
-    <table id='output' style='font-family: monospace'>
-    </table>
 </div>

@@ -4,12 +4,15 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastMessageService } from '../services/toast-message.service';
 import * as  root from '../model/root';
 import * as node from '../model/node';
-import * as node4Line from '../model/nodeLine';
+/*import * as node4Line from '../model/nodeLine';*/
 
 @Component({
   selector: 'app-view-log-detail',
   templateUrl: './view-log-detail.component.html',
-  styleUrls: ['./view-log-detail.component.scss']
+  styleUrls: ['./view-log-detail.component.scss'],
+  host: {
+    '(document:body)': 'onDocumentBody($event)'
+  }
 })
 export class ViewLogDetailComponent implements OnInit {
   @ViewChild('selector') private someName;
@@ -21,7 +24,7 @@ export class ViewLogDetailComponent implements OnInit {
   data: any;
   root: root.Root = new root.Root();
   node: node.Node = new node.Node();
-  node4Line: node4Line.Node4Line = new node4Line.Node4Line();
+  /*node4Line: node4Line.Node4Line = new node4Line.Node4Line();*/
   extTree: any
   nodeStack: any[] = [];
   hero: any
@@ -35,6 +38,13 @@ export class ViewLogDetailComponent implements OnInit {
   warned = false;
   devRef: any;
   selectedCategories: string[] = ['Technology', 'Sports'];
+  debugCheckboxRef = false;
+  includeTimeCheckboxRef = false;
+  includeMicrosecondsCheckboxRef = false;
+  includeObjectIdCheckboxRef = false;
+  includeSubcategoryCheckboxRef = false;
+  includeCategoryCheckboxRef = false;
+
   constructor(private mine: MineLogsService,
     private toast: ToastMessageService,
     private route: ActivatedRoute,
@@ -47,11 +57,7 @@ export class ViewLogDetailComponent implements OnInit {
 
     });
     this.getParticularLog();
-    //this.hero = JSON.stringify(this.root)
   }
-
-
-
 
   getParticularLog() {
     this.mine.getParticularLog(this.id).subscribe(res => {
@@ -65,6 +71,12 @@ export class ViewLogDetailComponent implements OnInit {
   }
 
   realParse(input) {
+    this.root['time'] = 'TIME';
+    this.root['microseconds'] = 'MICROSECONDS';
+    this.root['category'] = 'CATEGORY';
+    this.root['line'] = 'LINE/SUBCAT';
+    this.root['objectId'] = 'OBJECTID';
+    this.root['text'] = 'TEXT';
     delete this.root.children;
     this.root.children = [];
     this.nodeStack = [this.root];
@@ -82,24 +94,24 @@ export class ViewLogDetailComponent implements OnInit {
         var node4Line = this.parseLine(line, false);
         if (line.indexOf('USER_DEBUG') > 0) {
           while (!this.timeRegex.test(lines[++i])) {
-            this.node4Line = this.parseLine(lines[i], true);
+            node4Line = this.parseLine(lines[i], true);
           }
           --i;
         }
         if (line.indexOf('CUMULATIVE_LIMIT_USAGE') > 0 && line.indexOf('CUMULATIVE_LIMIT_USAGE_END') < 0) {
           while (lines[++i].indexOf('CUMULATIVE_LIMIT_USAGE_END') < 0) {
-            this.node4Line.children.push({
-                time: '',
-                line: '',
-                microseconds: '',
-                objectId: '',
-                category: '',
-                leaf: true,
-                text: '\r\n' + lines[i],
-                isEntry: false,
-                isExit : false,
-                isException : false,
-                isDebug : false
+            node4Line.children.push({
+              time: '',
+              line: '',
+              microseconds: '',
+              objectId: '',
+              category: '',
+              leaf: true,
+              text: '\r\n' + lines[i],
+              isEntry: false,
+              isExit: false,
+              isException: false,
+              isDebug: false
             });
           }
           --i;
@@ -115,9 +127,6 @@ export class ViewLogDetailComponent implements OnInit {
     if (input && input.length > 0 && numOk === 0) {
       alert("Didn't understand the input.");
     }
-    alert("got data");
-
-
     this.render();
   }
 
@@ -126,7 +135,7 @@ export class ViewLogDetailComponent implements OnInit {
 
   parseLine(line, isDebug) {
 
-
+    this.node = new node.Node();
     this.node.leaf = false;
     this.node.children = [];
 
@@ -175,7 +184,7 @@ export class ViewLogDetailComponent implements OnInit {
     if (this.node.isEntry) {
       this.indent++;
       this.nodeStack[this.nodeStack.length - 1].children.push(this.node);
-      this.nodeStack.push(node);
+      this.nodeStack.push(this.node);
     } else if (this.node.isExit) {
       this.indent--;
       var offNode = this.nodeStack.pop();
@@ -196,7 +205,7 @@ export class ViewLogDetailComponent implements OnInit {
 
     this.node.text = this.format([line]);
     console.log("node is", this.node);
-    
+
     return this.node;
 
   }
@@ -223,115 +232,121 @@ export class ViewLogDetailComponent implements OnInit {
 
   realRender() {
 
-    var table = document.getElementById('output');
+    var table = this.elementRef.nativeElement.querySelector('#output');
     table.innerHTML = ''; // Remove existing output
+    this.debugCheckboxRef = this.elementRef.nativeElement.querySelector('#userDebugOnly').checked;
+    this.includeTimeCheckboxRef = this.elementRef.nativeElement.querySelector('#includeTime').checked;
+    this.includeMicrosecondsCheckboxRef = this.elementRef.nativeElement.querySelector('#includeMicroseconds').checked;
+    this.includeObjectIdCheckboxRef = this.elementRef.nativeElement.querySelector('#includeObjectId').checked;
+    this.includeSubcategoryCheckboxRef = this.elementRef.nativeElement.querySelector('#includeSubcategory').checked;
+    this.includeCategoryCheckboxRef = this.elementRef.nativeElement.querySelector('#includeCategory').checked;
 
     // Faster plain table rendering
-    var includeTime = true
-    var includeMicroseconds = true
-    var includeCategory = true
-    var includeSubcategory = true
-    var includeObjectId = true
+    var includeTime = this.includeTimeCheckboxRef;
+    var includeMicroseconds = this.includeMicrosecondsCheckboxRef;
+    var includeCategory = this.includeCategoryCheckboxRef;
+    var includeSubcategory = this.includeSubcategoryCheckboxRef;
+    var includeObjectId = this.includeObjectIdCheckboxRef;
 
     if (!this.root.children || this.root.children.length == 0) {
       return;
     }
 
-    this.renderNode(table, root, -1, includeTime, includeMicroseconds, includeCategory, includeSubcategory, includeObjectId);
+    this.renderNode(table, this.root, -1, includeTime, includeMicroseconds, includeCategory, includeSubcategory, includeObjectId);
 
   }
 
-   renderNode(table, node, depth, includeTime, includeMicroseconds, includeCategory, includeSubcategory, includeObjectId) {
+  renderNode(table, node, depth, includeTime, includeMicroseconds, includeCategory, includeSubcategory, includeObjectId) {
 
-      var tr = document.createElement('tr');
+    var tr = document.createElement('tr');
 
-      node.tr = tr;
-      tr['node'] = node;
-      console.log("node in render node", node);
-      
+    node.tr = tr;
+    tr['node'] = node;
+    console.log("node in render node", node);
 
-      if (includeTime) this.createCell(tr, node.time);
-      if (includeMicroseconds) this.createCell(tr, node.microseconds);
-      if (includeObjectId) this.createCell(tr, node.objectId);
-      if (includeSubcategory) this.createCell(tr, node.line);
-      if (includeCategory) this.createCell(tr, node.category);
 
-      var paddingLeft = 30 * depth;
-      if (true)
-     this. createCell(tr, node.text);
+    if (includeTime) this.createCell(tr, node.time);
+    if (includeMicroseconds) this.createCell(tr, node.microseconds);
+    if (includeObjectId) this.createCell(tr, node.objectId);
+    if (includeSubcategory) this.createCell(tr, node.line);
+    if (includeCategory) this.createCell(tr, node.category);
 
-      if (node.isException) {
-          tr.className = 'exception';
-      } else if (node.isDebug) {
-          tr.className = 'debug';
-      } else if (node.isHeader) {
-          tr.className = 'header';
+    var paddingLeft = 30 * depth;
+    if (this.debugCheckboxRef)
+      this.createCell(tr, node.text);
+
+    if (node.isException) {
+      tr.className = 'exception';
+    } else if (node.isDebug) {
+      tr.className = 'debug';
+    } else if (node.isHeader) {
+      tr.className = 'header';
+    } else {
+      tr.className = 'logRow';
+    }
+
+
+    table.appendChild(tr);
+
+    if (node.children) {
+
+      for (var i = 0; i < node.children.length; i++) {
+        this.renderNode(table, node.children[i], depth + 1, includeTime, includeMicroseconds, includeCategory, includeSubcategory, includeObjectId);
+      }
+
+    }
+  }
+
+
+  createCell(tr, text) {
+
+    var td = document.createElement('td');
+
+    td.className = 'logCell';
+    td.appendChild(document.createTextNode((text)));
+    tr.appendChild(td);
+  }
+
+  handleToggle(e) {
+
+    var event = e ? e : window.event;
+    var target = event.target ? event.target : event.srcElement;
+    var row = target.parentElement.parentElement;
+    var node = row['node'];
+
+    var isExpand = !node.expanded;
+    node.expanded = isExpand;
+    //previously image change function used as given below... 
+    //node.tr.src = isExpand ? 'expand.png' : 'collapse.png';
+    //Now its changed...
+    var numberOfNodeTrChilds = node.tr.children.length;
+    node.tr.children[numberOfNodeTrChilds - 1].children[0].src = isExpand ? 'collapse.png' : 'expand.png';
+    node.tr.style.backgroundColor = isExpand ? '#eee' : '#fdf';
+
+    this.toggle(node, isExpand);
+
+  }
+
+  toggle(node, isExpand) {
+
+    for (var i = 0; node.children && i < node.children.length; i++) {
+
+      var child = node.children[i];
+
+      if (!isExpand) {
+        child.tr.style.display = 'none';
+        this.toggle(child, isExpand);
       } else {
-          tr.className = 'logRow';
-      }
-     
 
-      table.appendChild(tr);
+        child.tr.style.display = '';
 
-      if (node.children) {
-
-          for (var i = 0; i < node.children.length; i++) {
-             this. renderNode(table, node.children[i], depth + 1, includeTime, includeMicroseconds, includeCategory, includeSubcategory, includeObjectId);
-          }
-
-      }
-  }
-
-
-   createCell(tr, text) {
-
-      var td = document.createElement('td');
-
-      td.className = 'logCell';
-      td.appendChild(document.createTextNode((text)));
-      tr.appendChild(td);
-  }
-
-   handleToggle(e) {
-
-      var event = e ? e : window.event;
-      var target = event.target ? event.target : event.srcElement;
-      var row = target.parentElement.parentElement;
-      var node = row['node'];
-
-      var isExpand = !node.expanded;
-      node.expanded = isExpand;
-      //previously image change function used as given below... 
-      //node.tr.src = isExpand ? 'expand.png' : 'collapse.png';
-      //Now its changed...
-      var numberOfNodeTrChilds = node.tr.children.length;
-      node.tr.children[numberOfNodeTrChilds - 1].children[0].src = isExpand ? 'collapse.png' : 'expand.png';
-      node.tr.style.backgroundColor = isExpand ? '#eee' : '#fdf';
-
-     this. toggle(node, isExpand);
-
-  }
-
-   toggle(node, isExpand) {
-
-      for (var i = 0; node.children && i < node.children.length; i++) {
-
-          var child = node.children[i];
-
-          if (!isExpand) {
-              child.tr.style.display = 'none';
-              this.toggle(child, isExpand);
-          } else {
-
-              child.tr.style.display = '';
-
-              if (child.expanded) {
-                  this.toggle(child, isExpand);
-              }
-
-          }
-
+        if (child.expanded) {
+          this.toggle(child, isExpand);
         }
+
       }
+
+    }
+  }
 
 }
