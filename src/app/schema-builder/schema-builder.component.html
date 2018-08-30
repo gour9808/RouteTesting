@@ -1,0 +1,29 @@
+<p-table [value]="objectList" [paginator]="true" [style]="{'margin-top':'10px'}" 
+      [rows]="10"  paginatorPosition  = "top">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>All Objects</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-obj>
+        <tr [pSelectableRow]="obj">
+            <td><input type="checkbox" data-md-icheck (change)="getAllFields($event, obj)">{{obj.label}}
+                <p-table [value]="fieldList" [paginator]="true" [style]="{'margin-top':'10px'}" 
+                    [rows]="10" loadingIcon="fa-circle-o-notch" [loading]="loading" paginatorPosition  = "top">
+                  <ng-template pTemplate="header">
+                      <tr>
+                          <th>All Fields</th>
+                      </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-fld>
+                      <tr [pSelectableRow]="fld">
+                          <td><input type="checkbox" >{{fld.label}}
+                              
+                          </td>
+                      </tr>
+                  </ng-template>
+                </p-table>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

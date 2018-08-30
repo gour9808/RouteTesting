@@ -28,7 +28,7 @@ export class AllComponent implements OnInit, OnDestroy {
   label: string = "Stop watching"
 
 
-  constructor(private mineService: MineLogsService, private toast: ToastsManager, vcr: ViewContainerRef, private router: Router, private route: ActivatedRoute) {
+  constructor(private mineService: MineLogsService,  private toast: ToastsManager, vcr: ViewContainerRef, private router: Router, private route: ActivatedRoute) {
     this.toast.setRootViewContainerRef(vcr)
   }
 
@@ -72,6 +72,7 @@ export class AllComponent implements OnInit, OnDestroy {
     }
     else {
       this.getAllLogs();
+      //this.getAllObjects();
     }
   }
 

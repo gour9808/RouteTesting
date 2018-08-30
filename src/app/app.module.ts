@@ -46,6 +46,8 @@ import {PanelModule} from 'primeng/panel';
 import {CheckboxModule} from 'primeng/checkbox';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import { SchemaService } from './services/schema.service';
+import { SchemaBuilderComponent } from './schema-builder/schema-builder.component';
 
 
 
@@ -61,7 +63,7 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
     ViewLogDetailComponent,
     ViewDebugLevelLogComponent,
     CreditsComponent,
-    AccessDeniedComponent,
+    AccessDeniedComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -97,7 +99,7 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
       useClass: HttpInterceptorService,
       multi: true
     },
-    ToastMessageService, MineLogsService,
+    ToastMessageService, MineLogsService,SchemaService,
     OAuthGuard,
     SlimLoadingBarService,
     ToolbarTitleService,

@@ -15,6 +15,7 @@ import { ViewLogDetailComponent } from './view-log-detail/view-log-detail.compon
 import { ViewDebugLevelLogComponent } from './view-debug-level-log/view-debug-level-log.component';
 import { CreditsComponent } from './credits/credits.component';
 import { ViewLogsByUserComponent } from './view-logs-by-user/view-logs-by-user.component';
+import { SchemaBuilderComponent } from './schema-builder/schema-builder.component';
 
 export const eventRoutes: Routes = [
     { path: 'all', component: EventsComponent },
@@ -33,6 +34,7 @@ export const MineRoutes: Routes = [
     {path : 'view', component : ViewLogsByUserComponent},
     { path: "flag", component: FlagComponent },
     { path: "debugLevelLog", component: ViewDebugLevelLogComponent },
+    { path: "schema", component: SchemaBuilderComponent }
 
 ]
 

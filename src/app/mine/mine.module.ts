@@ -20,6 +20,7 @@ import {PanelModule} from 'primeng/panel';
 import {CheckboxModule} from 'primeng/checkbox';
 import { ViewLogsByUserComponent } from '../view-logs-by-user/view-logs-by-user.component';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import { SchemaBuilderComponent } from '../schema-builder/schema-builder.component';
 
 
 
@@ -29,8 +30,8 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
         CommonModule, FormsModule,AutoCompleteModule,TabViewModule,CalendarModule,CardModule,ToggleButtonModule,
         FlexLayoutModule, TableModule,ScrollPanelModule, WidgetsModule, DialogModule, ButtonModule, DropdownModule, WidgetsModule
     ],
-    exports: [RouterModule, MineComponent, FlagComponent,ViewLogsByUserComponent, AllComponent],
-    declarations: [ AllComponent, MineComponent, FlagComponent, TimeAgoPipe, ViewLogsByUserComponent, FilterPipe],
+    exports: [RouterModule, MineComponent, FlagComponent,ViewLogsByUserComponent, AllComponent, SchemaBuilderComponent],
+    declarations: [ AllComponent, MineComponent, FlagComponent, TimeAgoPipe, ViewLogsByUserComponent, FilterPipe, SchemaBuilderComponent],
     providers: [],
 })
 export class MineModule {

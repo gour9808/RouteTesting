@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   tabs = [
     { name: 'All', path: 'allLogs', closable:false },
     { name: 'Mine', path: 'logs' , closable: false},
+    { name: 'Schema Builder', path: 'schema' },
     { name: '', path: 'flag', icon: 'fa fa-flag', closable : false }
   ];
   constructor(private comms: CommunicatorService) {
