@@ -1,0 +1,7 @@
+@import "../widget.scss";
+
+input[type=text],
+input[type=date],
+.ui-inputtext.ui-widget.ui-state-default.ui-corner-all {
+    @extend .input-design;
+}

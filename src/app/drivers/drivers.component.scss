@@ -1,0 +1,13 @@
+// @import '../home/home.component.scss';
+// @import '../setup-wizard/setup-wizard.component.scss';
+// @import '../user-profile/user-profile.component.scss';
+.avatar {
+    margin: 0px;
+    max-width: 32px;
+    max-height: 32px;
+    margin: 5px;
+    margin-right: 11px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+}

@@ -1,0 +1,44 @@
+<div [ngClass]="class" fxFlex fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row" fxLayoutAlign="start">
+    <i *ngIf="!pictureURL && icon" [style.color]="color" class="mdi attach-icon" [ngClass]="icon"></i>
+    <div fxFlex="75px"  fxLayout="column" *ngIf="pictureURL">
+      <span class="attach-image">
+        <a [href]="pictureURL" target="_blank"><img [src]="pictureURL" alt=""></a>
+      </span>
+        </div>
+
+    <div fxFlex fxLayout="column" class="file-upload">
+      <span class="input-label">{{label | translate}} </span>
+      <div fxLayput="row">
+        <div *ngIf="!pictureURL && !showFile">
+          <span (click)='file.click()' style="cursor: pointer;">{{ 'CLICK_HERE_TO_UPLOAD_FILE' | translate }}</span>
+          <input [hidden]='true' accept="image/*" type="file" #file (change)='onFilesSelected($event)'>
+        </div>
+        <div *ngIf="showLoader">
+          <span class="name">{{ file.name }} </span>
+          <span fxFlex style="height: 20px;" fxLayoutAlign="start">
+            <cbp-svg-circular-loader fxLayoutAlign="start"></cbp-svg-circular-loader>
+          </span>
+        </div>
+        <div *ngIf="pictureURL">
+          <a [href]="pictureURL" class="name" target="_blank">{{ 'VIEW_RECEIPT' | translate }}</a>
+          <span fxFlex style="height: 20px;" fxLayoutAlign="start">
+            <i class="mdi mdi-delete delete-icon" [pTooltip]="'REMOVE_FILE' | translate" *ngIf="pictureURL || !showLoader" (click)="isDialogVisible = true"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<cbp-dialog [showDialog]="isDialogVisible" (showDialogChange)="showDialogChange($event)">
+  <cbp-card [label]="'REMOVE_FILE'">
+    <div class="dialog" fxLayout="column" fxLayoutGap="2%">
+      <span fxFlex class="message" [innerHTML]="'ARE_YOU_SURE_TO_REMOVE_FILE' | translate"></span>
+      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="2%">
+        <cbp-flat-button label="CANCEL" type="negative" style="margin-left: 30px;" (click)="isDialogVisible=false"></cbp-flat-button>
+        <cbp-flat-button label="REMOVE" type="positive" (click)="deleteFile()"></cbp-flat-button>
+      </div>
+    </div>
+  </cbp-card>
+</cbp-dialog>

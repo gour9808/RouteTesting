@@ -1,0 +1,7 @@
+<div fxLayout="column" class="input-group">
+    <span class="input-label">{{label | translate}}
+            <span class="asterisk_input" *ngIf="mandatory">  </span>
+    </span>
+    <input type="date" [placeholder]="placeholder|translate" [(ngModel)]="model" (ngModelChange)="modelChange" [attr.value]="model" (change)="onInputChanged()" [maxlength]="maxlength"/>
+    <span *ngIf="error" class="input-error">{{errorMessage |translate}}</span>
+</div>

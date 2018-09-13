@@ -1,0 +1,106 @@
+@import "../../styles/shadow.scss";
+@import "../../styles/utils.scss";
+@import "~mdi/scss/variables";
+@import "~mdi/scss/functions";
+.notification {
+    position: fixed;
+    right: 0;
+    top: 64px;
+    bottom: 0;
+    z-index: 99;
+    width: 360px;
+    @include md-whiteframe-2dp;
+    background-color: #FAFAFA;
+    .header {
+        @include md-whiteframe-2dp;
+        height: 64px;
+        z-index: 2;
+        background: #fafafa;
+        padding: 8px;
+        .title{
+            font-size: 18px;
+            font-weight: bold;
+            color: #555555;
+            &:before {
+                font: normal normal normal 18px/1 "Material Design Icons";
+                content: mdi('bell');
+                margin-right: 5px;
+            }
+        }
+        .mdi{
+            color: rgba(0, 0, 0, .7);
+            font-size: 24px;
+            @include hover-shadow;
+        }
+    }
+    .meta{
+        height: 48px;
+        background: #f1f1f1;
+        padding: 8px;
+        @include border-bottom;
+        .count{
+            font-weight: bold;
+        }
+        .clear{
+            font-size: 14px;
+            @include hover-shadow;
+            &:hover{
+                font-weight: bold;
+            }
+        }
+    }
+    .list {
+        height: 100%;
+        overflow: auto;
+        background: #fafafa;
+        .list-item {
+            min-height: 56px;
+            padding: 8px;
+            @include hover-shadow;
+            .circular {
+                border-radius: 50%;
+                background: #555555;
+                color: white;
+                width: 36px;
+                height: 36px;
+                text-align: center;
+                vertical-align: middle;
+                line-height: 36px;
+                -webkit-transition: .2s ease;
+                transition: .2s ease;
+                margin: 0 8px;
+            }
+            .mdi {
+                @include hover-shadow;
+                margin: 8px;
+                font-size: 24px;
+                color: #555555;
+            }
+            .title {
+                font-size: 16px;
+                font-weight: bold;
+                color: #555555;
+            }
+            .description {
+                font-size: 14px;
+                color: lighten($color: #555555, $amount: 10%);
+                margin-top: 5px;
+            }
+            .time{
+                margin: 8px 0;
+                margin-left: 50px;
+                font-size: 12px;
+                color: lighten($color: #555555, $amount: 20%);
+                &:before {
+                    font: normal normal normal 12px/1 "Material Design Icons";
+                    content: mdi('calendar-clock');
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+}
+
+.notification-not-available {
+    margin-top: 12px;
+}

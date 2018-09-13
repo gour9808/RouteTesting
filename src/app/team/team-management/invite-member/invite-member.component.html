@@ -1,0 +1,17 @@
+<cbp-dialog [showDialog]="showInviteDialog" (showDialogChange)="hide()" (dialogShown)="ngOnInit()">
+    <cbp-card label="INVITE_MEMBER" [searching]="inviteLoading">
+        <div class="dialog" fxLayout="column">
+            <cbp-input-field-text icon="mdi-account" [mandatory]="true" label="NAME" [placeholder]="'ENTER_NAME' | translate" [(model)]="invitation.receiverName"></cbp-input-field-text>
+            <cbp-input-field-text icon="mdi-email" label="EMAIL" [placeholder]="'ENTER_EMAIL_TO_INVITE' | translate" [keyFilter]="'email'"
+                                  mandatory="true" [(model)]="invitation.receiverEmail"></cbp-input-field-text>
+            <cbp-input-field-text icon="mdi-phone" label="PHONE" [placeholder]="'ENTER_PHONE_NUMBER' | translate" [keyFilter]="'num'"
+                                  [(model)]="invitation.receiverPh"></cbp-input-field-text>
+            <cbp-input-field-options icon="mdi-account-network" label="ROLE" [list]="roles" [placeH]="'SELECT_ROLE' | translate" [disabled]="!roles.length"
+                                     [value]="inviteRole" mandatory="true" (selected)="setRole($event)"></cbp-input-field-options>
+            <div fxLayout="row" fxLayoutAlign="end center" class="footer-btn" fxLayoutGap="4%">
+                <cbp-flat-button [disabled]="inviteLoading" label="CANCEL" (click)="hide()"></cbp-flat-button>
+                <cbp-button label="INVITE" (click)="invite()" [disabled]="!goForInvitation() || inviteLoading"></cbp-button>
+            </div>
+        </div>
+    </cbp-card>
+</cbp-dialog>

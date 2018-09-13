@@ -1,0 +1,25 @@
+.licenseCard{
+    background: #FFFFFF;
+    margin: 10px;
+    width:auto;
+    height: 500px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    overflow-x:hidden;
+    .avatar {
+        margin: 0px;
+        margin: 5px;
+        font-size:120px;
+        border-radius: 50%;
+        color: gray;       
+    }
+    .image{
+        margin: 0px;
+        margin: 5px;
+        margin-left: 15px;
+        border-radius: 50%;
+        object-fit: cover;
+        height: 120px;
+        width: 120px;
+    }
+
+}

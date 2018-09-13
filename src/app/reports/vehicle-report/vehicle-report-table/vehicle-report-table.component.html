@@ -1,0 +1,62 @@
+<cbp-card [label]="'VEHICLE_REPORT'" [searching]="loadingVehicles">
+    <div class="card-header" fxLayout="row" fxLayoutAlign="end center" fxFlex>
+        <cbp-calender [title]="'FROM'" [(model)]="fromDate" (modelChange)="fromChange($event)"></cbp-calender>
+        <cbp-calender [title]="'TO'" [(model)]="toDate" (modelChange)="toChange($event)"></cbp-calender>
+        <cbp-icon-button icon="mdi-refresh" (click)="getSummary()" label="REFRESH"></cbp-icon-button>
+        <cbp-icon-button icon="mdi-download" (click)="vehicle.exportCSV()" label="DOWNLOAD"></cbp-icon-button>
+    </div>
+    <div fxLayout="column">
+        <p-table [value]="vehicles" #vehicle [columns]="cols" [loading]="loadingVehicles" [rows]="10" [paginator]="vehicles?.length>10" [pageLinks]="3"
+            sortMode="single" [scrollable]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 50px;"></th>
+                    <th style="text-align: left;">{{ "VEHICLE_NAME" |translate }}</th>
+                    <th style="text-align: right;">{{ "TOTAL_DISTANCE_KMS" |translate }}</th>
+                    <th style="text-align: right;">{{ "TOTAL_TRIPS" |translate }}</th>
+                    <th style="text-align: right;">{{ "TOTAL_DURATION_DRIVEN" |translate }}</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                <tr class="click" (click)="openDetail(rowData)">
+                    <td style="text-align: center; width: 50px;">
+                        <img class="avatar" *ngIf="rowData.make" [src]='getVehicleLogo(rowData.make)' />
+                        <i class="mdi mdi-car" *ngIf="!rowData.make"></i>
+                    </td>
+                    <td>
+                        <div fxLayout='column'>
+                            <span class='vehicle-name'>{{rowData.name ? rowData.name : '-'}}</span>
+                            <span class='vehicle-license'>{{rowData.license}}</span>
+                        </div>
+                    </td>
+                    <td style="text-align: right;">
+                        <span>{{ rowData.totalDistance }}</span>
+                    </td>
+                    <td style="text-align: right;">
+                        <span>{{ rowData.trips }}</span>
+                    </td>
+                    <td style="text-align: right;">
+                        <span>{{ rowData.duration }}</span>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer" let-rowData>
+                <tr>
+                    <td style="width: 50px;"></td>
+                    <td colspan="1">
+                       <strong> {{ "TOTAL" | translate }} </strong>
+                    </td>
+                    <td style="text-align: right;">
+                       <strong>  {{totalDistance}}</strong>
+                    </td>
+                    <td style="text-align: right;">
+                        <strong> {{totalTrips}}</strong>
+                    </td>
+                    <td style="text-align: right;">
+                        <strong> {{totalDuration}}</strong>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</cbp-card>

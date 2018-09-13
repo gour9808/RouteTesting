@@ -1,0 +1,63 @@
+@import "../widget.scss";
+
+.switch-title {
+    font-size: $switch-title;
+    margin: 5px;
+    @include font-weight(bold);
+}
+
+.switch-pseudo {
+    content: "";
+    position: absolute;
+    margin: 0;
+    outline: 0;
+    top: 50%;
+    @include transform(translate(0, -50%));
+    @include transition(0.3s);
+}
+
+.switch-label {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    @include font-weight(medium);
+    text-align: left;
+    padding: 16px 0 16px 44px;
+    &:before {
+        @extend .switch-pseudo;
+    left: 1px;
+    width: 34px;
+    height: 14px;
+        background-color: $switch-background;
+    border-radius: 8px;
+  }
+    &:after {
+        @extend .switch-pseudo;
+    left: 0;
+    width: 20px;
+    height: 20px;
+        background-color: $switch-active-bg;
+        @include border-radius(50%);
+        box-shadow: 0 3px 1px -2px $switch-shadow-color1, 0 2px 2px 0 $switch-shadow-color2, 0 1px 5px 0 $switch-shadow-color3;
+    }
+}
+
+.switch-input {
+    display: none;
+    &:checked + .switch-label:before {
+        background-color: $switch-label;
+    }
+    &:checked + .switch-label:after {
+        background-color: $switch-label-after;
+        @include transform(translate(80%, -50%));
+    }
+    &:disabled + .switch-label {
+    cursor: not-allowed;
+        &:before {
+            background-color: $switch-disable-before;
+        }
+        &:after {
+            background-color: $switch-disable-after;
+        }
+    }
+}

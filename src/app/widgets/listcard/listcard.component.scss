@@ -1,0 +1,29 @@
+@import "../widget.scss";
+@import "../general.scss";
+
+.card {
+    @extend .card-design;
+    cursor: pointer;
+    &.small {
+        min-width: 80%;
+        min-height: 80%;
+    }
+    .material-icons.dash {
+        font-size: $listcard-icon;
+        color: $highlight-color;
+        width: 100%;
+        height: 200px;
+        text-align: center;
+    }
+    .dash-title {
+        font-size: $btn;
+        color: $dash-title;
+        padding: 5px;
+        margin-left: -10px;
+    }
+    .dash-name {
+        font-size: $list-card-name;
+        color: $dash-title;
+        margin-left: -10px;
+    }
+}

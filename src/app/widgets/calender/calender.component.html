@@ -1,0 +1,8 @@
+<div class="input-group" fxLayout="column" fxFlex>
+    <span #calendarLabel class="input-label"> {{title | translate}} </span>
+    <span class="asterisk_input" *ngIf="mandatory">  </span>
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <i *ngIf="icon" [style.color]="iconColor" class="mdi" [ngClass]="icon"></i>
+        <p-calendar dateFormat="dd M yy" [locale]="currentLocale" appendTo="body" [disabled]="disabled" styleClass="cbp-calendar" class="cbp-calendar" [(ngModel)]="model" [showIcon]="false" [showTime]="showTime" (onSelect)="selected($event)" (ngModelChange)="modelChange" [style]="{'width':'100%'}"></p-calendar>
+    </div>
+</div>

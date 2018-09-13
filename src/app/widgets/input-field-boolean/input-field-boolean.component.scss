@@ -1,0 +1,10 @@
+@import "../widget.scss";
+
+.input-label {
+    @extend .label;
+}
+
+select {
+    @extend .select-box;
+}
+

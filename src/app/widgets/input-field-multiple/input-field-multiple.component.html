@@ -1,0 +1,9 @@
+<div fxLayout="column" class="input-group">
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <i *ngIf="icon" [style.color]="iconColor" class="mdi" [ngClass]="icon"></i>
+        <span class="input-label">{{label | translate}}</span>
+        <span class="asterisk_input" *ngIf="mandatory">  </span>
+    </div>
+    <p-chips [placeholder]="placeholder" addOnBlur='true' [(ngModel)]="model" (onAdd)="add($event)" (onRemove)="remove($event)"></p-chips>
+    <span *ngIf="error" class="input-error">{{errorMessage | translate }}</span>
+</div>

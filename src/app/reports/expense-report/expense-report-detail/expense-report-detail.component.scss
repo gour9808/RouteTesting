@@ -1,0 +1,119 @@
+@import '../../../common/common.scss';
+@import "../../../styles/utils";
+
+.pointer { cursor: pointer;}
+.report-header {
+    background: $highlight-color;
+    @include md-whiteframe-2dp;
+    background: $highlight-color;
+    z-index: 3;
+    width: 100%;
+    padding: 0;
+    .info-header {
+        padding: 5px 20px;
+        @include border-bottom-color($info-header-border);
+    }
+    .metrics {
+        .total {
+            font-weight: 700;
+        }
+        .avatar {
+            max-width: 40px;
+            margin-right: 10px;
+            border-radius: 0;
+        }
+        .vehicle-make-model {
+            font-size: 12px;
+            font-style: normal;
+            letter-spacing: 0.2px;
+        }
+        .vehicle-name {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        padding: 5px 22px;
+        &:not(:last-child) {
+            border-right: 1px solid $info-header-border;
+        }
+        &:last-child {
+            margin-right: 12px;
+        }
+        .mdi {
+            font-size: 26px;
+            line-height: 0.9;
+            margin-right: 10px;
+        }
+        .number {
+            font-size: 20px;
+            color: $message-select;
+        }
+        .field {
+            display: block;
+            font-size: 16px;
+            @include font-weight(bold);
+            color: $field;
+            line-height: 1.5;
+        }
+    }
+}
+.expense-list {
+    padding: 8px 20px;
+    min-height: 52px;
+    &:hover {
+        background-color: #f5f6fa;
+    }
+    &:not(:last-child) {
+        @include border-bottom;
+    }
+    .mdi {
+        &.expense-type-icon {
+            font-size: 18px;
+            margin-right: 10px;
+            color: rgba(0, 0, 0, 0.6);
+        }
+    }
+    .expense-meta {
+        font-size: 16px;
+        color: #737373;
+        font-weight: 500;
+        span {
+            padding-right: 8px;
+            line-height: 20px;
+            &:not(:first-child) {
+                padding-left: 8px;
+            }
+            &:not(:last-child) {
+                border-right: 1px solid #9B9B9B;
+            }
+        }
+    }
+    .expense-cost-item {
+        margin: 0 8px 0 8px;
+        .cost {
+            font-size: 16px;
+            color: #5b5b5b;
+            font-weight: bold;
+        }
+        .unit {
+            font-size: 12px;
+            color: #9B9B9B;
+        }
+    }
+    .avatar {
+        max-width: 40px;
+        margin-right: 10px;
+        border-radius: 0;
+    }
+    .vehicle-make-model {
+        font-size: 12px;
+        font-style: normal;
+        letter-spacing: 0.2px;
+    }
+    .vehicle-name {
+        font-size: 16px;
+        margin-bottom: 2px;
+        font-weight: bold;
+        text-transform: capitalize;
+    }
+}

@@ -1,0 +1,11 @@
+.registration-container {
+    height: 100%;
+    overflow: auto;
+    .registration-card {
+        width: 40%;
+        margin: 0 auto;
+        .map-container {
+            margin: 8px;
+        }
+    }
+}

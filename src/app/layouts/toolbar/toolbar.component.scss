@@ -1,0 +1,174 @@
+.toolbar {
+    /*background: #FF5800;*/
+    background: rgb(255, 109, 0);
+    padding: 5px;
+    height: 64px;
+    color: white;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12);
+    .mdi {
+        font-size: 24px;
+        margin: 8px;
+        cursor: pointer;
+        color: white;
+    }
+    .title {
+        font-size: 20px;
+        margin-left: 12px;
+    }
+    .user-info {
+        padding: 12px;
+    }
+    .name {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: 700;
+    }
+    .email {
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.5);
+    }
+    .header {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: 700;
+        padding: 8px 0 8px 12px;
+    }
+    .avatar {
+        max-width: 32px;
+        max-height: 32px;
+        font-size: 28px;
+        margin: 5px;
+        margin-right: 11px;
+        object-fit: cover;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    .button {
+        color: rgba(0, 0, 0, 0.7);
+        background-color: #FFFFFF;
+        span {
+            display: inline-block;
+            font-size: 24px;
+            padding: 8px;
+        }
+    }
+    .ripple {
+        position: relative;
+        overflow: hidden;
+        transform: translate3d(0, 0, 0);
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform .5s, opacity 1s;
+        }
+        &:active:after {
+            transform: scale(0, 0);
+            opacity: .2;
+            transition: 0s;
+        }
+    }
+    .flag-icon-background {
+        background-size: contain;
+        background-position: 50%;
+        background-repeat: no-repeat;
+    }
+    .flag-icon {
+        background-size: contain;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        position: relative;
+        display: inline-block;
+        width: 1.33333333em;
+        line-height: 1em;
+        &:before {
+            content: "\00a0";
+        }
+        &.flag-icon-squared {
+            width: 1em;
+        }
+    }
+    .flag-icon-de {
+        background-image: url(../../../assets/de.svg);
+    }
+    .flag-icon-en {
+        background-image: url(../../../assets/en.svg);
+    }
+    .flag-icon-eg {
+        background-image: url(../../../assets/eg.svg);
+    }
+    .dropdown {
+        position: absolute;
+        top: 64px;
+        overflow: hidden;
+        padding-right: 12px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 6;
+        background-color: #f9f9f9;
+    }
+}
+::ng-deep .ui-overlaypanel-content{
+    padding: 0;
+}
+.popout {
+    min-width: 200px;
+    min-height: 100px;
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.16);
+    font-size: 14px;
+    .header {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: 700;
+        padding: 8px 0 8px 12px;
+    }
+    .user-info {
+        padding: 12px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+        .name {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.5);
+            font-weight: 700;
+        }
+        .email {
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.5);
+        }
+    } // &:before {
+    //     content: "";
+    //     position: absolute;
+    //     width: 0;
+    //     height: 0;
+    //     border-width: 10px;
+    //     border-style: solid;
+    //     border-color: transparent transparent #FFFFFF transparent;
+    //     top: -20px;
+    //     left: 185px;
+    // }
+    cbp-menu-item:not(:last-child) {
+        border-bottom: .5px solid rgba(0, 0, 0, 0.16);
+    }
+    &.notification-popout {
+        color: rgba(0, 0, 0, 0.7); // &:before {
+        //     content: "";
+        //     position: absolute;
+        //     width: 0;
+        //     height: 0;
+        //     border-width: 10px;
+        //     border-style: solid;
+        //     border-color: transparent transparent #FFFFFF transparent;
+        //     top: -20px;
+        //     left: 185px;
+        // }
+    }
+}

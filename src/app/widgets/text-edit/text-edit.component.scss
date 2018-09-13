@@ -1,0 +1,33 @@
+@import '../../styles/utils.scss';
+.in {
+    box-sizing: border-box;
+    display: block;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.87);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.26);
+    outline: 0;
+    width: 100%;
+    height: 20px;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    font-size: $message;
+    font-family: inherit;
+    line-height: inherit;
+    background-image: none;
+    margin:0;
+    &:focus {
+        border-color: $text-edit-focus;
+        border-width: 2px;
+        box-shadow: none;
+    }
+}
+
+.static {
+    outline: none;
+    font-size: $message;
+    color: $icon-label;
+    border: none;
+    width: 100%;
+    height: 20px;
+}

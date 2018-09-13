@@ -1,0 +1,26 @@
+@import "../widget.scss";
+
+.icon-button {
+    padding: 4px;
+    user-select: none;
+    &:hover, &:focus, &:active {
+        cursor: pointer;
+        background: $hover-color;        
+        .icon, .icon-label {
+            color: $icon-label;
+        }
+    }
+    .icon {
+        font-size: $item;
+        color: $icon;
+    }
+    .icon-label {
+        font-size: $icon-label;
+        color: $icon;
+        @include font-weight(bold);
+        text-transform: uppercase;
+    }
+    &.ripple {
+        @include ripple;
+    }
+}

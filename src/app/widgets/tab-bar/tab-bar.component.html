@@ -1,0 +1,9 @@
+<div class="tab-bar" fxLayout="row" fxLayoutAlign="start center">
+    <div *ngFor="let tab of tabs; let isFirst = first"  class="title" fxLayout="row" fxLayoutAlign="center center">
+      <i class="mdi mdi-chevron-right" *ngIf="!isFirst"></i>
+      <span>{{tab.name | translate}}</span>
+    </div>
+  </div>
+
+<!-- [routerLink]="tab.path" routerLinkActive="active" -->
+  

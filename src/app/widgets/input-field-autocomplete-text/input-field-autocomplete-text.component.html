@@ -1,0 +1,11 @@
+<div fxLayout="column" class="input-group">
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <i *ngIf="icon" [style.color]="iconColor" class="mdi" [ngClass]="icon"></i>
+        <span class="input-label">{{label | translate}}
+      <span class="asterisk_input" *ngIf="mandatory">  </span>
+    </span>
+    </div>
+    <p-autoComplete appendTo="body" [disabled]="disabled" [(ngModel)]="model" [placeholder]="placeholder | translate " [suggestions]="results"
+                    (onSelect)="selected($event)" [field]="displayKey" (completeMethod)="search($event)"
+                    (onFocus)="!autocomplete.value && autocomplete.handleDropdownClick()" dropdownMode="current" #autocomplete></p-autoComplete>
+</div>

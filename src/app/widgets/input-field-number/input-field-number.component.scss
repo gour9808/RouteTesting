@@ -1,0 +1,10 @@
+@import "../widget.scss";
+
+input[type=text],input[type=number],.ui-inputtext.ui-widget.ui-state-default.ui-corner-all {
+    @extend .input-design;
+    height: 36px;
+}
+
+.input-label {
+    @extend .label;
+}

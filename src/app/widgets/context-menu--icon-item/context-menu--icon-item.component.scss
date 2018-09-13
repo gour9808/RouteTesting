@@ -1,0 +1,27 @@
+@import "../../styles/utils.scss";
+@import "../widget.scss";
+
+.context-menu-item {
+    padding: 8px;
+    padding-left: 12px;
+    &:hover {
+        font-weight: bold;
+        background: $hover-color;
+        border-left: 4px solid $list-item;
+        padding-left: 8px;
+        cursor: pointer;
+        .label {
+            font-weight: bold;
+        }
+    }
+    .icon {
+        color: #495867;
+        font-size: 20px;
+    }
+    .label {
+        color: #555555;
+        font-size: 16px;
+        font-weight: normal;
+        margin: 0 5px;
+    }
+}

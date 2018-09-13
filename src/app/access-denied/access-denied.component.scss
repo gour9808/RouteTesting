@@ -1,0 +1,36 @@
+.error-500 {
+    background: #eeeeee;
+    h1 {
+        font-size: 112px;
+        text-align: center;
+        line-height: 1;
+        margin-bottom: 16px;
+        font-weight: 500;
+        color: #005fb3;
+    }
+    h4 {
+        font-size: 24px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.54);
+    }
+    h6 {
+        font-size: 17px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.54);
+        margin: 16px auto 48px;
+    }
+    span {
+        font-weight: bold;
+    }
+    a {
+        &:hover{
+            cursor: pointer;
+        }
+        text-align: center;
+        text-decoration: none;
+        color: #005fb3;
+        &:visited {
+            color: #005fb3;
+        }
+    }
+}

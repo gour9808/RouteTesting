@@ -1,0 +1,20 @@
+<cbp-dialog [showDialog]="showAddDialog" (showDialogChange)="hide()" (dialogShown)="ngOnInit()">
+    <cbp-card label="ADD_NEW_USER" [searching]="inviteLoading">
+        <div class="dialog" fxLayout="column">
+            <div fxLayout="row">
+                <cbp-input-field-text fxFlex [mandatory]="true" icon="mdi-account" label="FIRST_NAME" [placeholder]="'ENTER_FIRST_NAME' | translate" [(model)]="unverifiedInvite.unverifiedUserInfo.userEntity.given_name"></cbp-input-field-text>
+                <cbp-input-field-text fxFlex [mandatory]="true" icon="mdi-account" label="LAST_NAME" [placeholder]="'ENTER_LAST_NAME' | translate" [(model)]="unverifiedInvite.unverifiedUserInfo.userEntity.family_name"></cbp-input-field-text>
+            </div>
+            <cbp-input-field-text icon="mdi-email" label="EMAIL" [placeholder]="'ENTER_EMAIL_TO_INVITE' | translate"
+                                  mandatory="true" [keyFilter]="'email'" [(model)]="unverifiedInvite.unverifiedUserInfo.userEntity.email"></cbp-input-field-text>
+            <cbp-input-field-text icon="mdi-phone" label="PHONE" [placeholder]="'ENTER_PHONE_NUMBER' | translate" [keyFilter]="'num'"
+                                  [(model)]="unverifiedInvite.unverifiedUserInfo.userEntity.mobile_number"></cbp-input-field-text>
+            <cbp-input-field-options icon="mdi-account-network" label="ROLE" [list]="roles" [placeH]="'SELECT_ROLE' | translate" [disabled]="!roles.length"
+                                     [value]="inviteRole" mandatory="true" (selected)="setRole($event)"></cbp-input-field-options>
+            <div fxLayout="row" fxLayoutAlign="end center" class="footer-btn" fxLayoutGap="4%">
+                <cbp-flat-button label="CANCEL" (click)="hide()"></cbp-flat-button>
+                <cbp-button label="ADD" (click)="addUser()" [disabled]="!goForAdd() || inviteLoading"></cbp-button>
+            </div>
+        </div>
+    </cbp-card>
+</cbp-dialog>

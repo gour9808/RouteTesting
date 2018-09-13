@@ -1,0 +1,40 @@
+<div fxLayout='column' fxFlex *ngIf="!selectedVehicle" class="tracking-list">
+    <div class="action-bar" fxLayout='row' fxLayoutAlign='start center'>
+        <cbp-input-action-switch [isEnabled]="enableSwitch" [label]="'ACTIVE_VEHICLES'" (state)='filterActive($event)'></cbp-input-action-switch>
+        <span fxFlex></span>
+        <cbp-input-action-switch [isEnabled]="enableSwitch" [label]="'FIT_BOUNDS'" (state)='fitBounds($event)'></cbp-input-action-switch>
+    </div>
+    <cbp-loader *ngIf="!vehicles.length"></cbp-loader>
+    <div class="hover-overflow" *ngIf="vehicles.length">
+        <div class="vehicle-legend" fxLayout='row' fxLayoutAlign='start center' *ngFor='let vehicle of vehicles' (click)='over(vehicle)'
+             fxLayoutGap='2%'>
+            <img class="avatar" [src]='getVehicleLogo(vehicle.make)'/>
+            <div fxLayout='column' fxFlex>
+                <div fxLayout='column'>
+                    <span class="vehicle-make-model">{{vehicle.make}} {{vehicle.model}}</span>
+                    <span class='vehicle-name'>{{vehicle.name}}</span>
+                    <span class="vehicle-license">({{vehicle.numberPlate.strLicense}})</span>
+                    <span class="vehicle-license clock-icon" *ngIf="vehicle.lkl">
+                       <i class="mdi mdi-clock-fast"></i>
+                        <strong>{{vehicle.lkl}}</strong>
+                    </span>
+                </div>
+            </div>
+            <svg height='32' width='32' viewBox="0 0 50 50">
+                <path [attr.d]='carSvg' [attr.fill]='vehicle.color'></path>
+            </svg>
+            <i class="mdi mdi-signal" [style.color]='vehicle.color' *ngIf="vehicle.state == 'ACTIVE'" [pTooltip]="vehicle.state | translate" tooltipPosition="bottom"></i>
+            <i class="mdi mdi-signal-off" [style.color]='vehicle.color' *ngIf="vehicle.state != 'ACTIVE'" [pTooltip]="vehicle.state | translate" tooltipPosition="bottom"></i>
+        </div>
+    </div>
+</div>
+<div fxLayout='column' fxFlex *ngIf="selectedVehicle" class="tracking-list">
+    <div class="action-bar" fxLayout='row' fxLayoutAlign='start center'>
+        <i class="mdi mdi-arrow-left" (click)="unBound()"></i>
+        <span class="title">{{"DETAILS" | translate}}</span>
+    </div>
+    <cbp-loader *ngIf="!vehicles.length"></cbp-loader>
+    <div fxLayout="column">
+        <cbp-tracking-detail-item [vehicle]="selectedVehicle" [driver]="selectedDriver"></cbp-tracking-detail-item>
+    </div>
+</div>

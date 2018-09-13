@@ -1,0 +1,65 @@
+@import '../../../styles/utils.scss';
+@import '../../../styles/shadow.scss';
+
+:host {
+    height: 100%;
+}
+
+.geo-fence-container {
+    height: 100%;
+    .fence-header {
+        padding: 8px;
+        color: #9B9B9B;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .fence-scroll-container {
+        height: 100%;
+        overflow: auto;
+    }
+    .fence-list-item {
+        padding: 8px;
+        min-height: 64px;
+        &:hover {
+            background-color: #f5f6fa;
+            cursor: pointer;
+        }
+        &:not(:last-child) {
+            @include border-bottom;
+        }
+        .fence-name {
+            font-weight: bold;
+            color: #5b5b5b;
+            font-size: 16px;
+        }
+        .fence-update-time {
+            color: #9B9B9B;
+            font-size: 12px;
+            padding: 8px 0;
+        }
+        .fence-property-name {
+            font-weight: bold;
+            color: #9B9B9B;
+            font-size: 14px;
+        }
+        .fence-property-value {
+            color: #5b5b5b;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .mdi.mdi-delete {
+
+        }
+    }
+}
+
+.dialog {
+    max-height: 200px;
+    min-width: 400px;
+    padding: 12px;
+    .message {
+        font-size: 16px;
+        padding: 8px;
+    }
+}
+

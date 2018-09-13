@@ -1,0 +1,31 @@
+<cbp-card [label]="'TOP_DRIVERS'" [searching]="loadingDrivers">
+    <div class="card-header" fxLayout="row" fxLayoutAlign="center center">
+        <cbp-input-field-search #search [placeholder]="'SEARCH'" (searchTerm)='searchTerm.value = $event; search.searching = false'></cbp-input-field-search>
+        <cbp-text-icon-item *ngIf="showAdd" class="click" [label]="'ADD_DRIVER'" icon="mdi-account-plus" (click)="showDialog = true"></cbp-text-icon-item>
+    </div>
+    <div class="driver-container">
+        <div class="driver-item" fxLayout="row" *ngFor="let driver of drivers | limitToPipe: 5 | filterBy:searchTerm | sortBy:'totalDistance'"
+             fxLayoutAlign="start center">
+            <i *ngIf="!driver.profilePhotoURL" class="mdi mdi-account-circle"></i>
+            <img *ngIf="driver.profilePhotoURL" class="avatar" [src]="driver.profilePhotoURL" />
+            <div fxFlex fxLayout="column">
+                <span class="name">{{driver.displayname}}</span>
+                <span class="email">{{driver.currentEMail}}</span>
+            </div>
+            <cbp-text-icon-item fxFlex icon="mdi-fast-forward" color="#4FB979" label="TOTAL_TRIPS" [value]="driver.trips ? driver.trips : '0'"></cbp-text-icon-item>
+            <cbp-text-icon-item fxFlex icon="mdi-speedometer" color="#0079c1" label="DISTANCE" [value]="driver.totalDistance ? (driver.totalDistance + ' kms') : '0 kms'"></cbp-text-icon-item>
+            <!--<i class="mdi mdi-dots-vertical click" (click)="menu.toggle($event)"></i>-->
+        </div>
+    </div>
+</cbp-card>
+<cbp-dialog [(showDialog)]="showDialog">
+    <cbp-driver-search></cbp-driver-search>
+</cbp-dialog>
+<p-overlayPanel #menu [style]="{'border': 'none'}">
+    <div fxLayout="column">
+        <cbp-context-menu--icon-item icon="mdi-eye" [label]="'VIEW_DETAILS'"></cbp-context-menu--icon-item>
+        <cbp-context-menu--icon-item *ngIf="!showAdd" icon="mdi-car" [label]="'ASSIGN_TO_VEHICLE'"></cbp-context-menu--icon-item>
+        <cbp-context-menu--icon-item *ngIf="!showAdd" icon="mdi-delete-forever" [label]="'REMOVE_FROM_FLEET'"></cbp-context-menu--icon-item>
+        <cbp-context-menu--icon-item *ngIf="showAdd" icon="mdi-delete-forever" [label]="'REMOVE_FROM_VEHICLE'"></cbp-context-menu--icon-item>
+    </div>
+</p-overlayPanel>

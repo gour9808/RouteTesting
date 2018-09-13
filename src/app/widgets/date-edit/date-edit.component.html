@@ -1,0 +1,4 @@
+<input id="calendar" type="date" [(ngModel)]="model" [attr.value]="model" (change)="send($event)" 
+(keyup.enter)="isEdit=true" [readonly]="isEdit" style="border:none;font-size:16px;color:rgba(0, 0, 0, 0.8);outline:none"/>
+
+

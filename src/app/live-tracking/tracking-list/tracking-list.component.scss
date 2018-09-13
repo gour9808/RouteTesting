@@ -1,0 +1,91 @@
+@import '../../common/common.scss';
+@import '../../styles/utils.scss';
+
+.hover-overflow {
+    overflow: hidden;
+    margin-right: 5px;
+    &:hover {
+        margin-right: 0px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+}
+
+.tracking-list {
+    background: #FFFFFF;
+}
+
+.action-bar{
+    padding: 5px;
+    min-height: 48px;
+    max-height: 48px;
+    z-index: 1189;
+    color: $field;
+    @include md-whiteframe-2dp;
+    .title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .mdi {
+        margin: 0 12px;
+        @include hover-shadow();
+    }
+}
+
+.vehicle-legend {
+    color: $message-select;
+    padding: 12px;
+    .state-dot {
+        border-radius: 50%;
+        background: $asterisk;
+        height: 8px;
+        width: 8px;
+        margin: 0 8px 0 0;
+    }
+    .vehicle-make-model {
+        font-size: 14px;
+    }
+    .vehicle-name {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .vehicle-license {
+        font-size: 12px;
+        &.clock-icon {
+            margin-top: 5px;
+            .mdi {
+                font-size: 16px;
+                margin-right: 3px;
+                vertical-align: middle;
+            }
+        }
+    }
+    &:hover {
+        border-left: 4px solid $list-item;
+        padding-left: 8px;
+        cursor: pointer;
+        background: $hover-color;
+    }
+    &:not(:last-child) {
+        @include border-bottom-color($info-header-border);
+    }
+    .mdi{
+        margin: 0;
+    }
+    .blink {
+        transition: all 0.5s ease-in-out;
+        animation: blink normal 1s infinite ease-in-out;
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 50;
+    }
+    100% {
+        opacity: 100;
+    }
+}

@@ -1,0 +1,60 @@
+
+@import "../../styles/utils.scss";
+
+cbp-input-field-search {
+    margin: 5px;
+}
+
+.vehicleList-container {
+    height: 400px;
+    min-width: 480px;
+    overflow: hidden;
+    padding-right: 5px;
+    &:hover {
+        overflow: auto;
+    }
+    .vehicleList-item {
+        color: rgba(0, 0, 0, .70);
+        transition: border .5s ease;
+        padding: 12px;
+        // margin-top: 5px;
+        &:hover {
+            cursor: pointer;
+            background: #f1f1f1;
+        }
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba(138, 156, 167, .4);
+        }
+        .vehicle-make-model {
+            font-size: 14px;
+        }
+        .vehicle-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .vehicle-license {
+            font-size: 12px;
+        }
+        .mdi {
+            margin: 0;
+            &.mdi-car {
+                font-size: 32px;
+            }
+        }
+    }
+}
+
+.click {
+    @include button-effect();
+    &.mdi {
+        color: #495867;
+        font-size: 20px;
+    }
+}
+
+.driverAssigned{
+        margin-right:9px !important;
+}
+.noRecords{
+    padding:5px;
+}

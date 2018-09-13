@@ -1,0 +1,48 @@
+<div class="sidebar" fxLayout="column" (onHover)="expanded = $event">
+    <div class="app-header" fxLayout="column">
+        <div fxLayout="row" class="app-name-container">
+            <img class="logo" src="assets/logo.png"/>
+            <span class="app-name">
+                    <a href="https://www.carbookplus.com" target="_blank">CarbookPlus<br>{{'FLEET_MANAGEMENT' | translate}}</a>
+                        <br>
+                </span>
+        </div>
+
+        <div fxLayout="column" class="fleetInfo" (click)="showFleets = !showFleets">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <span class="active-fleet-name" fxFlex>{{fleetName}}</span>
+                <i *ngIf="!showFleets" class="chevron mdi mdi-menu-down"></i>
+                <i *ngIf="showFleets" class="chevron mdi mdi-menu-up"></i>
+            </div>
+            <span class="active-fleet-role">{{role | translate}}</span>
+        </div>
+    </div>
+
+    <div *ngIf="!showFleets">
+        <a *ngFor="let menuItem of menu">
+            <cbp-list-item *ngIf="!menuItem.children && menuItem.active" [label]="menuItem.name | translate" [icon]="menuItem.icon" [path]="menuItem.path"
+                           [query]="menuItem.query"></cbp-list-item>
+            <cbp-expandable-list-item *ngIf="menuItem.children && menuItem.active" [label]="menuItem.name|translate" [icon]="menuItem.icon" [path]="menuItem.path"
+                                      [query]="menuItem.query">
+                <span *ngFor="let child of menuItem.children">
+            <cbp-list-item class="sub" *ngIf="child.active" [label]="child.name | translate" [icon]="child.icon" [path]="child.path" [query]="child.query"></cbp-list-item>
+          </span>
+            </cbp-expandable-list-item>
+        </a>
+    </div>
+
+    <div *ngIf="showFleets" style="overflow:auto">
+        <cbp-fleet-item *ngFor="let fleet of filteredFleets" [label]="fleet.fleetName" [count]="fleet.vehicleIdList ? fleet.vehicleIdList.length : '0'" [subLabel]="fleet.role" icon="mdi-bank"
+                        (click)="setFleet(fleet)"></cbp-fleet-item>
+        <div fxLayout="row" class="search-layout" fxLayoutAlign="start center" fxLayoutGap="2%" (click)="createFleet()">
+            <i class="mdi mdi-plus"></i>
+            <span>{{ 'CREATE_FLEET' | translate }}</span>
+        </div>
+    </div>
+
+    <span fxFlex></span>
+    <span class="footer">
+    Copyright © 2017
+    <a href="https://www.carbookplus.com" id="cbfm-goto-carbookplus.com" target="_blank">CarbookPlus<span class="version">(v{{version}})</span></a>
+    </span>
+</div>

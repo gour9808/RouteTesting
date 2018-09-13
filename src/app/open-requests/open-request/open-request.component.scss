@@ -1,0 +1,21 @@
+@import "../../common/common.scss";
+
+.openReqContainer{
+    height: 100%;
+    width:auto;
+    background: transparent;
+    .actionBar{
+        @include md-whiteframe-2dp;
+        background: white;
+        height: 70px;
+        padding: 0 12px;
+        width: 100%;
+    }
+    cbp-open-req-list{
+        z-index:20;
+    }
+
+    
+}
+
+

@@ -1,0 +1,96 @@
+<div class="fixed-container">
+    <div class="reminder-form">
+        <div fxLayout="row" fxLayoutAlign="center">
+            <cbp-input-field-calendar-highlight fxFlex fxLayoutAlign="center" mandatory="true" [dueDates]="dueDates"
+                                                [inline]="true" [model]="todayDate" (modelChange)="todayDate=$event;getDueTodayList($event)"></cbp-input-field-calendar-highlight>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center">
+            <span class="title">{{ convertToDate(todayDate) }}</span>
+        </div>
+        <div fxLayout="row">
+            <cbp-input-field-calendar [disabled]="!todayDate" mandatory="true" icon="mdi-calendar-clock" iconColor="#f4c20d" fxFlex [title]="'REMINDER_AT'"
+                [timeOnly]="true" [(model)]="dueDate" (modelChange)="setReminderDate($event)" [placeholder]="'ENTER_TIME' | translate"></cbp-input-field-calendar>
+        </div>
+        <div fxLayout="row">
+            <cbp-input-field-options mandatory="true" fxFlex [value]="reminder.recurringRules.recurrence" [label]="'RECURRENCE_TYPE'"
+                [placeH]="'RECURRENCE_TYPE' | translate" [list]="recurrenceType" (selected)="reminder.recurringRules.recurrence = $event"></cbp-input-field-options>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start">
+            <cbp-input-field-options mandatory="true" fxFlex [value]="reminder.reminderType" [label]="'REMINDER_FOR'" [placeH]="'REMINDER_FOR' | translate"
+                [list]="reminderTypeList" (selected)="reminder.reminderType = $event"></cbp-input-field-options>
+        </div>
+        <div fxLayout="row">
+            <cbp-input-field-number (modelChange)="minOdoReading($event)" [error]="showError" [errorMessage]="errorMessage"
+                                    *ngIf="reminder.reminderType == 'SERVICE'" fxFlex [label]="'ODOMETER_READING'" [model]="reminder.odoThreshold" [placeholder]="'ENTER_ODOMETER_READING_WHEN_TO_SERVICE' | translate"></cbp-input-field-number>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center">
+            <cbp-button [label]="'SAVE'" [disabled]="!ignition()" fxLayoutAlign="end" (click)="saveReminder(reminder)" style="margin:12px;"></cbp-button>
+        </div>
+    </div>
+    <div fxLayout="column" fxFlex>
+        <cbp-card [label]="'DAILY_REMINDER'" [searching]="loadingReminder">
+            <div class="list" (cbpClickOutside)="fadeOut()">
+                <div class="list-item" fxLayout="row" fxLayoutAlign="start center" *ngFor="let reminder of dailyReminder; let remind = index">
+                    <i class="mdi type-icon" [ngClass]="reminder.icon"
+                       [ngStyle]="{ 'color': matchTime(reminder.dueDate) ? '#f10000' : 'rgba(0, 0, 0, 0.6)'  }"></i>
+                        <div class="list-data" fxLayout="column" fxFlex="10%" fxLayoutAlign="center center">
+                            <span class="cost pointer"  (click)="selectedRemind = remind; update = true;">{{ convertToTime(reminder.dueDate) }}</span>
+                            <span class="cost" style="position: absolute; z-index: 999;" *ngIf='selectedRemind == remind && update' >
+                                <p-calendar inline="true" appendTo="list-data" styleClass="selectTime" [(ngModel)]="reminder.time" timeOnly="true" hourFormat="12" (onSelect)="setReminderDate($event, reminder)"></p-calendar>
+                            </span>
+                        </div>
+                        <div class="list-data" fxFlex="75%">
+                            <div class="cost">{{ 'REMINDER_FOR' | translate}} {{reminder.reminderType | translate}}</div>
+                            <div class="unit">{{ 'CREATED_BY' | translate}}: {{reminder.userName}}</div>
+                        </div>
+                        <b class="overdue" *ngIf="matchTime(reminder.dueDate)" fxFlex="15%"> {{ 'OVERDUE' | translate }} {{ reminder.dueDate | timeAgo }}</b>
+                        <div fxLayout="row" class="list-action-buttons" fxFlex="15%" fxLayoutAlign="end end">
+                            <!-- <i class="mdi mdi-pencil" *ngIf="checkUpdate(remind,selectedRemind)" [pTooltip]="'EDIT_REMINDER' | translate" (click)="selectedRemind = remind;"></i> -->
+                            <i class="mdi mdi-close-circle" *ngIf="!checkUpdate(remind,selectedRemind)" [pTooltip]="'CANCEL' | translate" (click)="selectedRemind = null"></i>
+                            <i class="mdi mdi-check" *ngIf="!checkUpdate(remind,selectedRemind)" [pTooltip]="'UPDATE_REMINDER' | translate" (click)="selectedRemind=null;updateReminder(reminder)"></i>
+                            <i class="mdi mdi-delete" [pTooltip]="'DELETE_REMINDER' | translate" (click)="reminderValue= reminder;isDialogVisible = true"></i>
+                        </div>
+                </div>
+            </div>
+        </cbp-card>
+        <cbp-card [label]="'DUE_TODAY'" [searching]="loadingReminder">
+                <div class="list" (cbpClickOutside)="hide()">
+                    <div class="list-item" fxLayout="row" fxLayoutAlign="start center" *ngFor="let reminder of dueDateReminder; let i= index">
+                        <i class="mdi type-icon" [ngClass]="reminder.icon" [ngStyle]="{ 'color': iconColor(reminder.dueDate)  } "></i>
+                        <div class="list-data" fxLayout="column" fxFlex="10%" fxLayoutAlign="center center">
+                            <span class="cost pointer"  (click)="selectedIndex = i; updateDue = true"> {{ convertToTime(reminder.dueDate) }}</span>
+                            <span class="cost"  style="position: absolute; z-index: 999;" *ngIf="selectedIndex == i && updateDue">
+                                <p-calendar  inline="true" appendTo="list-data" styleClass="selectTime" [(ngModel)]="reminder.time" timeOnly="true" hourFormat="12" (onSelect)="setReminderDate($event, reminder)"></p-calendar>
+                            </span>
+                        </div>
+                        <div class="list-data" fxFlex="75%">
+                            <div class="cost">{{ 'REMINDER_FOR' | translate}} {{reminder.reminderType | translate}}</div>
+                            <div class="unit">
+                                <span>{{ 'RECURRENCE_TYPE' | translate}}: {{ reminder.recurringRules.recurrence | translate }}</span>
+                                <span>{{ 'CREATED_BY' | translate}}: {{reminder.userName}}</span>
+                            </div>
+                        </div>
+                        <b class="overdue" *ngIf="reminder.dueDate < this.minDate.getTime()" fxFlex="15%"> {{ 'OVERDUE' | translate }} {{ reminder.dueDate | timeAgo }}</b>
+
+                        <div fxLayout="row" class="list-action-buttons" fxFlex="15%" fxLayoutAlign="end center">
+                            <i class="mdi mdi-close-circle" *ngIf="!checkUpdate(i, selectedIndex)" [pTooltip]="'CANCEL' | translate" (click)="selectedIndex = null"></i>
+                            <i class="mdi mdi-check" *ngIf="!checkUpdate(i, selectedIndex)" [pTooltip]="'UPDATE_REMINDER' | translate" (click)="selectedIndex = null;updateReminder(reminder)"></i>
+                            <i class="mdi mdi-delete" [pTooltip]="'DELETE_REMINDER' | translate" (click)="reminderValue= reminder;isDialogVisible = true"></i>
+                        </div>
+                    </div>
+                </div>
+            </cbp-card>
+    </div>
+</div>
+
+<cbp-dialog [showDialog]="isDialogVisible" (showDialogChange)="showDialogChange($event)">
+    <cbp-card [label]="'DELETE_REMINDER'">
+        <div class="dialog" fxLayout="column" fxLayoutGap="2%">
+            <span fxFlex class="message" [innerHTML]="'ARE_YOU_SURE_YOU_WANT_TO_DELETE_REMINDER' | translate"></span>
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="2%">
+                <cbp-flat-button label="CANCEL" type="negative" style="margin-left: 30px;" (click)="isDialogVisible=false"></cbp-flat-button>
+                <cbp-flat-button label="REMOVE" type="positive" (click)="deleteReminder(reminderValue)"></cbp-flat-button>
+            </div>
+        </div>
+    </cbp-card>
+</cbp-dialog>

@@ -1,0 +1,17 @@
+<div fxLayout="row">
+    <div class="icon"  >
+        <i class="mdi" [ngClass]="notification.icon"></i>
+    </div>
+    <div class="message">
+        <div fxLayout="column">
+            <div class="title">{{notification.title}}</div>
+           <!-- <div class="content" *ngIf="notification?.message.length < 23" fxFlex>{{notification.message}}</div>
+            <div class="content" *ngIf="notification?.message.length > 23" fxFlex>{{notification.message.substring(0,40)}}...</div> -->
+            <div class="content" *ngIf="notification?.message.length">{{notification.message}}</div>
+            <div class="date">
+                <span>{{notification.date | date:'medium'}}</span>
+                </div>
+            <ng-content select=".content"></ng-content>
+        </div>
+    </div>
+</div>

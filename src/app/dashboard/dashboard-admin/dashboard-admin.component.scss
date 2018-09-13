@@ -1,0 +1,50 @@
+@import '../../common/common.scss';
+@import "../../styles/utils";
+
+.home-container {
+    overflow: auto;
+    height: 100%;
+    .dashboard-header {
+        background: $highlight-color;
+        @include md-whiteframe-2dp;
+        background: $highlight-color;
+        z-index: 3;
+        width: 100%;
+        padding: 0;
+        .info-header {
+            padding: 15px 20px 10px;
+            @include border-bottom-color($info-header-border);
+        }
+        .fleet-name {
+            font-weight: bold;
+            font-size: 24px;
+            color: $fleet-name;
+        }
+        .user-greeting {
+            color: $label-color;
+            font-size: 20px;
+        }
+        .metrics {
+            padding: 12px 22px;
+            &:not(:last-child) {
+                border-right: 1px solid $info-header-border;
+            }
+            &:last-child {
+                margin-right: 12px;
+            }
+            .mdi {
+                font-size: 42px;
+            }
+            .number {
+                font-size: 24px;
+                color: $message-select;
+            }
+            .field {
+                display: block;
+                font-size: 16px;
+                @include font-weight(bold);
+                color: $field;
+            }
+        }
+    }
+}

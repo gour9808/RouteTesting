@@ -1,0 +1,55 @@
+<!-- <div fxLayout="column">
+
+    <cbp-card label="Invite Driver" [expanded]="true" [searching]="searching" *ngIf="driverCreate">
+      <div fxLayout="row">
+          <cbp-input-field-text [label]="" [placeholder]="'ENTER_EMAIL_ADDRESS'|translate" [errorMessage]="errorMessage" [(model)]="searchEmail"
+            (modelChange)="validateEmail($event)" (keyup.enter)="searchUser()" fxFlex></cbp-input-field-text>
+        </div>
+        <cbp-button [label]="'INVITE'" [disabled]="!searchEnabled()" (click)="searchUser()" style="margin:10px;margin-top:20px;margin-right:10px"></cbp-button>
+        <cbp-button [label]="'CREATE_DRIVER'" (click)="driverCreate=!driverCreate" style="margin:10px;margin-top:20px;margin-right:10px"></cbp-button>
+
+      </div>
+    </cbp-card>
+
+    <cbp-driver-create *ngIf="!driverCreate" (createDriver)="createDriver()"></cbp-driver-create>
+
+    <cbp-card [label]="'SEARCH_RESULTS'" [expanded]="true" *ngIf="searchUsers.length>0">
+      <div fxLayout='column'>
+        <p-dataTable fxFlex [value]="searchUsers" [loading]="loadingDriversSearch" (onRowSelect)="addUser($event)" (onRowUnselect)="removeUser($event)">
+          <p-column field="displayname" [style]="{'width':'32px','height':'32px'}">
+            <ng-template let-col let-log="rowData" pTemplate="body">
+              <i *ngIf="!log.profilePhotoURL" class="material-icons avatar">account_circle</i>
+              <img *ngIf="log.profilePhotoURL" class="avatar" [src]="log.profilePhotoURL" />
+            </ng-template>
+          </p-column>
+
+          <p-column field="displayname" [header]="'NAME'| translate" [style]="{'text-align':'left'}">
+            <ng-template let-col let-log="rowData" pTemplate="body">
+              <div fxLayout="row" fxLayoutAlign="start center" style="margin-left:7px">
+                <div><b>{{log[col.field]}}</b></div>
+              </div>
+            </ng-template>
+          </p-column>
+
+          <p-column field="currentEMail" [header]="'EMAIL'|translate" [style]="{'text-align':'left'}"></p-column>
+          <p-column field="currentEMail" [header]="'ASSIGN_TO_VEHICLE'|translate" [style]="{'text-align':'left'}">
+            <ng-template let-row="rowData" pTemplate="body">
+              <div>
+                <cbp-input-field-options [placeH]="'SELECT_A_VEHICLE'" [list]="vehicleList" [value]="selectedVehicle" (selected)="assignedVehicle($event)"></cbp-input-field-options>
+              </div>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+
+        <div fxLayout="row" fxLayoutAlign="end" style="margin:12px">
+          <cbp-button [label]="'ADD_TO_FLEET'" [disabled]="newUserList.length<1 || !selectVehicle" (click)="addToFleet()"></cbp-button>
+        </div>
+      </div>
+    </cbp-card>
+
+    <cbp-minicard [items]="drivers" (onItemChosen)="onDriverSelected($event)"></cbp-minicard>
+  </div>
+  <ng2-toasty [position]="'bottom-right'"></ng2-toasty>
+   -->
+
+<router-outlet></router-outlet>

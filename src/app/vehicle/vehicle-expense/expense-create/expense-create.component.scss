@@ -1,0 +1,16 @@
+@import '../../../common/common.scss';
+@import '../../../styles/utils.scss';
+
+.create-card {
+    padding: 10px 0 15px;
+    .currency {
+        display: block;
+        padding: 0 8px;
+    }
+    .location {
+        height: 70px;
+    }
+    .gmap {
+        padding: 0 8px;
+    }
+}

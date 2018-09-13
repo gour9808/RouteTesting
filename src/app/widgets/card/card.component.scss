@@ -1,0 +1,50 @@
+@import "../widget.scss";
+@import "../general.scss";
+
+.card {
+    @extend .card-design;
+    .progress {
+        @extend .progress;
+        position: relative;
+        width: 20px;
+        height: 20px;
+        margin: 0 auto;
+    }
+    .header {
+        background: #fafafa;
+        border-bottom: 1px solid $card-title-border;
+        @include font-weight(light);
+        color: $card-title;
+        padding: 0 20px;
+        border-radius: 4px;
+        .card-title {
+            line-height: 48px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+    }
+    &.medium {
+        min-height: 400px;
+    }
+    &.small {
+        min-height: 250px;
+    }
+    .mdi {
+        cursor: pointer;
+    }
+    .card-body {
+        padding: 16px;
+    }
+    .scrollable {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        &:hover, &:focus {
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+    }
+    .large {
+        min-width: 350px;
+        min-height: 400px;
+    }
+}

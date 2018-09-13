@@ -1,0 +1,9 @@
+<div style="height:100%" fxLayout="row">
+    <cbp-sidebar *ngIf="showSidenav" [menu]=menuItems name="Fleet Management"></cbp-sidebar>
+    <div fxLayout="column" fxFlex>
+        <cbp-toolbar (toggleSidenav)="toggle()" class="full-width"></cbp-toolbar>
+        <div style="overflow-y: auto;height:100%;overflow-x:hidden">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+@import "../widget.scss";
+@import "../general.scss";
+@import "../../common/common";
+
+.progress-dialog {
+    @include md-whiteframe-2dp();
+    background: white;
+    padding: 12px;
+}
+.progress {
+    @extend .progress;
+    width: 60px;
+    height: 60px;
+}
+
+.message {
+    font-size: $message;
+    margin: 12px;
+    @include font-weight(bold);
+}

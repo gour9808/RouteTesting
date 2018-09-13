@@ -1,0 +1,53 @@
+<div class="expense-container">
+    <div fxLayout="row">
+        <cbp-actionbar fxFlex>
+            <cbp-icon-button icon="mdi-plus-box" [label]="'ADD_EXPENSE'" (click)="filter=false;expenseTypes.toggle($event)"></cbp-icon-button>
+            <span fxFlex></span>
+            <cbp-input-field-search #search [placeholder]="'SEARCH'" (searchTerm)='searchTerm.value = $event; search.searching = false'></cbp-input-field-search>
+            <cbp-icon-button style="margin: 0 5px 0 10px;" icon="mdi-filter-variant" [label]="'FILTER'" (click)="filter=true;expenseTypes.toggle($event)"></cbp-icon-button>
+            <cbp-icon-button icon="mdi-refresh" [label]="'REFRESH'" (click)="filterValue='';getExpenseData()"></cbp-icon-button>
+        </cbp-actionbar>
+    </div>
+
+    <div fxLayout="column">
+        <cbp-card [label]="'EXPENSES'" [searching]="loadingExpenses">
+            <div class="expense-list" *ngFor="let expense of expenseList | filterBy:searchTerm | filterByAny: filterValue" fxLayout="row" fxLayoutAlign="start center">
+                <i class="mdi expense-type-icon" [ngClass]="expense.icon"></i>
+                <div class="expense-detail-item" fxFlex="85%" (click)="gotoDetails(expense)">
+                    <span class="expense-description">{{expense.description ? expense.description : '-'}}</span>
+                    <div class="expense-meta" fxLayout="row">
+                        <span>Type: <b>{{expense.costType}}</b></span>
+                        <span>Issue Date: <b>{{expense.paymentDate + 'z' | date:'medium'}}</b></span>
+                    </div>
+                </div>
+                <div class="expense-cost-item" fxLayout="column" fxFlex="6%" fxLayoutAlign="end end">
+                    <span class="cost">{{expense.currency + expense.totalprice}}</span>
+                    <span class="unit">Cost</span>
+                </div>
+                <div fxLayout="row" class="expense-action-buttons" fxFlex="6%" fxLayoutAlign="end end">
+                    <i class="mdi mdi-file-image"  *ngIf="expense.receiptImage" (click)="gotoDetails(expense)" [pTooltip]="'VIEW_COST_RECEIPT' | translate"></i>
+                    <i class="mdi mdi-delete" (click)="isDialogVisible = true; selectedExpense = expense" [pTooltip]="'DELETE_EXPENSE' | translate"></i>
+                </div>
+            </div>
+        </cbp-card>
+    </div>
+
+    <p-overlayPanel #expenseTypes [styleClass]="'list-expense'">
+        <cbp-context-menu--icon-item [label]="'ALL' | translate" *ngIf="filter" (click)="filterValue=''"></cbp-context-menu--icon-item>
+        <div class="list-expense" fxLayout="column" *ngFor="let type of expenseType">
+            <cbp-context-menu--icon-item [label]="type.label | translate" (click)="gotoType(type)" [icon]="type.icon"></cbp-context-menu--icon-item>
+        </div>
+    </p-overlayPanel>
+</div>
+
+<cbp-dialog [(showDialog)]="isDialogVisible">
+    <cbp-card label="DELETE_EXPENSE" [searching]="deletingExpense">
+        <div class="dialog" fxLayout="column" fxLayoutGap="2%">
+            <span fxFlex class="message">{{'DELETE_EXPENSE_CONFIRM_MESSAGE' | translate}}</span>
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="2%">
+                <cbp-flat-button label="CANCEL" type="negative" style="margin-left: 30px;" [disabled]="deletingExpense" (click)="isDialogVisible=false"></cbp-flat-button>
+                <cbp-flat-button label="DELETE" type="positive" [disabled]="deletingExpense" (click)="deleteExpense(selectedExpense)"></cbp-flat-button>
+            </div>
+        </div>
+    </cbp-card>
+</cbp-dialog>

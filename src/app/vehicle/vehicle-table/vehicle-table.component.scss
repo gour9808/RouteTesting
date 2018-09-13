@@ -1,0 +1,67 @@
+@import "../../styles/utils";
+
+.vehicle-container {
+    height: 400px;
+    min-width: 480px;
+    overflow: hidden;
+    padding-right: 5px;
+    &:hover{
+        overflow: auto;
+        padding-right: 0;
+    }
+    .vehicle-legend {
+        color: rgba(0, 0, 0, .70);
+        padding: 12px;
+        transition: border .5s ease;
+        @include hover-shadow();
+        .state-dot {
+            border-radius: 50%;
+            background: red;
+            height: 8px;
+            width: 8px;
+            margin: 0 8px 0 0;
+        }
+        .vehicle-make-model {
+            font-size: 12px;
+        }
+        .vehicle-name {
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .vehicle-license {
+            font-size: 12px;
+        }
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba(138, 156, 167, .4);
+        }
+        .mdi {
+            margin: 0;
+            &.mdi-car {
+                font-size: 32px;
+            }
+        }
+    }
+}
+
+.click {
+    @include button-effect();
+    padding: 7px 10px 0 7px;
+    margin: 0px 0 0 0;
+    display: block;
+}
+
+
+.menu-item {
+    height: 48px;
+    padding: 5px;
+}
+
+
+.dialog {
+    max-height: 200px;
+    padding: 12px;
+    .message{
+        font-size: 16px;
+        padding: 8px;
+    }
+}

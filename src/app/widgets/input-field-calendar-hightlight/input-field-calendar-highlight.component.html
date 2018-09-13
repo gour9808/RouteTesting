@@ -1,0 +1,12 @@
+<div class="input-group" fxLayout="column" fxFlex>
+    <p-calendar readonlyInput='true' [disabled]="disabled" [dateFormat]="dateFormat" [minDate]="minDate" [maxDate]="maxDate"
+         [inline]="inline" [monthNavigator]="true" [yearNavigator]="true" hourFormat="12" [yearRange]="yearRange"
+        [showTime]="showTime"  [(ngModel)]="model" appendTo="body" [showIcon]="false" (onSelect)="selected($event)"
+        [style]="{'width':'100%'}">
+        <ng-template pTemplate="date" let-date>
+            <span style="position: relative;">{{date.day}}
+                <span class="highlight" *ngIf="checkDay(date)"></span>
+            </span>
+        </ng-template>
+    </p-calendar>
+</div>

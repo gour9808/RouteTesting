@@ -1,0 +1,53 @@
+<cbp-loader *ngIf="!requestModel"></cbp-loader>
+<cbp-loader *ngIf="creating"></cbp-loader>
+<div class="request-create-form" fxLayout='column' *ngIf="requestModel">
+    <cbp-card [label]="'CONFIRM_BOOKING'">
+    <div fxLayout="column" class="confirm-card" fxLayoutGap="2%">
+      <div fxLayout="row">
+        <cbp-text-icon-item fxFlex icon="mdi-account-circle" color="#4885ed" [label]="'CUSTOMER_NAME'" [value]="requestModel.requestor.name"></cbp-text-icon-item>
+        <cbp-text-icon-item fxFlex icon="mdi-phone" color="#4885ed" [label]="'PHONE'" [value]="requestModel.requestor.contacts[0]"></cbp-text-icon-item>
+      </div>
+      <div fxLayout="row">
+        <cbp-text-icon-item fxFlex icon="mdi-map-marker" color="#3cba54" [label]="'FROM'" [value]="requestModel.openRequest.pickupAddress.city"></cbp-text-icon-item>
+        <cbp-text-icon-item fxFlex icon="mdi-map-marker" color="#db3236" [label]="'TO'" [value]="requestModel.openRequest.dropAddress.city"></cbp-text-icon-item>
+      </div>
+      <div fxLayout="row">
+        <cbp-text-icon-item fxFlex icon="mdi-calendar-clock" color="#f4c20d" [label]="'WHEN'" [value]="getTime(requestModel.openRequest.pickupTime) | date:'medium'"></cbp-text-icon-item>
+      </div>
+      <div fxLayout='row' fxLayoutAlign='end center' fxLayoutGap="2%" style="margin:8px">
+          <cbp-flat-button [label]="'REJECT'" (click)="rejectTrip()"></cbp-flat-button>
+          <cbp-button [label]="'CONFIRM'" (click)="updateRequest()" [disabled]="!goForCreate()"></cbp-button>
+      </div>
+    </div>
+  </cbp-card>
+    <cbp-card *ngIf="selectedVehicle" [label]="'ASSIGN_VEHICLE'">
+    <div class="vehicle-legend no-hover" fxLayout='row' fxLayoutAlign='start center' fxLayoutGap='2%'>
+      <img class="avatar" [src]='getVehicleLogo(selectedVehicle.make)' />
+      <div fxLayout='column' fxFlex>
+        <div fxLayout='row' fxLayoutAlign='start center'>
+          <span class="vehicle-make-model">{{selectedVehicle.make}} {{selectedVehicle.model}}</span>
+        </div>
+        <div fxLayout='row' fxLayoutAlign='start center'>
+          <span class='vehicle-name'>{{selectedVehicle.name}}</span>
+          <span class="vehicle-license">{{selectedVehicle.numberPlate.strLicense}}</span>
+        </div>
+      </div>
+    </div>
+  </cbp-card>
+  <span class="header">{{'AVAILABLE_VEHICLES' | translate}}</span>
+  <div class="hover-overflow">
+    <div class="vehicle-legend" fxLayout='row' fxLayoutAlign='start center' *ngFor='let vehicle of vehicles' (click)='setVehicle(vehicle)'
+      fxLayoutGap='2%' [ngClass]="{'active':requestModel.vehicleId == vehicle.vehicleId}">
+      <img class="avatar" [src]='getVehicleLogo(vehicle.make)' />
+      <div fxLayout='column' fxFlex>
+        <div fxLayout='row' fxLayoutAlign='start center'>
+          <span class="vehicle-make-model">{{vehicle.make}} {{vehicle.model}}</span>
+        </div>
+        <div fxLayout='row' fxLayoutAlign='start center'>
+          <span class='vehicle-name'>{{vehicle.name}}</span>
+          <span class="vehicle-license">{{vehicle.numberPlate.strLicense}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

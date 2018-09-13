@@ -1,0 +1,8 @@
+@import '../../styles/utils.scss';
+.expense-data {
+    padding: 5px 10px;
+    @include border-bottom-color($switch-disable-after);
+}
+.chart {
+    padding: 10px 0 15px;
+}

@@ -1,0 +1,34 @@
+<cbp-card [label]="'BASIC_INFORMATION'" expanded="true">
+  <div fxLayout="column" *ngIf="driver">
+    <div fxLayout="column">
+      <cbp-input-field-text [label]="'NAME'" [model]="driver.displayname" (modelChange)="driver.displayName=$event" fxFlex></cbp-input-field-text>
+      <cbp-input-field-options [label]="'GENDER'" [list]="gender" [value]="chosen" (selected)="chosen=$event"  fxFlex></cbp-input-field-options>
+    </div>
+
+    <div fxLayout="row">
+      <cbp-input-field-text [label]="'PHONE_NUMBER'" [model]="phoneNo" (modelChange)="phoneNo=$event" fxFlex="25%"></cbp-input-field-text>
+      <div fxLayout="column" class="input-group" style="width:50%">
+          <cbp-input-field-chips  icon="mdi-phone" [label]="'PHONE_NUMBER'" [placeholder]="ENTER_PHONE_NUMBER" [(model)]="driver.phoneNumbers"
+          (onAdd)="AddPhone($event)" (onRemove)="RemovePhone($event)" [errorMessage]="errorPhoneNoMessage" [error]="errorPhoneNo"></cbp-input-field-chips>
+      </div>
+    </div>
+
+    <div fxLayout="column">
+        <div fxLayout="row">
+          <cbp-input-field-text [label]="'STREET'" [model]="currentAddress.street" (modelChange)="currentAddress.street=$event" fxFlex></cbp-input-field-text>
+          <cbp-input-field-text [label]="'CITY'" [model]="currentAddress.city" (modelChange)="currentAddress.city = $event" fxFlex></cbp-input-field-text>
+          <cbp-input-field-text [label]="'STATE'" [model]="currentAddress.state" (modelChange)="currentAddress.state = $event" fxFlex></cbp-input-field-text>
+        </div>
+        <div fxLayout="row">
+          <cbp-input-field-options [label]="'COUNTRY'" [list]="countries" (selected)="locale=$event" style="width:100px"fxFlex></cbp-input-field-options>
+          <cbp-input-field-text [label]="'ZIP_CODE'" [model]="currentAddress.postcode" (modelChange)="currentAddress.postcode = $event" fxFlex></cbp-input-field-text>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+      <span fxFlex></span>
+        <cbp-button [label]="'UPDATE'" (click)="updateDetails()" fxLayoutAlign="end" style="margin-bottom:10px;margin-right: 15px;width:150px"></cbp-button>
+    </div>
+  </div>
+</cbp-card>
+<ng2-toasty [position]="'bottom-right'"></ng2-toasty>

@@ -1,0 +1,101 @@
+<div fxLayout="column" fxFlex style="height:100%">
+    <cbp-circular-progress [showDialog]="loadingRequest" [message]="'PLEASE_WAIT'"></cbp-circular-progress>
+    <cbp-actionbar style="z-index:1">
+        <cbp-icon-button icon="mdi-plus-box" [label]="'NEW_REQUEST'" routerLink="../new" [queryParams]="{type:'fleet'}"></cbp-icon-button>
+    <span fxFlex></span>
+        <cbp-icon-button icon="mdi-sort" [label]="'SORT'" (click)="sorty.toggle($event)"></cbp-icon-button>
+        <cbp-icon-button icon="mdi-filter-variant" [label]="'FILTER'" (click)="filterByStatus.toggle($event)"></cbp-icon-button>
+        <cbp-icon-button icon="mdi-refresh" [label]="'REFRESH'" (click)="getAllRequestsInFleet()"></cbp-icon-button>
+        <!-- <cbp-icon-button icon="mdi-magnify" [label]="Search" (click)="sorty.toggle($event)"></cbp-icon-button> -->
+  </cbp-actionbar>
+  <cbp-actionbar style="z-index:0" *ngIf="filter">
+    <div *ngIf="filter" class="chip" fxLayout="row" fxLayoutAlign="start center">
+      <span class="icon" [ngClass]="filter"></span>
+      <span fxFlex>{{filter}}</span>
+      <i class="mdi mdi-close" (click)="filter='';selectedStatus=''" style="position:relative"></i>
+    </div>
+    <!-- <cbp-input-field-search fxFlex placeholder='Search' (searchTerm)='searchTerm = $event'></cbp-input-field-search> -->
+  </cbp-actionbar>
+  <div class="request-container" #scrollContainer fxFlex>
+    <div class="card indicator" [style.border-color]="getColor(item.status)" fxLayout="column" *ngFor='let item of requests | sortBy:selectedSort | filterByStatus: selectedStatus'
+      (click)="checkStatusAndNavigate(item)">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <i class="mdi mdi-account-circle" [style.color]="getColor(item.status)"></i>
+        <div fxLayout="column">
+          <span class="req-name">{{item.requestor.name}}</span>
+          <span>{{item.requestor.emailId}}</span>
+        </div>
+      </div>
+      <div fxLayout="row" class="details" fxLayoutGap="2%">
+        <cbp-text-icon-item fxFlex [icon]="getIcon(item.status)" [color]="getColor(item.status)" [label]="'STATUS'" [value]="getStatus(item.status) | translate"></cbp-text-icon-item>
+        <cbp-text-icon-item fxFlex icon="mdi-calendar-clock" [color]="getColor(item.status)" [label]="'PICKUP_TIME'" [value]="getTime(item.pickupTime) | date:'medium'"></cbp-text-icon-item>
+        <cbp-text-icon-item fxFlex trim="true" icon="mdi-map-marker" color="#3cba54" [label]="'START_ADDRESS'" [value]="item.pickupAddress"></cbp-text-icon-item>
+        <cbp-text-icon-item fxFlex trim="true" icon="mdi-map-marker" color="#db3236" [label]="'END_ADDRESS'" [value]="item.dropAddress"></cbp-text-icon-item>
+        <cbp-text-icon-item fxFlex (mouseenter)="showMoreInfo($event,op,item,true)" icon="mdi-account" [color]="getColor(item.status)"
+          [label]="'DRIVERS'" [value]="item.driverProfile?.displayname ? item.driverProfile?.displayname : '-'"></cbp-text-icon-item>
+        <cbp-text-icon-item fxFlex icon="mdi-car" [color]="getColor(item.status)" [label]="'VEHICLES'" [value]="item.vehicleView?.numberPlate.strLicense"
+          (mouseenter)="showMoreInfo($event,op,item)"></cbp-text-icon-item>
+        <cbp-text-icon-item fxFlex icon="mdi-clock" [color]="getColor(item.status)" [label]="'TRIP_DURATION'" [value]="item.duration | translate"></cbp-text-icon-item>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-overlayPanel #op appendTo="body" [showCloseIcon]="true">
+  <div *ngIf="driverPanel" class="driver-container" fxLayout="column">
+    <div class="driver-item" fxLayout="row" fxLayoutAlign="start center">
+      <i class="mdi mdi-account-circle" *ngIf="!driverHoverItem.profilePhotoURL"></i>
+      <img *ngIf="driverHoverItem.profilePhotoURL" class="avatar" [src]="driverHoverItem.profilePhotoURL" />
+      <div fxLayout="column">
+        <span class="name">{{driverHoverItem.name}}</span>
+        <span class="name">{{driverHoverItem.gender}} </span>
+        <span class="email">{{driverHoverItem.email}}</span>
+      </div>
+    </div>
+    <div class="driver-phone" fxLayout="row" fxLayoutAlign="start center">
+      <i class="mdi mdi-phone-in-talk"></i>
+      <span class="phone">{{driverHoverItem.phone}}</span>
+    </div>
+  </div>
+  <div *ngIf="!driverPanel" class="vehicle-container" fxLayout="column">
+    <div class="vehicle-legend" fxLayout='row' fxLayoutAlign='start center' fxLayoutGap='2%'>
+      <img class="avatar" [src]='getVehicleLogo(vehicleHoverItem.make)' />
+      <div fxLayout='column' fxFlex>
+        <div fxLayout='row' fxLayoutAlign='start center'>
+          <span class="vehicle-make-model">{{vehicleHoverItem.make}} {{vehicleHoverItem.model}}</span>
+        </div>
+        <div fxLayout='row' fxLayoutAlign='start center'>
+          <span class='vehicle-name'>{{vehicleHoverItem.name}}</span>
+          <span class="vehicle-license">({{vehicleHoverItem.license}})</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-overlayPanel>
+<p-overlayPanel #sorty appendTo="body">
+  <!-- <cbp-input-field-options [list]="sort" [(value)]="selectedSort" (selected)="selectedSort = $event;sorting()"></cbp-input-field-options> -->
+  <div fxLayout="column" fxFlex>
+    <span class="option" *ngFor="let item of sort" (click)="selectedSort=item.value">{{item.label}}</span>
+  </div>
+</p-overlayPanel>
+<p-overlayPanel #filterByStatus appendTo="body">
+  <div fxLayout="column" fxFlex fxLayoutAlign="start center">
+    <span class="option" *ngFor="let status of filters" [ngClass]="status.value" (click)="selectedStatus=status.value;filter=status.value">{{status.label}}</span>
+  </div>
+</p-overlayPanel>
+<!-- <p-overlayPanel #requestorOp appendTo="body" [showCloseIcon]="true">
+    <div class="driver-container" fxLayout="column">
+      <div class="driver-item" fxLayout="row" fxLayoutAlign="start center">
+        <i class="mdi mdi-account-circle" *ngIf="!reqtrHoverItem.profilePic"></i>
+        <img *ngIf="reqtrHoverItem.profilePic" class="avatar" [src]="reqtrHoverItem.profilePic" />
+        <div fxLayout="column">
+          <span class="name">{{reqtrHoverItem.name}}</span>
+          <span class="email">{{reqtrHoverItem.email}}</span>
+        </div>
+      </div>
+      <div class="driver-phone" fxLayout="row" fxLayoutAlign="start center">
+        <i class="mdi mdi-phone-in-talk"></i>
+        <span class="phone">{{reqtrHoverItem.phone}}</span>
+      </div>
+    </div>
+  </p-overlayPanel>  -->

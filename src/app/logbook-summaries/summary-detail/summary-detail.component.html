@@ -1,0 +1,101 @@
+<div fxLayout="column">
+    <div class="header-card" fxLayout="column">
+        <div class="info-header" fxLayout="row" fxLayoutAlign="start center">
+            <span class="user-greeting" fxFlex>
+                {{dateRange.from | date:'mediumDate'}}
+            </span>
+        </div>
+        <div fxLayout="row">
+            <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center" *ngFor="let metric of metrics">
+                <div fxLayout="column" fxFlex>
+                    <div class="field">{{metric.label1 | translate}} {{metric.label2 | translate}}</div>
+                    <div class="number">{{metric.value}}</div>
+                    <div class="number">{{metric.type | currency: locale}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <cbp-card [label]="'DRIVER_REPORT'" [searching]="loadingDrivers">
+            <p-table [value]="drivers" [loading]="loadingDrivers" [rows]="10" [paginator]="drivers?.length>10" [pageLinks]="3" sortMode="single"
+                     [scrollable]="true">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 50px;"></th>
+                        <th style="text-align: left;">{{ "DRIVER_NAME" |translate }}</th>
+                        <th style="text-align: right;">{{ "TOTAL_DURATION_HOURS" |translate }}</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                    <tr>
+                        <td style="text-align: center; width: 50px;">
+                            <img class="avatar" *ngIf="rowData.profilePhotoURL" [src]='rowData.profilePhotoURL'/>
+                            <i *ngIf="!rowData.profilePhotoURL" class="mdi mdi-account-circle"></i>
+                        </td>
+                        <td>
+                            <div fxLayout='column'>
+                                <span class='vehicle-name'>{{rowData.displayname ? rowData.displayname : '-'}}</span>
+                                <span class='vehicle-license'>{{rowData.currentEMail}}</span>
+                            </div>
+                        </td>
+                        <td style="text-align: right;">
+                            <span>{{ rowData.duration }}</span>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="footer" let-rowData>
+                    <tr>
+                        <td style="width: 50px;"></td>
+                        <td colspan="1">
+                            <strong> {{ "TOTAL" | translate }} </strong>
+                        </td>
+                        <td style="text-align: right;">
+                            <strong> {{totalDuration}}</strong>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </cbp-card>
+        <cbp-card [label]="'VEHICLE_REPORT'" [searching]="loadingVehicles">
+            <p-table [value]="vehicles" [loading]="loadingVehicles" [rows]="10" [paginator]="vehicles?.length>10" [pageLinks]="3"
+                     sortMode="single" [scrollable]="true">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 50px;"></th>
+                        <th style="text-align: left;">{{ "VEHICLE_NAME" |translate }}</th>
+                        <th style="text-align: right;">{{ "TOTAL_DISTANCE_KMS" |translate }}</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                    <tr>
+                        <td style="text-align: center; width: 50px;">
+                            <img class="avatar" *ngIf="rowData.make" [src]='getVehicleLogo(rowData.make)'/>
+                            <i class="mdi mdi-car" *ngIf="!rowData.make"></i>
+                        </td>
+                        <td>
+                            <div fxLayout='column'>
+                                <span class='vehicle-name'>{{rowData.name ? rowData.name : '-'}}</span>
+                                <span class='vehicle-license'>{{rowData.license}}</span>
+                            </div>
+                        </td>
+                        <td style="text-align: right;">
+                            <span>{{ rowData.totalDistance }}</span>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="footer" let-rowData>
+                    <tr>
+                        <td style="width: 50px;"></td>
+                        <td>
+                            <strong> {{ "TOTAL" | translate }} </strong>
+                        </td>
+                        <td style="text-align: right;">
+                            <strong> {{totalDistance}}</strong>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </cbp-card>
+    </div>
+</div>

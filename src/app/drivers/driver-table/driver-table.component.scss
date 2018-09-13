@@ -1,0 +1,53 @@
+@import '../../styles/shadow.scss';
+@import '../../styles/utils.scss';
+@import "../../widgets/widget.scss";
+@import "../../widgets/general.scss";
+.vehicle-make-model {
+    font-size: 14px;
+}
+
+.driver-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.driver-meta {
+    font-size: 14px;
+}
+
+.mdi-arrow-up-thick {
+    color: green;
+}
+
+.mdi-arrow-down-thick {
+    color: orangered;
+}
+
+.team {
+    .mdi-account-circle {
+        font-size: 36px;
+        color: $label-color;
+    }
+}
+
+.driverTable {
+    .actions {
+        .mdi {
+            font-size: 25px;
+        }
+        .email{
+            cursor:pointer;
+        }
+    }
+}
+
+.dialog {
+    max-height: 200px;
+    padding: 12px;
+    .message{
+        font-size: 16px;
+        padding: 8px;
+    }
+}
+
+

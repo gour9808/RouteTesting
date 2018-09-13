@@ -1,0 +1,10 @@
+<div class="item" fxLayout="column">
+    <div class="main-item" fxLayout="row" fxLayoutAlign="start center" (click)="expanded=!expanded; $event.stopPropagation()"
+         routerLinkActive="active">
+    <i class="mdi" [ngClass]="icon"></i>
+    <span fxFlex>{{label | translate }}</span>
+    <i *ngIf="!expanded" (click)="expanded=!expanded; $event.stopPropagation()"  class="mdi mdi-chevron-down"></i>
+    <i *ngIf="expanded" (click)="expanded=!expanded; $event.stopPropagation()"  class="mdi mdi-chevron-up"></i>
+  </div>
+  <ng-content *ngIf="expanded"></ng-content>
+</div>

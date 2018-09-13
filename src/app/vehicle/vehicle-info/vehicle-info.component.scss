@@ -1,0 +1,20 @@
+@import '../../common/common.scss';
+
+.uploader-box {
+    @include md-whiteframe-2dp;
+    display: block;
+    max-width:500px;
+    max-height:500px;
+    width: auto;
+    height: auto;
+}
+
+.vehicle-detail-card{
+    padding: 6px 7px;
+}
+
+.info{
+    margin-left: 12px;
+}
+
+

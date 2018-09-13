@@ -1,0 +1,24 @@
+@import '../../styles/shadow.scss';
+@import "../widget.scss";
+
+.input-label {
+    @extend .label;
+}
+
+select {
+    @extend .select-box;
+}
+
+.multiple-option {
+    .ui-multiselect-header .ui-multiselect-filter-container {
+        width: 100%;
+    }
+    .ui-multiselect-panel .ui-multiselect-filter-container .fa{
+        display: none;
+    }
+    .ui-widget-header{
+        background: transparent;
+        border: none;
+        @include md-whiteframe-1dp;
+    }
+}

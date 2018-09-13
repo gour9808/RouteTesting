@@ -1,0 +1,33 @@
+@import "../widget.scss";
+
+p-chips {
+    input[type=text],
+    .ui-inputtext.ui-widget.ui-state-default.ui-corner-all {
+        @extend .input-design;
+    }
+    .ui-inputtext.ui-state-focus,
+    .ui-inputtext:focus {
+        box-shadow: none;
+    }
+    .ui-widget-header .ui-state-default,
+    .ui-widget-content .ui-state-default,
+    .ui-state-default {
+        border: none;
+    }
+    .ui-chips-token{
+        margin: 5px;
+    }
+    .ui-chips-input-token {
+        width: 100%;
+    }
+
+    .ui-state-highlight {
+        border-color: $radio-span;
+        background: $radio-span;
+        color: $highlight-color;
+    }
+}
+
+.input-label {
+    @extend .label;
+}

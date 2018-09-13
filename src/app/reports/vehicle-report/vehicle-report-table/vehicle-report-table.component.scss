@@ -1,0 +1,30 @@
+@import "../../../styles/utils.scss";
+@import "../../../styles/colors.scss";
+
+.vehicle-make-model {
+    font-size: 14px;
+}
+
+.vehicle-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.vehicle-license {
+    font-size: 12px;
+}
+
+.mdi-arrow-up-thick {
+    color: green;
+}
+
+.mdi-arrow-down-thick {
+    color: orangered;
+}
+
+.click {
+    &:hover {
+        cursor: pointer;
+        background: $hover-color;
+    }
+}

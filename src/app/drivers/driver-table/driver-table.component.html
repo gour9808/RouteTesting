@@ -1,0 +1,81 @@
+<cbp-card [label]="'DRIVERS'" [searching]="loadingDrivers">
+    <div class="card-header">
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap='2%'>
+            <cbp-input-field-search #search [placeholder]="'SEARCH'" (searchTerm)='searchTerm.value = $event; search.searching = false'></cbp-input-field-search>
+            <cbp-icon-button icon="mdi-refresh" [label]="'REFRESH'" (click)="getDriversInFleet()"></cbp-icon-button>
+        </div>
+    </div>
+    <div fxLayout="column" class="driverTable">
+        <p-table [value]="drivers | filterBy:searchTerm" *ngIf="drivers" [rows]="10" loadingIcon="fa-spinner" [paginator]="true"
+                 [pageLinks]="3">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 50px; text-align: center;"></th>
+                    <th style="width: 50%; text-align: left;">{{ "DRIVER_NAME" |translate }}</th>
+                    <th style="text-align: right; width: 25%">{{ "TOTAL_DISTANCE_KMS" |translate }}</th>
+                    <th style="text-align: right; width: 25%;">{{ "TOTAL_TRIPS" |translate }}</th>
+                    <th style="text-align: right; width: 25%;">{{ "TOTAL_DURATION_DRIVEN" |translate }}</th>
+                    <th style="text-align: center;width: 80px;">{{'ACTION' | translate}}</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-driver let-rowIndex="rowIndex">
+                <tr class="team">
+                    <td style="text-align: center" class="team" [style]="{'width': '200px'}">
+                        <i *ngIf="!driver.profilePhotoURL" class="mdi mdi-account-circle"></i>
+                        <img *ngIf="driver.profilePhotoURL" class="avatar" [src]="driver.profilePhotoURL"/>
+                    </td>
+                    <td style="text-align: left;">
+                        <div fxLayout='column'>
+                            <span class='driver-name'>{{driver.displayname ? driver.displayname : '-'}}</span>
+                            <span class='driver-meta'>{{driver.currentEMail}}</span>
+                        </div>
+                    </td>
+                    <td style="text-align: right;">
+                        <span class="join-time">{{driver.totalDistance }}</span>
+                    </td>
+                    <td style="text-align: right;">
+                        <span class="join-time">{{driver.trips }}</span>
+                    </td>
+                    <td style="text-align: right;">
+                        <span class="join-time">{{driver.duration }}</span>
+                    </td>
+                    <td style="text-align: center;" class="actions">
+                        <i class="mdi mdi-dots-vertical click" *ngIf="driver.status!='REMOVED' && driver.status!='INVITE' && driver.status!='PENDING' && driver.status!='REJECTED' && driver.status!='ABORTED'" (click)="menu.toggle($event);currentDriver=driver;index=rowIndex"></i>
+                        <i *ngIf="driver.status == 'REMOVED'" class="mdi mdi-delete-forever removed" [pTooltip]="'DRIVER_IS_REMOVED' | translate" tooltipPosition="bottom"></i>
+                        <i *ngIf="driver.status == 'REJECTED'" class="mdi mdi-account-off removed" [pTooltip]="'INVITATION_REJECTED' | translate" tooltipPosition="bottom"></i>
+                         <i *ngIf="driver.status == 'PENDING'" class="mdi mdi-account-check removed" [pTooltip]="'INVITATION_SENT'| translate" tooltipPosition="bottom"></i>
+                        <i *ngIf="driver.status == 'INVITE' && !progress[rowIndex]" class="mdi mdi-email removed email" (click)="invite(driver,rowIndex)" [pTooltip]="'INVITE_DRIVER'| translate" tooltipPosition="bottom"></i>
+                        <cbp-svg-circular-loader *ngIf="progress[rowIndex]==true"></cbp-svg-circular-loader>
+                        <i *ngIf="driver.status == 'ABORTED'" class="mdi mdi-cancel removed"  [pTooltip]="'INVITATION_ABORTED'| translate" tooltipPosition="bottom"></i>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</cbp-card>
+
+<p-overlayPanel #filterby [style]="{'min-width':'200px','overflow':'auto','border': 'none'}">
+    <cbp-context-menu--icon-item [label]="type.label" *ngFor="let type of filterType" (click)="filterValue = type.value"></cbp-context-menu--icon-item>
+</p-overlayPanel>
+<cbp-dialog [(showDialog)]="isVehicleDialogVisible" (showDialogChange)="vehicleDialogChange($event)">
+    <vehicle-search-list *ngIf="isVehicleDialogVisible" [driver]="currentDriver"></vehicle-search-list>
+</cbp-dialog>
+<p-overlayPanel #menu [style]="{'border': 'none'}">
+    <div fxLayout="column">
+        <cbp-context-menu--icon-item icon="mdi-car" (click)="isVehicleDialogVisible=true;" [label]="'ADD_TO_VEHICLE'"></cbp-context-menu--icon-item>
+        <cbp-context-menu--icon-item icon="mdi-delete-forever" *ngIf="currentDriver?.status=='ACTIVE' || currentDriver?.status=='INACTIVE'" (click)="isRemoveDialogVisible=true;" [label]="'REMOVE_FROM_FLEET'"></cbp-context-menu--icon-item>
+    </div>
+</p-overlayPanel>
+
+<cbp-dialog [showDialog]="isRemoveDialogVisible" (showDialogChange)="removeDialogChange($event)">
+    <cbp-card [label]="'REMOVE_DRIVER'" [searching]="removingDriver">
+        <div class="dialog" fxLayout="column" fxLayoutGap="2%">
+            <span fxFlex class="message">Are you sure to remove driver
+                <b>{{currentDriver?.displayname}}</b> from the fleet?</span>
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="2%">
+                <cbp-flat-button label="CANCEL" type="negative" style="margin-left: 30px;" (click)="isRemoveDialogVisible=false;"></cbp-flat-button>
+                <cbp-flat-button label="REMOVE" type="positive" [disabled]="removingDriver" (click)="removeDriver(currentDriver.userId)"></cbp-flat-button>
+            </div>
+        </div>
+    </cbp-card>
+</cbp-dialog>

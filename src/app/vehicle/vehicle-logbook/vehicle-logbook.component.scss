@@ -1,0 +1,141 @@
+@import "~mdi/scss/variables";
+@import "~mdi/scss/functions";
+@import "../../styles/utils";
+@import "../../common/common.scss";
+
+:host {
+    height: 100%;
+    overflow: hidden;
+}
+
+.logbook-page {
+    height: 100%;
+    overflow: hidden;
+}
+
+cbp-card {
+    height: 100%;
+}
+.logbook-container {
+    //height: 700px;
+    overflow: auto;
+    .log-item {
+        padding: 8px;
+        max-height: 120px;
+        min-height: 100px;
+        &.gap {
+            background-color: #f5f6fa;
+        }
+        @include hover-shadow();
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba(138, 156, 167, .4);
+        }
+        .address {
+            font-size: 14px;
+            font-weight: bold;
+            color: #555555;
+        }
+        .time {
+            font-size: 12px;
+            margin-left: 24px;
+        }
+        .distance-duration {
+            font-size: 14px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .driver {
+            font-size: 14px;
+            text-align: center;
+        }
+    }
+}
+
+.log-detail {
+    width: 500px;
+    min-height: 480px;
+    @include md-whiteframe-4dp;
+    background: white;
+    .driver-detail {
+        padding: 12px 15px;
+        border-top: 2px solid #f8f8f8;
+        .driver-avatar {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border-radius: 100%;
+            margin-right: 7px;
+            border: 1px solid #d9d6d3;
+            text-align: center;
+            color: #d9d6d3;
+            font-size: 6px;
+            line-height: 27px;
+            position: relative;
+            top: 2px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            img {
+                max-width: 100%;
+                width: 100%;
+                border-radius: 100%;
+            }
+            .mdi {
+                font-size: 20px;
+                margin: 0;
+            }
+        }
+        .label {
+            font-size: 12px;
+            display: block;
+            margin: 0 0 3px;
+            color: #656565;
+            font-weight: 500;
+        }
+        .label-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #656565;
+        }
+        .driver-contact {
+            margin: 15px 0 0;
+        }
+        .driver-number {
+            font-size: 16px;
+            font-weight: 700;
+            position: relative;
+            display: block;
+            a {
+                text-decoration: none;
+                color: rgba(0, 0, 0, 0.7);
+            }
+            .flag {
+                font-size: 9px;
+                color: #c0c0c0;
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+        }
+    }
+    .logTime {
+        margin: 0 0 5px 20px;
+        font-size: 14px;
+        color: #656565;
+    }
+}
+
+.hr-text {
+    z-index: 1;
+    position: relative;
+    top: 20px;
+    background: #95afc0;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    height: 24px;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 4px;
+    border-radius: 4px;
+}

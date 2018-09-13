@@ -1,0 +1,64 @@
+@import "../../common/common.scss";
+@import "../../styles/utils.scss";
+
+.mdi-account-circle {
+    font-size: 24px;
+    margin: 5px;
+}
+
+.avatar {
+    height: 24px;
+    width: 24px;
+    margin: 5px;
+}
+
+.search-bar {
+    height: 48px;
+    @include md-whiteframe-4dp;
+    z-index: 1;
+}
+
+.click {
+    @include button-effect();
+    padding: 8px 10px 3px 9px;
+    margin: 0 8px;
+}
+.email {
+    text-overflow: ellipsis;
+    font-size: 12px;
+    width: 90%;
+    overflow: hidden;
+}
+.driver-container {
+    min-height: 400px;
+    min-width: 480px;
+    overflow: hidden;
+    &:hover{
+        overflow: auto;
+    }
+    .driver-item {
+        height: 56px;
+        padding: 12px;
+        font-size: 14px;
+        margin-top: 5px;
+        .email {
+            text-overflow: ellipsis;
+            font-size: 12px;
+            width: 90%;
+            overflow: hidden;
+        }
+        &:hover {
+            cursor: pointer;
+            background: #f1f1f1;
+        }
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba(138, 156, 167, .4);
+        }
+        .name {
+            font-weight: bold;
+        }
+        .emai{
+            color: rgba(0, 0, 0, .5);
+        }
+    }
+}

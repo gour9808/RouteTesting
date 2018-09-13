@@ -1,0 +1,61 @@
+@import "~ngx-chips/core/styles/core/_core.scss";
+@import "../widget.scss";
+
+$foundation-primary-dark: darken($foundation-primary, 10%);
+
+// this is the tag's theme
+$foundation-tag-theme: (
+    background: $foundation-primary,
+    background-focused: $radio-span,
+    background-active: $foundation-primary-dark,
+    background-hover: $radio-span,
+    color: $highlight-color,
+    color-hover: $highlight-color,
+    border-radius: 2px,
+    height: 24px,
+    line-height: 24px
+);
+
+// this is the delete icon's theme
+$foundation-icon-theme: (
+    fill: $highlight-color,
+    fill-focus: $fill-focus,
+    transition: all 0.35s
+);
+
+// apply theme to the container
+::ng-deep .ng2-tag-input.foundation-theme {
+    @include border-bottom-color($input-border-color);
+    &.ng2-tag-input--focused {
+        @include border-bottom-color($text-edit-focus);
+    }
+}
+
+// apply theme to the tags
+::ng-deep .ng2-tag-input.foundation-theme tag {
+    @include tag-theme($foundation-tag-theme);
+    .tag__text.inline{
+        font-size: $icon-label;
+    }
+}
+
+::ng-deep .ng2-tag-input.foundation-theme tag delete-icon svg{
+    height: 24px !important;
+}
+
+::ng-deep .ng2-tags-container tag-input-form form {
+    margin-bottom: 0;
+    .ng2-tag-input__text-input{
+        height: 24px;
+        margin: 0.1rem 0.3rem 0.1rem 0;
+        background: transparent;
+    }
+}
+// apply theme to the delete icon
+::ng-deep .ng2-tag-input.foundation-theme tag delete-icon {
+    @include icon-theme($foundation-icon-theme);
+}
+
+.input-label {
+    @extend .label;
+}

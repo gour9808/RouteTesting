@@ -1,0 +1,50 @@
+@import "../widget.scss";
+
+.flat-button {
+    border: none;
+    @include border-radius(2px);
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    font-size: $btn;
+    outline: 0;
+    text-decoration: none;
+    color: $flat-btn;
+    background: none;
+    text-align: center;
+    letter-spacing: .5px;
+    @include transition(0.2s);
+    cursor: pointer;
+    &:hover {
+        transform: scale(1.1);
+        background: rgba(255, 109, 0, 0.2);
+        color: rgba(255, 109, 0, 0.9);
+    }
+    &.positive {
+        color: rgba(96, 177, 88, 0.7);;
+        &:hover {
+            background: rgba(96, 177, 88, 0.2);;
+            color: rgba(96, 177, 88, 0.7);;
+        }
+    }
+    &.negative {
+        color: rgba(255, 109, 0, 0.9);
+        &:hover {
+            background: rgba(255, 109, 0, 0.2);
+            color: rgba(255, 109, 0, 0.9);
+        }
+    }
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    // background-color: $table-header;
+    background-color: rgba(76, 175, 80, 0.4);
+}
+
+.ripple {
+    @include ripple;
+}

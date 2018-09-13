@@ -1,0 +1,65 @@
+@import '../../common/common.scss';
+@import "../../styles/utils";
+
+:host {
+    height: 100%;
+}
+.item-container {
+    height: 480px;
+    overflow: auto;
+    .item {
+        padding: 8px 14px;
+        &:not(:last-child) {
+            @include border-bottom;
+        }
+        &:hover {
+            cursor: pointer;
+            background: #f6f7f8;
+        }
+        .req-name {
+            font-size: 16px;
+            margin: 12px 0 5px;
+            color: #757575;
+        }
+        .desc {
+            font-size: 12px;
+            margin-bottom: 10px;
+            color: #9E9E9E;
+        }
+        .count {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .mdi {
+            visibility: hidden;
+            color: #555555;
+            font-size: 28px;
+        }
+        &:hover {
+            .mdi {
+                visibility: visible;
+            }
+        }
+
+    }
+}
+
+.progress {
+    border: 4px solid #f3f3f3 !important;
+    /* Light grey */
+    border-top: 4px solid #ffa726 !important;
+    /* Blue */
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

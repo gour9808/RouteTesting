@@ -1,0 +1,7 @@
+<div fxLayout="row" class="input-group">
+  <label class="radio inline noselect">
+    <input [disabled]="disabled" type="radio" [checked]="checked" [name]="group" value="male" (click)="radioChecked($event,radio)">
+    <span> {{label | translate }} </span>
+      <span class="asterisk_input" *ngIf="mandatory">  </span>
+ </label>
+</div>

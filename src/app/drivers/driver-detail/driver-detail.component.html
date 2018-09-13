@@ -1,0 +1,17 @@
+<div class="driver-detail-container" fxLayout="column">
+    <div class="driver-info-header" fxLayout="column">
+        <!-- Driver Info -->
+        <div *ngIf="driver" class="driver-info-container" fxLayout="row" fxLayoutAlign="start center">
+            <img class="driver-profile-picture" [src]="driver.profilePhotoURL" *ngIf="driver.profilePhotoURL" />
+            <i class="mdi mdi-account-circle" *ngIf="!driver.profilePhotoURL"></i>
+            <div fxLayout="column">
+                <span class="driver-name">{{driver.displayname}}</span>
+                <span class="driver-email">{{driver.currentEMail}}</span>
+            </div>
+        </div>
+        <cbp-tabbar [tabs]="tabs"></cbp-tabbar>
+    </div>
+    <div style="height:100%;overflow-y:auto;overflow-x:hidden">
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+<div class="search-container" fxLayout="row" fxLayoutAlign="start center">
+    <i class="mdi mdi-magnify"></i>
+    <input type="text" autocomplete="off" class="search-box" [placeholder]="placeholder|translate" [disabled]="disabled" [(ngModel)]="model" (keyup)="onInputChanged()" [maxlength]="maxlength"/>
+    <cbp-svg-circular-loader *ngIf="searching"></cbp-svg-circular-loader>
+</div>

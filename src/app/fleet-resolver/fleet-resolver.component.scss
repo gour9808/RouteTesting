@@ -1,0 +1,50 @@
+@import '../common/common.scss';
+@import "../styles/utils";
+
+cbp-card{
+    min-width: 480px;
+    width: 500px;
+    height: 640px;
+}
+
+cbp-tabbar {
+    @include md-whiteframe-1dp;
+    z-index: 3;
+}
+.item-container {
+    height: 100%;
+    overflow: hidden;
+    &:hover{
+        overflow: auto;
+    }
+    .item {
+        padding: 8px 14px;
+        &:not(:last-child) {
+            @include border-bottom;
+        }
+        @include hover-shadow;
+        .req-name {
+            font-size: 20px;
+            margin: 12px 0;
+        }
+        .desc {
+            font-size: 14px;
+            color: #9E9E9E;
+        }
+        .count {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .mdi{
+            visibility: hidden;
+            color: #555555;
+            font-size: 28px;
+        }
+        &:hover{
+            .mdi{
+                visibility: visible;
+            }
+        }
+
+    }
+}

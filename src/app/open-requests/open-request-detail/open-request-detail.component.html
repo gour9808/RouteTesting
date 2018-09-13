@@ -1,0 +1,81 @@
+<div class="request-detail-container" fxLayout="column" *ngIf="currentRequest">
+  <div class="requestor-info-container" fxLayout="column">
+    <div class="requestor-info">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <i class="mdi mdi-account-circle" [style.color]="getColor(currentRequest.openRequest_status)"></i>
+        <div fxLayout="column">
+          <span class="req-name">{{currentRequest.requestor_name}}</span>
+          <span class="req-contact-email">{{currentRequest.openRequest_requestorEmail}}</span>
+          <span class="req-contact-phone">{{currentRequest.requestor_contacts}}</span>
+        </div>
+        <span fxFlex></span>
+          <cbp-flat-button *ngIf="canceltrip" [label]="'CANCEL_TRIP'" (click)="cancelTrip()"></cbp-flat-button>
+          <cbp-flat-button *ngIf="aborttrip" [label]="'ABORT_TRIP'" (click)="abortTrip()"></cbp-flat-button>
+          <cbp-flat-button *ngIf="endtrip" [label]="'END_TRIP'" (click)="endTrip()"></cbp-flat-button>
+      </div>
+    </div>
+    <div fxLayout="row" class="request-info" fxLayoutGap="2%">
+      <cbp-text-icon-item [icon]="getIcon(currentRequest.openRequest_status)" [color]="getColor(currentRequest.openRequest_status)"
+                          [label]="'STATUS'" [value]="getStatus(currentRequest.openRequest_status)"></cbp-text-icon-item>
+      <cbp-text-icon-item icon="mdi-calendar-clock" color="#db3236" [label]="'PICKUP_TIME'" [value]="humanReadableDate(currentRequest.openRequest_pickupTime) | date: 'medium'"></cbp-text-icon-item>
+
+        <cbp-text-icon-item icon="mdi-calendar-clock" color="#db3236" [label]="'START_TIME'" *ngIf="currentRequest.openRequest_startTime != null"
+                            [value]="humanReadableDate(currentRequest.openRequest_startTime) | date: 'medium'"></cbp-text-icon-item>
+        <cbp-text-icon-item icon="mdi-calendar-clock" color="#db3236" [label]="'END_TIME'" *ngIf="currentRequest.openRequest_endTime != null"
+                            [value]="humanReadableDate(currentRequest.openRequest_endTime) | date: 'medium'"></cbp-text-icon-item>
+        <cbp-text-icon-item icon="mdi-clock" [color]="getColor(currentRequest.openRequest_status)"
+                            *ngIf="currentRequest.openRequest_endTime != null"
+                            [label]="'TRIP_DURATION'" [value]="tripduration"></cbp-text-icon-item>
+    </div>
+  </div>
+  <div class="detail-info-container" fxLayout="row" fxFlex>
+    <div class="driver-vehicle-info">
+      <div fxLayout="column">
+          <cbp-card [label]="'VEHICLE_ASSIGNED'">
+          <div class="vehicle-legend" fxLayout='row' fxLayoutAlign='start' fxLayoutGap='2%'>
+            <img class="vehicle-logo" [src]='getVehicleLogo(currentRequest.vehicleView_make)' />
+            <div fxLayout='column'>
+              <span class="vehicle-make">{{currentRequest.vehicleView_make}}</span>
+              <span class="vehicle-model">{{currentRequest.vehicleView_model}}</span>
+              <span class="vehicle-license">{{currentRequest.vehicleView_numberPlate_strLicense}}</span>
+              <span class="vehicle-name">{{currentRequest.vehicleView_name}}</span>
+            </div>
+          </div>
+        </cbp-card>
+          <cbp-card [label]="'DRIVER_ASSIGNED'">
+          <div class="driver-container" fxLayout="column">
+            <div class="driver-item" fxLayout="row" fxLayoutAlign="start center">
+              <i class="mdi mdi-account-circle" *ngIf="!currentDriver.profilePhotoURL"></i>
+              <img *ngIf="currentDriver.profilePhotoURL" class="avatar" [src]="currentDriver.profilePhotoURL" />
+              <div fxLayout="column">
+                <span class="name">{{currentRequest.driverProfile_displayname}}</span>
+
+                  <span class="email">
+                  <a href="mailto:{{currentRequest.driverProfile_currentEMail}}" title="Mail Driver">
+                    {{currentRequest.driverProfile_currentEMail}}
+                  </a>
+                </span>
+              </div>
+            </div>
+            <div class="driver-phone" fxLayout="row" fxLayoutAlign="start center">
+              <i class="mdi mdi-phone-in-talk"></i>
+
+                <span class="phone">
+                <a href="tel:{{currentRequest.openRequest_contacts[0]}}" title="Call Driver">
+                  {{currentRequest.openRequest_contacts[0]}} </a>
+              </span>
+            </div>
+          </div>
+        </cbp-card>
+          <cbp-card [label]="'TRIP_INFORMATION'">
+          <div fxLayout="column" fxLayoutGap="4%">
+            <cbp-text-icon-item icon="mdi-map-marker" color="#3cba54" [label]="'From'" [value]="currentRequest.openRequest_pickupAddress_city"></cbp-text-icon-item>
+            <cbp-text-icon-item icon="mdi-map-marker" color="#db3236" [label]="'To'" [value]="currentRequest.openRequest_dropAddress_city"></cbp-text-icon-item>
+          </div>
+        </cbp-card>
+      </div>
+    </div>
+    <p-gmap fxFlex [options]="options" [overlays]="overlays" [style]="{'width':'100%','height':'100%'}" (onMapReady)="setMap($event)"></p-gmap>
+  </div>
+</div>
+<cbp-splash-loader *ngIf="!currentRequest"></cbp-splash-loader>

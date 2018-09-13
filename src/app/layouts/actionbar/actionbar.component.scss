@@ -1,0 +1,8 @@
+@import "../../styles/shadow.scss";
+.action-bar {
+    height: 56px;
+    @include md-whiteframe-1dp;
+    background: white;
+    padding: 4px;
+    z-index: 1;
+}

@@ -1,0 +1,25 @@
+<div class="home-container">
+    <div class="dashboard-header" fxLayout="column">
+        <div class="info-header" fxLayout="row" fxLayoutAlign="start center">
+            <span class="user-greeting" fxFlex>{{'WELCOME' | translate}},
+                <b> {{userInfo.displayname}}</b>
+            </span>
+        </div>
+        <div fxLayout="row">
+            <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center" *ngFor="let metric of metrics">
+                <div fxLayout="column" fxFlex>
+                    <div class="field">{{metric.label1 | translate}} {{metric.label2 | translate}}</div>
+                    <div class="number">{{metric.value}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <cbp-card [label]="'INVITATIONS'" fxFlex [searching]="!inviteLoaded">
+            <div class="scroll-container" style="height: 400px">
+                <cbp-activity-list (loaded)="inviteLoaded = $event"></cbp-activity-list>
+            </div>
+        </cbp-card>
+    </div>
+</div>

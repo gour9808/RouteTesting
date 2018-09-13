@@ -1,0 +1,112 @@
+<div fxLayout="column">
+    <p-overlayPanel #reminder [style]="{'border': 'none', 'width': '450px'}" [showCloseIcon]="true" [dismissable]="false">
+        <div fxLayout="column">
+            <div class="reminder-create-container" fxLayout="row">
+                <cbp-input-field-calendar isAdmin fxFlex mandatory="true" icon="mdi-calendar-clock" iconColor="#f4c20d" (modelChange)="setReminder($event)"
+                                          hourFormat="12" [showTime]="true" [model]="insuranceReminder.dueDate" [title]="'REMIND_ME_ON'" [placeholder]="'ENTER_TIME' | translate"></cbp-input-field-calendar>
+                <cbp-input-field-options isAdmin fxFlex [label]="'ENTER_RECURRENCETYPE'" [placeH]="'ENTER_RECURRENCETYPE' | translate" [list]="recurrenceType"
+                                         [value]="insuranceReminder.recurringRules.recurrence" (selected)="setRecurrenceType($event)"></cbp-input-field-options>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end">
+                <cbp-button [label]="'SAVE'" [disabled]="!goForReminder()" (click)="createInsuranceReminder(reminder)" style="margin:12px;"></cbp-button>
+            </div>
+        </div>
+    </p-overlayPanel>
+
+    <cbp-card [title]="'INSURANCE_POLICY_DETAILS'" [searching]="loadingInsurance">
+        <div class="card-header" fxLayout="row" fxLayoutAlign="end center">
+            <cbp-text-icon-item class="click" icon="mdi-plus" label="ADD_REMINDER_DETAILS" (click)="reminder.show($event)"></cbp-text-icon-item>
+        </div>
+        <p-accordion [multiple]="true">
+            <p-accordionTab [header]="'POLICY_DETAILS' | translate " [selected]="true" [disabled]="true">
+                <div fxLayout="column">
+                    <div fxLayout="row ">
+                        <cbp-input-field-text [label]=" 'INSURANCE_COMPANY_NAME'" [(model)]="insurance.insuranceCompany.name" isAdmin [placeholder]="'ENTER_INSURANCE_COMPANY_NAME' |translate "
+                                              [mandatory]="'true'" fxFlex></cbp-input-field-text>
+                        <cbp-input-field-text [label]=" 'POLICY_NUMBER'" [(model)]="insurance.insuranceCompany.policyNumber" isAdmin [placeholder]="'ENTER_POLICY_NUMBER' |translate "
+                                              [mandatory]="'true'" fxFlex></cbp-input-field-text>
+                    </div>
+
+                    <div fxLayout="row ">
+                        <cbp-calender fxFlex [title]="'FROM' |translate " (modelChange)="setFrom($event)" isAdmin [(model)]="insurance.insuranceCompany.certificateCardValidity.from"></cbp-calender>
+                        <cbp-calender fxFlex [title]="'TO' |translate " (modelChange)="setTo($event)" isAdmin [(model)]="insurance.insuranceCompany.certificateCardValidity.to"></cbp-calender>
+                    </div>
+
+                    <div fxLayout="row ">
+                        <cbp-input-field-text [label]=" 'AGENCY_NAME'" [(model)]="insurance.insuranceCompany.agency " isAdmin [placeholder]="'ENTER_AGENCY_NAME' |translate "
+                                              fxFlex></cbp-input-field-text>
+                        <cbp-input-field-text [label]=" 'AGENT_NAME'" [(model)]="insurance.insuranceCompany.agencyContactName" isAdmin [placeholder]="'ENTER_AGENT_NAME' |translate "
+                                              fxFlex></cbp-input-field-text>
+                    </div>
+
+                    <div fxLayout="row">
+                        <cbp-input-field-text [label]=" 'AGENCY_PHONE_NUMBER'" fxFlex [(model)]="insurance.insuranceCompany.phone" isAdmin [placeholder]="'ENTER_AGENCY_PHONE_NUMBER' |translate "
+                                              fxFlex></cbp-input-field-text>
+                        <div class="policy-check" fxFlex>
+                            <span class="damage ">{{'DOES_POLICY_COVER_MATERIAL_DAMAGE_TO_VEHICLE' | translate}} ?</span>
+                            <cbp-switch [(model)]="insurance.insuranceCompany.materialDamageCovered" isAdmin (modelChange)="setDamage($event)"></cbp-switch>
+                        </div>
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab [header]="'POLICY_HOLDER_DETAILS' |translate">
+                <div fxLayout="column">
+                    <div fxLayout="row">
+                        <cbp-input-field-text [label]=" 'FIRST_NAME'" [(model)]="insurance.insurancePolicyHolder.firstName" isAdmin [placeholder]="'ENTER_FIRST_NAME' |translate "
+                                              fxFlex></cbp-input-field-text>
+                        <cbp-input-field-text [label]=" 'FULL_NAME'" [(model)]="insurance.insurancePolicyHolder.name " isAdmin [placeholder]="'ENTER_FULL_NAME' |translate "
+                                              fxFlex></cbp-input-field-text>
+                    </div>
+
+                    <div fxLayout="row ">
+                        <cbp-input-field-text [label]=" 'EMAIL'" [(model)]="insurance.insurancePolicyHolder.email " isAdmin [placeholder]="'ENTER_EMAIL' |translate "
+                                              fxFlex></cbp-input-field-text>
+                        <cbp-input-field-text [label]=" 'PHONE'" [(model)]="insurance.insurancePolicyHolder.phone" isAdmin [placeholder]="'ENTER_PHONE_NUMBER' |translate "
+                                              fxFlex></cbp-input-field-text>
+                    </div>
+
+                    <div fxLayout="row ">
+                        <cbp-input-field-text [label]=" 'GREEN_CARD_NUMBER'" [(model)]="insurance.insuranceCompany.greenCardNumber" isAdmin [placeholder]="'ENTER_GREEN_CARD_NUMBER' |translate "
+                                              fxFlex></cbp-input-field-text>
+                        <cbp-input-field-text [label]=" 'POLICYHOLDER_LICENSE_NUMBER'" [(model)]="insurance.insurancePolicyHolder.drivingLicenceNumber"
+                                              isAdmin [placeholder]="'ENTER_POLICYHOLDER_LICENSE_NUMBER' |translate " fxFlex></cbp-input-field-text>
+                    </div>
+
+                    <div fxLayout="row ">
+                        <cbp-input-field-text [label]=" 'POLICYHOLDER_LICENSE_CATAGORY'" [(model)]="insurance.insurancePolicyHolder.category" isAdmin [placeholder]="'ENTER_POLICYHOLDER_LICENSE_CATAGORY' |translate "
+                                              fxFlex></cbp-input-field-text>
+                    </div>
+
+                    <div fxLayout="row ">
+                        <cbp-calender fxFlex [title]="'DRIVING_LICENSE_VALIDITY' |translate " (modelChange)="setDlValidity($event)" isAdmin [(model)]="insurance.insurancePolicyHolder.drivingLicenceValidity"></cbp-calender>
+                        <cbp-calender fxFlex [title]="'DATE_OF_BIRTH' |translate " (modelChange)="setDob($event)" isAdmin [(model)]="insurance.insurancePolicyHolder.dateOfBirth "></cbp-calender>
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab [header]="'ADDRESS_INFORMATION' |translate ">
+                <div fxLayout="row ">
+                    <cbp-input-field-text [label]=" 'ADDRESS'" [(model)]="insurance.insurancePolicyHolder.address.street" isAdmin [placeholder]="'ENTER_ADDRESS' |translate "
+                                          fxFlex></cbp-input-field-text>
+                    <cbp-input-field-text [label]=" 'CITY'" [(model)]="insurance.insurancePolicyHolder.address.city" isAdmin [placeholder]="'ENTER_CITY' |translate "
+                                          fxFlex></cbp-input-field-text>
+                </div>
+
+                <div fxLayout="row">
+                    <cbp-input-field-text [label]=" 'COUNTRY'" [(model)]="insurance.insurancePolicyHolder.address.county" isAdmin [placeholder]="'ENTER_COUNTRY' |translate "
+                                          fxFlex></cbp-input-field-text>
+                    <cbp-input-field-text [label]=" 'POSTAL_CODE'" [(model)]="insurance.insurancePolicyHolder.address.postcode" isAdmin [placeholder]="'ENTER_POSTAL_CODE' |translate "
+                                          fxFlex></cbp-input-field-text>
+                </div>
+
+            </p-accordionTab>
+        </p-accordion>
+        <!--<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2%" style="margin:12px">
+    <input type="file" accept="image/*" [(ngModel)]="insurance.pictureUrl" multiple="multiple" #file (change)='onBasicUpload($event)'>
+    <span></span>
+    </div>-->
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="2%" style="margin:12px">
+            <cbp-button [label]="'SAVE'" [disabled]="!goForIgnition()" (click)="choose()"></cbp-button>
+        </div>
+
+    </cbp-card>
+</div>

@@ -1,0 +1,56 @@
+<div class="geo-fence-container">
+    <div fxLayout="row">
+        <cbp-actionbar fxFlex>
+            <cbp-icon-button icon="mdi-plus-box" [label]="'ADD_GEO_FENCE'" (click)="setUpNewFence()"></cbp-icon-button>
+            <span fxFlex></span>
+            <cbp-icon-button icon="mdi-refresh" [label]="'REFRESH'" (click)="fetchGeoFence()"></cbp-icon-button>
+        </cbp-actionbar>
+    </div>
+
+    <div fxLayout="column">
+        <cbp-card [label]="'GEO_FENCES'" [searching]="loadingFences">
+            <div class="fence-header" fxLayout="row">
+                <span fxFlex="30%">Fence Name</span>
+                <span fxFlex>Notify on</span>
+                <span fxFlex>Activate on</span>
+                <span fxFlex>Deactivate on</span>
+                <span fxFlex>Repeat</span>
+                <span fxFlex="5%"></span>
+            </div>
+            <div class="fence-scroll-container">
+                <div class="fence-list-item" *ngFor="let fence of geoFenceList" fxLayout="row" fxLayoutAlign="start center" (click)="openFenceDetail(fence)">
+                    <div fxLayout="column" fxFlex="30%">
+                        <span class="fence-name">{{fence.name}}</span>
+                        <span class="fence-update-time">Type: {{fence.type}} | Radius: {{fence.radius}}m</span>
+                    </div>
+                    <div fxLayout="column" fxFlex>
+                        <span class="fence-property-value">{{fence.notify}}</span>
+                    </div>
+                    <div fxLayout="column" fxFlex>
+                        <span class="fence-property-value">{{fence.activate}}</span>
+                    </div>
+                    <div fxLayout="column" fxFlex>
+                        <span class="fence-property-value">{{fence.deactivate}}</span>
+                    </div>
+                    <div fxLayout="column" fxFlex>
+                        <span class="fence-property-value">{{fence.repeat}}</span>
+                    </div>
+                    <div fxFlex="5%">
+                        <i class="mdi mdi-delete" (click)="isDialogVisible = true; selectedFence = fence; $event.stopPropagation()"></i>
+                    </div>
+                </div>
+            </div>
+        </cbp-card>
+    </div>
+</div>
+<cbp-dialog [showDialog]="isDialogVisible" (showDialogChange)="showDialogChange()">
+    <cbp-card [label]="'CONFIRM DELETE'" [searching]="loadingFences">
+        <div class="dialog" fxLayout="column" fxLayoutGap="2%" *ngIf="selectedFence">
+            <span fxFlex class="message" [innerHTML]="'DELETE_GEOFENCE_CONFIRMATION' | translate:{'fenceName': selectedFence.name}"></span>
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="2%">
+                <cbp-flat-button label="CANCEL" type="negative" [disabled]="loadingFences" (click)="isDialogVisible=false"></cbp-flat-button>
+                <cbp-flat-button label="DELETE" type="positive" [disabled]="loadingFences" (click)="deleteFence(selectedFence)"></cbp-flat-button>
+            </div>
+        </div>
+    </cbp-card>
+</cbp-dialog>

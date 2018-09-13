@@ -1,0 +1,64 @@
+@import "../widget.scss";
+@import "../../styles/shadow.scss";
+@import "../../styles/utils.scss";
+
+.vehicle-search {
+    .avatar {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+        margin: 5px;
+    }
+    .make {
+        font-size: 14px;
+        color: $label-color;
+        font-weight: bold;
+    }
+    .model-variant {
+        font-size: $message;
+        color: $label-color;
+    }
+    ::ng-deep .search-highlight {
+        background-color: #4885ed;
+        font-weight: bold;
+        color: #f1f1f1;
+    }
+}
+
+input[type=text],
+input[type=number],
+.ui-inputtext.ui-widget.ui-state-default.ui-corner-all {
+    @extend .input-design;
+    @extend .disable;
+    @extend .read-only;
+}
+
+.input-label {
+    @extend .label;
+}
+
+.label-container {
+    height: 20px;
+    margin-bottom: 8px;
+}
+
+.search-area {
+    position: relative;
+    display: inline-block;
+    .result-box {
+        display: block;
+        position: absolute;
+        top: 36px;
+        background-color: #f9f9f9;
+        width: 100%;
+        min-height: 160px;
+        max-height: 300px;
+        overflow: auto;
+        @include md-whiteframe-1dp();
+        z-index: 1;
+        .search-item {
+            @include button-effect();
+            @include focus-effect();
+        }
+    }
+}

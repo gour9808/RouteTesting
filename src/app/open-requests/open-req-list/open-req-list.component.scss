@@ -1,0 +1,201 @@
+@import "../../common/common.scss";
+:host {
+    height: 100%;
+}
+
+.request-container {
+    overflow: auto;
+}
+
+.indicator {
+    border-left: 3px solid;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.meta {
+    background: #F1f1f1;
+    padding: 12px;
+}
+
+.card {
+    margin: 12px;
+    padding: 8px;
+    @include md-whiteframe-1dp;
+    background: white;
+    &:first-child {
+        margin-top: 8px;
+    }
+    &:hover {
+        cursor: pointer;
+        background: #FAFAFA;
+    }
+}
+
+.req-name {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.mdi-account-circle {
+    font-size: 32px;
+    color: rgba(0, 0, 0, 0.65);
+    margin: 5px;
+}
+
+.details {
+    margin: 12px 0 0 20px;
+}
+
+.driver-container {
+    max-height: 400px;
+    min-width: 280px;
+    overflow: hidden;
+    &:hover {
+        cursor: pointer;
+        background: #fcfcfc;
+    }
+    .driver-item {
+        height: 56px;
+        padding: 12px;
+        font-size: 14px;
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba(138, 156, 167, .4);
+        }
+        .name {
+            font-weight: bold;
+        }
+        .emai {
+            color: rgba(0, 0, 0, .5);
+        }
+    }
+    .driver-phone {
+        padding: 5px 12px 5px 12px;
+        font-size: 14px;
+        .phone {
+            font-weight: bold;
+        }
+        .mdi {
+            font-size: 14px;
+        }
+    }
+}
+
+.vehicle-container {
+    .vehicle-legend {
+        color: rgba(0, 0, 0, .70);
+        padding: 12px;
+        .state-dot {
+            border-radius: 50%;
+            background: red;
+            height: 8px;
+            width: 8px;
+            margin: 0 8px 0 0;
+        }
+        .vehicle-make-model {
+            font-size: 14px;
+        }
+        .vehicle-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .vehicle-license {
+            margin-left: 8px;
+            font-size: 12px;
+        }
+        &:hover {
+            cursor: pointer;
+            background: #fcfcfc;
+        }
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba(138, 156, 167, .4);
+        }
+        .mdi {
+            margin: 0;
+        }
+    }
+}
+
+.option {
+    color: rgba(0, 0, 0, 0.5);
+    padding: 8px;
+    height: 36px;
+    width: 150px;
+    cursor: pointer;
+    vertical-align: middle;
+    font-weight: bold;
+    &:not(:last-child) {
+        border-bottom: 1px solid rgba(138, 156, 167, .4);
+    }
+    &:hover {
+        color: rgba(0, 0, 0, 0.7);
+    }
+}
+
+.option:hover {
+    background: #E7E2E2
+}
+
+.RECEIVED {
+    border-left: 3px solid #f4c20d;
+}
+
+.ASSIGNED {
+    border-left: 3px solid #4885ed;
+}
+
+.ACCEPTED {
+    border-left: 3px solid #3cba54;
+}
+
+.START_TRIP {
+    border-left: 3px solid #194D04;
+}
+
+.FLTMGR_CANCELLED {
+    border-left: 3px solid #db3236;
+}
+
+.chip {
+    height: 30px;
+    min-width: 150px;
+    border-radius: 32px;
+    margin-left: 15px;
+    @include md-whiteframe-1dp;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    background: #F5EFEF;
+    color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    vertical-align: middle;
+    .icon {
+        height: 30px;
+        width: 30px;
+        border-top-left-radius: 100%;
+        border-bottom-left-radius: 100%;
+        border-top-right-radius: 100%;
+        border-bottom-right-radius: 100%;
+        background: orange;
+        &.RECEIVED {
+            background: #f4c20d;
+        }
+        &.ASSIGNED {
+            background: #4885ed;
+        }
+        &.ACCEPTED {
+            background: #3cba54;
+        }
+        &.START_TRIP {
+            background: #194D04;
+        }
+        &.FLTMGR_CANCELLED {
+            background: #db3236;
+        }
+    }
+    .mdi-close {
+        margin: 5px;
+    }
+}

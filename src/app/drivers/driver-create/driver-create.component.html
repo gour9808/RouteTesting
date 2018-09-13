@@ -1,0 +1,26 @@
+<div fxLayout="column">
+    <cbp-card [label]="'CREATE_DRIVER'" expanded="true">
+    <div class="form" fxLayout="column">
+      <div fxLayout="row" fxFlex>
+        <cbp-input-field-text [label]="'FIRST_NAME'" [placeholder]="'ENTER_FIRST_NAME' | translate" fxFlex></cbp-input-field-text>
+        <cbp-input-field-text [label]="'LAST_NAME'" [placeholder]="'ENTER_LAST_NAME' | translate"   fxFlex></cbp-input-field-text>
+      </div>
+      <cbp-input-field-text [label]="'EMAIL'" [placeholder]="'ENTER_EMAIL' | translate" fxFlex style="margin-top:90px"></cbp-input-field-text>
+      <cbp-input-field-text [label]="'PHONE_NUMBER'" [placeholder]="'ENTER_PHONE_NUMBER' | translate" fxFlex></cbp-input-field-text>
+      <cbp-input-field-text [label]="'LICENSE'" [placeholder]="'ENTER_LICENSE' | translate" fxFlex></cbp-input-field-text>
+    </div>
+        <cbp-button [label]="'CREATE_DRIVER'" (click)="create($event)" fxLayoutAlign="end" fxFlex style="margin-bottom:50px;margin-right:15px"></cbp-button>
+  </cbp-card>
+
+    <!-- <cbp-card label="License Information" expanded="true">
+        <div class="form" fxLayout="column">
+            <div fxLayout="row" fxFlex>
+              <cbp-input-field-text label="License Number" [placeholder]="'ENTER_FIRST_NAME'" fxFlex></cbp-input-field-text>
+              <cbp-input-field-text label="License Category" [placeholder]="'ENTER_LAST_NAME'"   fxFlex></cbp-input-field-text>
+            </div>
+            <cbp-input-field-text [label]="'EMAIL'" [placeholder]="'ENTER_EMAIL'" fxFlex style="margin-top:90px"></cbp-input-field-text>
+            <cbp-input-field-text [label]="'PHONE_NUMBER'" [placeholder]="'ENTER_PHONE_NUMBER'" fxFlex></cbp-input-field-text>
+            <cbp-input-field-text [label]="'LICENSE'" [placeholder]="'ENTER_LICENSE'" fxFlex></cbp-input-field-text>
+          </div>
+    </cbp-card> -->
+</div>

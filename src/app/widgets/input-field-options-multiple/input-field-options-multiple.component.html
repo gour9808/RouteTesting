@@ -1,0 +1,9 @@
+<div fxLayout="column" class="input-group multiple-option">
+  <div fxLayout="row" fxLayoutAlign="start center" style="margin-bottom:8px">
+      <i *ngIf="icon" [style.color]="iconColor" class="mdi" [ngClass]="icon"></i>
+      <span class="input-label">{{label | translate}}</span>
+      <span class="asterisk_input" *ngIf="mandatory">  </span>
+  </div>
+    <p-multiSelect class="custom-dropdown" [disabled]="disabled" [options]="list" [(ngModel)]="value" [filter]="showFilter" (onChange)="onSelected()"
+                   autoWidth="false"></p-multiSelect>
+</div>

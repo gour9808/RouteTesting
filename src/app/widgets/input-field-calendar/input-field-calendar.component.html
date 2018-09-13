@@ -1,0 +1,11 @@
+<div class="input-group" fxLayout="column" fxFlex>
+  <div fxLayout="row" fxLayoutAlign="start center" *ngIf="title">
+    <i *ngIf="icon" [style.color]="iconColor" class="mdi" [ngClass]="icon"></i>
+    <span class="input-label">{{title | translate}}
+        <span class="asterisk_input" *ngIf="mandatory"></span>
+    </span>
+  </div>
+    <p-calendar readonlyInput='true' [disabled]="disabled" [dateFormat]="dateFormat" [minDate]="minDate" [maxDate]="maxDate" [placeholder]="placeholder"
+                [monthNavigator]="true" [yearNavigator]="true" [yearRange]="yearRange" [showTime]="showTime" [timeOnly]="timeOnly" [hourFormat]="hourFormat" [(ngModel)]="model"
+                appendTo="body" [showIcon]="false" (onSelect)="selected($event)" [style]="{'width':'100%'}"></p-calendar>
+</div>

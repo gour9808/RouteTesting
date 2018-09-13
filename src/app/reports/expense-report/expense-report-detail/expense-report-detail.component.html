@@ -1,0 +1,117 @@
+<div class="report-header" fxLayout="column">
+    <div fxLayout="row">
+        <div class="metrics" fxLayout="row" fxFlex="25%" fxLayoutAlign="start center" *ngIf="expensiveVehicle">
+            <div fxLayout="column" fxFlex>
+                <div class="field">{{ "MOST_EXPENSIVE_VEHICLE" | translate }}</div>
+                <div class="number pointer" (click)="openVehicleExpense(expensiveVehicle)" fxLayout="row" fxLayoutAlign="start center">
+                    <img class="avatar" *ngIf="expensiveVehicle.make" [src]='getVehicleLogo(expensiveVehicle.make)'/>
+                    <i class="mdi mdi-car" *ngIf="!expensiveVehicle.make"></i>
+                    <span class="vehicle-name">{{ expensiveVehicle?.numberPlate?.strLicense}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center" *ngIf="!showMonth">
+            <div fxLayout="column" fxFlex>
+                <div class="field">{{ "MOST_EXPENSIVE_CATEGORY" | translate }}</div>
+                <div class="number">{{ expensiveCategory.name | translate}} ({{ expensiveCategory.value | currency: locale }})</div>
+            </div>
+        </div>
+        <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center" *ngIf="showMonth">
+            <div fxLayout="column" fxFlex>
+                <div class="field">{{ "MOST_EXPENSIVE_MONTH" | translate }}</div>
+                <div class="number">{{ expensiveMonth.name | translate}} ({{ expensiveMonth.value | currency: locale }})</div>
+            </div>
+        </div>
+        <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center">
+            <div fxLayout="column" fxFlex>
+                <div class="field">{{ "TOTAL_EXPENSE" | translate }}</div>
+                <div class="number">{{ yearTotalExpense | currency: locale }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div fxLayout="row">
+    <cbp-card [label]="chartLabel" fxFlex>
+        <div style="height: 300px;width:99%; padding-top: 10px;">
+            <ngx-charts-bar-vertical
+                *ngIf="expenseChartData.length && showMonth"
+                [results]="expenseChartData"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]="'MONTH' | translate" [yAxisLabel]="yAxisBar">
+            </ngx-charts-bar-vertical>
+            <ngx-charts-bar-vertical
+                *ngIf="expenseChartData.length && !showMonth"
+                [results]="expenseChartData"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]="'DATE' | translate" [yAxisLabel]="yAxisBar">
+            </ngx-charts-bar-vertical>
+        </div>
+    </cbp-card>
+</div>
+<div fxLayout="row">
+    <cbp-card [label]="'EXPENSE_BY_VEHICLE'" fxFlex="50%" [searching]="loadingExpense">
+        <div style="height: 315px; overflow-y: auto;">
+            <div class="expense-list pointer" *ngFor="let expense of expenseVehicleData" (click)="openVehicleExpense(expense.vehicle)" fxLayout="row" fxLayoutAlign="start center">
+        <span *ngIf="expense.vehicle">
+          <img class="avatar" *ngIf="expense.vehicle.make" [src]='getVehicleLogo(expense.vehicle.make)'/>
+          <i class="mdi mdi-car" *ngIf="!expense.vehicle.make"></i>
+          </span>
+                <div fxLayout='column' fxFlex="80%" *ngIf="expense.vehicle">
+                    <div fxLayout='column'>
+            <span class="vehicle-name">{{ expense.vehicle.name }}
+              <i class="vehicle-make-model"> ({{ expense.vehicle.numberPlate.strLicense}})</i>
+            </span>
+                    </div>
+                    <div fxLayout='row' fxLayoutAlign='start center'>
+                        <div class="vehicle-make-model">{{expense.vehicle.make}} {{expense.vehicle.model}}</div>
+                    </div>
+                </div>
+                <div fxLayout='column' fxFlex="86%" *ngIf="!expense.vehicle"><span class="vehicle-name">No vehicle data found</span></div>
+                <div class="expense-cost-item" fxLayout="column" fxFlex="20%" fxLayoutAlign="end end">
+                    <span class="cost">{{ expense.value | currency: locale }}</span>
+                </div>
+            </div>
+        </div>
+    </cbp-card>
+
+    <cbp-card [label]="'EXPENSES_BY_CATEGORY'" fxFlex="50%" [searching]="loadingExpense" *ngIf="!showMonth">
+        <div style="height: 315px; overflow-y: auto;">
+            <div class="expense-list" fxLayout="row" fxLayoutAlign="start center" *ngFor="let category of expenseCategoryData">
+                <div class="expense-detail-item" fxFlex="80%">
+                    <div class="expense-meta" fxLayout="row">
+                        <span>{{category.name | translate}}</span>
+                    </div>
+                </div>
+                <div class="expense-cost-item" fxLayout="column" fxFlex="20%" fxLayoutAlign="end end">
+                    <span class="cost"> {{category.value | currency: locale}}</span>
+                </div>
+            </div>
+        </div>
+    </cbp-card>
+
+    <cbp-card [label]="'EXPENSES_BY_MONTH'" fxFlex="50%" [searching]="loadingExpense" *ngIf="showMonth">
+        <div style="height: 315px; overflow-y: auto;">
+            <div class="expense-list pointer" fxLayout="row" fxLayoutAlign="start center" *ngFor="let expense of expenseMonthData">
+                <div class="expense-detail-item" fxFlex="80%">
+                    <div class="expense-meta" fxLayout="row">
+                        <span>{{expense.name | translate}}</span>
+                    </div>
+                </div>
+                <div class="expense-cost-item" fxLayout="column" fxFlex="20%" fxLayoutAlign="end end">
+                    <span class="cost">{{expense.value | currency: locale}}</span>
+                </div>
+            </div>
+        </div>
+    </cbp-card>
+</div>

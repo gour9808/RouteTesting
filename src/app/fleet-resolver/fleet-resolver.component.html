@@ -1,0 +1,14 @@
+<div fxLayout="column" style="height: 100%">
+    <cbp-toolbar></cbp-toolbar>
+    <div fxLayout="row" fxLayoutAlign="center center" fxFill style="overflow:auto;">
+        <cbp-card label="My card title" [showHeader]="false">
+            <div fxLayout="column" style="height: 100%">
+                <cbp-tabbar [tabs]="menu"></cbp-tabbar>
+                <div class="scroll-container">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </cbp-card>
+    </div>
+
+</div>

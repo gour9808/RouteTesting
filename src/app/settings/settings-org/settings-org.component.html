@@ -1,0 +1,39 @@
+<cbp-card  [title]="'ORGANIZATION_DETAILS'" [searching]="loading" expanded="organisation">
+    <div class="card" fxLayout="column" *ngIf="organisation">
+      <div class="card-body">
+        <div fxLayout="column">
+          <cbp-input-field-text [label]="'NAME'" [placeholder]="'ENTER_ORGANIZATION_NAME' | translate" [disabled]="submitting" [error]="showErrorForName" [errorMessage]="errorMessage"
+            [(model)]="organisation.organisationName" (modelChange)="validateName($event)" fxFlex></cbp-input-field-text>
+        </div>
+        <div fxLayout="column">
+          <span class="big-label">{{'ADDRESS_INFORMATION' | translate}}</span>
+          <div fxLayout="row">
+            <cbp-input-field-text [label]="'STREET'" [placeholder]="'ENTER_STREET' | translate" [(model)]="organisation.addressInfo.street"
+              style="width:200%"></cbp-input-field-text>
+            <cbp-input-field-text [label]="'CITY'" [placeholder]="'ENTER_CITY' | translate" [(model)]="organisation.addressInfo.city"
+              style="width:200%"></cbp-input-field-text>
+          </div>
+          <div fxLayout="row">
+            <cbp-input-field-text [label]="'STATE'" [placeholder]="'ENTER_STATE' | translate" [(model)]="organisation.addressInfo.state"
+              style="width:200%"></cbp-input-field-text>
+            <cbp-input-field-text [label]="'COUNTRY'" [placeholder]="'ENTER_COUNTRY' | translate" [(model)]="organisation.addressInfo.county"
+              style="width:200%"></cbp-input-field-text>
+            <cbp-input-field-text [label]="'ZIP_CODE'" [placeholder]="'ENTER_ZIP_CODE' | translate" [(model)]="organisation.addressInfo.postcode"
+              style="width:200%"></cbp-input-field-text>
+          </div>
+
+          <!-- <div fxLayout="column ">
+            <cbp-input-field-text [label]=" 'SEARCH' | translate " [placeholder]=" 'SEARCH_ADDRESS_ON_MAP' | translate " #addresssearch></cbp-input-field-text>
+            <div class="map-container " fxFlex>
+              <agm-map [latitude]="latitude " [longitude]="longitude " [scrollwheel]="false " [zoom]="zoom ">
+                <agm-marker [latitude]="latitude " [longitude]="longitude "></agm-marker>
+              </agm-map>
+            </div>
+          </div> -->
+        </div>
+        <div fxLayout="row " fxLayoutAlign="end" style="margin: 10px">
+            <cbp-button [label]="'SAVE'" [disabled]="organisation.organisationName.length<1 " (click)="updateOrganisation() "></cbp-button>
+        </div>
+      </div>
+    </div>
+  </cbp-card>

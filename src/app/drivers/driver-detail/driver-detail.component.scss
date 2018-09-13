@@ -1,0 +1,28 @@
+@import "../../common/common.scss";
+
+.driver-detail-container{
+    .driver-info-header{
+        background: white;        
+        @include md-whiteframe-2dp;  
+        .driver-profile-picture{
+            border-radius: 50%;
+            @include md-whiteframe-1dp;      
+            margin: 8px;
+            object-fit: contain; 
+            height: 96px; 
+        }
+        .mdi-account-circle{
+            font-size: 64px;
+            color: rgba(0,0,0,0.5);
+        }
+        .driver-name{
+            font-size: 32px;
+            color: rgba(0,0,0,.7);
+            font-weight: bold;
+        }
+        .driver-email{
+            font-size: 18px;
+        }      
+    }
+    
+}

@@ -1,0 +1,46 @@
+<cbp-card [label]="'VEHICLE_LIST'" expanded="true" [searching]="!vehicles.length">
+    <cbp-button [label]="'INVITE'" *ngIf="isFleet" link="/fleet/vehicle/search" fxLayoutAlign="end" style="margin: 15px"></cbp-button>
+    <cbp-button [label]="'CREATE'" *ngIf="!isFleet" link="/user/vehicle/create" fxLayoutAlign="end" style="margin: 15px"></cbp-button>
+
+    <p-dataGrid [value]="vehicles" emptyMessage=" ">
+        <ng-template let-car pTemplate="item">
+            <div class="ui-g-12 ui-md-2">
+                <div class="card small" fxLayout="column" fxLayoutAlign="start center" (click)="redirectToDetails(car)">
+                    <div class="logobox" fxLayout="column">
+                        <i *ngIf="!car.make" class="mdi mdi-car icons"></i>
+                        <img *ngIf="car.make" class="logo" [src]="getVehicleLogo(car.make)" />
+                    </div>
+                    <div fxLayout="column">
+                        <b><span fxFlex class="content model row">{{car.make}}{{car.model}}</span></b>
+                        <span class=" content name row">{{car.name}}({{car.numberPlate.strLicense}})</span>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataGrid>
+</cbp-card>
+
+<!--<cbp-card *ngIf="isFleet" [label]="'VEHICLE_LIST'| translate" expanded="true">
+    <div fxLayout="column">
+        <p-dataGrid [value]="vehicles">
+            <ng-template let-car pTemplate="item">
+                <div class="ui-g-12 ui-md-2">
+                    <div class="card small" fxLayout="column" fxLayoutAlign="start center" (click)="redirectToDetails(car)">
+                        <div class="logobox" fxLayout="column">
+                            <i *ngIf="!car.make" fxFlex class="mdi mdi-car icons"></i>
+                            <img *ngIf="car.make" fxFlex="55" class="logo" [src]="getVehicleLogo(car.make)" />
+                        </div>
+                        <div fxLayout="column">
+                            <b><span fxFlex class="content model row">{{car.make}}{{car.model}}</span></b>
+                            <span fxFlex class=" content name row">{{car.name}}({{car.numberPlate.strLicense}})</span>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-dataGrid>
+    </div>
+</cbp-card>
+
+<p routerLink='/fleet/vehicle/details'>
+    vehicle list
+</p>-->

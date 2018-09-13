@@ -1,0 +1,55 @@
+<cbp-card [label]="'DRIVERS'" [searching]="loadingDrivers" fxFlex>
+    <div class="card-header" fxLayout="row" fxLayoutAlign="center center" *cbpAdminOrAgentOnly>
+        <cbp-input-field-search #search [placeholder]="'SEARCH'" (searchTerm)='searchTerm.value = $event; search.searching = false'></cbp-input-field-search>
+        <cbp-text-icon-item *ngIf="showAdd" class="click" [label]="'ADD_DRIVER'" icon="mdi-account-plus" (click)="showDialog = true"></cbp-text-icon-item>
+    </div>
+    <div class="driver-container">
+        <div class="driver-item" (onHover)="showOptions[i] = $event" fxLayout="row" *ngFor="let driver of drivers | filterBy:searchTerm | sortBy:'totalDistance'; let i = index; "
+             fxLayoutAlign="start center">
+            <i *ngIf="!driver.profilePhotoURL" class="mdi mdi-account-circle"></i>
+            <img *ngIf="driver.profilePhotoURL" class="avatar" [src]="driver.profilePhotoURL"/>
+            <div fxFlex="40%" fxLayout="column">
+                <span class="name">{{driver.displayname}}</span>
+                <span class="email">{{driver.currentEMail}}</span>
+            </div>
+            <cbp-text-icon-item fxFlex icon="mdi-fast-forward" color="#4FB979" label="TOTAL_TRIPS" [value]="driver.trips ? driver.trips : '0'"></cbp-text-icon-item>
+            <cbp-text-icon-item fxFlex icon="mdi-speedometer" color="#0079c1" label="DISTANCE" [value]="driver.totalDistance ? (driver.totalDistance + ' kms') : '0 kms'"></cbp-text-icon-item>
+            <!-- <i class="mdi mdi-dots-vertical click" (click)="menu.toggle($event); currentDriver = driver"></i> -->
+            <span fxFlex *ngIf="!showOptions[i]"></span>
+            <!--Hack to maintain same width-->
+            <div *ngIf="showOptions[i]" fxFlex fxLayout="row" fxLayoutAlign="end center">
+                <i class="mdi mdi-account-plus-outline click" *ngIf="(!driver.currentDriver) && driver.status==null" [pTooltip]="'SET_CURRENT_DRIVER' | translate" (click)="checkDriver(driver)"></i>
+                <i class="mdi mdi-account-remove click" *ngIf="driver.currentDriver" [pTooltip]="'REMOVE_CURRENT_DRIVER' | translate" (click)="offDutyDriver(driver.userId)"></i>
+                <i class="mdi mdi-account-plus-outline click disabled" [pTooltip]="'DRIVER_ALREADY_ASSIGNED' | translate" *ngIf="(!driver.currentDriver) && driver.status!=null"></i>
+                <i class="mdi mdi-delete-forever click" (click)="isRemoveDriver=true;selectedDriver=driver" [pTooltip]="'REMOVE_FROM_VEHICLE' | translate"></i>
+            </div>
+        </div>
+    </div>
+</cbp-card>
+<cbp-dialog [(showDialog)]="showDialog">
+    <cbp-driver-search></cbp-driver-search>
+</cbp-dialog>
+
+<cbp-dialog [showDialog]="isSetDriver" (showDialogChange)="driverCahnge($event)">
+    <cbp-card [label]="'CHANGE_DRIVER'" [searching]="removingVehicle">
+        <div class="dialog" fxLayout="column" fxLayoutGap="2%" *ngIf="selectedDriver">
+            <span fxFlex class="message" [innerHTML]="'ARE_YOU_SURE_CHANGE_CURRENT_DRIVER' | translate:{'driverName': selectedDriver.displayname}"></span>
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="2%">
+                <cbp-flat-button label="NO" type="negative" (click)="isSetDriver=false"></cbp-flat-button>
+                <cbp-flat-button label="YES" type="positive" (click)="changeCurrentDriver(selectedDriver)"></cbp-flat-button>
+            </div>
+        </div>
+    </cbp-card>
+</cbp-dialog>
+
+<cbp-dialog [showDialog]="isRemoveDriver" (showDialogChange)="removeChange($event)">
+    <cbp-card [label]="'REMOVE_DRIVER'" [searching]="removingVehicle">
+        <div class="dialog" fxLayout="column" fxLayoutGap="2%" *ngIf="selectedDriver">
+            <span fxFlex class="message" [innerHTML]="'ARE_YOU_SURE_TO_REMOVE_DRIVER_FROM_VEHICLE' | translate:{'driverName': selectedDriver.displayname}"></span>
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="2%">
+                <cbp-flat-button label="CANCEL" type="negative" (click)="isRemoveDriver=false"></cbp-flat-button>
+                <cbp-flat-button label="REMOVE" type="positive" (click)="removeFromVehicle(selectedDriver)"></cbp-flat-button>
+            </div>
+        </div>
+    </cbp-card>
+</cbp-dialog>

@@ -1,0 +1,9 @@
+<div style="height:100%" fxLayout="row">
+    <cbp-sidebar *ngIf="showSidenav" [menu]=menuItems name="User Management"></cbp-sidebar>
+    <div fxLayout="column" fxFlex>
+        <cbp-toolbar (toggleSidenav)="toggle()" class="full-width" [title]="title | translate"></cbp-toolbar>
+        <div fxFlex style="overflow-y: auto">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

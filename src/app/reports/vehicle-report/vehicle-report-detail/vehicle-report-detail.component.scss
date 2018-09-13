@@ -1,0 +1,122 @@
+@import "../../../styles/shadow";
+@import "../../../styles/colors";
+@import "../../../styles/utils";
+
+.header-card {
+    background: $highlight-color;
+    @include md-whiteframe-2dp;
+    background: $highlight-color;
+    z-index: 3;
+    width: 100%;
+    padding: 0;
+    .info-header {
+        padding: 15px 20px 10px;
+        @include border-bottom-color($info-header-border);
+        .logo {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+        }
+    }
+    .fleet-name {
+        font-weight: bold;
+        font-size: 24px;
+        color: $fleet-name;
+    }
+    .user-greeting {
+        color: $label-color;
+        font-size: 20px;
+    }
+    .metrics {
+        padding: 12px 22px;
+        &:not(:last-child) {
+            border-right: 1px solid $info-header-border;
+        }
+        &:last-child {
+            margin-right: 12px;
+        }
+        .mdi {
+            font-size: 42px;
+        }
+        .number {
+            font-size: 24px;
+            color: $message-select;
+        }
+        .field {
+            display: block;
+            font-size: 16px;
+            @include font-weight(bold);
+            color: $field;
+        }
+    }
+}
+
+.indicator-container {
+    margin: 10px 5px 3px 10px;
+    padding: 12px;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px 0 $card-shadow1, 0 1px 1px 0 $card-shadow2, 0 2px 1px -1px $card-shadow3;
+    &:hover {
+        @include md-whiteframe-1dp();
+        border-color: transparent;
+        cursor: pointer;
+    }
+    .mdi {
+        font-size: 24px;
+        margin: 4px;
+    }
+    .indicator-info {
+        margin: 0 4px;
+        .indicator-label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #757575;
+            margin-bottom: 4px;
+        }
+        .indicator-value {
+            font-size: 16px;
+            color: #555555;
+        }
+    }
+    .mdi-check-circle {
+        color: #3cba54;
+    }
+}
+
+.log {
+    padding: 4px 20px;
+    &:not(:last-child) {
+        @include border-bottom();
+    }
+    &:hover {
+        @include hover-shadow();
+    }
+    height: 64px;
+    background-color: white;
+    .log-date {
+        .log-value {
+            font-size: 16px;
+            color: #555555;
+        }
+    }
+    .log-metrics {
+        padding: 0 4px;
+        .log-label {
+            text-align: right;
+        }
+        .log-value {
+            text-align: right;
+        }
+    }
+    .log-value {
+        font-size: 14px;
+        font-weight: bold;
+        color: #666666;
+    }
+    .log-label {
+        font-size: 12px;
+        color: #757575;
+    }
+
+}

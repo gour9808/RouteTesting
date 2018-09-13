@@ -1,0 +1,11 @@
+<div fxLayout="column" class="input-group">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <i *ngIf="icon" [style.color]="iconColor" class="mdi" [ngClass]="icon"></i>
+    <span class="input-label">{{label | translate}}</span>
+      <span class="asterisk_input" *ngIf="mandatory">  </span>
+  </div>
+  <div fxLayout="row">
+      <cbp-input-field-radio [disabled]="disabled || radio.disabled" *ngFor="let radio of radios" [radio]="radio" [checked]="radio.checked"
+                             [label]="radio.label" [group]="group" (selected)="radioChecked($event)"></cbp-input-field-radio>
+  </div>
+</div>

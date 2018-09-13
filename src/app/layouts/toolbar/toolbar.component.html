@@ -1,0 +1,39 @@
+<div class="toolbar" fxLayout="row" fxLayoutAlign="start center">
+    <i class="mdi mdi-menu" *ngIf="showNotif" (click)="toggle()"></i>
+    <span class="title" fxFlex>{{title | translate}}</span>
+    <div fxLayout="row" class="user-info" fxLayoutAlign="center center">
+        <!--<div fxLayout="column" class="user-info">
+          <span class="name">{{userInfo.displayname}}</span>
+          <span class="email">{{userInfo.currentEMail}}</span>
+        </div>-->
+        <i class="mdi mdi-bell" (click)="notif=!notif"  [title]="'NOTIFICATIONS' | translate"></i>
+        <i class="mdi mdi-earth avatar" (click)="lang.toggle($event)" (clickOutside)="onClickOut($event)" [title]="'CHOOSE_A_LANGUAGE' | translate"></i>
+        <i class="mdi mdi-account-circle avatar" #popOutButton (click)="op.toggle($event)" [title]="'PROFILE' | translate" (clickOutside)="onClickOut($event)"></i>
+    </div>
+</div>
+<p-overlayPanel #op>
+    <div class="popout " fxLayout="column">
+        <div class="user-info" fxLayout="row" fxLayoutAlign="start center">
+            <i *ngIf="!userInfo.profilePhotoURL" class="mdi  mdi-account-circle  avatar"
+               style="color: rgba(0, 0, 0, .6);font-size:32px;"></i>
+            <img *ngIf="userInfo.profilePhotoURL" class="avatar" [src]="userInfo.profilePhotoURL"/>
+            <div fxLayout="column">
+                <span class="name">{{userInfo.displayname}}</span>
+                <span class="email">{{userInfo.currentEMail}}</span>
+            </div>
+        </div>
+        <!--<cbp-menu-item routerLink="/user" text="Profile" icon="mdi-account"></cbp-menu-item>-->
+        <cbp-menu-item routerLink="/resolver" [text]="'MY_FLEETS'" icon="mdi-bank" *ngIf="isFleet"></cbp-menu-item>
+        <!--<cbp-menu-item text="Settings" icon="mdi-settings"></cbp-menu-item>-->
+        <cbp-menu-item [text]="'SIGN_OUT'" icon="mdi-power" (click)="logout()"></cbp-menu-item>
+    </div>
+</p-overlayPanel>
+<p-overlayPanel #lang>
+    <div class="popout .md-whiteframe-2dp lang" fxLayout="column">
+        <span class="header">{{ 'CHOOSE_A_LANGUAGE' | translate }}</span>
+        <cbp-menu-item *ngFor="let lang of languages" [text]="lang.name" [icon]="lang.icon" (click)="change(lang)"
+                       [class]="isActive(lang.value)"></cbp-menu-item>
+    </div>
+</p-overlayPanel>
+
+<cbp-notifications *ngIf="notif"></cbp-notifications>

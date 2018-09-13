@@ -1,0 +1,8 @@
+<div class="item" [ngClass]="class" fxLayout="column" fxLayoutAlign="start">
+  <div fxLayout="row">
+    <i class="mdi" [ngClass]="icon" [style.color]="color"></i>
+    <span class="text">{{label | translate }}</span>
+      <span class="asterisk_input" *ngIf="mandatory">  </span>
+  </div>
+    <span class="text-val" [ngClass]="{'trim':trim}" [ngStyle]="{'font-size':size + 'px'}">{{value}}</span>
+</div>

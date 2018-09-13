@@ -1,0 +1,24 @@
+<cbp-card [label]="'ALL_DRIVERS'" [searching]="loadingDrivers">
+    <div fxLayout='column' fxLayoutGap="2%">
+        <cbp-input-field-search #search [placeholder]="'SEARCH'" (searchTerm)='searchTerm.value = $event; search.searching = false'></cbp-input-field-search>
+        <div class="driver-container" *ngIf="(drivers | filterBy: searchTerm).length !== 0">
+            <div class="driver-item" *ngFor="let driver of drivers| filterBy:searchTerm;  let idex = index" fxLayout="row" fxLayoutAlign="start center">
+                <i *ngIf="!driver.profilePhotoURL" class="mdi mdi-account-circle"></i>
+                <img *ngIf="driver.profilePhotoURL" class="avatar" [src]="driver.profilePhotoURL"/>
+                <div fxLayout="column">
+                    <span class="name">{{driver.displayname}}</span>
+                    <span class="email">{{driver.currentEMail}}</span>
+                </div>
+                <span fxFlex></span>
+                <i *ngIf="!progress[idex]" class="click mdi mdi-plus-box" (click)="setDriver(driver, idex)"></i>
+                <cbp-svg-circular-loader *ngIf="progress[idex]"></cbp-svg-circular-loader>
+            </div>
+        </div>
+        <div class="driver-container" *ngIf="(drivers | filterBy: searchTerm).length === 0">
+            <div class="empty-message-container animated fadeIn" *ngIf="!loadingDrivers" fxLayout="column" fxLayoutAlign="center center" fxFill>
+                <i class="mdi mdi-account-plus"></i>
+                <span class="message">Invite to Fleet</span>
+            </div>
+        </div>
+    </div>
+</cbp-card>

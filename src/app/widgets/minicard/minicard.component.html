@@ -1,0 +1,19 @@
+<cbp-card label="Driver List" expanded="true">
+  <p-dataGrid [value]="items" >
+      <ng-template let-item pTemplate="item">
+              <div class="container" fxLayout="column" (click)="itemChosen(item)">
+                <div class="picture" fxFlex>
+                    <i *ngIf="!item.profilePhotoURL" class="material-icons avatar">account_circle</i>
+                    <img *ngIf="item.profilePhotoURL" class="image" [src]="item.profilePhotoURL"/>
+                </div>
+                <div class="content" fxLayout="column" fxFlex>
+                    <span class="displayName"><b>{{item.displayname}}</b></span>
+                    <div fxLayout="row">
+                      <i class="mdi mdi-email"></i>
+                      <span class="email">{{item.currentEMail}}</span>
+                    </div>
+                </div>
+              </div>
+      </ng-template>
+  </p-dataGrid>
+</cbp-card>

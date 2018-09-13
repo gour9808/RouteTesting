@@ -1,0 +1,9 @@
+<cbp-card label="ADD_VEHICLE" [searching]="searching">
+    <div fxLayout="column" style="padding: 8px">
+        <cbp-input-field-text [placeholder]="'ENTER_LICENSE_PLATE_NUMBER' | translate" [errorMessage]="errorMessage" [(model)]="searchLicense" [error]="error" fxFlex></cbp-input-field-text>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <cbp-flat-button fxFlexAlign="center" [label]="'SAVE'" (click)="searchVehicle()" [disabled]="searchLicense?.length<2" style="margin:10px"></cbp-flat-button>
+            <cbp-flat-button fxFlexAlign="center" [label]="'SAVE_AND_CLOSE'" (click)="searchVehicle(); saveAndClose = true" [disabled]="searchLicense?.length<2" style="margin:10px"></cbp-flat-button>
+        </div>
+    </div>
+</cbp-card>

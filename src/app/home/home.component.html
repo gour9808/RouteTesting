@@ -1,0 +1,59 @@
+<div class="home-container">
+    <div class="dashboard-header" fxLayout="column">
+        <div class="info-header" fxLayout="row" fxLayoutAlign="start center">
+            <span class="user-greeting" fxFlex>{{'WELCOME' | translate}},
+                <b> {{userInfo.displayname}}</b>
+            </span>
+        </div>
+        <div fxLayout="row">
+            <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center" *ngFor="let metric of metrics">
+                <div fxLayout="column" fxFlex>
+                    <div class="field">{{metric.label1 | translate}} {{metric.label2 | translate}}</div>
+                    <div class="number">{{metric.value}}</div>
+                    <div class="number">{{metric.type | currency: locale}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <cbp-card label="TRAVEL_TREND" fxFlex [searching]="!vehicleAreaDataLoaded">
+            <div style="height: 400px">
+                <ngx-charts-area-chart *ngIf="vehicleAreaData" [results]="vehicleArea" [scheme]="colorScheme" [gradient]="true" [xAxis]="true" [yAxis]="true" [legend]="false"
+                                       [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'DATE' | translate" [yAxisLabel]="'DISTANCE_IN_KMS' | translate"
+                                       [autoScale]="true">
+                </ngx-charts-area-chart>
+                <div class="empty-message-container animated fadeIn" *ngIf="!vehicleAreaData" fxLayoutAlign="center center" fxLayout="column"
+                    fxFlex>
+                    <i class="mdi mdi-inbox"></i>
+                    <span class="message">{{ 'NO_DATA_FOUND' | translate}}</span>
+                </div>
+            </div>
+        </cbp-card>
+    </div>
+
+    <div fxLayout="row">
+        <!--<cbp-card label="TRIP_SUMMARY" fxFlex [searching]="!driverBarDataLoaded">-->
+        <!--<div style="height: 400px">-->
+        <!--<ngx-charts-bar-horizontal [gradient]="false" [barPadding]="driverBarData.length < 2 ? 75 : 0" *ngIf="driverBarData.length" [scheme]="colorScheme" [results]="driverBarData"-->
+        <!--[xAxis]="true" [yAxis]="true" [legendTitle]="legendTitle" [legend]="true" [showXAxisLabel]="true" [showYAxisLabel]="true"-->
+        <!--[xAxisLabel]="'NUMBER_OF_TRIPS' | translate" [yAxisLabel]="'DRIVER' | translate">-->
+        <!--</ngx-charts-bar-horizontal>-->
+        <!--<div class="empty-message-container animated fadeIn" *ngIf="!driverBarData.length" fxLayoutAlign="center center" fxLayout="column"-->
+        <!--fxFlex>-->
+        <!--<i class="mdi mdi-inbox"></i>-->
+        <!--<span class="message">{{ 'NO_DATA_FOUND' | translate}}</span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</cbp-card>-->
+        <cbp-vehicle-table fxFlex [showAdd]="false" (onVehicleDeleted)="reload($event)" [isFleet]="false"></cbp-vehicle-table>
+        <cbp-driver-list fxFlex [showAdd]="false" [drivers]="drivers" [loadingDrivers]="loadingDrivers"></cbp-driver-list>
+    </div>
+    <div fxLayout="row">
+        <cbp-card [label]="'INVITATIONS'" fxFlex [searching]="!inviteLoaded">
+            <div class="scroll-container" style="height: 400px">
+                <cbp-activity-list (loaded)="inviteLoaded = $event"></cbp-activity-list>
+            </div>
+        </cbp-card>
+    </div>
+</div>

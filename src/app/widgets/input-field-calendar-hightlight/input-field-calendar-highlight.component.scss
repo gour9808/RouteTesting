@@ -1,0 +1,20 @@
+@import "../widget.scss";
+
+input[type=text],
+input[type=number],
+.ui-widget-content .ui-inputtext,
+.ui-inputtext.ui-widget.ui-state-default.ui-corner-all {
+    @extend .input-design;
+}
+
+.input-label {
+    @extend .label;
+}
+
+.highlight {
+    background-color: #ff6d00;
+    margin: 3px 0px 0 6px;
+    border-radius: 100%;
+    position: absolute;
+    padding: 3px;
+}

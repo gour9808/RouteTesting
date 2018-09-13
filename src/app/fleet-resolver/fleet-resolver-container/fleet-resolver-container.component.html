@@ -1,0 +1,20 @@
+<div class="item-container" fxLayout="column">
+    <cbp-splash-loader *ngIf="!fleetLoaded"></cbp-splash-loader>
+    <div fxFlex *ngIf="fleets.length">
+        <div class="item" fxLayout="column" *ngFor="let fleet of fleets" (click)="setFleet(fleet)">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                 <div fxLayout="column" fxFlex>
+              <span class="req-name">{{dealer.name}}</span>
+              <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="start center">
+                <span class="desc">Service Type</span>
+                <span class="count">{{getServiceType(dealer.vendortype)}}</span>
+              </div>
+            </div>
+                <i class="mdi mdi-chevron-right"></i>
+            </div>
+        </div>
+    </div>
+    <div style="margin: 8px">
+        <cbp-flat-button label="Create Fleet" fxLayoutAlign="center center" [routerLink]="'/registration'" style="margin: 8px"></cbp-flat-button>
+    </div>
+</div>

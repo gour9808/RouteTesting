@@ -1,0 +1,16 @@
+<div class="container animated fadeIn" fxLayout="column">
+    <div class="title" fxFlex>
+        <span>Notifications</span>
+    </div>
+    <div fxFlex class="choice">
+        <div class="noNotifications" *ngIf="notifications?.length == 0">
+            <h5>No notifications to show!</h5>
+        </div>
+        <!--<div class="noNotifications"><h5>No notifications were found</h5></div>-->
+        <div class="notifications" *ngFor="let n of notifications">
+            <cbp-notification [notification]="n" (click)="toggle()"></cbp-notification>
+        </div>
+    </div>
+    <div fxFlex class="footer">
+    </div>
+</div>

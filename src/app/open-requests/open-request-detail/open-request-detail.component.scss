@@ -1,0 +1,193 @@
+@import "../../common/common.scss";
+@import "~mdi/scss/variables";
+@import "~mdi/scss/functions";
+@import '../../styles/utils.scss';
+
+:host {
+    height: 100%;
+}
+
+.request-detail-container {
+    overflow: hidden;
+    height: 100%;
+    .requestor-info-container {
+        padding: 12px 8px;
+        @include md-whiteframe-2dp;
+        background: white;
+        z-index: 3;
+        .requestor-info {
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(138, 156, 167, .4);
+            .req-name {
+                font-weight: bold;
+                font-size: 24px;
+            }
+            .req-contact-email,
+            .req-contact-phone {
+                font-weight: bold;
+                font-size: 14px;
+                opacity: .75;
+                display: inherit;
+            }
+            .req-contact-email {
+                &:before {
+                    font: normal normal normal 18px/1 "Material Design Icons";
+                    content: mdi('email');
+                    margin-right: 5px;
+                }
+            }
+            .req-contact-phone {
+                &:before {
+                    font: normal normal normal 18px/1 "Material Design Icons";
+                    content: mdi('phone');
+                    margin-right: 5px;
+                }
+            }
+            .mdi-account-circle {
+                font-size: 48px;
+                color: rgba(0, 0, 0, 0.65);
+                margin: 5px;
+            }
+        }
+        .request-info {
+            margin: 12px 0 0 20px;
+            cbp-text-icon-item {
+                &:not(::first-child) {
+                    border-left: 1px solid rgba(138, 156, 167, .4);
+                }
+            }
+        }
+    }
+    .detail-info-container{
+        height: 100%;
+        overflow: hidden;
+    }
+    .driver-vehicle-info {
+        padding: 12px 8px;
+        @include md-whiteframe-2dp;
+        overflow: auto;
+        height: 100%;
+        width: 360px;
+        background: #FAFAFA;
+        z-index: 2;
+        cbp-card div {
+            padding: 8px;
+        }
+        .header {
+            padding: 12px;
+            font-weight: bold;
+            color: rgba(0, 0, 0, 0.65);
+        }
+        .driver-container {
+            min-width: 280px;
+            overflow: hidden;
+            &:hover {
+                cursor: pointer;
+                background: #fcfcfc;
+            }
+            .driver-item {
+                padding: 0 5px;
+                font-size: 14px;
+                .name {
+                    font-weight: bold;
+                    font-size: 20px;
+                }
+                .email {
+                    font-weight: bold;
+                    color: rgba(0, 0, 0, .5);
+                    display: inherit;
+                    a {
+                        color: rgba(0, 0, 0, .5);
+                        text-decoration: none;
+                        @include transition(0.3s);
+                        &:hover {
+                            color: #4885ed;
+                        }
+                    }
+                    &:before {
+                        font: normal normal normal 18px/1 "Material Design Icons";
+                        content: mdi('email');
+                        margin-right: 5px;
+                    }
+                }
+                .phone {
+                    font-weight: bold;
+                    color: rgba(0, 0, 0, .5);
+                    display: inherit;
+                    &:before {
+                        font: normal normal normal 18px/1 "Material Design Icons";
+                        content: mdi('phone');
+                        margin-right: 5px;
+                    }
+                }
+                .mdi {
+                    font-size: 24px;
+                    margin: 5px;
+                    color: #4885ed;
+                }
+            }
+            .driver-phone .mdi {
+                font-size: 20px;
+                margin: 0px 17px 0 0;
+                color: #4885ed;
+            }
+            .phone a {
+                text-decoration: none;
+                color: rgba(0, 0, 0, .5);
+                @include transition(0.3s);
+                &:hover {
+                    color: #4885ed;
+                }
+            }
+        }
+        .vehicle-legend {
+            color: rgba(0, 0, 0, .70);
+            .vehicle-logo {
+                max-width: 48px;
+                max-height: 48px;
+                object-fit: contain;
+                border-radius: 50%;
+                cursor: pointer;
+                margin: 5px;
+            }
+            .vehicle-make {
+                font-weight: bold;
+                font-size: 20px;
+            }
+            .vehicle-model {
+                font-weight: bold;
+                color: rgba(0, 0, 0, .5);
+                font-size: 14px;
+            }
+            .vehicle-name {
+                font-size: 14px;
+                font-weight: bold;
+            }
+            &:hover {
+                cursor: pointer;
+                background: #fcfcfc;
+            }
+            .mdi {
+                margin: 0;
+            }
+            .vehicle-license,
+            .vehicle-name {
+                font-weight: bold;
+                color: rgba(0, 0, 0, 0.5);
+                font-size: 14px;
+                display: inherit;
+            }
+            .vehicle-license {
+                color: rgba(0, 0, 0, 0.7);
+                &:before {
+                    font: normal normal normal 18px/1 "Material Design Icons";
+                    content: mdi('credit-card');
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+    p-gmap {
+        z-index: 0;
+    }
+}

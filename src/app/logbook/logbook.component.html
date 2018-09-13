@@ -1,0 +1,64 @@
+<p-dialog header="Trip image" [(visible)]="display" modal="modal" width="600" height="335" [responsive]="true">
+    <img [src]="tripImageUrl" class="image" />
+    <div fxLayout="row">
+        <div fxLayout="row" fxflex>
+            <p class="green">
+                <i class="mdi mdi-car icons" style="color: green;"></i>
+                <span class="cbp-name">{{startOdo}}</span>
+            </p>
+        </div>
+        <div fxLayout="row" fxflex>
+            <p class="red">
+                <i class="mdi mdi-car icons" style="color: red; "></i>
+                <span class="cbp-name">{{endOdo}}</span>
+            </p>
+        </div>
+    </div>
+</p-dialog>
+
+<cbp-card [label]="'LOGBOOK'|translate" expanded="true">
+    <div fxFlex #flexCard>
+        <p-dataTable [value]="logs" scrollable="true" [scrollHeight]="viewHeight" [loading]="loadingLogs" loadingIcon="fa-spinner" [rows]="10" [paginator]="logs?.length>0" [pageLinks]="3" *ngIf="logs.length>0" (onRowClick)="showDialog($event)">
+
+            <!--Also [emptyMessage]="emptyMessage" can be used  -->
+            <p-column field="driverName" [header]="'DRIVER_NAME'|translate" [filter]="true" [filterPlaceholder]="'SEARCH DRIVER'|translate" filterMatchMode="startsWith"></p-column>
+            <p-column field="startTime" [header]="'START_TIME'|translate" [style]="{'text-align':'left'}">
+                <ng-template pTemplate="filter" let-row>
+                    <input type="date" [(ngModel)]="startDate" (change)="match($event)">
+                </ng-template>
+                <ng-template let-col let-log="rowData" pTemplate="body">
+                    <div>{{log[col.field] | date:'jms'}}</div>
+                    <div><i>{{log[col.field] | date:'yMMMd'}}</i></div>
+                </ng-template>
+            </p-column>
+            0
+            <p-column field="endTime" [header]="'END_TIME'|translate" [style]="{'text-align':'left'}">
+                <ng-template pTemplate="filter" let-row>
+                    <input type="date" [(ngModel)]="endDate" (change)="match($event)">
+                </ng-template>
+                <ng-template let-col let-log="rowData" pTemplate="body">
+                    <div>{{log[col.field] | date:'jms'}}</div>
+                    <div>{{log[col.field] | date:'yMMMd'}}</div>
+                </ng-template>
+            </p-column>
+            <p-column field="duration" [header]="'TRIP_DURATION'|translate" [style]="{'text-align':'left'}"></p-column>
+            <p-column field="startAddress" [header]="'START_ADDRESS'|translate" [style]="{'text-align':'left'}">
+                <ng-template let-col let-log="rowData" pTemplate="body">
+                    <div *ngIf="log[col.field].street">{{log[col.field].street}}</div>
+                    <div>{{log[col.field].city}}</div>
+                </ng-template>
+            </p-column>
+            <p-column field="endAddress" [header]="'END_ADDRESS'|translate" [style]="{'text-align':'left'}">
+                <ng-template let-col let-log="rowData" pTemplate="body">
+                    <div>{{log[col.field].street}}</div>
+                    <div>{{log[col.field].city}}</div>
+                </ng-template>
+            </p-column>
+            <p-column field="distance" [header]="'TRAVELLED_DISTANCE'|translate" [style]="{'text-align':'left'}">
+                <ng-template let-col let-log="rowData" pTemplate="body">
+                    <div style="text-align: center">{{log[col.field]}} Km</div>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+</cbp-card>

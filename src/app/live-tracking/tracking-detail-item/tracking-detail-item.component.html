@@ -1,0 +1,66 @@
+<div class="vehicle-grid-item" fxLayout="column">
+    <div class="vehicle-picture" *ngIf="!vehicle.make">
+        <i class="mdi mdi-car car-bg"></i>
+    </div>
+    <div class="vehicle-picture img-bg" *ngIf="vehicle.profilePictureUrl">
+        <img [src]="vehicle.profilePictureUrl" />
+    </div>
+    <div class="vehicle-picture logo-bg" *ngIf="!vehicle.profilePictureUrl && vehicle.make" [ngStyle]="{ 'background-image': 'url(' + getVehicleLogo(vehicle.make) + ')'}">
+    </div>
+    <!--<div class="vehicle-picture" *ngIf="vehicle.profilePictureUrl" [ngStyle]="{ 'background-image': 'url(' + vehicle.profilePictureUrl + ')'}"></div>-->
+    <div fxLayout="column" class="vehicle-detail">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="vehicle-name" fxLayout="column" fxFlex="50%">
+                <span class="label">{{ 'VEHICLE_NAME' | translate }}</span>
+                <span class="label-value">{{vehicle.name}}</span>
+            </div>
+            <div class="reg-no" fxLayout="column" fxFlex="50%">
+                <span class="label">{{ 'LICENSE' | translate }}</span>
+                <span class="label-value">{{vehicle.numberPlate?.strLicense}}</span>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" class="vehicle-make-model">
+            <img class="vehicle-logo" *ngIf="vehicle.make" [src]="getVehicleLogo(vehicle.make)" />
+            <i *ngIf="!vehicle.make" class="mdi mdi-car vehicle-logo"></i>
+            <span class="label-value">{{vehicle.make}} {{vehicle.model}} {{vehicle.variant}}</span>
+            <span fxFlex></span>
+            <i class="mdi mdi-signal" [style.color]='vehicle.color' *ngIf="vehicle.state == 'ACTIVE'" [pTooltip]="vehicle.state | translate"
+                tooltipPosition="bottom"></i>
+            <i class="mdi mdi-signal-off" [style.color]='vehicle.color' *ngIf="vehicle.state != 'ACTIVE'" [pTooltip]="vehicle.state | translate"
+                tooltipPosition="bottom"></i>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" class="driver-detail">
+        <div class="driver-avatar" *ngIf="driver?.profilePhotoURL" [ngStyle]="{ 'background-image': 'url(' + driver.profilePhotoURL + ')'}"></div>
+        <i *ngIf="!driver?.profilePhotoURL" class="mdi mdi-account-circle"></i>
+        <div class="driver-info" *ngIf="driver">
+            <span class="label" *ngIf="driver">{{ 'DRIVER_NAME' | translate }}</span>
+            <span class="label" *ngIf="!driver">{{ 'DRIVER_DETAILS' | translate }}</span>
+            <span class="label-value">{{ driver? driver.displayname : "-"}}</span>
+        </div>
+    </div>
+    <div fxLayout="row" class="vehicle-location">
+        <i class="mdi mdi-map-marker-radius"></i>
+        <div fxLayout="column">
+            <span class="label">{{'LAST_KNOWN_LOCATION' | translate}}</span>
+            <span class="label-value">{{address}}</span>
+        </div>
+    </div>
+    <div fxLayout="row" class="vehicle-metrics">
+        <div fxLayout="column" fxFlex fxFlexAlign="start" *ngIf="vehicle.lkl">
+            <span class="label">{{ 'UPDATED_TIME' | translate }}</span>
+            <span class="label-value">{{ vehicle.lkl }} </span>
+        </div>
+    </div>
+    <div fxLayout="row" class="vehicle-metrics">
+        <div fxLayout="column" fxFlex fxFlexAlign="start">
+            <span class="label">{{ 'DISTANCE_TRAVELLED' | translate }}</span>
+            <span class="label-value">{{ vehicle.mileage | number : '1.2-2' }} Kms</span>
+        </div>
+        <div fxLayout="column" fxFlex fxFlexAlign="end">
+            <span class="label">{{'TOTAL_TRIPS' | translate }}</span>
+            <span class="label-value">{{vehicle.numberOfTrips}}</span>
+        </div>
+    </div>
+    <cbp-flat-button fxFlexAlign="center" [label]="'MORE_DETAILS'" (click)="openVehicleDetail(vehicle)"></cbp-flat-button>
+</div>

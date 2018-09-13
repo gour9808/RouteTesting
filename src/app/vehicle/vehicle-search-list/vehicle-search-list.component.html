@@ -1,0 +1,20 @@
+<cbp-card [label]="'ASSIGN_DRIVER_TO_VEHICLE'">
+    <div fxLayout='column' fxLayoutGap="2%">
+        <cbp-input-field-search #search [placeholder]="'SEARCH'" (searchTerm)='searchTerm.value = $event; search.searching = false'></cbp-input-field-search>
+        <div class="vehicleList-container">
+            <div class="vehicleList-item" *ngFor='let vehicle of vehicles | filterBy:searchTerm;let i=index; ' fxLayoutAlign='start center' fxLayoutGap='2%'>
+                <img class="avatar" *ngIf="vehicle.make" [src]='getVehicleLogo(vehicle.make)' />
+                <i *ngIf="!vehicle.make" class="mdi mdi-car"></i>
+                <div fxLayout='column' fxFlex>
+                    <span class="vehicle-make-model">{{vehicle.make}} {{vehicle.model}}</span>
+                        <span class='vehicle-name'>{{vehicle.name ? vehicle.name : '-'}}</span>
+                        <span class="vehicle-license">({{vehicle.numberPlate.strLicense}})</span>
+                </div>
+                <span fxFlex></span>
+                <i class="click mdi mdi-plus-box" *ngIf="!vehicle.isDriverAssigned && !progress[i]" (click)="assignDriverToVehicle(vehicle,i)" [pTooltip]="'ASSIGN_DRIVER' | translate" tooltipPosition="bottom"></i>
+                <i class="mdi mdi-check driverAssigned" *ngIf="vehicle.isDriverAssigned && !progress[i]" [pTooltip]="'DRIVER_HAS_ASSIGNED' | translate" tooltipPosition="bottom"></i>
+                <cbp-svg-circular-loader *ngIf="progress[i]"></cbp-svg-circular-loader>
+            </div>
+        </div>
+    </div>
+</cbp-card>

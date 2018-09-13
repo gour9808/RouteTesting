@@ -1,0 +1,22 @@
+<div class="item-container" fxLayout="column">
+    <div class="item" *ngFor="let invite of inviteList; let idex = index">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column" fxFlex>
+                <span class="req-name" [innerHTML]="'INVITED_MESSAGE' | translate:{'senderName': invite.senderName, 'groupName': invite.groupName,'roles': invite.roles}"></span>
+                <span class="desc">{{invite.updateTime | timeAgo | translate}}</span>
+            </div>
+            <div fxLayout="column" fxLayoutGap="2%" fxLayoutAlign="end center">
+                <div *ngIf="progress[idex]" class="progress"></div>
+                <div *ngIf="!progress[idex]">
+                    <cbp-icon-button icon="mdi-check-circle-outline" fxFlex (click)="updateInvitation(idex, true, invite)"></cbp-icon-button>
+                    <cbp-icon-button icon="mdi-cancel" fxFlex (click)="updateInvitation(idex, false, invite)"></cbp-icon-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="empty-message-container animated fadeIn" *ngIf="!inviteList.length" fxLayoutAlign="center center" fxLayout="column"
+         fxFlex>
+        <i class="mdi mdi-inbox"></i>
+        <span class="message">{{'PENDING_INVITATION_MESSAGE' | translate}}</span>
+    </div>
+</div>

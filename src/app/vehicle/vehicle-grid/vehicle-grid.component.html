@@ -1,0 +1,24 @@
+<div class="vehicle-grid-container">
+    <div class="action-bar" fxLayout="row" fxLayoutAlign="start center">
+        <cbp-text-icon-item *cbpAdminOrAgentOnly class="click" icon="mdi-plus" label="NEW_VEHICLE" routerLink="../create"></cbp-text-icon-item>
+        <cbp-text-icon-item *cbpAdminOrAgentOnly class="click" icon="mdi-credit-card-plus" label="ADD_VEHICLE" (click)="showDialog = true"></cbp-text-icon-item>
+        <span fxFlex></span>
+
+        <cbp-input-field-search #search [placeholder]="'SEARCH'" (searchTerm)='searchTerm.value = $event; search.searching = false'></cbp-input-field-search>
+        <cbp-icon-button icon="mdi-filter-variant" class="sort-vehicle" [label]="'FILTER'" (click)="sortby.toggle($event)"></cbp-icon-button>
+        <cbp-icon-button icon="mdi-refresh" [label]="'REFRESH'" (click)="checkQueryAndGetVehicles()"></cbp-icon-button>
+    </div>
+    <cbp-circular-progress [showDialog]="loadingVehicles" [message]="'PLEASE_WAIT'"></cbp-circular-progress>
+    <div class="vehicle-grid">
+        <cbp-vehicle-grid-item [grid]="vehicle" *ngFor='let vehicle of vehicles |  filterBy:searchTerm | filterByResponse: sortvalue' (onVehicleDeleted)="checkQueryAndGetVehicles()"></cbp-vehicle-grid-item>
+    </div>
+</div>
+
+<cbp-dialog [(showDialog)]="showDialog">
+    <div fxLayout="column">
+        <cbp-vehicle-search></cbp-vehicle-search>
+    </div>
+</cbp-dialog>
+<p-overlayPanel #sortby [style]="{'min-width':'200px','overflow':'auto','border': 'none'}">
+    <cbp-context-menu--icon-item [label]="type.label" *ngFor="let type of sortType" (click)="sortvalue = type.value"></cbp-context-menu--icon-item>
+</p-overlayPanel>

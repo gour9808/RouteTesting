@@ -1,0 +1,93 @@
+@import '../../common/common.scss';
+@import '../../styles/utils.scss';
+:host {
+    height: 100%;
+}
+
+.last-known-location {
+    padding: 8px;
+    background: $highlight-color;
+    z-index: 1;
+    height: 64px;
+    @include md-whiteframe-1dp;
+}
+
+.switch {
+    @include border-bottom-color($card-title-border);
+}
+:host /deep/ .gm-style {
+    .gm-style-iw {
+        overflow: hidden;
+        width: 260px;
+        text-align: left;
+        top: 10px;
+        left: 10px;
+        padding: 0 5px;
+        border: none;
+        box-shadow: none;
+        .details-header {
+            a {
+                text-decoration: none;
+                color: $list-item;
+            }
+            .avatar {
+                display: inline-block;
+                vertical-align: top;
+                width: 40px;
+                height: 40px;
+                max-width: 40px;
+                max-height: 40px;
+                position: relative;
+                border-radius: 100%;
+                font-size: 40px;
+                margin: 0 8px 0 0;
+                padding: 0;
+            }
+            .driver-avatar, .gm-style img {
+                @extend .avatar;
+            }
+            i.avatar {
+                @extend .avatar;
+                left: -3px;
+                top: -4px;
+            }
+            .column {
+                display: inline-block;
+                vertical-align: top;
+            }
+            .driver-license {
+                font-size: 12px;
+                color: $notifiction-content;
+                @include font-weight(medium);
+            }
+            .driver-name {
+                font-size: 16px;
+                color: $table-header;
+                @include font-weight(bold);
+                display: block;
+            }
+            .driver-email {
+                font-size: 14px;
+                display: block;
+                @include font-weight(regular);
+            }
+            hr {
+                border: none;
+                @include border-bottom-color($notifications);
+                margin: 5px 0 6px;
+            }
+            .car-icon {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                vertical-align: top;
+                margin: 0 14px 0 5px;
+                background-position: center;
+                background-size: contain;
+                background-repeat: no-repeat;
+                font-size: 30px;
+                line-height: 0.8;
+            }
+        }
+    }
+}

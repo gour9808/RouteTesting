@@ -1,0 +1,10 @@
+<div class="card md-whiteframe-z1" fxLayout="column">
+    <div *ngIf="showHeader" class="header" fxLayoutAlign="start center" fxLayout="row" fxLayoutGap="1%">
+        <cbp-svg-circular-loader *ngIf="searching"></cbp-svg-circular-loader>
+        <span class="card-title" *ngIf="label" fxFlex>{{label | translate}}</span>
+        <ng-content select=".card-header"></ng-content>
+    </div>
+    <div fxFlex>
+        <ng-content></ng-content>
+    </div>
+</div>

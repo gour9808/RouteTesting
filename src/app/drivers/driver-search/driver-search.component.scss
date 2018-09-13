@@ -1,0 +1,54 @@
+@import "../../styles/utils.scss";
+
+cbp-input-field-search {
+    margin: 5px;
+}
+
+.driver-container {
+    height: 400px;
+    min-width: 480px;
+    overflow: hidden;
+    &:hover {
+        overflow: auto;
+    }
+    .driver-item {
+        height: 56px;
+        padding: 12px;
+        font-size: 14px;
+        &:hover {
+            cursor: pointer;
+            background: #f1f1f1;
+        }
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba(138, 156, 167, .4);
+        }
+        .name {
+            font-weight: bold;
+        }
+        .email {
+            color: rgba(0, 0, 0, .5);
+            width: 85%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
+
+.mdi-account-circle {
+    font-size: 36px;
+    margin: 5px;
+}
+
+.avatar {
+    height: 36px;
+    width: 36px;
+    margin: 5px;
+}
+
+.click {
+    @include button-effect();
+    &.mdi {
+        color: #495867;
+        font-size: 20px;
+    }
+}

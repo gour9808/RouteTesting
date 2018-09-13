@@ -1,0 +1,49 @@
+<p-dialog [style]="{'width':'800px', 'background': '#fff'}" [closable]="false" header='Upload Images (Max 5)' [(visible)]="showDialog" modal="true"
+          closeOnEscape="true">
+
+  <div fxLayout='column' fxLayoutGap='2%'>
+    <p-dataTable *ngIf='imageMetas.length>0' [style]="{'width':'700px'}" [value]="imageMetas" emptyMessage='Nothing to preview'>
+      <p-column field="name" header="Name"></p-column>
+      <p-column header="Size">
+        <ng-template let-img='rowData' pTemplate='body'>
+          <span>{{img.size | size}}</span>
+        </ng-template>
+      </p-column>
+      <p-column *ngIf='uploading && !uploadFail' [style]="{'width':'38px'}">
+        <ng-template let-img="rowData" pTemplate="body">
+          <i *ngIf='img.status' class="mdi small mdi-check"></i>
+          <div *ngIf='!img.status' class='progress'></div>
+        </ng-template>
+      </p-column>
+      <p-column *ngIf='!uploading && !uploaded && !uploadFail' [style]="{'width':'38px'}">
+        <ng-template let-img="rowData" pTemplate="body">
+          <i class="mdi small mdi-delete" (click)="deleteImage(img)"></i>
+        </ng-template>
+      </p-column>
+      <p-column *ngIf='uploadFail' [style]="{'width':'38px'}">
+        <ng-template let-img="rowData" pTemplate="body">
+          <i class="mdi small mdi-alert"></i>
+        </ng-template>
+      </p-column>
+    </p-dataTable>
+
+
+    <div *ngIf='images.length<=0' cbpDragDrop [options]="options" (fileOver)="fileOver($event)" [ngClass]="{'hovering': hover}"
+      (onFileDrop)="onFilesChange($event)" class="uploader-box" fxLayout="column" fxLayoutAlign="center center">
+      <i class="big mdi mdi-cloud-upload"></i>
+      <div fxLayout='column' fxLayoutAlign='center center' fxLayoutGap='2%'>
+        <span class="message">Drag images here</span>
+        <span>OR</span>
+        <input [hidden]='true' type="file" accept="image/*" multiple="multiple" #file (change)='onFilesSelected($event)'>
+        <span class="message-select" (click)='file.click()'>Choose Image</span>
+      </div>
+    </div>
+
+    <div class="buttons" fxLayout='row' fxLayoutAlign='end' fxLayoutGap='2%'>
+        <cbp-button *ngIf='!uploading' label='Cancel' (click)='hide()'></cbp-button>
+        <cbp-button [disabled]='!images.length' *ngIf='!getUploadStatus()' label='Upload' (click)='uploadImages()'></cbp-button>
+        <cbp-button *ngIf='getUploadStatus()' label='Done' (click)='done()'></cbp-button>
+        <cbp-button *ngIf='uploadFail' label='Back' (click)='done()'></cbp-button>
+    </div>
+  </div>
+</p-dialog>

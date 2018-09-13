@@ -1,0 +1,8 @@
+@import "../styles/shadow";
+cbp-sidebar{
+    z-index: 990;
+}
+cbp-toolbar{
+    z-index: 5;
+    @include md-whiteframe-1dp;
+}

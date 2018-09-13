@@ -1,0 +1,40 @@
+<div class="fixed-container">
+    <div fxLayout="row" style="height: 100%">
+        <div class="fence-list">
+            <cbp-input-field-autocomplete-address icon="mdi-map" [label]="'SEARCH_LOCATION'" (pickedAddress)="getAutoPlaces($event)"></cbp-input-field-autocomplete-address>
+            <cbp-input-field-text [icon]="'mdi-map-marker-minus'" [label]="'ENTER_FENCE_NAME'" [(model)]="geoFence.geofence.geofenceName"></cbp-input-field-text>
+            <cbp-input-field-number *ngIf="showRadius" [icon]="'mdi-map-marker-circle'" [label]="'Enter Radius'" [(model)]="geoFence.geofence.radius" (modelChange)="changeRadius($event)"></cbp-input-field-number>
+            <cbp-input-field-options [icon]="'mdi-bell-ring'" iconColor="#00a98f" [label]="'NOTIFY'" [list]="notifyType" [value]="geoFence.tracking_status" [filter]="false" (selected)="updateNotifyMode($event)"></cbp-input-field-options>
+            <p-accordion [multiple]="true">
+                <p-accordionTab header="Advanced Options">
+                    <cbp-input-field-calendar-range [icon]="'mdi-calendar-clock'" iconColor="#34bf49" title="Fence Lifetime" [model]="fenceLifetime" (modelChange)="updateLifetime($event)"></cbp-input-field-calendar-range>
+                    <cbp-input-field-options [icon]="'mdi-repeat'" iconColor="#00a98f" [label]="'Repeat'" [list]="recurrenceType" [value]="geoFence.geofence.recurrence" [filter]="false" (selected)="updateRecurrenceMode($event)"></cbp-input-field-options>
+                    <div fxLayout="row">
+                        <cbp-input-field-calendar [disabled]="!this.geoFence.geofence.fenceActivationTime" fxFlex [model]="activateDate" [icon]="'mdi-calendar-clock'" iconColor="#34bf49" (modelChange)="updateActivateTime($event)" [dateFormat]="dateFormat"
+                                                  [showTime]="true" [timeOnly]="true" [title]="'Activate On'" [placeholder]="'ENTER_TIME' | translate"></cbp-input-field-calendar>
+                        <cbp-input-field-calendar [disabled]="!this.geoFence.geofence.fenceActivationTime" fxFlex [model]="deactivateDate" [icon]="'mdi-calendar-clock'" iconColor="#ff4c4c" (modelChange)="updateDeactivateTime($event)" [dateFormat]="dateFormat"
+                                                  [showTime]="true" [timeOnly]="true" [title]="'Deactivate On'" [placeholder]="'ENTER_TIME' | translate"></cbp-input-field-calendar>
+                    </div>
+                    <cbp-input-field-options [icon]="'mdi-bell'" iconColor="#34bf49" [label]="'Early Notification Threshold'" [list]="thresholdValues" [disabled]="!geoFence.geofence.onTimeThreshold.startTime" [value]="earlyNotification" [filter]="false" (selected)="updateEarlyNotificationThreshold($event)"></cbp-input-field-options>
+                    <cbp-input-field-options [icon]="'mdi-bell'" iconColor="#ff4c4c" [label]="'Late Notification Threshold'" [list]="thresholdValues" [disabled]="!geoFence.geofence.onTimeThreshold.endTime" [value]="lateNotification" [filter]="false" (selected)="updateLateNotificationThreshold($event)"></cbp-input-field-options>
+                </p-accordionTab>
+            </p-accordion>
+            <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="2%" style="margin: 8px">
+                <cbp-flat-button *ngIf="!saving" [label]="'CANCEL'" (click)="back()"></cbp-flat-button>
+                <cbp-button *ngIf="!saving" [disabled]="!showSave" [label]="'SAVE'" (click)="saveOrUpdate()"></cbp-button>
+                <cbp-svg-circular-loader *ngIf="saving"></cbp-svg-circular-loader>
+            </div>
+        </div>
+        <div fxLayout="column" fxFlex>
+            <div class="last-known-location" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2%">
+                <cbp-icon-button icon="mdi-shape-circle-plus" [label]="'DRAW_CIRCLE'" (click)="setShape('circle')"></cbp-icon-button>
+                <cbp-icon-button icon="mdi-shape-polygon-plus" [label]="'DRAW_SHAPE'" (click)="setShape('polygon')"></cbp-icon-button>
+                <span fxFlex></span>
+                <cbp-icon-button icon="mdi-delete" [label]="'DELETE'" (click)="clearGeoFence()"></cbp-icon-button>
+            </div>
+            <!-- geofence map component -->
+            <p-gmap *ngIf="showMap" fxFlex [options]="options" [overlays]="overlays" (onOverlayDragEnd)="handleDragEnd($event,this)"
+                    [style]="{'width':'100%','height':'100%'}" (onMapReady)="setMap($event)"></p-gmap>
+        </div>
+    </div>
+</div>

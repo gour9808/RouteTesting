@@ -1,0 +1,63 @@
+<cbp-card [label]="type" [searching]="searching">
+    <div class="create-card">
+        <div fxLayout='row' fxLayoutAlign='start bottom' fxLayoutGap="3%">
+            <div fxLayout='column' fxFlex="50%">
+                <div fxLayout='row' fxLayoutAlign='start center'>
+                    <cbp-input-field-calendar mandatory="true" icon="mdi-calendar-clock" iconColor="#f4c20d" [maxDate]="maxDate" [disabled]="searching"
+                                              (modelChange)="setPaymentDate($event)" [showTime]="true" [yearRange]="yearRange" [model]="expenses.paymentDate"
+                                              fxFlex [title]="'WHEN'" [placeholder]="'ENTER_TIME' | translate" fxFlex></cbp-input-field-calendar>
+                </div>
+                <div fxLayout='row' fxLayoutAlign='start center'>
+                    <cbp-input-field-text icon="mdi-cash-multiple" iconColor="#4885ed" fxFlex [label]="'DESCRIPTION'" [placeholder]="'DESCRIPTION' | translate"
+                                          [(model)]="expenses.description"></cbp-input-field-text>
+                </div>
+                <!-- parking field minHour-->
+                <div *ngIf="type=='PARKING'">
+                    <div fxLayout='row' fxLayoutAlign='start center'>
+                        <cbp-input-field-text icon="mdi-cash-multiple" iconColor="#4885ed" [disabled]="searching" fxFlex [label]="'COST_PER_HOUR'"
+                        keyFilter="money" [placeholder]="'COST_PER_HOUR' | translate" [(model)]="expenses.priceperunit" (modelChange)="getTotalPrice()"></cbp-input-field-text>
+                    </div>
+                    <div fxLayout='row' fxLayoutAlign='start center'>
+                        <cbp-input-field-text icon="mdi-clock-fast" [(model)]="expenses.amount" (modelChange)="getTotalPrice()" iconColor="#4885ed"
+                        keyFilter="int" [disabled]="searching" fxFlex [label]="'NO_OF_HOURS'" [placeholder]="'NO_OF_HOURS' | translate"></cbp-input-field-text>
+                    </div>
+                </div>
+                <!-- fuel field -->
+                <div *ngIf="type=='FUEL'">
+                    <div fxLayout='row' fxLayoutAlign='start center'>
+                        <cbp-input-field-text readonly="true" icon="mdi-fas-station" iconColor="#4885ed" [disabled]="searching" fxFlex [label]="'FUEL_TYPE'"
+                                              [placeholder]="'FUEL_TYPE' | translate" [(model)]="vehicle.fuelType"></cbp-input-field-text>
+                    </div>
+                    <div fxLayout='row' fxLayoutAlign='start center'>
+                        <cbp-input-field-text icon="mdi-cash-100" iconColor="#4885ed" [disabled]="searching" fxFlex [label]="'COST_PER_AMOUNT'" [placeholder]="'COST_PER_AMOUNT' | translate"
+                        keyFilter="money" [(model)]="expenses.priceperunit" (modelChange)="getTotalPrice()"></cbp-input-field-text>
+
+                        <cbp-input-field-text icon="mdi-fuel" [(model)]="expenses.amount" (modelChange)="getTotalPrice()" iconColor="#4885ed" [disabled]="searching"
+                        keyFilter="int" fxFlex [label]="'FUEL_QUANTITY'" [placeholder]="'FUEL_QUANTITY' | translate"></cbp-input-field-text>
+                    </div>
+                </div>
+                <!-- end of fuel field -->
+                <div fxLayout='row' fxLayoutAlign='start center'>
+                    <cbp-input-field-text mandatory="true" icon="mdi-cash-multiple" iconColor="#4885ed" [disabled]="searching" fxFlex [label]="'TOTAL_AMOUNT'"
+                    keyFilter="money" [placeholder]="expenses.currency" [(model)]="expenses.totalprice"></cbp-input-field-text>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="2%" style="margin:8px 8px 0;">
+                    <cbp-single-file-upload fxFlex [pictureURL]="expenses.receiptImage.pictureURL" fxLayoutAlign="start center"
+                                            icon="mdi-paperclip" color="rgb(72, 133, 237)" [label]="'ATTACH_RECEIPT'" (uploadedURLs)='addFileToReceipt($event)'></cbp-single-file-upload>
+
+                    <cbp-flat-button (click)="gotoDetail()" [label]="'BACK'|translate"></cbp-flat-button>
+
+                    <cbp-button [label]="'SAVE'" [disabled]="!goForIgnition()" (click)="setPayload()"></cbp-button>
+                </div>
+
+            </div>
+            <div fxLayout='column' fxFlex="50%" style="height: 350px;" *ngIf="type!='INSURANCE'">
+                <div class="location" fxLayout="row" fxLayoutAlign="start center">
+                    <cbp-input-field-autocomplete-address fxFlex icon="mdi-map" [label]="'SEARCH_LOCATION'" (pickedAddress)="getAutoPlaces($event)"></cbp-input-field-autocomplete-address>
+                </div>
+                <p-gmap class="gmap" *ngIf="showMap" fxFlex [options]="options" [overlays]="overlays" (onOverlayDragEnd)="handleDragEnd($event,this)"
+                        [style]="{'width':'100%','height':'100%'}" (onMapReady)="setMap($event)"></p-gmap>
+            </div>
+        </div>
+    </div>
+</cbp-card>

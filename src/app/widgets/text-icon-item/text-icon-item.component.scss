@@ -1,0 +1,37 @@
+@import "../widget.scss";
+@import "../../styles/colors.scss";
+
+.item{
+    color: #757575;
+    &:hover, &:focus {
+        cursor: pointer;
+        user-select: none;
+    }
+    .mdi{
+        font-size: 16px;
+        margin-right: 5px;
+    }
+    .text{
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 1.3;
+    }
+    .text-val{
+        margin: 0 0 0 24px;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.6);
+        @include font-weight(bold);
+    }
+    .trim{
+        overflow: hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+        width:150px;
+        display:inline-block;
+    }
+    &.right-align {
+        .text-val {
+            text-align: right;
+        }
+    }
+}

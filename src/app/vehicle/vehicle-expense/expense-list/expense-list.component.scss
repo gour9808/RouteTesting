@@ -1,0 +1,131 @@
+@import '../../../styles/utils.scss';
+@import '../../../styles/shadow.scss';
+
+:host {
+    height: 100%;
+}
+
+.expense-container {
+    height: 100%;
+    overflow: auto;
+}
+
+.list-expense {
+    min-width: 200px;
+    background-color: white;
+}
+
+.expense-list {
+    padding: 8px;
+    min-height: 64px;
+    &:hover {
+        background-color: #f5f6fa;
+        cursor: pointer;
+    }
+    &:not(:last-child) {
+        @include border-bottom;
+    }
+    .mdi {
+        &.expense-type-icon {
+            font-size: 28px;
+            color: rgba(0, 0, 0, 0.6);;
+        }
+    }
+    .expense-action-buttons {
+        .mdi {
+            @include button-effect();
+            padding: 4px;
+            color: #757575;
+        }
+    }
+    .expense-detail-item {
+        padding: 8px;
+        .expense-description {
+            font-size: 16px;
+            color: #5b5b5b;
+        }
+        .expense-meta {
+            font-size: 12px;
+            color: #9B9B9B;
+            span {
+                padding-right: 8px;
+                line-height: 20px;
+                &:not(:first-child) {
+                    padding-left: 8px;
+                }
+                &:not(:last-child) {
+                    border-right: 1px solid #9B9B9B;
+                }
+            }
+        }
+    }
+    .expense-cost-item {
+        margin: 0 8px 0 8px;
+        .cost {
+            font-size: 16px;
+            color: #5b5b5b;
+            font-weight: bold;
+        }
+        .unit {
+            font-size: 12px;
+            color: #9B9B9B;
+        }
+    }
+}
+
+.PARKING {
+    border-left-color: #c3ff8d;
+}
+
+.FUEL {
+    border-left-color: #FF6384;
+}
+
+.VEHICLEDEALER {
+    border-left-color: #fff88d;
+}
+
+.FINANCING {
+    border-left-color: #36A2EB;
+}
+
+.GARAGE {
+    border-left-color: #FFCE56;
+}
+
+.INSURANCE {
+    border-left-color: #ff3c3c;
+}
+
+.FINE {
+    border-left-color: #01458e;
+}
+
+.pie-chart {
+    margin: 10px 0 0;
+}
+
+.filter-option {
+    font-size: 14px;
+    min-width: 130px;
+    margin: 0 10px 0 15px;
+    padding: 0 0 0;
+    text-align: center;
+}
+
+.expense-data {
+    .delete-icon {
+        cursor: pointer;
+        font-size: 18px;
+        color: $label-color;
+    }
+}
+
+.ui-widget-content {
+    border: none;
+}
+
+.dialog {
+    padding: 12px;
+    min-width: 450px;
+}

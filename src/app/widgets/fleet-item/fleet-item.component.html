@@ -1,0 +1,7 @@
+<div class="item" [ngClass]="class" fxLayout="row" fxLayoutAlign="start center">
+    <div fxLayout="column" class="fleet-info" fxFlex>
+        <span>{{label | translate }}</span>
+        <span class="desc">{{'TOTAL_VEHICLES' | translate}}: {{count}}</span>
+    </div>
+    <span class="sub-label">{{subLabel | translate}}</span>
+</div>

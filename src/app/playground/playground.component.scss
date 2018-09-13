@@ -1,0 +1,35 @@
+@import "../styles/shadow.scss";
+@import "~mdi/scss/variables";
+@import "~mdi/scss/functions";
+cbp-card {
+    width: 50%;
+}
+
+.log-item {
+    padding: 8px;
+    height: 128px;
+    &:not(:last-child) {
+        border-bottom: 1px solid rgba(138, 156, 167, .4);
+    }
+    .address {
+        font-size: 14px;
+        font-weight: bold;
+        &:before {
+            font: normal normal normal 18px/1 "Material Design Icons";
+            content: mdi('map-marker');
+            margin-right: 5px;
+        }
+    }
+    .time {
+        font-size: 12px;
+        margin-left: 5px;
+    }
+    .distance-duration {
+        font-size: 14px;
+        text-align: center;
+    }
+    .driver {
+        font-size: 14px;
+        text-align: center;
+    }
+}

@@ -1,0 +1,67 @@
+<div class="info-container">
+    <div fxLayout="column">
+        <cbp-card [label]="'VEHICLE_DETAILS'">
+            <div class="vehicle-detail-card" fxLayout="row" *ngIf="vehicle">
+                <div fxLayout="column" fxFlex class="info">
+                    <!--<cbp-input-action-switch [isEnabled]="true" [checked]="vehicle.bookable" [label]="'BOOKABLE'" (state)='filterActive($event)'></cbp-input-action-switch>-->
+                    <div fxLayout="row">
+
+                        <cbp-input-field-autocomplete-vehicles isAdmin fxFlex [label]="'MAKEMODELVARIANT'" [model]="brand" (pickedVehicle)="selectedBrand($event)"></cbp-input-field-autocomplete-vehicles>
+                        <cbp-input-field-text fxFlex [label]="'NAME'" isAdmin [(model)]="vehicle.name"></cbp-input-field-text>
+                    </div>
+                    <div fxLayout="row">
+
+                        <cbp-input-field-text fxFlex [label]="'REG_NO'" isAdmin [(model)]="vehicle.numberPlate.strLicense"></cbp-input-field-text>
+                        <cbp-input-field-text fxFlex [label]="'VIN'" isAdmin [placeholder]="'ENTER_VIN'  | translate" [(model)]="vehicle.vin"></cbp-input-field-text>
+                    </div>
+                    <cbp-input-field-text [label]="'TRACKING_DEVICE_NUMBER'" isAdmin [placeholder]="'ENTER_DEVICE_NUMBER'  | translate" [(model)]="trackingId"></cbp-input-field-text>
+                    <div style="margin: 12px" fxFlexAlign="end" >
+                        <cbp-button *cbpAdminOrAgentOnly [label]="'UPDATE'" (click)="updateVehicle(); updateTrackingMode()"></cbp-button>
+                    </div>
+                </div>
+            </div>
+        </cbp-card>
+        <cbp-vehicle-driver-list showAdd="true" (refreshDriver)="refreshDriver($event)" [drivers]="drivers" [loadingDrivers]="loadingDrivers"></cbp-vehicle-driver-list>
+        <!-- <div fxLayout="row">
+            <cbp-vehicle-reminder [vehicle]="vehicle" [loadingReminder]="loadingReminder"></cbp-vehicle-reminder>
+        </div> -->
+    </div>
+        <div fxLayout="row">
+            <cbp-card fxFlex [label]="'LOGBOOK_SUMMARY'" [searching]="loadingSummaryList">
+                <div class="card-header" fxLayout="row" fxLayoutAlign="end center" fxFlex>
+                    <div fxLayout="row">
+                        <cbp-calender icon="mdi-calendar" iconColor="#DE561C" [(model)]="fromDate" (modelChange)="fromChange($event)"></cbp-calender>
+                        <cbp-calender icon="mdi-calendar" iconColor="#A2EF44" [(model)]="toDate" (modelChange)="toChange($event)"></cbp-calender>
+                    </div>
+                    <cbp-icon-button icon="mdi-refresh" (click)="getLogbookSummary()" label="REFRESH"></cbp-icon-button>
+                </div>
+                <div fxFlex class="logDataTable">
+                    <p-table *ngIf="logbookSummaryList.length" [value]="logbookSummaryList" [paginator]="true" [rows]="10" sortMode="none">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="text-align: start">{{"DATE" | translate}}</th>
+                                <th style="text-align: end">{{ "DISTANCE_COVERED_KMS" | translate }}</th>
+                                <th style="text-align: end">{{ "NUMBER_OF_TRIPS" | translate }}</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                            <tr>
+                                <td>{{rowData.date}}</td>
+                                <td style="text-align: end">{{rowData.businessKM}}</td>
+                                <td style="text-align: end">{{rowData.businessTrip}}</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <tr>
+                                <td> Total</td>
+                                <td style="text-align: end"> {{totalDistance}}</td>
+                                <td style="text-align: end"> {{totalTrips}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                </div>
+            </cbp-card>
+        </div>
+
+</div>

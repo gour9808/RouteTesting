@@ -1,0 +1,17 @@
+@import '../../common/common.scss';
+
+:host{
+    height: 100%;
+}
+.request-create-container{
+    overflow: hidden;
+}
+
+cbp-open-req-create-form{
+    @include md-whiteframe-2dp;
+    z-index: 1;
+}
+
+p-gmap{
+    z-index: 0;
+}

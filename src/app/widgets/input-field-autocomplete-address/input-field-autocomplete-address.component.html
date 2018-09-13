@@ -1,0 +1,11 @@
+<div fxLayout="column" class="input-group">
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <i *ngIf="icon" [style.color]="iconColor" class="mdi" [ngClass]="icon"></i>
+        <span class="input-label">{{label | translate}}
+            <span class="asterisk_input" *ngIf="mandatory">  </span>
+        </span>
+    </div>
+    <p-autoComplete [disabled]="disabled" [(ngModel)]="model"[placeholder]="'SEARCH_ADDRESS' | translate"  [suggestions]="results" (onSelect)="selected($event)"
+        field="description" (completeMethod)="search($event)"></p-autoComplete>
+</div>
+<input hidden=true #searchBox>

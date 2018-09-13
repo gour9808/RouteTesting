@@ -1,0 +1,50 @@
+@import "../widget.scss";
+@import "../general.scss";
+
+.item {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+    vertical-align: middle;
+    color: $icon;
+    padding-left: 12px;
+    min-height: 64px;
+    border-bottom: 1px solid #f1f1f1;
+    i {
+        font-size: $item;
+    }
+    .fleet-info {
+        padding: 8px;
+    }
+    .desc {
+        margin-top: 5px;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.4);
+    }
+    .sub-label {
+        border: 1px solid #f1f1f1;
+        border-radius: 4px;
+        padding: 4px;
+        font-size: 12px;
+        margin: 4px;
+        color: rgba(0, 0, 0, 0.4);
+    }
+    &.active, &:hover:not(.disabled) {
+        background: $hover-color;
+        font-weight: bold;
+        border-left: 4px solid $list-item;
+        padding-left: 8px;
+        color: $icon-label;
+    }
+    &.disabled {
+        cursor: not-allowed;
+    }
+    &:hover:not(.disabled) {
+        background: $hover-color;
+        cursor: pointer;
+    }
+    &.selected {
+        border-left: 4px solid $list-item;
+        padding-left: 8px;
+    }
+}

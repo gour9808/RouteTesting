@@ -1,0 +1,28 @@
+<div class="driver-grid-container">
+    <cbp-splash-loader *ngIf="loadingDrivers"></cbp-splash-loader>
+  <div class="action-bar">
+      <cbp-input-action-switch [isEnabled]='drivers.length' [label]="'ACTIVE_DRIVERS'" (state)='filterActive($event)'></cbp-input-action-switch>
+    <cbp-input-field-search [placeholder]="'SEARCH'" (searchTerm)='searchTerm.value = $event'></cbp-input-field-search>
+      <cbp-button [label]="'ADD_DRIVER'" (click)="showDialog=!showDialog"></cbp-button>
+  </div>
+  <div class="driver-grid">
+    <!-- <div class="driver-grid-item" *ngFor='let driver of drivers | filterBy:searchTerm'> -->
+        <div class="driver-grid-item" *ngFor='let driver of drivers | filterBy:searchTerm' (click)="openDriverDetail(driver)">
+      <i *ngIf="!driver.profilePhotoURL" class="mdi mdi-account-circle avatar driver-avatar"></i>
+      <img *ngIf="driver.profilePhotoURL" class="avatar driver-avatar" [src]="driver.profilePhotoURL" />
+      <span class="driver-name">{{driver.displayname}}</span>
+      <span class="driver-email">{{driver.currentEMail}}</span>
+      <span class="line"></span>
+      <i class="mdi mdi-car car-icon"></i>
+      <span class="driver-vehicle" (click)="openVehicleDetail();$event.stopPropagation()">Audi A4</span>
+    </div>
+  </div>
+</div>
+
+<p-dialog [header]="'INVITE_DRIVER' | translate" [(visible)]="showDialog" modal="modal" width="800" [responsive]="true">
+    <div fxLayout="column">
+      <cbp-driver-search></cbp-driver-search>
+        <cbp-button [label]="'CLOSE'" (click)="showDialog=false" fxLayoutAlign="end" style="margin:10px"></cbp-button>
+    </div>
+  </p-dialog>
+

@@ -1,0 +1,33 @@
+@import "../widget.scss";
+
+.tab-bar {
+    background: $highlight-color;
+    height: 60px;
+    color: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 1px 5px 0 $card-shadow1, 0 2px 2px 0 $card-shadow2, 0 3px 1px -2px $card-shadow3;
+    .mdi {
+        font-size: $item;
+        margin: 8px;
+        cursor: pointer;
+    }
+    .title {
+        width: 250px;
+        font-size: $message;
+        @include font-weight(medium);
+        height: 100%;
+        color: $tab-title-color;
+        span{
+            padding: 5px;
+        }
+       &.active {
+           @include font-weight(bold);
+           border-bottom: 4px solid $list-item;
+           color: $icon-label;
+        }
+        &:hover, &:focus {
+            background: $hover-color;
+            cursor: pointer;
+            outline: none;
+        }
+    }
+}

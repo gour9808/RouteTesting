@@ -1,0 +1,13 @@
+@import "../widget.scss";
+
+input[type=text],
+input[type=number],
+.ui-inputtext.ui-widget.ui-state-default.ui-corner-all {
+    @extend .input-design;
+    @extend .disable;
+    @extend .read-only;
+}
+
+.input-label {
+    @extend .label;
+}

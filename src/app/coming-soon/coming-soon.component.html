@@ -1,0 +1,40 @@
+<p-dataTable [value]="cars" expandableRows="true" #dt [expandedRows]="expandedItems">
+  <p-column [style]="{'width':'38px'}" field="request_status">
+    <ng-template let-col let-item="rowData" pTemplate="body">
+      <i class="mdi" [ngClass]="getIcon(item.request_status)" [style.color]="getColor(item.request_status)"></i>
+      <div class="status" [style.background]="getColor(item.request_status)"></div>
+    </ng-template>
+  </p-column>
+  <p-column field="requestor_name" header="Name">
+    <ng-template let-col let-item="rowData" pTemplate="body">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <i class="mdi mdi-account-circle"></i>
+        <div fxLayout="column">
+          <span class="name">{{item.requestor_name}}</span>
+          <span>{{item.requestor_email}}</span>
+        </div>
+      </div>
+    </ng-template>
+  </p-column>
+  <p-column field="pick_up_time" header="Pick Up Time"></p-column>
+  <p-column field="start_address" header="Start Address"></p-column>
+  <p-column field="end_address" header="End Address"></p-column>
+  <ng-template let-item pTemplate="rowexpansion">
+    <div fxLayout="row" class="meta">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <i class="mdi mdi-account"></i>
+        <div fxLayout="column">
+          <span class="name">{{item.driver_name}}</span>
+          <span>{{item.driver_email}}</span>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <i class="mdi mdi-car"></i>
+        <div fxLayout="column">
+          <span class="name">{{item.vehicle_make}}</span>
+          <span>{{item.vehicle_model}}</span>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-dataTable>

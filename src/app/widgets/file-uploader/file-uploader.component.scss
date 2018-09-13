@@ -1,0 +1,52 @@
+@import "../widget.scss";
+@import "../general.scss";
+
+.uploader-box {
+    border: 1px dashed $message-color;
+    height: 200px;
+    width: 700px;
+    margin-top: .5em;
+}
+
+.hovering {
+    background: $message-hover;
+}
+
+.message {
+    font-size: 18px;
+    color: $message-color;
+}
+
+.message-select {
+    @extend .message;
+    @include font-weight(bold);
+    color: $message-select;
+    cursor: pointer;
+}
+
+.thumbnail {
+    height: 100%;
+    width: 100%;
+    max-height: 100px;
+    max-width: 100px;
+    object-fit: contain;
+}
+
+.mdi {
+    &.big {
+        font-size: $big-icon;
+        color: $icon;
+    }
+    &.small {
+        font-size: $item;
+    }
+    .progress {
+        @extend .progress;
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.ui-dialog.ui-widget .ui-dialog-content {
+    padding: 0;
+}

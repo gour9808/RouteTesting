@@ -1,0 +1,11 @@
+<div fxLayout="column" class="input-group">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <i *ngIf="icon" [style.color]="iconColor" class="mdi" [ngClass]="icon"></i>
+      <span class="input-label">{{label | translate}}
+      <span class="asterisk_input" *ngIf="mandatory">  </span>
+    </span>
+  </div>
+    <tag-input [maxItems]='maxItems' [(ngModel)]='model' [disabled]='disabled' [placeholder]='placeholder | translate ' separatorKeys=','
+               (onAdd)='add($event)' (onRemove)='remove($event)' [theme]="'foundation-theme'"></tag-input>
+  <span *ngIf="!error" class="input-error">{{errorMessage | translate }}</span>
+</div>

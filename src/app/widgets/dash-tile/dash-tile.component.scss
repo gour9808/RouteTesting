@@ -1,0 +1,29 @@
+@import "../widget.scss";
+@import "../general.scss";
+
+.card {
+    @extend .card-design;
+  cursor: pointer;
+  padding: 12px;
+  &.small {
+      min-width: 300px;
+      min-height: 100px;
+  }
+
+  .mdi.dash {
+      font-size: $dash-icon;
+      color: $highlight-color;
+      margin: 0 5px 0 0;
+  }
+
+    .dash-number {
+      font-size: $item;
+      @include font-weight(bold);
+      color: $highlight-color;
+  }
+
+    .dash-title {
+      font-size: $message;
+      color: $highlight-color;
+  }
+}

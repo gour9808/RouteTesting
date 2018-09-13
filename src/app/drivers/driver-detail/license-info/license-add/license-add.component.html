@@ -1,0 +1,25 @@
+<cbp-card [label]="'ENTER_NEW_LICENSE_DETAILS'" expanded="true">
+    <div fxLayout="column">
+        <div fxLayout="row">
+          <cbp-input-field-text [label]="'LICENSE_NUMBER'" [placeholder]="'ENTER_LICENSE_NUMBER' | translate"  mandatory="true" [error]="!licenseNumber.length" [errorMessage]="licenseError" [model]="licenseNumber" (modelChange)="licenseNumber=$event" fxFlex></cbp-input-field-text>
+          <cbp-input-field-text [label]="'LICENSE_CATAGORY'" [placeholder]="'ENTER_LICENSE_CATAGORY' | translate" [model]="licenseCategoryValue.categoryType" (modelChange)="licenseCategoryValue.categoryType=$event" fxFlex></cbp-input-field-text>
+          <cbp-input-field-text [label]="'ISSUING_AUTHORITY'" [placeholder]="'ENTER_ISSUING_AUTHORITY' | translate" [model]="issuingAuthority" (modelChange)="issuingAuthority=$event" fxFlex></cbp-input-field-text>
+        </div>
+        <div fxLayout="row">
+          <cbp-input-field-text [label]="'FIRST_NAME'" [placeholder]="'ENTER_FIRST_NAME' | translate" [model]="firstName"   (modelChange)="firstName=$event" fxFlex></cbp-input-field-text>
+          <cbp-input-field-text [label]="'LAST_NAME'" [placeholder]="'ENTER_LAST_NAME' | translate" [model]="lastName"  (modelChange)="lastName=$event" fxFlex></cbp-input-field-text>
+        </div>
+        <div fxLayout="row">
+          <cbp-input-date [label]="'DATE_OF_BIRTH'" [placeholder]="'ENTER_DATE_OF_BIRTH'" [model]="dob" (modelChange)="dob=$event" fxFlex></cbp-input-date>
+          <cbp-input-field-text [label]="'PLACE_OF_BIRTH'" [placeholder]="'ENTER_PLACE_OF_BIRTH' | translate" [model]="placeOfBirth" (modelChange)="placeOfBirth=$event" fxFlex></cbp-input-field-text>
+        </div>
+        <div fxLayout="row">
+            <cbp-input-date [label]="'VALID_FROM'" [placeholder]="'ENTER_DATE_OF_ISSUE'"  mandatory="true" [error]="doiError.length" [errorMessage]="doiError" [model]="doi" (modelChange)="doi=$event" fxFlex></cbp-input-date>
+            <cbp-input-date [label]="'TO'" [placeholder]="'ENTER_DATE_OF_EXPIRY'" mandatory="true" [model]="doe" [error]="doeError.length" [errorMessage]="doeError" (modelChange)="doe=$event" fxFlex></cbp-input-date>
+        </div>
+        <cbp-input-field-text [label]="'ADDRESS'" [placeholder]="'ENTER_ADDRESS' | translate" [model]="addressInfo" (modelChange)="addressInfo=$event" fxFlex></cbp-input-field-text>
+        <cbp-input-field-options [label]="'COUNTRY'"  [list]="countries" (selected)="locale=$event"></cbp-input-field-options>
+        <cbp-button [label]="'ADD'" (click)="addLicense()" fxLayoutAlign="end" style="margin:10px;margin-left:85%;width:150px"></cbp-button>
+    </div>
+  </cbp-card>
+  <ng2-toasty [position]="'bottom-right'"></ng2-toasty>

@@ -1,0 +1,207 @@
+@import "../../common/common.scss";
+@import '../../styles/utils.scss';
+
+.vehicle-grid-item {
+    @include md-whiteframe-1dp();
+    background: #fff;
+    position: relative;
+    color: rgba(0, 0, 0, 0.6);
+    @include transition(0.2s);
+    &:hover {
+        @include md-whiteframe-2dp;
+        transform: scale(1.02);
+    }
+
+    .vehicle-picture {
+        text-align: center;
+        background: #fafafa;
+        line-height: 1.5;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        .mdi {
+            font-size: 80px;
+            color: #b4b4b4;
+        }
+        &.logo-bg {
+            background-size: contain;
+            img {
+                object-fit: contain;
+            }
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            max-width: 100%;
+            margin: 0 auto;
+            object-fit: contain;
+        }
+        width: 100%;
+        height: 130px;
+    }
+    .label {
+        font-size: 12px;
+        text-transform: uppercase;
+        display: block;
+        margin: 0 0 3px;
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: 500;
+    }
+    .label-value {
+        font-size: 16px;
+        font-weight: 700;
+    }
+    .vehicle-detail {
+        padding: 15px;
+        width: 100%;
+        &:hover {
+            cursor: pointer;
+        }
+        .vehicle-make {
+            font-size: 16px;
+            font-weight: 700;
+            position: relative;
+            display: block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            padding: 0 1px 0 0;
+            .mdi-circle {
+                font-size: 9px;
+                color: #c0c0c0;
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 10px;
+                &.active {
+                    color: #60e61f;
+                }
+            }
+        }
+        .regno {
+            padding: 0 0 0 13px;
+        }
+        .vehicle-make-model {
+            margin-top: 15px;
+            .vehicle-logo {
+                width: 32px;
+                margin-right: 7px;
+                background-position: center;
+                background-size: contain;
+                background-repeat: no-repeat;
+                img {
+                    max-width: 100%;
+                    width: 100%;
+                }
+
+                .mdi-car {
+                    font-size: 20px;
+                    line-height: 17px;
+                }
+            }
+            .vehicle-model {
+                font-weight: bold;
+                font-size: 14px;
+                margin: 0;
+                color: rgba(0, 0, 0, 0.5);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+    .driver-detail {
+        padding: 12px 9px;
+        border-top: 2px solid #f8f8f8;
+        margin: 0% 2% 0% 2%;
+        .driver-avatar {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border-radius: 100%;
+            margin-right: 7px;
+            border: 1px solid #d9d6d3;
+            text-align: center;
+            color: #d9d6d3;
+            font-size: 6px;
+            line-height: 27px;
+            position: relative;
+            top: 2px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            img {
+                max-width: 100%;
+                width: 100%;
+                border-radius: 100%;
+            }
+            .mdi {
+                font-size: 20px;
+                margin: 0;
+            }
+        }
+        .driver-contact {
+            margin: 15px 0 0;
+        }
+        .driver-info {
+            width: 85%;
+            // min-height: 92px;
+        }
+        .driver-number {
+            font-size: 16px;
+            font-weight: 700;
+            position: relative;
+            display: block;
+            a {
+                text-decoration: none;
+                color: rgba(0, 0, 0, 0.7);
+            }
+            .flag {
+                font-size: 9px;
+                color: #c0c0c0;
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+        }
+    }
+    .bottom-btn {
+        border-top: 1px solid #e7e7e7;
+        height: 48px;
+        padding: 4px;
+        .btn {
+            @include button-effect();
+            text-transform: uppercase;
+            padding: 8px;
+            font-size: 14px;
+            @include transition(0.3s);
+            &:last-child {
+                border: none;
+            }
+            &:hover {
+                cursor: pointer;
+                color:black;
+            }
+            &.item {
+                .text {
+                    font-size: 14px !important;
+                }
+            }
+        }
+        .mdi {
+            @include button-effect();
+            padding: 4px;
+            color: #757575;
+        }
+    }
+
+}
+
+.dialog {
+    max-height: 200px;
+    padding: 12px;
+    .message{
+        font-size: 16px;
+        padding: 8px;
+    }
+}

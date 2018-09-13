@@ -1,0 +1,17 @@
+<div fxLayout="row" *ngFor="let vechile of make">
+    <div class="card small" fxLayout="column" fxLayoutAlign="start center">
+        <div class="card" fxLayout="column" style="background: lightslategray;margin-top: 0px">
+            <div style="background:black;opacity: 0.6;">
+                <img class="avatar" [src]="getVehicleLogo(make.make)" />
+                <i class="material-icons pull-right" style="font-size: 26px;color: white;margin-left: 20px" (click)="deletefromFleet()">delete</i>
+            </div>
+        </div>
+        <div fxLayout="column" flex fxLayoutAlign="end center">
+            <div class="row" style="margin: 10px">
+                <b><span class="dash-title" fxLayoutGap=10%>{{vechile.make}}{{vechile.model}}</span></b>
+            </div>
+            <div class="row" style="margin-bottom: 10px">
+                <span class="dash-name">{{vechile.name}}</span>
+            </div>
+        </div>
+    </div>

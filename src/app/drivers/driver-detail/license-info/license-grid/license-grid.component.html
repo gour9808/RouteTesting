@@ -1,0 +1,35 @@
+<div *ngIf="show">
+<div fxLayout="column" class="licenseCard" *ngFor="let key of licenseInfoArray; let i = index" (click)="showbtn(i)">
+    <div fxLayout="row">
+        <div fxFlex style="margin-top:10px" fxFlex="20%">
+            <i *ngIf="!licenseInfo[key].licensePictureUrl" class="material-icons avatar">account_circle
+            </i>
+            <input *ngIf="!licenseInfo[key].licensePictureUrl" type="file" accept="image/*" (change)="onFilesSelected($event)"style="font-size:18px;margin:10px"/>
+            <img *ngIf="licenseInfo[key].licensePictureUrl" class="image" [src]="licenseInfo[key].licensePictureUrl"/>
+        </div>
+        <div fxLayout="column" fxFlex="80%">
+            <cbp-input-field-text [label]="'FIRST_NAME'" [model]="licenseInfo[key].firstName" (modelChange)="licenseInfo[key].firstName=$event" fxFlex></cbp-input-field-text>
+            <cbp-input-field-text [label]="'LAST_NAME'" [model]="licenseInfo[key].lastName" (modelChange)="licenseInfo[key].lastName=$event" fxFlex></cbp-input-field-text>
+        </div>
+    </div>
+    <div fxLayout="row" fxFlex style="margin-top:20px">
+        <cbp-input-field-text [label]="'LICENSE_NUMBER'" [model]="licenseInfo[key].licenseNumber" (modelChange)="licenseInfo[key].licenseNumber=$event" fxFlex></cbp-input-field-text>
+        <cbp-input-field-text [label]="'LICENSE_CATAGORY'" [placeholder]="'ENTER_LICENSE_CATAGORY' | translate" [model]="licenseCategoryValue.categoryType" (modelChange)="licenseCategoryValue.categoryType=$event" fxFlex></cbp-input-field-text>
+    </div>
+    <div fxLayout="row" fxFlex style="margin-top:20px">
+        <cbp-input-date [label]="'DATE_OF_BIRTH'" [model]="licenseInfo[key].dateOfBirth" (modelChange)="licenseInfo[key].dateOfBirth=$event" fxFlex></cbp-input-date>
+        <cbp-input-field-text [label]="'PLACE_OF_BIRTH'" [model]="licenseInfo[key].placeOfBirth" (modelChange)="licenseInfo[key].placeOfBirth=$event" fxFlex></cbp-input-field-text>
+    </div>
+    <div fxLayout="row" fxFlex style="margin-top:20px">
+        <cbp-input-date [label]="'VALID_FROM'" [model]="licenseInfo[key].dateOfIssue" (modelChange)="licenseInfo[key].dateOfIssue=$event" fxFlex></cbp-input-date>
+        <cbp-input-date [label]="'TO'" [model]="licenseInfo[key].dateOfExpiry" (modelChange)="licenseInfo[key].dateOfExpiry=$event" fxFlex></cbp-input-date>
+        <cbp-input-field-text [label]="'ISSUING_AUTHORITY'" [model]="licenseInfo[key].issuingAuthority" (modelChange)="licenseInfo[key].issuingAuthority=$event" fxFlex></cbp-input-field-text>
+    </div>
+    <div fxLayout="row">
+        <span fxFlex></span>
+        <cbp-button *ngIf="!btn" [label]="'UPDATE'" (click)="editDetails(key)" fxLayoutAlign="end" fxFlex style="margin:10px;margin-top:40px"></cbp-button>
+    </div>
+</div>
+</div>
+<span *ngIf="!show" style="opacity:0.8;position:relative;color:black;text-align:middle;top:150px;left:400px">No License info found! click on Add License Details</span>
+<ng2-toasty [position]="'bottom-right'"></ng2-toasty>

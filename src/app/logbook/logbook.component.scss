@@ -1,0 +1,32 @@
+// @import '../home/home.component.scss'
+.ui-datatable-scrollable-body {
+    overflow-y: scroll;
+    height: 350px;
+}
+
+div.ui-datatable .ui-datatable-loading {
+    height: inherit;
+    overflow-y: scroll;
+}
+
+.image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.green {
+    border: 5px;
+    border-style: hidden;
+    width: 225px;
+    height: 42px;
+    margin-left: 27px;
+}
+
+.red {
+    border: 5px;
+    border-style: hidden;
+    width: 225px;
+    height: 42px;
+    margin-left: 49px;
+}

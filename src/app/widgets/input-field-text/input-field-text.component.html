@@ -1,0 +1,11 @@
+<div fxLayout="column" class="input-group">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <i *ngIf="icon" [style.color]="iconColor" class="mdi" [ngClass]="icon"></i>
+    <span class="input-label">{{label | translate}}
+      <span class="asterisk_input" *ngIf="mandatory">  </span>
+    </span>
+  </div>
+  <input type="text" [readonly]="readonly" [pKeyFilter]="keyFilter" [pValidateOnly]="false" [disabled]="disabled" [placeholder]="placeholder" [(ngModel)]="model" (keyup)="onInputChanged()" (blur)='onBlur()'
+  />
+  <span *ngIf="error" class="input-error">{{errorMessage | translate }}</span>
+</div>

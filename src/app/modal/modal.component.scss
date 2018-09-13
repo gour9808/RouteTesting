@@ -1,0 +1,31 @@
+.card {
+    @extend .card;
+  min-width: 350px;
+  border: 1px solid rgba(0, 0, 0, 0.19);
+  min-height: 250px;
+    margin: 10px 3px 0px 10px;
+  &:hover {
+    box-shadow: 1px 1px 5px #888;
+  }
+  .card-title {
+    background: #f1f1f1;
+    font-size: 18px;
+    line-height: 36px;
+    font-weight: bold;
+    padding: 10px;
+  }
+  &.medium {
+    max-height: 400px;
+  }
+  .scrollable {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    &:hover {
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+  }
+  .card-body {
+    padding: 16px;
+  }
+}

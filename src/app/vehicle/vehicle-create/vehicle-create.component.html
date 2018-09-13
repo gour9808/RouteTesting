@@ -1,0 +1,45 @@
+<cbp-card [label]="'ADD_NEW_VEHICLE'" expanded="true" [searching]="searching">
+    <p-accordion [multiple]="true">
+        <p-accordionTab [header]="'BASIC_INFORMATION' | translate" [selected]="true" [disabled]="true">
+            <div fxLayout="row">
+                <cbp-input-field-text [label]="'LICENSE_PLATE_NUMBER'" [placeholder]="'ENTER_LICENSE_PLATE_NUMBER' | translate" [(model)]="newVehicle.numberPlate.strLicense"
+                    [mandatory]="true" fxFlex></cbp-input-field-text>
+                <cbp-input-field-text #vehicleNameInput [label]="'VEHICLE_NAME'" [placeholder]="'WHAT_DO_YOU_WANT_TO_CALL_YOUR_VEHICLE?' | translate"
+                    [(model)]="newVehicle.name" [mandatory]="true" fxFlex></cbp-input-field-text>
+                <cbp-input-field-autocomplete-vehicles [mandatory]="true" [label]="'MAKEMODELVARIANT'" [placeholder]="'TYPE_TO_SEARCH_MAKE_AND_MODEL' | translate"
+                    [model]="brand" (pickedVehicle)="selectedBrand($event)" fxFlex></cbp-input-field-autocomplete-vehicles>
+                <cbp-input-field-options [label]="'VEHICLETYPE'" mandatory="true" [value]="newVehicle.vehicleType" [list]="vehicleTypes"
+                    [filter]="false" fxFlex></cbp-input-field-options>
+            </div>
+            <!-- <div class="row"> -->
+                <!-- <cbp-input-field-options label="COUNTRY" [value]="currentCountry" [list]="countries" [placeH]="'ENTER_COUNTRY' | translate"
+                    [disabled]="!countries.length" showFilter="true" mandatory="true" fxFlex (selected)="setCountry($event)"></cbp-input-field-options> -->
+                <!-- <cbp-input-field-options label="TIMEZONE" [value]="currentTimezone" [list]="timezones" [placeH]="'SELECT_TIMEZONE' | translate"
+                    [disabled]="!countries.length" showFilter="true" mandatory="true" fxFlex (selected)="setTimezone($event)"></cbp-input-field-options> -->
+            <!-- </div> -->
+        </p-accordionTab>
+        <p-accordionTab [header]="'ADD_MORE_INFORMATION'|translate">
+            <div fxLayout="row">
+                <cbp-input-field-number [label]="'CURRENT_MILEAGE'" [placeholder]="'ENTER_CURRENT_MILEAGE' | translate" [(model)]="newVehicle.mileage"
+                    fxFlex></cbp-input-field-number>
+
+                <cbp-input-field-text [label]="'YEAROFCONSTRUCTION'" [placeholder]="'ENTER_YEAR_OF_CONSTRUCTION' | translate" [(model)]="newVehicle.yearOfConstruction"
+                    fxFlex></cbp-input-field-text>
+
+                <cbp-input-field-number [label]="'PURCHASEPRICE'" [placeholder]="'ENTER_PURCHASE_PRICE' | translate" [(model)]="newVehicle.purchaseprice"
+                    fxFlex></cbp-input-field-number>
+            </div>
+            <div fxLayout="row">
+                <cbp-input-field-text #vin [label]="'VIN'" [placeholder]="'ENTER_VIN' | translate" [maxlength]="17" (input)="vin.value=$event.target.value.toUpperCase()"
+                    [(model)]="newVehicle.vin" fxFlex></cbp-input-field-text>
+
+                <cbp-input-field-options [label]="'FUELTYPE'" [value]="newVehicle.fuelType" [list]="getFuelType()" [filter]="false" fxFlex></cbp-input-field-options>
+                <div fxFlex></div>
+            </div>
+        </p-accordionTab>
+        <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="2%" style="margin:12px;margin-top:12px">
+            <cbp-button [label]="'BACK'" (click)="BackToList()" fxLayoutAlign="end" style="margin-bottom:50px;margin-right:15px"></cbp-button>
+            <cbp-button [label]="'CREATE_VEHICLE'" [disabled]="!ignition()" (click)="save()"></cbp-button>
+        </div>
+    </p-accordion>
+</cbp-card>

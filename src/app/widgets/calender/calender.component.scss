@@ -1,0 +1,14 @@
+@import "../widget.scss";
+
+.cbp-calendar {
+    input[type=text],
+    input[type=number],
+    .ui-inputtext.ui-widget.ui-state-default.ui-corner-all {
+        @extend .input-design;
+    }
+}
+
+.input-label {
+    @extend .label;
+    margin-bottom: 5px;
+}

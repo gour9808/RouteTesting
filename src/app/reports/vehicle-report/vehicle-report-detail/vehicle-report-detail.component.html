@@ -1,0 +1,62 @@
+<div fxLayout="column" style="height: 100%; overflow: auto">
+    <div class="header-card" fxLayout="column">
+        <div class="info-header" fxLayout="row" fxLayoutAlign="start center">
+            <span class="user-greeting" fxFlex>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1%">
+                    <img class="logo" [src]="getVehicleLogo(vehicleInfo.make)"/>
+                    <span>{{vehicleInfo.name}} ({{vehicleInfo.numberPlate?.strLicense}})</span>
+                </div>
+            </span>
+        </div>
+        <div fxLayout="row">
+            <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center" *ngFor="let metric of metrics">
+                <div fxLayout="column" fxFlex>
+                    <div class="field">{{metric.label1 | translate}} {{metric.label2 | translate}}</div>
+                    <div class="number">{{metric.value}}</div>
+                    <div class="number">{{metric.type | currency: locale}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <div fxFlex *ngFor="let indicator of indicators" class="indicator-container" fxLayout="row" fxLayoutAlign="start center">
+            <i class="mdi" [ngClass]="indicator.icon"></i>
+            <div class="indicator-info" fxLayout="column" fxFlex>
+                <span class="indicator-label">{{indicator.label}}</span>
+                <span class="indicator-value">{{indicator.value}}</span>
+            </div>
+            <i class="mdi" [ngClass]="indicator.status_icon"></i>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <cbp-card [label]="'Last Updated Location'" fxFlex>
+            <p-gmap *ngIf="showMap" [options]="options" [overlays]="overlays" (onMapReady)="setMap($event)" [style]="{'width':'100%','height':'400px'}"></p-gmap>
+        </cbp-card>
+        <cbp-card [label]="'Daily Travel Report'" fxFlex>
+            <div style="height: 400px; overflow: auto">
+                <div *ngFor="let log of logbookSummaryList" (onHover)="updateMetrics()" fxLayout="row" fxLayoutAlign="start center" class="log" (click)="openLogbook(log)">
+                    <div class="log-date" fxLayout="column" fxFlex="25%">
+                        <span class="log-value">{{log.date}}</span>
+                        <span class="log-label">{{log.day}}</span>
+                    </div>
+                    <div class="log-metrics" fxLayout="row" fxFlex="75%">
+                        <div fxLayout="column" fxFlex>
+                            <span class="log-value">{{log.businessKM}}</span>
+                            <span class="log-label">Kms Travelled</span>
+                        </div>
+                        <div fxLayout="column" fxFlex>
+                            <span class="log-value">{{log.businessTrip}}</span>
+                            <span class="log-label">No. of Trips</span>
+                        </div>
+                        <div fxLayout="column" fxFlex>
+                            <span class="log-value">{{log.businessDuration}}</span>
+                            <span class="log-label">Hours Driven</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </cbp-card>
+    </div>
+</div>

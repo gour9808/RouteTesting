@@ -1,0 +1,65 @@
+<div class="team-management" fxLayout="column">
+    <cbp-actionbar>
+        <cbp-text-icon-item *cbpAdminOrAgentOnly class="click" icon="mdi-account-plus" [label]="'ADD_MEMBER'" (click)="addDialog.show()"></cbp-text-icon-item>
+        <cbp-text-icon-item *cbpAdminOrAgentOnly class="click" icon="mdi-email" [label]="'INVITE_MEMBER'" (click)="inviteDialog.show()"></cbp-text-icon-item>
+        <span fxFlex></span>
+        <cbp-input-field-search #search [placeholder]="'SEARCH'" (searchTerm)='searchTerm.value = $event; search.searching = false'></cbp-input-field-search>
+        <cbp-icon-button icon="mdi-filter-variant" class="sort-vehicle" [label]="'FILTER'" (click)="filterby.toggle($event)"></cbp-icon-button>
+        <cbp-icon-button icon="mdi-refresh" [label]="'REFRESH'" (click)="getInvites()"></cbp-icon-button>
+    </cbp-actionbar>
+    <cbp-card label="INVITED_USERS" [searching]="loadingInvitees">
+        <p-table [value]="invitees | filterBy:searchTerm | filterByResponse:filterValue" *ngIf="invitees" [rows]="10" [paginator]="true" [pageLinks]="3">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 50%; text-align: left;">{{ "NAME" |translate }}</th>
+                    <th style="text-align: right; width: 25%">{{ "ROLE" |translate }}</th>
+                    <th style="text-align: right; width: 25%;">{{ "INVITED" |translate }}</th>
+                    <th style="text-align: right; width: 25%;">{{ "INVITED_BY" |translate }}</th>
+                    <th style="text-align: center;width: 180px;"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-invitee let-rowIndex="rowIndex">
+                <tr class="team">
+                    <td style="text-align: center" class="team" [style]="{'width': '200px'}">
+                        <div fxLayout="row" fxLayoutGap="1%" fxFlex>
+                            <i class="mdi mdi-account-circle team-icon" fxLayoutAlign="start center"></i>
+                            <div fxLayout="column" fxLayoutAlign="center start">
+                                <span class="name">{{invitee.name}}</span>
+                                <span class="contact">{{invitee.email}}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="text-align: right;">
+                        <div fxLayout="column" fxLayoutAlign="end">
+                            <span class="role">{{ invitee.role | translate}}</span>
+                        </div>
+                    </td>
+                    <td style="text-align: right;">
+                        <span class="join-time">{{invitee.updateTime | timeAgo}}</span>
+                    </td>
+                    <td style="text-align: right;">
+                        <span class="join-time">{{invitee.invitedBy}}</span>
+                    </td>
+                    <td style="text-align: center;">
+                        <i *ngIf="invitee.responseType == 'PENDING'" class="action mdi mdi-delete" [pTooltip]="'CANCEL_INVITATION' | translate" tooltipPosition="bottom"
+                           (click)="cancelInvitation(invitee)"></i>
+                        <i *ngIf="invitee.responseType == 'ACCEPTED'" class="action mdi mdi-check" [pTooltip]="'INVITATION_ACCEPTED' | translate" tooltipPosition="bottom"></i>
+                        <i *ngIf="invitee.responseType == 'ABORTED'" class="action mdi mdi-cancel" [pTooltip]="'INVITATION_ABORTED' | translate" tooltipPosition="bottom"></i>
+                        <i *ngIf="invitee.responseType == 'ABORTED'" class="action mdi mdi-refresh" [pTooltip]="'RESEND_INVITATION' | translate"
+                           (click)="resendInvite(invitee)" tooltipPosition="bottom"></i>
+                        <i *ngIf="invitee.responseType == 'REJECTED'" class="action mdi mdi-account-off" [pTooltip]="'INVITATION_DECLINED' | translate" tooltipPosition="bottom"></i>
+                        <i *ngIf="invitee.responseType == 'REJECTED'" class="action mdi mdi-refresh" [pTooltip]="'Resend Invitation'"
+                           (click)="resendInvite(invitee)" tooltipPosition="bottom"></i>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </cbp-card>
+</div>
+
+<p-overlayPanel #filterby [style]="{'min-width':'200px','overflow':'auto','border': 'none'}">
+    <cbp-context-menu--icon-item [label]="type.label" *ngFor="let type of filterType" (click)="filterValue = type.value"></cbp-context-menu--icon-item>
+</p-overlayPanel>
+
+<cbp-add-member #addDialog (reload)="getInvites()"></cbp-add-member>
+<cbp-invite-member #inviteDialog (reload)="getInvites()"></cbp-invite-member>

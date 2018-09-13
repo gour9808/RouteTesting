@@ -1,0 +1,66 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/utils.scss";
+
+.container {
+    position: absolute;
+    margin-left:40%;
+    right:50px;
+    top:65px;
+    width: 280px;
+    margin-left: 60%;
+    min-height: 80px;
+    max-height: 340px;
+    box-shadow: 0px 1px 2px 1px $card-shadow1;
+    z-index: 6;
+    background-color: $highlight-color;
+    overflow-x: hidden;
+    margin-left: 65%;
+    .title {
+        text-align: left;
+        font-size: 14px;
+        color: $icon;
+        @include font-weight(bold);
+        padding: 8px;
+        border-bottom: 1px solid $notifiction-title;
+    }
+    .choice {
+        font-family: 'Hind', sans-serif;
+        width: inherit;
+        min-height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        .noNotifications {
+            text-align: center;
+            color: $dash-title;
+            position: relative;
+            width: inherit;
+            h5 {
+                color: $icon;
+                padding-top: 110px;
+            }
+        }
+        .notifications {
+            color: $dash-title;
+            position: relative;
+            max-height: 70px;
+            width: inherit;
+            border-bottom: 1px solid $notifications;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+    }
+    .footer {
+        border: 1px solid $notifiction-title;
+    }
+}
+
+@media screen and (max-width: 699px) and (min-width: 500px) {
+    .container {
+        margin-left: -370px;
+        top: 50px;
+        right: 45px;
+    }
+}

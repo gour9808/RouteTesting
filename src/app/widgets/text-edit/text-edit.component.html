@@ -1,0 +1,4 @@
+<input #textEditInput type="text" [ngClass]="input" [ngStyle]="{'font-size': font + 'px'}" (click)="change($event)" [(ngModel)]="model"
+       (ngModelChange)="modelChange" (keyup.enter)="change($event)" [readonly]="isEdit" style="border:none;font-size: 16px;outline:none;
+color:rgba(0, 0, 0, 0.8); width: 100%;height: 25px;cursor:pointer">
+

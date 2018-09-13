@@ -1,0 +1,6 @@
+<div fxLayout='row' fxLayoutAlign='start center' class="switch">
+    <span class="switch-title">{{label | translate}}</span>
+    <input type="checkbox" [disabled]='!isEnabled' [attr.id]="elementId" name="set-name" class="switch-input"
+           [(ngModel)]='checked' (change)='toggle(checked)'>
+    <label [attr.for]="elementId" class="switch-label"></label>
+</div>

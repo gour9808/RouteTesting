@@ -1,0 +1,104 @@
+<div style="overflow: auto; height: 100%">
+    <div fxLayout="row" fxFill>
+        <div class="details-header" fxLayout="column">
+            <cbp-svg-circular-loader *ngIf="!loadingDetails"></cbp-svg-circular-loader>
+            <div class="vehicle-grid-item" *ngIf="loadingDetails">
+                <div class="vehicle-picture" *ngIf="!vehicle.make">
+                    <i class="mdi mdi-car car-bg"></i>
+                </div>
+                <div class="vehicle-picture img-bg" *ngIf="vehicle.profilePictureUrl">
+                    <img [src]="vehicle.profilePictureUrl" />
+                </div>
+                <div class="vehicle-picture logo-bg" *ngIf="!vehicle.profilePictureUrl && vehicle.make">
+                    <img [src]="getVehicleLogo(vehicle.make)" />
+                </div>
+                <!--<div class="vehicle-picture" *ngIf="vehicle.profilePictureUrl" [ngStyle]="{ 'background-image': 'url(' + vehicle.profilePictureUrl + ')'}"></div>-->
+                <div fxLayout="column" class="vehicle-detail">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <div class="vehicle-name" fxLayout="column" fxFlex="50%">
+                            <span class="label">{{ 'VEHICLE_NAME' | translate }}</span>
+                            <span class="label-value">{{vehicle.name}}</span>
+                        </div>
+                        <div class="reg-no" fxLayout="column" fxFlex="50%">
+                            <span class="label">{{ 'REG_NO' | translate }}</span>
+                            <span class="label-value">{{vehicle.numberPlate?.strLicense}}</span>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start center" class="vehicle-make-model">
+                        <img class="vehicle-logo" *ngIf="vehicle.make" [src]="getVehicleLogo(vehicle.make)" />
+                        <i *ngIf="!vehicle.make" class="mdi mdi-car vehicle-logo"></i>
+                        <span class="label-value">{{vehicle.make}} {{vehicle.model}} {{vehicle.variant}}</span>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" class="driver-detail">
+                    <!--<div class="driver-avatar" *ngIf="driver?.profilePhotoURL" [ngStyle]="{ 'background-image': 'url(' + driver.profilePhotoURL + ')'}"></div>-->
+                    <!--<i *ngIf="!driver?.profilePhotoURL" class="mdi mdi-account-circle"></i>-->
+                    <!--<cbp-svg-circular-loader *ngIf="loadingDriver"></cbp-svg-circular-loader>-->
+                    <!--<div class="driver-info" *ngIf="!loadingDriver">-->
+                    <!--<span class="label" *ngIf="driver">{{ 'DRIVER_NAME' | translate }}</span>-->
+                    <!--<span class="label" *ngIf="!driver">{{ 'DRIVER_DETAILS' | translate }}</span>-->
+                    <!--<span class="label-value">{{ driver? driver.displayname : "-"}}</span>-->
+                    <!--</div>-->
+                    <cbp-text-icon-item icon="mdi-account-circle" fxFlex="90%" [label]="'CURRENT_DRIVER'" [value]="driver? driver.displayname : '-'"></cbp-text-icon-item>
+                </div>
+                <div fxLayout="row" class="vehicle-location">
+                    <!--<i class="mdi mdi-map-marker-radius"></i>-->
+                    <!--<div fxLayout="column">-->
+                    <!--<span class="label">{{'LAST_KNOWN_LOCATION' | translate}}</span>-->
+                    <!--<span class="label-value">{{address}}</span>-->
+                    <!--</div>-->
+                    <cbp-text-icon-item icon="mdi-map-marker-radius" color="red" label="LAST_KNOWN_LOCATION" [value]="address"></cbp-text-icon-item>
+                </div>
+                <img width="100%" *ngIf="staticMaps" [src]="staticMaps" alt="Google Map of bangalore">
+                <div fxLayout="row" class="vehicle-metrics" *ngIf="lastUpdatedTime">
+                    <div fxLayout="column" fxFlex fxFlexAlign="start">
+                        <span class="label">{{ 'UPDATED_TIME' | translate }}</span>
+                        <span class="label-value">{{ lastUpdatedTime }} </span>
+                    </div>
+                </div>
+                <div fxLayout="row" class="vehicle-metrics">
+                    <div fxLayout="column" fxFlex fxFlexAlign="start">
+                        <span class="label">{{ 'DISTANCE_TRAVELLED' | translate }}</span>
+                        <span class="label-value">{{ vehicle.mileageBusiness | number : '1.2-2' }} Kms</span>
+                    </div>
+                    <div fxLayout="column" fxFlex fxFlexAlign="end">
+                        <span class="label">{{'TOTAL_TRIPS' | translate }}</span>
+                        <span class="label-value">{{vehicle.numberOfTrips}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="column" fxFlex>
+            <cbp-tabbar [tabs]='tabs'></cbp-tabbar>
+            <div style="overflow: auto; margin-bottom: 8px" fxFlex>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+    <cbp-dialog [(showDialog)]="showDialog">
+        <cbp-card label="AVAILABLE_DRIVERS" [searching]="loadingDrivers">
+            <div fxLayout='column' fxLayoutGap="2%">
+                <div class="driver-container" *ngIf="drivers.length != 0">
+                    <div class="driver-item" *ngFor="let driver of drivers" fxLayout="row" fxLayoutAlign="start center">
+                        <i *ngIf="!driver.profilePhotoURL" class="mdi mdi-account-circle"></i>
+                        <img *ngIf="driver.profilePhotoURL" class="avatar" [src]="driver.profilePhotoURL" />
+                        <div fxLayout="column">
+                            <span class="name">{{driver.displayname}}</span>
+                            <span class="email">{{driver.currentEMail}}</span>
+                        </div>
+                        <span fxFlex></span>
+                        <i class="click mdi mdi-plus-box" [pTooltip]="'SET_CURRENT_DRIVER' | translate" (click)="onDutyDriver(driver.userId)"></i>
+                    </div>
+                </div>
+                <div class="driver-container" *ngIf="(drivers | filterBy: searchTerm).length === 0">
+                    <div class="empty-message-container animated fadeIn" *ngIf="!loadingDrivers" fxLayout="column" fxLayoutAlign="center center"
+                        fxFill>
+                        <i class="mdi mdi-account-plus"></i>
+                        <span class="message">Invite to Fleet</span>
+                    </div>
+                </div>
+            </div>
+        </cbp-card>
+
+    </cbp-dialog>
+</div>

@@ -1,0 +1,72 @@
+<div class="request-create-form scroll-container">
+    <cbp-card [label]="'NEW_BOOKING'" [searching]="searching">
+        <div class="create-card">
+            <div fxLayout='row' fxLayoutAlign='start start' fxLayoutGap="2%">
+                <div fxLayout='column' fxFlex="55%">
+                    <div fxLayout='row' fxLayoutAlign='start center'>
+                        <cbp-input-field-text icon="mdi-email" iconColor="#4885ed" [disabled]="searching" (modelChange)="searchEmail($event)" [cbpValidator]="'email'"
+                                              [error]="error" [(model)]="requestor.emailId" [label]="'CLIENT_EMAIL'" [placeholder]="'ENTER_REQUESTOR_EMAIL' | translate"
+                                              mandatory="true" fxFlex></cbp-input-field-text>
+                        <cbp-input-field-calendar mandatory="true" icon="mdi-calendar-clock" iconColor="#f4c20d" [minDate]="minDate" [disabled]="searching"
+                                                  [model]="requestModel.pickupTime" (modelChange)="setTime($event)" [showTime]="true" fxFlex [title]="'WHEN'"
+                                                  [placeholder]="'ENTER_PICK_UP_TIME' | translate"></cbp-input-field-calendar>
+                    </div>
+                    <div fxLayout='row' fxLayoutAlign='start start'>
+                        <cbp-input-field-text icon="mdi-account" iconColor="#4885ed" [disabled]="searching" [(model)]="requestor.name" [label]="'CLIENT_NAME'"
+                                              [placeholder]="'ENTER_REQUESTOR_NAME' | translate" mandatory="true" fxFlex></cbp-input-field-text>
+
+                        <cbp-input-field-chips fxFlex maxItems='3' [(model)]="requestor.contacts" icon="mdi-phone" iconColor="#4885ed" [label]="'CLIENT_PHONE'"
+                                               [placeholder]="'ENTER_REQUESTOR_PHONE' | translate" (onRemove)="removePhone($event)" (onAdd)='addPhone($event.value)'
+                                               mandatory="true"></cbp-input-field-chips>
+                    </div>
+                    <div fxLayout='column'>
+                        <div fxLayout='row' fxLayoutAlign='start center'>
+                            <cbp-input-field-autocomplete-address mandatory="true" icon="mdi-map-marker" iconColor="#3cba54" [disabled]="searching" fxFlex
+                                                                  [(model)]="addressHack.start" [label]="'PICKUP_FROM'" (pickedAddress)="getAutoPlaces($event,true)"></cbp-input-field-autocomplete-address>
+
+                            <cbp-input-field-autocomplete-address mandatory="true" icon="mdi-map-marker" iconColor="#db3236" [disabled]="searching" fxFlex
+                                                                  [(model)]="addressHack.end" [label]="'DROP_TO'" (pickedAddress)="getAutoPlaces($event,false)"></cbp-input-field-autocomplete-address>
+                        </div>
+                        <div fxLayout='row' fxLayoutAlign='start center'>
+                            <cbp-input-field-autocomplete-address icon="mdi-map-marker" iconColor="#4885ed" [disabled]="searching" fxFlex [(model)]="addressHack.way"
+                                                                  [label]="'ADD_WAY_POINTS'" (pickedAddress)="addMarkerWay($event)"></cbp-input-field-autocomplete-address>
+
+                            <cbp-button [label]="'ADD'" (click)="addWayPoints($event)"></cbp-button>
+                        </div>
+                        <!-- view waypoint table -->
+                        <div fxLayout="row" class="waypoint_table" fxLayoutAlign="start center">
+                            <p-dataTable [value]="wayPointTable" #dt scrollable="true" scrollHeight="150px" emptyMessage=" ">
+                                <p-column [header]="'WAY_POINTS' | translate" [style]="{'width':'90%'}">
+                                    <ng-template let-way="rowData" let-i="rowIndex" pTemplate="body">
+                                        <div fxLayout="row" fxLayoutAlign="start center">
+                                            <div fxLayout="column">
+                                                <span>{{way.city}}</span>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                                <p-column>
+                                    <ng-template let-way="rowData" let-i="rowIndex" pTemplate="body">
+                                        <i class="mdi mdi-close-circle wayClose" (click)="removeWay(way,i);"></i>
+                                    </ng-template>
+                                </p-column>
+                            </p-dataTable>
+                        </div>
+                    </div>
+
+                    <div fxLayout='row' fxLayoutAlign='start center'>
+                        <cbp-input-field-text icon="mdi-comment-text-outline" iconColor="#4885ed" [disabled]="searching" (modelChange)="setMessage($event)"
+                                              fxFlex [label]="'MESSAGE'" [placeholder]="'ENTER_OPTIONAL_COMMENTS' | translate"></cbp-input-field-text>
+
+                    </div>
+                    <div fxLayout='row' fxLayoutAlign='end center' fxLayoutGap="2%" style="margin:8px">
+                        <cbp-button [label]="'CREATE_REQUEST'" [disabled]="!this.goForConfirm()" (click)="selectAction()"></cbp-button>
+                    </div>
+                </div>
+                <div fxLayout='column' fxFlex="45%" style="height: 500px;" >
+                    <p-gmap *ngIf="showMap" fxFlex [options]="options" [overlays]="overlays" [style]="{'width':'100%','height':'100%'}" (onMapReady)="setMap($event)"></p-gmap>
+                </div>
+            </div>
+        </div>
+    </cbp-card>
+</div>

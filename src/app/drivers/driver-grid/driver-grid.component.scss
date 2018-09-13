@@ -1,0 +1,103 @@
+@import "../../common/common.scss";
+
+
+.driver-grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 4px 64px 1fr;
+    grid-template-areas: "loader" "action-bar" "driver-grid";
+    overflow: hidden;
+    height: 100%;
+    cbp-loader {
+        grid-area: loader;
+    }
+    .action-bar {
+        grid-area: action-bar;
+        @include md-whiteframe-2dp;
+        background: white;
+        height: 48px;
+        padding: 8px;
+
+        z-index: 2;
+        display: grid;
+        grid-template-columns: auto auto 1fr 25%;
+        grid-gap: 10px;
+        align-items: center;
+        grid-template-areas: "button switch . search";
+        cbp-button{
+            grid-area: button;
+        }
+        cbp-input-action-switch{
+            grid-area: switch;
+        }
+        cbp-input-field-search{
+            grid-area: search;
+        }
+    }
+    .driver-grid {
+        grid-area: driver-grid;
+        overflow: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-rows: repeat(auto-fit, 100px);
+        grid-auto-flow: row;
+        grid-gap: 8px;
+        padding: 8px;
+        .driver-grid-item {
+            display: grid;
+            grid-template-columns: 15% 1fr;
+            grid-template-rows: 24px 24px 1px fit-content;
+            grid-template-areas: "driver-avatar driver-name" "driver-avatar driver-email" "line line" "car-icon driver-vehicle";
+            align-items: center;
+            @include md-whiteframe-1dp;
+            background: white;
+            color: rgba(0, 0, 0, 0.7);
+            &:hover {
+                cursor: pointer;
+                border: 1px solid #ff6d00;
+            }
+            .mdi {
+                font-size: 32px;
+                color: lightslategray;
+                margin: 5px;
+            }
+            .driver-avatar {
+                grid-area: driver-avatar;
+                color: rgba(0, 0, 0, 0.7);
+            }
+            .driver-name {
+                grid-area: driver-name;
+                font-weight: bold;
+                font-size: 16px;
+                margin-top: 8px;
+            }
+            .driver-email {
+                grid-area: driver-email;
+                font-size: 14px;
+                &:before {
+                    font-family: "Material Design Icons";
+                    content: '\F1EE';
+                    margin-right: 5px;
+                }
+                margin-bottom: 8px;
+            }
+            .line {
+                grid-area: line;
+                height: 1px;
+                border-bottom: 1px solid rgba(138, 156, 167, .4);
+            }
+            .car-icon {
+                grid-area: car-icon;
+            }
+            .driver-vehicle {
+                grid-area: driver-vehicle;
+                font-size: 14px;
+                &:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

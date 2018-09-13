@@ -1,0 +1,11 @@
+<cbp-card [label]="'FLEET_DETAILS'" expanded="true" [searching]="!loaded">
+  <div fxLayout="column" *ngIf="fleet">
+    <div fxLayout="row ">
+      <cbp-input-field-text [label]="'NAME'" [placeholder]="'ENTER_FLEET_NAME' | translate " [errorMessage]="errorMessage " [error]="showErrorForName " [(model)]="fleet.fleetName "
+        (modelChange)="validateName($event) " fxFlex></cbp-input-field-text>
+    </div>
+    <div fxLayout="row " fxLayoutAlign="end" style="margin: 10px">
+        <cbp-button [label]="'SAVE'" [disabled]="fleet.fleetName .length<1 " (click)="updateFleetInfo() "></cbp-button>
+    </div>
+  </div>
+</cbp-card>

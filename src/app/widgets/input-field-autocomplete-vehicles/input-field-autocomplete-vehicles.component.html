@@ -1,0 +1,19 @@
+<div fxLayout="column" class="input-group vehicle-search">
+    <div fxLayout="row" fxLayoutAlign="start center" class="label-container">
+        <i *ngIf="icon" [style.color]="iconColor" class="mdi" [ngClass]="icon"></i>
+        <span fxFlex class="input-label">{{label | translate}}
+      <span class="asterisk_input" *ngIf="mandatory"></span>
+    </span>
+        <cbp-svg-circular-loader *ngIf="searching"></cbp-svg-circular-loader>
+    </div>
+    <div class="search-area">
+        <input fxFlex autocomplete="false" type="text" [readonly]="readonly" [disabled]="disabled" [placeholder]="placeholder" [(ngModel)]="model" (keyup)="onInputChanged()"/>
+        <div class="result-box" *ngIf="results.length" (cbpClickOutside)="out()">
+            <div class="search-item" fxLayout="row" *ngFor="let vehicle of results" fxLayoutAlign="start center" (click)="selected(vehicle); out()">
+                <img class="avatar" [src]="vehicle.logo"/>
+                <div class="make" [innerHTML]="vehicle.name | cbpHighlight : highlightTerm"></div>
+            </div>
+        </div>
+    </div>
+    <span *ngIf="error" class="input-error">{{errorMessage | translate }}</span>
+</div>

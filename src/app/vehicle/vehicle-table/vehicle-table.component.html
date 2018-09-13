@@ -1,0 +1,46 @@
+<cbp-card *ngIf="!isFleet" [label]="'VEHICLE_LIST'" [searching]="loadingVehicles">
+    <div class="card-header" fxLayout="row" fxFlexAlign="center center">
+        <cbp-icon-button-horizontal *cbpAdminOrAgentOnly icon="mdi-plus" label="NEW_VEHICLE" (click)="routeToCreate()"></cbp-icon-button-horizontal>
+        <cbp-icon-button-horizontal *cbpAdminOrAgentOnly icon="mdi-credit-card-plus" label="ADD_VEHICLE" (click)="routeToAdd()"></cbp-icon-button-horizontal>
+    </div>
+    <div class="vehicle-container">
+        <div class="vehicle-legend" (click)="routeToDetail(vehicle)" fxLayout='row' fxLayoutAlign='start center' *ngFor='let vehicle of vehicles'
+             fxLayoutGap='2%'>
+            <img class="avatar" *ngIf="vehicle.make" [src]='getVehicleLogo(vehicle.make)'/>
+            <i class="mdi mdi-car" *ngIf="!vehicle.make"></i>
+            <div fxLayout='column' fxFlex cbpDeepLink linkType='VEHICLE' [linkId]='vehicle.vehicleId'>
+                <div fxLayout='column'>
+                    <span class='vehicle-name'>{{vehicle.name ? vehicle.name : '-'}}</span>
+                    <span class="vehicle-license">({{vehicle.numberPlate.strLicense}})</span>
+                </div>
+                <div fxLayout='row' fxLayoutAlign='start center'>
+                    <span class="vehicle-make-model">{{vehicle.make}} {{vehicle.model}}</span>
+                </div>
+            </div>
+            <cbp-text-icon-item fxFlex icon="mdi-fast-forward" color="#4FB979" label="TOTAL_TRIPS" [value]="vehicle.trips"></cbp-text-icon-item>
+            <cbp-text-icon-item fxFlex icon="mdi-speedometer" color="#0079c1" label="DISTANCE" [value]="vehicle.totalDistance ? vehicle.totalDistance + ' kms': '-'+ ' kms'"></cbp-text-icon-item>
+            <!--<i class="mdi mdi-dots-vertical click" (click)="menu.toggle($event)"></i>-->
+
+            <!--<p-overlayPanel #menu [style]="{'border': 'none'}" [styleClass]='list-expense'>-->
+            <!--<div fxLayout="column">-->
+            <!--<cbp-context-menu&#45;&#45;icon-item icon="mdi-eye" [label]="'VIEW_DETAILS'" (click)="routeToDetail(vehicle)"></cbp-context-menu&#45;&#45;icon-item>-->
+            <!--<cbp-context-menu&#45;&#45;icon-item icon="mdi-crosshairs-gps" [label]="'LOCATE_ON_MAP'" (click)="routeToTracking(vehicle)"></cbp-context-menu&#45;&#45;icon-item>-->
+            <!--<cbp-context-menu&#45;&#45;icon-item icon="mdi-delete-forever" [label]="'REMOVE_FROM_FLEET'" (click)="isDialogVisible=true; selectedVehicle=vehicle;"></cbp-context-menu&#45;&#45;icon-item>-->
+            <!--</div>-->
+            <!--</p-overlayPanel>-->
+        </div>
+    </div>
+</cbp-card>
+
+<cbp-dialog [showDialog]="isDialogVisible" (showDialogChange)="showDialogChange($event)">
+    <cbp-card label="Remove Vehicle" [searching]="removingVehicle">
+        <div class="dialog" fxLayout="column" fxLayoutGap="2%">
+            <span fxFlex class="message">Are you sure to remove vehicle
+                <b>{{selectedVehicle?.name}}</b> from the fleet?</span>
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="2%">
+                <cbp-flat-button label="CANCEL" type="negative" style="margin-left: 30px;" [disabled]="removingVehicle" (click)="isDialogVisible=false"></cbp-flat-button>
+                <cbp-flat-button label="REMOVE" type="positive" [disabled]="removingVehicle" (click)="removeFromFleet(selectedVehicle)"></cbp-flat-button>
+            </div>
+        </div>
+    </cbp-card>
+</cbp-dialog>

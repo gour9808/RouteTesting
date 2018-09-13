@@ -1,0 +1,71 @@
+<div fxLayout="column">
+    <div class="logbook-page">
+        <cbp-card [searching]="loadingLogs">
+            <div class="card-header" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+                <div fxLayout="row" fxFlex>
+                    <cbp-calender [title]="'FROM'" [(model)]="fromDate" (modelChange)="fromChange($event)"></cbp-calender>
+                    <cbp-calender [title]="'TO'" [(model)]="toDate" (modelChange)="toChange($event)"></cbp-calender>
+                </div>
+                <cbp-icon-button icon="mdi-refresh" (click)="getLogbook()" label="REFRESH"></cbp-icon-button>
+                <cbp-icon-button icon="mdi-printer" (click)="printLogbook()" [label]="'PRINT'"></cbp-icon-button>
+            </div>
+            <div class="logbook-container">
+                <div class="log-item" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="1%" *ngFor="let log of logs;let i = index; let last = last"
+                    [ngClass]="log.type == 'GAP' ? 'gap':''" (click)="tripDetail(log)">
+                    <div fxLayout="row" fxLayoutAlign="start center" style="padding-top: 18px">
+                        <i class="mdi mdi-map-marker" [style.color]="log.type != 'GAP' ? '#3cba54' : '#555555' "></i>
+                        <span fxFlex class="address start">{{log.startAddress?.housenumber}}</span>
+                        <span fxFlex fxFlexAlign="center" *ngIf="log.type != 'GAP'" class="distance-duration">{{log.distance}} kms</span>
+                        <span fxFlex fxFlexAlign="center" *ngIf="log.type == 'GAP'" class="distance-duration">{{'GAP' | translate}}</span>
+                        <i class="mdi mdi-map-marker" [style.color]="log.type != 'GAP' ? '#d62d20' : '#555555' "></i>
+                        <span fxFlex class="address end">{{log.endAddress?.housenumber}}</span>
+                    </div>
+                    <div fxLayout="row">
+                        <span fxFlex class="time">{{log.startAddressTime}}</span>
+                        <span fxFlex fxFlexAlign="center" class="driver">{{log.duration}}</span>
+                        <span fxFlex class="time">{{log.endAddressTime}}</span>
+                    </div>
+                    <span class="hr-text" fxFlexAlign="center" *ngIf="log.haltTime">{{ "HALT" | translate }} : {{log.haltTime}}</span>
+                </div>
+            </div>
+        </cbp-card>
+    </div>
+</div>
+
+
+<cbp-dialog [(showDialog)]="showDialog">
+    <div class="log-detail">
+        <div fxLayout="column">
+            <div fxLayout="row" *ngIf="logDetail.type != 'GAP'" class="driver-detail">
+                <div *ngIf="driver">
+                    <div class="driver-avatar" *ngIf="driver.profilePhotoURL" [ngStyle]="{ 'background-image': 'url(' + driver.profilePhotoURL + ')'}"></div>
+                </div>
+                <div class="driver-avatar" *ngIf="!driver || !driver.profilePhotoURL">
+                    <i class="mdi mdi-account"></i>
+                </div>
+                <div class="driver-info" *ngIf="!loadingDriver">
+                    <div class="label-value">{{ driver? driver.displayname : "-"}}</div>
+                    <div class="label">{{ driver? driver.currentEMail : "-"}}</div>
+                </div>
+            </div>
+            <img width="100%" *ngIf="staticMaps" [src]="staticMaps" alt="Google Map of bangalore">
+            <div style="padding: 12px 12px 0 12px; margin-top: 10px;">
+                <div class="logTime" *ngIf="logDetail">{{ logDetail.startAddressTime }}</div>
+                <cbp-text-icon-item color="#3cba54" icon="mdi-map-marker" [label]="logDetail?.startAddress?.housenumber"></cbp-text-icon-item>
+            </div>
+            <div style="padding: 12px">
+                <div class="logTime" *ngIf="logDetail">{{ logDetail.endAddressTime }}</div>
+                <cbp-text-icon-item color="#d62d20" icon="mdi-map-marker" [label]="logDetail?.endAddress?.housenumber" ></cbp-text-icon-item>
+            </div>
+            <div fxLayout="row" style="padding: 12px">
+                <cbp-text-icon-item fxFlex color="#005fb3" icon="mdi-fast-forward" [label]="'DISTANCE'" [value]="logDetail?.distance + ' Kms'"></cbp-text-icon-item>
+                <cbp-text-icon-item fxFlex icon="mdi-timer" [label]="'DURATION'" [value]="logDetail?.duration"></cbp-text-icon-item>
+            </div>
+            <div fxLayout="row" *ngIf="logDetail.type != 'GAP'" style="padding: 12px">
+                <cbp-text-icon-item fxFlex color="#3cba54" icon="mdi-speedometer" [label]="'AVERAGE_SPEED'" [value]="logDetail?.avgSpeed"></cbp-text-icon-item>
+                <cbp-text-icon-item fxFlex color="#d62d20" icon="mdi-speedometer" [label]="'MAXIMUM_SPEED'" [value]="logDetail?.maxSpeed"></cbp-text-icon-item>
+            </div>
+        </div>
+
+    </div>
+</cbp-dialog>

@@ -1,0 +1,54 @@
+<div fxLayout="column">
+    <div class="dashboard-header" fxLayout="column">
+        <div class="info-header" fxLayout="row" fxLayoutAlign="start center">
+            <span class="user-greeting" fxFlex>{{'WELCOME' | translate}}, {{userInfo.displayname}}</span>
+        </div>
+        <div fxLayout="row">
+            <div class="metrics" fxLayout="row" fxFlex fxLayoutAlign="start center" *ngFor="let metric of metrics">
+                <span class="number">{{metric.value}}</span>
+                <div fxLayout="column">
+                    <span class="field">{{metric.label1 | translate}}</span>
+                    <span class="field">{{metric.label2 | translate}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div fxLayout="row">
+        <cbp-card [label]="'MY_VEHICLES'" expanded="true" fxFlex>
+            <div fxFlex style="max-height:400px;">
+                <p-table [value]="vehicles" [loading]="loadingVehicles" [rows]="10" [paginator]="vehicles?.length>10" [pageLinks]="3" sortMode="single"
+                    [scrollable]="true">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 50px;"></th>
+                            <th style="text-align: left;">{{ "MAKE" |translate }}</th>
+                            <th style="text-align: right;">{{ "MODEL" |translate }}</th>
+                            <th style="text-align: right;">{{ "NAME" |translate }}</th>
+                            <th style="text-align: right;">{{ "LICENSE" |translate }}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                            <tr>
+                                <td style="text-align: center; width: 50px;">
+                                    <img class="avatar" *ngIf="rowData.make" [src]='getVehicleLogo(rowData.make)' />
+                                    <i class="mdi mdi-car" *ngIf="!rowData.make"></i>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span>{{ rowData.make }}</span>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span>{{ rowData.model }}</span>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span>{{ rowData.name }}</span>
+                                </td>
+                                <td style="text-align: right;">
+                                    <span>{{ rowData.numberPlate.strLicense }}</span>
+                                </td>
+                            </tr>
+                        </ng-template>
+                </p-table>
+            </div>
+        </cbp-card>
+    </div>
+</div>
